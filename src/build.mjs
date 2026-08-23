@@ -209,6 +209,7 @@ function header(current = "home") {
           <a class="${current === "brands" ? "active" : ""}" href="${link("/brands/")}">Brands</a>
           <a class="${current === "commercial" ? "active" : ""}" href="${link("/commercial/")}">Commercial</a>
           <a class="${current === "gallery" ? "active" : ""}" href="${link("/gallery/")}">Gallery</a>
+          <a class="${current === "reviews" ? "active" : ""}" href="${link("/reviews/")}">Reviews</a>
           <a class="${current === "about" ? "active" : ""}" href="${link("/about/")}">About</a>
           <a class="${current === "contact" ? "active" : ""}" href="${link("/contact/")}">Contact</a>
         </nav>
