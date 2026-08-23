@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readdir, rm, stat, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "ductless-page-expanded-20260820";
+const assetVersion = "airrand-logo-favicon-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -1546,7 +1546,8 @@ function layout({ title, description, pathname, current, body, schema = [], imag
   <meta property="og:image" content="${pageUrl(asset(image).slice(1))}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#07090c">
-  <link rel="icon" href="${link("/favicon.svg")}" type="image/svg+xml">
+  <link rel="icon" href="${asset("airrand-logo-tight.png")}?v=${assetVersion}" type="image/png">
+  <link rel="apple-touch-icon" href="${asset("airrand-logo-tight.png")}?v=${assetVersion}">
   <link rel="manifest" href="${link("/site.webmanifest")}">
   <link rel="preload" href="${asset("airrand-logo-tight.png")}" as="image">
   <link rel="stylesheet" href="${asset("styles.css")}?v=${assetVersion}">
@@ -5334,7 +5335,10 @@ function privacyPage() {
   };
 }
 
-function staticFiles() {
+async function staticFiles() {
+  const logoFavicon = await readFile(path.join(publicDir, "assets", "airrand-logo-tight.png"), "base64");
+  const logoFaviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 223"><rect width="360" height="223" rx="18" fill="#07090c"/><image href="data:image/png;base64,${logoFavicon}" width="360" height="223" preserveAspectRatio="xMidYMid meet"/></svg>`;
+
   return [
     {
       pathname: "/robots.txt",
@@ -5354,7 +5358,7 @@ Sitemap: ${site.baseUrl}/sitemap.xml
           display: "standalone",
           background_color: "#07090c",
           theme_color: "#07090c",
-          icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml" }],
+          icons: [{ src: "/assets/airrand-logo-tight.png", sizes: "360x223", type: "image/png" }],
         },
         null,
         2,
@@ -5362,7 +5366,7 @@ Sitemap: ${site.baseUrl}/sitemap.xml
     },
     {
       pathname: "/favicon.svg",
-      content: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="#07090c"/><path d="M14 37 32 18l18 19" fill="none" stroke="#f6f8fb" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 39h20v12H22z" fill="#f6f8fb"/><path d="M12 16h13" stroke="#1aa7ff" stroke-width="5" stroke-linecap="round"/><path d="M39 16h13" stroke="#ff6b2b" stroke-width="5" stroke-linecap="round"/></svg>`,
+      content: logoFaviconSvg,
     },
     {
       pathname: "/projects/index.html",
@@ -5469,7 +5473,7 @@ async function build() {
     await writePage(page);
   }
 
-  for (const file of staticFiles()) {
+  for (const file of await staticFiles()) {
     await writeStatic(file.pathname, file.content);
   }
 
