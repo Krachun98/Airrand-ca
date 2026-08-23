@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "airrand-logo-favicon-20260823";
+const assetVersion = "quote-request-form-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
