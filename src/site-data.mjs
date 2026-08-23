@@ -273,18 +273,19 @@ export const services = [
     slug: "water-heaters",
     group: "Water Heating",
     image: "water-heater-installation.webp",
-    short: "Installation and replacement of traditional water heating systems.",
+    short: "Tank, tankless and boiler-related water heating support.",
     intro:
-      "Airrand installs and replaces traditional water heaters for homes and small commercial applications.",
+      "Airrand installs, replaces and services tank water heaters, tankless systems and boiler-related water-heating equipment for homes and light commercial applications.",
     meta:
-      "Water heater installation and replacement services for homes and commercial properties across the GTA.",
+      "Water heater, tankless and boiler-related water heating services for homes and light commercial properties across the GTA.",
     details: [
       "Traditional tank water heater installation",
-      "Replacement planning and removal coordination",
-      "Water and venting connections",
-      "Operational checks before completion",
+      "Tankless water heater planning and installation",
+      "Boiler and hydronic water-heating conversations",
+      "Gas, venting, water and drainage connections",
+      "Startup and operational checks before completion",
     ],
-    applications: ["Homes", "Rental properties", "Small commercial spaces"],
+    applications: ["Homes", "Rental properties", "Light commercial spaces", "Mechanical rooms"],
   },
   {
     title: "Tankless Water Heaters",

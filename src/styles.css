@@ -4042,6 +4042,567 @@ details.review-page-copy[open] summary span {
   padding: 14px 16px;
 }
 
+.water-heating-hero::before {
+  background:
+    linear-gradient(90deg, rgba(7, 9, 12, 0.98), rgba(7, 9, 12, 0.74) 48%, rgba(7, 9, 12, 0.62)),
+    linear-gradient(180deg, rgba(7, 9, 12, 0.18), rgba(7, 9, 12, 0.88));
+}
+
+.water-heating-section {
+  background:
+    radial-gradient(circle at 12% 0, rgba(54, 169, 255, 0.055), transparent 32%),
+    radial-gradient(circle at 88% 12%, rgba(255, 116, 51, 0.045), transparent 34%),
+    var(--bg);
+}
+
+.water-heating-overview-section,
+.water-heating-selection-section,
+.water-heating-tankless-section,
+.water-heating-boiler-vs-section,
+.water-heating-installation-section,
+.water-heating-scale-section,
+.water-heating-brands-section {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent),
+    var(--bg-soft);
+}
+
+.water-heating-aside {
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.08), transparent 58%),
+    var(--panel);
+}
+
+.water-heating-options-grid,
+.water-selection-grid,
+.water-sign-grid,
+.water-install-grid,
+.water-maintenance-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.water-heating-options-grid,
+.water-install-grid,
+.water-maintenance-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.water-selection-grid,
+.water-sign-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.water-option-card,
+.water-technical-card,
+.water-comparison-card,
+.water-purpose-card,
+.water-maintenance-card,
+.water-flow-panel,
+.water-dual-panel article,
+.water-chip-panel,
+.water-safety-list,
+.water-scale-panel {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    #0a1016;
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.22);
+}
+
+.water-option-card,
+.water-technical-card,
+.water-comparison-card,
+.water-purpose-card,
+.water-maintenance-card,
+.water-scale-panel {
+  display: grid;
+  align-content: start;
+  gap: 13px;
+  padding: 22px;
+}
+
+.water-option-card {
+  min-height: 440px;
+  grid-template-rows: auto auto auto auto 1fr auto;
+}
+
+.water-option-card:hover,
+.water-technical-card:hover,
+.water-comparison-card:hover,
+.water-purpose-card:hover,
+.water-maintenance-card:hover {
+  border-color: rgba(54, 169, 255, 0.34);
+  transform: translateY(-2px);
+}
+
+.water-option-card,
+.water-technical-card,
+.water-comparison-card,
+.water-purpose-card,
+.water-maintenance-card {
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.water-option-card:nth-child(3),
+.water-purpose-card:nth-child(2),
+.water-maintenance-card:nth-child(3) {
+  background:
+    linear-gradient(180deg, rgba(255, 116, 51, 0.075), rgba(255, 255, 255, 0.012)),
+    #0a1016;
+}
+
+.water-option-card h3,
+.water-technical-card h3,
+.water-comparison-card h3,
+.water-purpose-card h3,
+.water-maintenance-card h3,
+.water-scale-panel h3,
+.water-dual-panel h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.08rem;
+  line-height: 1.18;
+}
+
+.water-option-card p,
+.water-technical-card p,
+.water-comparison-card p,
+.water-purpose-card p,
+.water-maintenance-card p,
+.water-scale-panel p,
+.water-note {
+  margin: 0;
+  color: var(--muted);
+}
+
+.water-note {
+  max-width: 660px;
+  font-size: 1.02rem;
+}
+
+.water-note strong {
+  color: var(--text);
+}
+
+.water-heating-icon {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(54, 169, 255, 0.28);
+  border-radius: 9px;
+  background:
+    radial-gradient(circle at 50% 0, rgba(54, 169, 255, 0.16), transparent 66%),
+    rgba(54, 169, 255, 0.055);
+  color: var(--blue);
+}
+
+.water-option-card:nth-child(3) .water-heating-icon,
+.water-purpose-card:nth-child(2) .water-heating-icon,
+.water-maintenance-card:nth-child(3) .water-heating-icon {
+  border-color: rgba(255, 116, 51, 0.28);
+  background:
+    radial-gradient(circle at 50% 0, rgba(255, 116, 51, 0.18), transparent 66%),
+    rgba(255, 116, 51, 0.06);
+  color: var(--orange);
+}
+
+.water-heating-icon svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.water-heating-list {
+  display: grid;
+  margin: 8px 0 0;
+  padding: 0;
+  gap: 8px;
+  color: var(--muted);
+  list-style: none;
+}
+
+.water-heating-list li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.water-heating-list li::before {
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  content: "";
+}
+
+.water-option-card:nth-child(3) .water-heating-list li::before,
+.water-purpose-card:nth-child(2) .water-heating-list li::before,
+.water-maintenance-card:nth-child(3) .water-heating-list li::before {
+  background: var(--orange);
+}
+
+.water-option-card strong {
+  color: var(--steel);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.water-option-card .button {
+  justify-self: center;
+  width: 100%;
+  height: 64px;
+  padding-inline: 14px;
+  white-space: nowrap;
+}
+
+.water-split-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.52fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 30px;
+}
+
+.water-flow-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr);
+  align-items: stretch;
+  padding: 22px;
+  gap: 12px;
+}
+
+.water-flow-step {
+  display: grid;
+  min-height: 152px;
+  place-items: center;
+  align-content: center;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(7, 9, 12, 0.54);
+  text-align: center;
+}
+
+.water-flow-step-main {
+  background:
+    linear-gradient(180deg, rgba(255, 116, 51, 0.08), rgba(54, 169, 255, 0.05)),
+    rgba(7, 9, 12, 0.62);
+}
+
+.water-flow-step strong {
+  max-width: 130px;
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.22;
+}
+
+.water-flow-arrow {
+  display: grid;
+  place-items: center;
+  color: var(--blue);
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
+.water-dual-panel,
+.water-comparison-grid,
+.water-boiler-vs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.water-dual-panel article {
+  display: grid;
+  align-content: start;
+  gap: 13px;
+  padding: 22px;
+}
+
+.water-comparison-card {
+  min-height: 330px;
+}
+
+.water-chip-panel {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  padding: 24px;
+  gap: 18px;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 116, 51, 0.12), transparent 34%),
+    radial-gradient(circle at 92% 94%, rgba(54, 169, 255, 0.11), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.012)),
+    #0a1016;
+}
+
+.water-chip-panel::before {
+  position: absolute;
+  inset: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 12px;
+  opacity: 0.7;
+  pointer-events: none;
+  content: "";
+}
+
+.water-chip-panel-head,
+.water-chip-grid,
+.water-problem-tile {
+  position: relative;
+  z-index: 1;
+}
+
+.water-chip-panel-head {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 13px;
+}
+
+.water-chip-panel-head strong {
+  display: block;
+  color: var(--text);
+  font-size: 1.02rem;
+  line-height: 1.2;
+}
+
+.water-chip-panel-head small,
+.water-application-chip small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.25;
+}
+
+.water-chip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.water-application-chip,
+.water-problem-tile,
+.water-summary-line {
+  border: 1px solid rgba(255, 255, 255, 0.095);
+  border-radius: 9px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.044), rgba(255, 255, 255, 0.014)),
+    rgba(6, 10, 14, 0.72);
+}
+
+.water-application-chip {
+  display: grid;
+  min-height: 76px;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  padding: 12px;
+  gap: 10px;
+}
+
+.water-application-chip strong,
+.water-problem-tile strong {
+  display: block;
+  color: var(--text);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.water-mini-icon {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba(54, 169, 255, 0.24);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 0, rgba(54, 169, 255, 0.16), transparent 68%),
+    rgba(54, 169, 255, 0.052);
+  color: var(--blue);
+}
+
+.water-application-chip:nth-child(3n) .water-mini-icon,
+.water-problem-tile:nth-child(4n + 1) .water-mini-icon,
+.water-problem-tile:nth-child(4n + 5) .water-mini-icon {
+  border-color: rgba(255, 116, 51, 0.28);
+  background:
+    radial-gradient(circle at 50% 0, rgba(255, 116, 51, 0.17), transparent 68%),
+    rgba(255, 116, 51, 0.06);
+  color: var(--orange);
+}
+
+.water-mini-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.85;
+}
+
+.water-summary-line {
+  max-width: 880px;
+  margin: 20px auto 0;
+  padding: 16px 18px;
+  color: var(--steel);
+  text-align: center;
+}
+
+.water-safety-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 20px;
+  gap: 12px;
+}
+
+.water-safety-list div {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.water-safety-list strong {
+  color: var(--steel);
+  line-height: 1.2;
+}
+
+.water-problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.water-problem-tile {
+  display: grid;
+  min-height: 88px;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  padding: 14px;
+  gap: 11px;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.water-problem-tile:hover {
+  border-color: rgba(54, 169, 255, 0.28);
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.06), rgba(255, 255, 255, 0.014)),
+    rgba(6, 10, 14, 0.76);
+  transform: translateY(-2px);
+}
+
+.water-problem-tile small {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--blue);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.055em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.water-scale-panel {
+  max-width: 560px;
+  justify-self: end;
+}
+
+.water-brand-strip {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: 8px 0 0;
+  padding: 0;
+  gap: 10px;
+  list-style: none;
+}
+
+.water-brand-strip .brand-strip-card {
+  min-height: 108px;
+}
+
+.water-brand-strip .brand-strip-card img {
+  max-height: 42px;
+}
+
+@media (max-width: 1120px) {
+  .water-heating-options-grid,
+  .water-selection-grid,
+  .water-sign-grid,
+  .water-install-grid,
+  .water-maintenance-grid,
+  .water-problem-grid,
+  .water-brand-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .water-flow-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .water-flow-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 920px) {
+  .water-split-grid,
+  .water-dual-panel,
+  .water-comparison-grid,
+  .water-boiler-vs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .water-scale-panel {
+    max-width: none;
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 680px) {
+  .water-heating-options-grid,
+  .water-selection-grid,
+  .water-sign-grid,
+  .water-install-grid,
+  .water-maintenance-grid,
+  .water-safety-list,
+  .water-chip-grid,
+  .water-chip-panel,
+  .water-problem-grid,
+  .water-brand-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .water-option-card,
+  .water-technical-card,
+  .water-comparison-card,
+  .water-purpose-card,
+  .water-maintenance-card,
+  .water-dual-panel article,
+  .water-flow-panel,
+  .water-chip-panel,
+  .water-safety-list,
+  .water-scale-panel {
+    padding: 20px;
+  }
+
+  .water-option-card,
+  .water-comparison-card,
+  .water-flow-step {
+    min-height: auto;
+  }
+}
+
 .faq-section {
   background:
     linear-gradient(180deg, rgba(54, 169, 255, 0.04), transparent),

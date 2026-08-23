@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "mobile-brand-orbit-20260823";
+const assetVersion = "water-heating-panels-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -64,7 +64,7 @@ const photoHeadings = {
   "gas-lines": "Recent gas line installations.",
   humidifiers: "Recent humidifier installations.",
   "tankless-water-heaters": "Recent tankless water heater installations.",
-  "water-heaters": "Recent water heater installations.",
+  "water-heaters": "Recent Water Heating Installations",
 };
 
 const photoSourceLabels = {
@@ -1796,6 +1796,61 @@ function serviceFaqs(service) {
     timeline: "Timing depends on access, equipment, parts and the amount of installation, repair or coordination required.",
   };
 
+  if (service.slug === "water-heaters") {
+    return [
+      {
+        question: "Should I choose tank or tankless?",
+        answer:
+          "The right choice depends on hot-water demand, equipment location, gas or electrical capacity, venting, budget and project requirements. Airrand can review the application and explain practical options.",
+      },
+      {
+        question: "Does tankless mean unlimited hot water?",
+        answer:
+          "A properly sized tankless system can provide continuous hot water within its designed flow capacity. Flow rate, incoming water temperature, gas capacity and simultaneous fixtures still matter.",
+      },
+      {
+        question: "Can Airrand replace my existing water heater?",
+        answer:
+          "Yes, subject to evaluating the existing equipment, venting, water connections, fuel source, drainage and the application. Direct replacements are usually simpler than changes in equipment type or location.",
+      },
+      {
+        question: "What size water heater do I need?",
+        answer:
+          "Sizing depends on household demand, fixture use, recovery needs, equipment type and the installation conditions. It should not be selected from square footage alone.",
+      },
+      {
+        question: "What is a combi boiler?",
+        answer:
+          "A combi boiler is one appliance designed to provide hydronic space heating and domestic hot-water production. It must be sized for both the building heating load and the hot-water demand.",
+      },
+      {
+        question: "Is a boiler the same as a water heater?",
+        answer:
+          "No. A water heater is primarily for domestic hot water such as showers, sinks, dishwashers and laundry. A boiler is primarily for hydronic space heating, although some systems are designed to combine both functions.",
+      },
+      {
+        question: "Why is my tankless water heater showing an error code?",
+        answer:
+          "Error codes vary by manufacturer and model. They can relate to ignition, venting, water flow, sensors, condensate, gas supply or maintenance needs, so the specific equipment should be diagnosed properly.",
+      },
+      {
+        question: "Why is water leaking from my water heater?",
+        answer:
+          "Water can come from piping, drainage, relief components, fittings or the tank itself. If a storage tank is leaking from the tank body, replacement may be required.",
+      },
+      {
+        question: "Can a water heater be moved?",
+        answer:
+          "Relocation may require changes to water piping, gas, venting, drainage, electrical and service access. The location needs to be evaluated before the scope can be confirmed.",
+      },
+      {
+        question: "How often should water-heating equipment be maintained?",
+        answer:
+          "Maintenance intervals depend on equipment type, manufacturer requirements, usage and water conditions. Tankless systems and boilers often have more specific maintenance needs than a basic tank replacement.",
+      },
+    ];
+  }
+
   if (service.slug === "air-conditioning") {
     return [
       {
@@ -2030,6 +2085,889 @@ function faqSection(service, faqs) {
       </div>
     </section>
   `;
+}
+
+const waterHeatingBrandSlugs = ["bradford-white", "rheem", "rinnai", "navien", "bosch", "ibc"];
+
+const waterHeatingSystemOptions = [
+  {
+    eyebrow: "Tank Water Heater",
+    title: "Tank Water Heaters",
+    icon: "tank",
+    text: "Stores a ready supply of hot water in an insulated tank.",
+    itemsTitle: "Best suited for",
+    items: [
+      "Straightforward replacement",
+      "Conventional residential applications",
+      "Lower upfront equipment cost",
+      "Familiar serviceability",
+    ],
+    cta: "Tank Water Heaters",
+    href: "#tank-water-heaters",
+  },
+  {
+    eyebrow: "Tankless Water Heater",
+    title: "Tankless Water Heaters",
+    icon: "tankless",
+    text: "Heats domestic water on demand instead of storing a large volume of hot water.",
+    itemsTitle: "Potential benefits",
+    items: [
+      "Compact installation",
+      "Continuous hot water when properly sized",
+      "Higher-efficiency equipment options",
+      "No large storage tank",
+    ],
+    cta: "Explore Tankless Systems",
+    href: "/services/tankless-water-heaters/",
+  },
+  {
+    eyebrow: "Boiler",
+    title: "Boilers & Hydronic Heating",
+    icon: "boiler",
+    text:
+      "Boilers heat water for hydronic heating systems such as radiators, baseboards, fan coils or in-floor heating.",
+    itemsTitle: "Potential applications",
+    items: [
+      "Radiant floors",
+      "Baseboard heating",
+      "Radiators",
+      "Hydronic air handlers",
+      "Combination heating systems",
+    ],
+    cta: "Ask About Boiler Systems",
+    href: "/contact/",
+  },
+];
+
+const waterHeatingSelectionFactors = [
+  {
+    title: "Hot-Water Demand",
+    text:
+      "Occupants, bathrooms, showers, large tubs, appliances and simultaneous fixture use all affect the right system choice.",
+    icon: "water",
+  },
+  {
+    title: "Available Space",
+    text:
+      "Tank systems need room for storage, while tankless equipment can free up floor space but still needs clearances and service access.",
+    icon: "space",
+  },
+  {
+    title: "Existing Venting",
+    text:
+      "Current venting can influence replacement options. Some equipment may require metal venting, plastic venting, combustion air or vent modifications.",
+    icon: "venting",
+  },
+  {
+    title: "Fuel Source",
+    text:
+      "Natural gas, propane or electric equipment options depend on available fuel, electrical capacity and the existing mechanical setup.",
+    icon: "flame",
+  },
+  {
+    title: "Budget",
+    text:
+      "Different systems have different upfront equipment and installation costs, especially when venting, gas piping or location changes are involved.",
+    icon: "budget",
+  },
+  {
+    title: "Long-Term Priorities",
+    text:
+      "Efficiency, space savings, hot-water recovery, equipment lifespan and serviceability should be weighed against initial cost.",
+    icon: "controls",
+  },
+];
+
+const waterHeatingTankReplacementSigns = [
+  ["Leaking Tank", "Visible water from the tank body can point toward replacement rather than repair."],
+  ["Corrosion", "Rust, failing fittings or deteriorated components can signal poor overall condition."],
+  ["Insufficient Hot Water", "Hot water that runs out too quickly may relate to capacity, recovery or equipment condition."],
+  ["Burner / Control Problems", "Repeated ignition, burner or control issues should be properly diagnosed."],
+  ["Repeated Service Calls", "Frequent repair visits can make replacement a more practical discussion."],
+  ["Poor Overall Condition", "Condition matters more than a single age number when deciding what comes next."],
+];
+
+const waterHeatingInstallationItems = [
+  ["Equipment Selection", "Choose equipment appropriate for the application.", "sizing"],
+  ["Gas / Fuel Connection", "Verify gas piping, fuel supply and pressure where applicable.", "gas"],
+  ["Venting", "Install intake and exhaust systems according to equipment requirements.", "venting"],
+  ["Water Connections", "Provide appropriate hot and cold water piping and isolation.", "piping"],
+  ["Drainage", "Install condensate or relief drainage where required.", "drainage"],
+  ["Electrical", "Verify power, controls and disconnect requirements.", "electrical"],
+  ["Expansion Control", "Evaluate thermal expansion requirements where applicable.", "pressure"],
+  ["Startup & Testing", "Verify operation and temperatures before completion.", "testing"],
+  ["Service Access", "Leave equipment accessible for future maintenance and repair.", "tools"],
+];
+
+const waterHeatingSafetyItems = [
+  "Temperature and pressure relief valve",
+  "Venting",
+  "Combustion air",
+  "Gas piping",
+  "Expansion",
+  "Drainage",
+  "Carbon monoxide considerations",
+  "Equipment clearances",
+];
+
+const waterHeatingHydronicApplications = [
+  { title: "Radiators", detail: "Existing radiator loops", icon: "temperature" },
+  { title: "Baseboard heaters", detail: "Hydronic perimeter heat", icon: "piping" },
+  { title: "In-floor radiant heating", detail: "Warm floor zones", icon: "space" },
+  { title: "Hydronic fan coils", detail: "Forced-air comfort from hot water", icon: "venting" },
+  { title: "Air handlers", detail: "Coils tied into ductwork", icon: "controls" },
+  { title: "Snowmelt where applicable", detail: "Outdoor radiant applications", icon: "scale" },
+];
+
+const waterHeatingProblems = [
+  { title: "No hot water", group: "Temperature", icon: "temperature" },
+  { title: "Insufficient hot water", group: "Demand", icon: "water" },
+  { title: "Water temperature fluctuating", group: "Controls", icon: "controls" },
+  { title: "Tank leaking", group: "Tank condition", icon: "drainage" },
+  { title: "Pilot / ignition problems", group: "Ignition", icon: "flame" },
+  { title: "Error codes", group: "Diagnostics", icon: "controls" },
+  { title: "Burner problems", group: "Combustion", icon: "flame" },
+  { title: "Venting issues", group: "Venting", icon: "venting" },
+  { title: "Unusual noise", group: "Operation", icon: "tools" },
+  { title: "Water around the equipment", group: "Leak or drain", icon: "drainage" },
+  { title: "Tankless flow problems", group: "Flow rate", icon: "tankless" },
+  { title: "Boiler pressure problems", group: "Hydronic", icon: "pressure" },
+];
+
+const waterHeatingMaintenanceGroups = [
+  {
+    title: "Tank Water Heater",
+    items: [
+      "Visual inspection",
+      "Burner operation",
+      "Venting",
+      "Drainage",
+      "Relief valve condition",
+      "General tank condition",
+    ],
+  },
+  {
+    title: "Tankless",
+    items: [
+      "Heat-exchanger cleaning / descaling when appropriate",
+      "Filters",
+      "Burner operation",
+      "Venting",
+      "Condensate",
+      "Error history",
+    ],
+  },
+  {
+    title: "Boiler",
+    items: [
+      "Burner / combustion",
+      "Pressure",
+      "Expansion tank",
+      "Circulation",
+      "Venting",
+      "Controls",
+      "Condensate",
+      "Heat exchanger",
+    ],
+  },
+];
+
+function waterHeatingIcon(key) {
+  const icons = {
+    tank: `
+      <svg viewBox="0 0 24 24" role="img" focusable="false">
+        <path d="M8 4.5h8" />
+        <path d="M8 19.5h8" />
+        <path d="M7 7.5a5 2.4 0 0 1 10 0v9a5 2.4 0 0 1-10 0Z" />
+        <path d="M7 7.5a5 2.4 0 0 0 10 0" />
+        <path d="M10 11h4" />
+        <path d="M10 14h4" />
+      </svg>
+    `,
+    tankless: `
+      <svg viewBox="0 0 24 24" role="img" focusable="false">
+        <rect x="6" y="3.5" width="12" height="17" rx="2.5" />
+        <path d="M9 7h6" />
+        <path d="M9 10.5h6" />
+        <path d="M10 14h4" />
+        <path d="M9 20.5v2" />
+        <path d="M15 20.5v2" />
+      </svg>
+    `,
+    boiler: `
+      <svg viewBox="0 0 24 24" role="img" focusable="false">
+        <rect x="5" y="4" width="14" height="15" rx="2.5" />
+        <path d="M8 8h8" />
+        <path d="M8 11h3" />
+        <path d="M13 11h3" />
+        <path d="M8 16h8" />
+        <path d="M9 19v2" />
+        <path d="M15 19v2" />
+      </svg>
+    `,
+    water: () => technicalSetupIcon("Drainage"),
+    flame: () => heatingIcon("flame"),
+    venting: () => technicalSetupIcon("Venting"),
+    gas: () => technicalSetupIcon("Gas pressure"),
+    electrical: () => technicalSetupIcon("Electrical"),
+    controls: () => technicalSetupIcon("Controls"),
+    drainage: () => technicalSetupIcon("Drainage"),
+    sizing: () => technicalSetupIcon("Proper sizing"),
+    testing: () => technicalSetupIcon("Commissioning"),
+    tools: () => heatingIcon("tools"),
+    temperature: () => heatingIcon("temperature"),
+    space: () => heatingIcon("home"),
+    budget: () => heatingIcon("energy"),
+    pressure: `
+      <svg viewBox="0 0 24 24" role="img" focusable="false">
+        <path d="M6 15a6 6 0 1 1 12 0" />
+        <path d="M12 15l3-4" />
+        <path d="M5 19h14" />
+        <path d="M8 15h8" />
+      </svg>
+    `,
+    piping: `
+      <svg viewBox="0 0 24 24" role="img" focusable="false">
+        <path d="M4 8h9a3 3 0 0 1 3 3v5" />
+        <path d="M4 16h8a4 4 0 0 0 4-4V8" />
+        <path d="M18 8h2" />
+        <path d="M18 16h2" />
+      </svg>
+    `,
+    shield: `
+      <svg viewBox="0 0 24 24" role="img" focusable="false">
+        <path d="M12 3 19 6v5c0 4.8-2.8 8.1-7 10-4.2-1.9-7-5.2-7-10V6Z" />
+        <path d="M9 12l2 2 4-5" />
+      </svg>
+    `,
+    scale: `
+      <svg viewBox="0 0 24 24" role="img" focusable="false">
+        <path d="M12 3s5 5.4 5 9a5 5 0 0 1-10 0c0-3.6 5-9 5-9Z" />
+        <path d="M8.5 17.5c2.3 1.2 4.7 1.2 7 0" />
+        <path d="M6 21h12" />
+      </svg>
+    `,
+    cycle: () => heatingIcon("cycle"),
+  };
+
+  const icon = icons[key] ?? icons.tools;
+  return typeof icon === "function" ? icon() : icon;
+}
+
+function waterHeatingList(items) {
+  return `
+    <ul class="water-heating-list">
+      ${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+    </ul>
+  `;
+}
+
+function waterHeatingOverviewSection(service) {
+  return `
+    <section class="section water-heating-section water-heating-overview-section">
+      <div class="container service-detail-grid">
+        <article class="detail-copy">
+          <p class="eyebrow">What Airrand Handles</p>
+          <h2>Water-heating work planned around the full mechanical system.</h2>
+          <p>Water-heating equipment is connected to more than just hot and cold water lines. Fuel supply, venting, drainage, controls, clearances and service access all affect the right installation approach.</p>
+          <p>Airrand works through tank replacements, tankless upgrades and boiler-related water-heating conversations with practical recommendations for GTA homes and light commercial properties.</p>
+          <ul class="check-list">
+            ${service.details.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+          </ul>
+        </article>
+        <aside class="service-aside water-heating-aside">
+          <h2>Common Applications</h2>
+          <ul>
+            ${service.applications.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+          </ul>
+          <a class="button button-primary" href="${link("/contact/")}">Book Water Heating Service</a>
+          <a class="button button-secondary" href="tel:${site.phoneTel}">Call ${site.phone}</a>
+        </aside>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingOptionsSection() {
+  return `
+    <section class="section water-heating-section water-heating-options-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "System Types",
+          title: "Tank, Tankless or Boiler?",
+          text:
+            "These systems are often discussed together, but they are not the same. The right option depends on the equipment purpose, demand and existing site conditions.",
+          align: "center",
+        })}
+        <div class="water-heating-options-grid">
+          ${waterHeatingSystemOptions
+            .map(
+              (option) => `
+                <article class="water-option-card reveal">
+                  <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon(option.icon)}</span>
+                  <p class="eyebrow">${escapeHtml(option.eyebrow)}</p>
+                  <h3>${escapeHtml(option.title)}</h3>
+                  <p>${escapeHtml(option.text)}</p>
+                  <div>
+                    <strong>${escapeHtml(option.itemsTitle)}</strong>
+                    ${waterHeatingList(option.items)}
+                  </div>
+                  <a class="button button-secondary" href="${link(option.href)}">${escapeHtml(option.cta)}</a>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingSelectionSection() {
+  return `
+    <section class="section water-heating-section water-heating-selection-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Equipment Selection",
+          title: "Which Water Heating System Makes Sense?",
+          text:
+            "Good selection starts with the building and the existing mechanical setup, not a one-size-fits-all recommendation.",
+        })}
+        <div class="water-selection-grid">
+          ${waterHeatingSelectionFactors
+            .map(
+              (item) => `
+                <article class="water-technical-card reveal">
+                  <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon(item.icon)}</span>
+                  <h3>${escapeHtml(item.title)}</h3>
+                  <p>${escapeHtml(item.text)}</p>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingTankSection() {
+  return `
+    <section id="tank-water-heaters" class="section water-heating-section water-heating-tank-section">
+      <div class="container water-split-grid">
+        <article>
+          ${sectionHeading({
+            eyebrow: "Traditional Water Heating",
+            title: "Tank Water Heaters",
+            text:
+              "Traditional tank water heaters maintain a stored volume of hot water. They remain a practical option for many homes because they are familiar, straightforward, widely serviceable and available in several capacities.",
+          })}
+          <p class="water-note">A tank replacement still needs proper venting, water connections, fuel setup, drainage and startup checks before it is handed over.</p>
+        </article>
+        <div class="water-flow-panel reveal" aria-label="Tank water heater flow diagram">
+          <div class="water-flow-step">
+            <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("water")}</span>
+            <strong>Cold Water In</strong>
+          </div>
+          <span class="water-flow-arrow" aria-hidden="true">&rarr;</span>
+          <div class="water-flow-step water-flow-step-main">
+            <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("tank")}</span>
+            <strong>Heated Storage Tank</strong>
+          </div>
+          <span class="water-flow-arrow" aria-hidden="true">&rarr;</span>
+          <div class="water-flow-step">
+            <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("temperature")}</span>
+            <strong>Hot Water Out</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingReplacementSection() {
+  return `
+    <section class="section water-heating-section water-heating-replacement-section">
+      <div class="container">
+        ${sectionHeading({
+          title: "When Should a Tank Water Heater Be Replaced?",
+          text:
+            "Condition matters more than a single age number. Leaks, corrosion, repeated failures and poor performance are stronger signals than the calendar alone.",
+        })}
+        <div class="water-sign-grid">
+          ${waterHeatingTankReplacementSigns
+            .map(
+              ([title, text]) => `
+                <article class="water-technical-card reveal">
+                  <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon(title.includes("Leak") ? "water" : title.includes("Control") ? "controls" : "tools")}</span>
+                  <h3>${escapeHtml(title)}</h3>
+                  <p>${escapeHtml(text)}</p>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingTanklessSection() {
+  const advantages = [
+    "Compact wall-mounted design",
+    "Continuous hot-water capability when sized correctly",
+    "High-efficiency options",
+    "Reduced standby storage losses",
+  ];
+  const considerations = ["Gas capacity", "Venting", "Water flow", "Electrical requirements", "Water quality", "Maintenance"];
+
+  return `
+    <section class="section water-heating-section water-heating-tankless-section">
+      <div class="container water-split-grid">
+        <article>
+          ${sectionHeading({
+            eyebrow: "On-Demand Hot Water",
+            title: "Tankless Water Heaters",
+            text:
+              "Tankless systems heat water as it flows through the equipment instead of storing a large tank of hot water.",
+          })}
+          <p class="water-note"><strong>Continuous hot water within the system's designed flow capacity.</strong> That is the important distinction: tankless systems still need to be selected around demand and site conditions.</p>
+          <a class="button button-primary" href="${link("/services/tankless-water-heaters/")}">View Tankless Water Heating</a>
+        </article>
+        <div class="water-dual-panel reveal">
+          <article>
+            <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("tankless")}</span>
+            <h3>Potential Advantages</h3>
+            ${waterHeatingList(advantages)}
+          </article>
+          <article>
+            <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("venting")}</span>
+            <h3>Potential Considerations</h3>
+            ${waterHeatingList(considerations)}
+          </article>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingComparisonSection() {
+  return `
+    <section class="section water-heating-section water-heating-comparison-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Comparison",
+          title: "Tank vs. Tankless",
+          text:
+            "Neither system is automatically better. The right option depends on the home, water demand, equipment location and budget.",
+          align: "center",
+        })}
+        <div class="water-comparison-grid">
+          <article class="water-comparison-card reveal">
+            <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("tank")}</span>
+            <h3>Tank</h3>
+            ${waterHeatingList([
+              "Stores hot water",
+              "Larger physical footprint",
+              "Lower typical equipment complexity",
+              "Straightforward replacement in many homes",
+              "Hot-water supply limited by stored capacity and recovery",
+            ])}
+          </article>
+          <article class="water-comparison-card reveal">
+            <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("tankless")}</span>
+            <h3>Tankless</h3>
+            ${waterHeatingList([
+              "Heats water on demand",
+              "Compact wall-mounted equipment",
+              "Requires adequate fuel or power",
+              "More complex controls",
+              "Can provide continuous hot water when properly sized",
+            ])}
+          </article>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingBoilerSection() {
+  return `
+    <section class="section water-heating-section water-heating-boiler-section">
+      <div class="container water-split-grid">
+        <article>
+          ${sectionHeading({
+            eyebrow: "Hydronic Systems",
+            title: "Boilers and Hydronic Heating",
+            text:
+              "Boilers heat water that circulates through a hydronic heating system. Boiler installation and service in Toronto and the GTA depends on the building, piping, venting, controls and equipment application.",
+          })}
+          <p class="water-note">Depending on the equipment and system design, some boiler systems may also support domestic hot-water production.</p>
+        </article>
+        <div class="water-chip-panel reveal" aria-label="Common hydronic applications">
+          <div class="water-chip-panel-head">
+            <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("boiler")}</span>
+            <div>
+              <strong>Common hydronic applications</strong>
+              <small>Matched to piping, controls and heat load.</small>
+            </div>
+          </div>
+          <div class="water-chip-grid">
+            ${waterHeatingHydronicApplications
+              .map(
+                (item) => `
+                  <article class="water-application-chip">
+                    <span class="water-mini-icon" aria-hidden="true">${waterHeatingIcon(item.icon)}</span>
+                    <div>
+                      <strong>${escapeHtml(item.title)}</strong>
+                      <small>${escapeHtml(item.detail)}</small>
+                    </div>
+                  </article>
+                `,
+              )
+              .join("")}
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingBoilerVsSection() {
+  return `
+    <section class="section water-heating-section water-heating-boiler-vs-section">
+      <div class="container">
+        ${sectionHeading({
+          title: "Boiler vs. Water Heater",
+          text:
+            "Many homeowners use the words interchangeably, but the equipment is usually designed for different primary jobs.",
+          align: "center",
+        })}
+        <div class="water-boiler-vs-grid">
+          <article class="water-purpose-card reveal">
+            <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("tank")}</span>
+            <p class="eyebrow">Water Heater</p>
+            <h3>Domestic hot water</h3>
+            ${waterHeatingList(["Showers", "Sinks", "Dishwashers", "Laundry"])}
+          </article>
+          <article class="water-purpose-card reveal">
+            <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("boiler")}</span>
+            <p class="eyebrow">Boiler</p>
+            <h3>Hydronic space heating</h3>
+            ${waterHeatingList(["Radiators", "Baseboards", "Radiant floors", "Hydronic air handlers"])}
+          </article>
+        </div>
+        <p class="water-summary-line">Some systems combine both functions, but the equipment and piping arrangement must be designed specifically for that application.</p>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingCombiSection() {
+  return `
+    <section class="section water-heating-section water-heating-combi-section">
+      <div class="container water-split-grid">
+        <article>
+          ${sectionHeading({
+            eyebrow: "Combination Systems",
+            title: "What Is a Combi Boiler?",
+            text:
+              "A combination boiler can provide both hydronic space heating and domestic hot water from one appliance.",
+          })}
+          <p class="water-note"><strong>The equipment has to be sized for both the building's heating demand and domestic hot-water requirements.</strong> A combi boiler is not automatically the right choice for every home.</p>
+        </article>
+        <div class="water-dual-panel reveal">
+          <article>
+            <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("cycle")}</span>
+            <h3>Potential Advantages</h3>
+            ${waterHeatingList(["Compact equipment", "Fewer separate appliances", "Efficient modern designs"])}
+          </article>
+          <article>
+            <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("controls")}</span>
+            <h3>Potential Considerations</h3>
+            ${waterHeatingList(["Proper sizing", "Domestic hot-water demand", "Heating load", "Controls", "Piping", "Maintenance"])}
+          </article>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingInstallationSection() {
+  return `
+    <section class="section water-heating-section water-heating-installation-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Installation Standard",
+          title: "What Proper Water Heating Installation Actually Includes",
+          text:
+            "Water-heating installation is mechanical work. The details around venting, fuel, drainage, expansion and startup matter as much as the appliance itself.",
+        })}
+        <div class="water-install-grid">
+          ${waterHeatingInstallationItems
+            .map(
+              ([title, text, icon]) => `
+                <article class="water-technical-card reveal">
+                  <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon(icon)}</span>
+                  <h3>${escapeHtml(title)}</h3>
+                  <p>${escapeHtml(text)}</p>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingSafetySection() {
+  return `
+    <section class="section water-heating-section water-heating-safety-section">
+      <div class="container water-split-grid">
+        <article>
+          ${sectionHeading({
+            eyebrow: "Safety",
+            title: "Water Heating Safety Matters",
+            text:
+              "Gas-fired and vented equipment must be approached carefully. Airrand evaluates the installation as a system instead of treating the appliance as a standalone box.",
+          })}
+          <p class="water-note">This is not DIY gas or venting advice. Site conditions and manufacturer requirements need to be reviewed by a qualified professional.</p>
+        </article>
+        <div class="water-safety-list reveal">
+          ${waterHeatingSafetyItems
+            .map(
+              (item) => `
+                <div>
+                  <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon(item.includes("Carbon") ? "shield" : item.includes("Venting") ? "venting" : item.includes("Gas") ? "gas" : "tools")}</span>
+                  <strong>${escapeHtml(item)}</strong>
+                </div>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingDiagnosticsSection() {
+  return `
+    <section class="section water-heating-section water-heating-diagnostics-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Diagnostics",
+          title: "Common Water Heating Problems",
+          text:
+            "These symptoms can have several possible causes and should be properly diagnosed before equipment or components are replaced.",
+        })}
+        <div class="water-problem-grid">
+          ${waterHeatingProblems
+            .map(
+              (item) => `
+                <article class="water-problem-tile reveal">
+                  <span class="water-mini-icon" aria-hidden="true">${waterHeatingIcon(item.icon)}</span>
+                  <div>
+                    <small>${escapeHtml(item.group)}</small>
+                    <strong>${escapeHtml(item.title)}</strong>
+                  </div>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingScaleSection() {
+  return `
+    <section class="section water-heating-section water-heating-scale-section">
+      <div class="container water-split-grid">
+        <article>
+          ${sectionHeading({
+            eyebrow: "Long-Term Performance",
+            title: "Water Quality Can Affect Equipment",
+            text:
+              "Mineral buildup and scale can affect water-heating equipment over time. Maintenance needs can vary depending on equipment, water quality, usage and manufacturer requirements.",
+          })}
+        </article>
+        <div class="water-scale-panel reveal">
+          <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon("scale")}</span>
+          <h3>Scale-sensitive areas</h3>
+          ${waterHeatingList(["Tankless heat exchangers", "Boiler heat exchangers", "Fixtures", "Storage tanks"])}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingMaintenanceSection() {
+  return `
+    <section class="section water-heating-section water-heating-maintenance-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Maintenance",
+          title: "Water Heating Equipment Needs Regular Care",
+          text:
+            "Maintenance is different for tanks, tankless units and boilers. The equipment type and manufacturer requirements should guide the service approach.",
+        })}
+        <div class="water-maintenance-grid">
+          ${waterHeatingMaintenanceGroups
+            .map(
+              (group) => `
+                <article class="water-maintenance-card reveal">
+                  <span class="water-heating-icon" aria-hidden="true">${waterHeatingIcon(group.title.includes("Tankless") ? "tankless" : group.title.includes("Boiler") ? "boiler" : "tank")}</span>
+                  <h3>${escapeHtml(group.title)}</h3>
+                  ${waterHeatingList(group.items)}
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+        <div class="section-action">
+          <a class="button button-primary" href="${link("/contact/")}">Book Water Heating Service</a>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingBrandsSection() {
+  const brandCards = waterHeatingBrandSlugs.map((slug) => brandsBySlug.get(slug)).filter(Boolean);
+
+  return `
+    <section class="section water-heating-section water-heating-brands-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Brands",
+          title: "Water Heating Equipment Options",
+          text:
+            "Airrand works with multiple equipment manufacturers so the system can be selected around the application, budget and project requirements.",
+          align: "center",
+        })}
+        <ul class="water-brand-strip" aria-label="Water heating equipment brands">
+          ${brandCards
+            .map(
+              (brand) => `
+                <li class="brand-strip-card brand-${brand.slug}">
+                  ${brandLogo(brand)}
+                </li>
+              `,
+            )
+            .join("")}
+        </ul>
+        <div class="section-action">
+          <a class="button button-secondary" href="${link("/brands/")}">Explore All Brands</a>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingWorkSection(work) {
+  if (!work.photos.length) return "";
+  const workTitle = "Recent Water Heating Installations";
+
+  return `
+    <section class="section gallery-section water-heating-work-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Recent Work",
+          title: workTitle,
+          text: "A look at recent Airrand water-heating installations throughout the GTA.",
+        })}
+        ${workSlider(work.photos, workTitle)}
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingFaqSection(faqs) {
+  return `
+    <section class="section faq-section water-heating-faq-section">
+      <div class="container faq-shell">
+        ${sectionHeading({
+          eyebrow: "FAQ",
+          title: "Water Heating FAQ",
+          text: "Common questions about tank water heaters, tankless systems, boilers, replacement and service in the Greater Toronto Area.",
+          align: "center",
+        })}
+        <div class="faq-list">
+          ${faqs
+            .map(
+              (faq) => `
+                <details class="faq-item">
+                  <summary><span>${escapeHtml(faq.question)}</span></summary>
+                  <p>${escapeHtml(faq.answer)}</p>
+                </details>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function waterHeatingPage(service) {
+  const work = servicePhotos(service);
+  const faqs = serviceFaqs(service);
+  const pageDescription =
+    "Airrand installs and services tank water heaters, tankless systems and boilers for residential and light commercial properties throughout the Greater Toronto Area.";
+
+  return {
+    pathname: `/services/${service.slug}/`,
+    title: "Water Heater, Tankless & Boiler Services GTA | Airrand",
+    description: pageDescription,
+    current: "services",
+    image: service.image,
+    schema: [
+      businessSchema(),
+      serviceSchema({ ...service, title: "Water Heating", meta: pageDescription }),
+      faqSchema(faqs),
+      breadcrumbs([
+        { name: "Home", url: "/" },
+        { name: "Services", url: "/services/" },
+        { name: "Water Heating", url: `/services/${service.slug}/` },
+      ]),
+    ],
+    body: `
+      <section class="page-hero service-hero water-heating-hero" style="--hero-image: url('${asset(service.image)}')">
+        <div class="container">
+          <p class="eyebrow">Water Heating</p>
+          <h1>Water Heating Solutions for the Greater Toronto Area</h1>
+          <p>Airrand installs, replaces and services tank water heaters, tankless systems and boilers for residential and light commercial applications throughout the GTA.</p>
+          ${ctaButtons()}
+        </div>
+      </section>
+      ${waterHeatingOverviewSection(service)}
+      ${waterHeatingOptionsSection()}
+      ${waterHeatingSelectionSection()}
+      ${waterHeatingTankSection()}
+      ${waterHeatingReplacementSection()}
+      ${waterHeatingTanklessSection()}
+      ${waterHeatingComparisonSection()}
+      ${waterHeatingBoilerSection()}
+      ${waterHeatingBoilerVsSection()}
+      ${waterHeatingCombiSection()}
+      ${waterHeatingInstallationSection()}
+      ${standardsStrip()}
+      ${waterHeatingSafetySection()}
+      ${waterHeatingDiagnosticsSection()}
+      ${waterHeatingScaleSection()}
+      ${waterHeatingMaintenanceSection()}
+      ${waterHeatingBrandsSection()}
+      ${waterHeatingWorkSection(work)}
+      ${waterHeatingFaqSection(faqs)}
+      ${finalCta({
+        title: "Need help with water heating equipment?",
+        text:
+          "Share photos of the equipment, the property type and what is happening so Airrand can recommend the right next step.",
+      })}
+    `,
+  };
 }
 
 const coolingWarningSigns = [
@@ -4443,6 +5381,10 @@ function servicesPage() {
 }
 
 function servicePage(service) {
+  if (service.slug === "water-heaters") {
+    return waterHeatingPage(service);
+  }
+
   const isCoolingPage = service.slug === "air-conditioning";
   const isHeatPumpPage = service.slug === "heat-pumps";
   const isDuctlessPage = service.slug === "ductless-systems";
