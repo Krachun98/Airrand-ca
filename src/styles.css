@@ -4202,7 +4202,8 @@ details.review-page-copy[open] summary span {
 }
 
 .contact-form label span,
-.radio-row legend {
+.radio-row legend,
+.address-section legend {
   color: var(--steel);
   font-size: 0.9rem;
   font-weight: 850;
@@ -5508,6 +5509,20 @@ details.review-page-copy[open] summary span {
 .radio-row input {
   width: auto;
   min-height: auto;
+}
+
+.address-section {
+  display: grid;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.015);
+  gap: 14px;
+}
+
+.address-section legend {
+  padding: 0 6px;
 }
 
 .form-status {

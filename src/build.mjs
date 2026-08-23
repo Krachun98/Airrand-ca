@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "quote-api-route-20260823";
+const assetVersion = "quote-address-section-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -364,6 +364,27 @@ function contactForm(context = "quote") {
           </select>
         </label>
       </div>
+      <fieldset class="address-section">
+        <legend>Service Address</legend>
+        <label>
+          <span>Street Address</span>
+          <input name="streetAddress" type="text" autocomplete="address-line1" required>
+        </label>
+        <div class="field-grid">
+          <label>
+            <span>Unit / Suite</span>
+            <input name="unit" type="text" autocomplete="address-line2">
+          </label>
+          <label>
+            <span>City</span>
+            <input name="city" type="text" autocomplete="address-level2" required>
+          </label>
+        </div>
+        <label>
+          <span>Postal Code</span>
+          <input name="postalCode" type="text" autocomplete="postal-code" required>
+        </label>
+      </fieldset>
       <fieldset class="radio-row">
         <legend>Project Type</legend>
         <label><input type="radio" name="projectType" value="Residential" checked> Residential</label>

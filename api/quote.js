@@ -57,13 +57,17 @@ function normalizeAttachments(photos = []) {
   });
 }
 
-function quoteEmail({ name, phone, email, service, projectType, context, message, photos }) {
+function quoteEmail({ name, phone, email, service, streetAddress, unit, city, postalCode, projectType, context, message, photos }) {
   const subject = `Airrand ${service || "HVAC"} request`;
   const rows = [
     ["Name", name],
     ["Phone", phone],
     ["Email", email],
     ["Service Needed", service],
+    ["Street Address", streetAddress],
+    ["Unit / Suite", unit || "Not provided"],
+    ["City", city],
+    ["Postal Code", postalCode],
     ["Project Type", projectType],
     ["Source", context],
     ["Photos Attached", photos.length ? `${photos.length}` : "No"],
@@ -122,12 +126,16 @@ export default async function handler(request, response) {
     const phone = cleanText(payload.phone, 80);
     const email = cleanText(payload.email, 160);
     const service = cleanText(payload.service, 120);
+    const streetAddress = cleanText(payload.streetAddress, 180);
+    const unit = cleanText(payload.unit, 80);
+    const city = cleanText(payload.city, 100);
+    const postalCode = cleanText(payload.postalCode, 20);
     const projectType = cleanText(payload.projectType, 80);
     const context = cleanText(payload.context, 120);
     const message = cleanText(payload.message, 3000);
     const photos = normalizeAttachments(payload.photos);
 
-    if (!name || !phone || !email || !service || !projectType || !message) {
+    if (!name || !phone || !email || !service || !streetAddress || !city || !postalCode || !projectType || !message) {
       return response.status(400).json({ error: "Please complete all required fields." });
     }
 
@@ -135,7 +143,20 @@ export default async function handler(request, response) {
       return response.status(400).json({ error: "Please enter a valid email address." });
     }
 
-    const emailContent = quoteEmail({ name, phone, email, service, projectType, context, message, photos });
+    const emailContent = quoteEmail({
+      name,
+      phone,
+      email,
+      service,
+      streetAddress,
+      unit,
+      city,
+      postalCode,
+      projectType,
+      context,
+      message,
+      photos,
+    });
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
