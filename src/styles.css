@@ -5870,6 +5870,30 @@ details.review-page-copy[open] summary span {
     font-weight: 850;
   }
 
+  .mobile-nav summary {
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-nav summary::after {
+    width: 8px;
+    height: 8px;
+    margin-left: auto;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    content: "";
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 160ms ease;
+  }
+
+  .mobile-nav details[open] summary::after {
+    transform: translateY(2px) rotate(225deg);
+  }
+
   .mobile-nav details div {
     display: grid;
     padding-left: 12px;
