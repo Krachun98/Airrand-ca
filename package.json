@@ -1,0 +1,13 @@
+{
+  "name": "airrand-redesign",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static, SEO-focused redesign for Airrand.ca.",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "serve": "node src/server.mjs",
+    "validate": "node src/validate.mjs",
+    "audit": "node src/audit.mjs"
+  }
+}

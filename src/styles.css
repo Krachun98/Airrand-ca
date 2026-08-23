@@ -1,0 +1,6539 @@
+:root {
+  --bg: #07090c;
+  --bg-soft: #0d1116;
+  --panel: #11171d;
+  --panel-2: #161d24;
+  --panel-3: #1f262d;
+  --text: #f6f8fb;
+  --muted: #aeb7c2;
+  --muted-2: #7f8b98;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.22);
+  --blue: #36a9ff;
+  --blue-strong: #1592e6;
+  --orange: #ff7433;
+  --orange-strong: #e85c1b;
+  --steel: #c5cbd3;
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+  --radius: 8px;
+  --max: 1180px;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background:
+    linear-gradient(180deg, rgba(255, 116, 51, 0.035), transparent 360px),
+    var(--bg);
+  color: var(--text);
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+
+body.nav-open {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(54, 169, 255, 0.35);
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.container {
+  width: min(var(--max), calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  top: 12px;
+  left: 12px;
+  transform: translateY(-140%);
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 800;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.site-header {
+  position: sticky;
+  z-index: 900;
+  top: 0;
+  border-bottom: 1px solid var(--line);
+  background: rgba(7, 9, 12, 0.86);
+  backdrop-filter: blur(16px);
+}
+
+.header-shell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(1280px, calc(100% - 32px));
+  min-height: 84px;
+  margin-inline: auto;
+  gap: 22px;
+}
+
+.site-logo,
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 120px;
+  height: 76px;
+}
+
+.site-logo img,
+.footer-logo img {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.desktop-nav > a,
+.nav-dropdown > summary {
+  min-height: 42px;
+  padding: 11px 12px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.93rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.desktop-nav > a:hover,
+.desktop-nav > a.active,
+.nav-dropdown.active > summary,
+.nav-dropdown[open] > summary,
+.nav-dropdown > summary:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text);
+}
+
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.nav-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-dropdown > summary::after {
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  content: "";
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.nav-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  display: none;
+  width: 300px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(13, 17, 22, 0.98);
+  box-shadow: var(--shadow);
+  gap: 4px;
+}
+
+.nav-dropdown[open] .nav-menu {
+  display: grid;
+}
+
+.nav-menu a {
+  padding: 10px 12px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.nav-menu a:hover {
+  background: rgba(54, 169, 255, 0.12);
+  color: var(--text);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-phone {
+  color: var(--text);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 13px 20px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-weight: 850;
+  line-height: 1.1;
+  text-align: center;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button-primary {
+  background: var(--blue);
+  color: #03111c;
+}
+
+.button-primary:hover {
+  background: #62bdff;
+}
+
+.button-secondary {
+  border-color: var(--line-strong);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+}
+
+.button-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.button-small {
+  min-height: 42px;
+  padding: 11px 15px;
+  background: var(--blue);
+  color: #03111c;
+  font-size: 0.9rem;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  margin: 4px auto;
+  background: var(--text);
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.site-header[data-open="true"] .nav-toggle span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.site-header[data-open="true"] .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.site-header[data-open="true"] .nav-toggle span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.hero,
+.page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--bg-soft);
+  background-image: var(--hero-image);
+  background-position: center right;
+  background-size: cover;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  height: 76svh;
+  min-height: 520px;
+  max-height: 760px;
+}
+
+.hero::before,
+.page-hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(7, 9, 12, 0.98) 0%, rgba(7, 9, 12, 0.85) 38%, rgba(7, 9, 12, 0.38) 68%, rgba(7, 9, 12, 0.58) 100%),
+    linear-gradient(180deg, rgba(7, 9, 12, 0.2), rgba(7, 9, 12, 0.82));
+}
+
+.hero::after {
+  position: absolute;
+  z-index: -1;
+  right: 7%;
+  bottom: 8%;
+  width: 28%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(54, 169, 255, 0.8), var(--orange));
+  content: "";
+}
+
+.hero-content {
+  padding: 74px 0 48px;
+}
+
+.hero-content > * {
+  max-width: 720px;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--blue);
+  font-size: 0.79rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text);
+  letter-spacing: 0;
+  line-height: 1.02;
+}
+
+h1 {
+  margin-bottom: 22px;
+  font-size: 2.65rem;
+  font-weight: 900;
+}
+
+.hero h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  margin-bottom: 16px;
+  font-size: 2.05rem;
+  font-weight: 900;
+}
+
+h3 {
+  margin-bottom: 10px;
+  font-size: 1.08rem;
+  font-weight: 850;
+}
+
+p {
+  color: var(--muted);
+}
+
+.hero p,
+.page-hero p {
+  max-width: 660px;
+  color: #d4dce5;
+  font-size: 1.12rem;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  gap: 10px 20px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.hero-meta span,
+.hero-meta a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+}
+
+.hero-meta span::before,
+.hero-meta a::before {
+  width: 8px;
+  height: 8px;
+  margin-right: 9px;
+  border-radius: 999px;
+  background: var(--orange);
+  content: "";
+}
+
+.trust-bar {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #0a0e12;
+}
+
+.trust-shell {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: min(1280px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.trust-shell div {
+  min-height: 116px;
+  padding: 24px;
+  border-right: 1px solid var(--line);
+}
+
+.trust-shell div:first-child {
+  border-left: 1px solid var(--line);
+}
+
+.trust-shell strong,
+.trust-shell span {
+  display: block;
+}
+
+.trust-shell strong {
+  margin-bottom: 8px;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.trust-shell span {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.section {
+  padding: 96px 0;
+}
+
+.muted-section {
+  background: var(--bg-soft);
+}
+
+.section-heading {
+  max-width: 760px;
+  margin-bottom: 36px;
+}
+
+.section-heading-center {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.section-heading p:last-child {
+  margin-bottom: 0;
+  font-size: 1.05rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.service-card {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  min-height: 382px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.service-card:hover {
+  border-color: rgba(54, 169, 255, 0.45);
+  background: #141b22;
+  transform: translateY(-3px);
+}
+
+.service-card-image {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: #05080b;
+}
+
+.service-card-image::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 35%, rgba(7, 9, 12, 0.62));
+  content: "";
+}
+
+.service-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 240ms ease;
+}
+
+.service-card:hover img {
+  transform: scale(1.035);
+}
+
+.service-card-body {
+  display: grid;
+  align-content: start;
+  padding: 22px;
+  gap: 9px;
+}
+
+.service-card-group,
+.gallery-card small,
+.review-label {
+  color: var(--orange);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.service-card strong {
+  color: var(--text);
+  font-size: 1.28rem;
+  line-height: 1.1;
+}
+
+.service-card span:last-child {
+  color: var(--muted);
+}
+
+.brands-section {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.06), transparent 55%),
+    #090d11;
+}
+
+.brands-section .section-heading {
+  max-width: 820px;
+}
+
+.brands-section .section-heading h2 {
+  color: var(--text);
+}
+
+.brands-section .section-heading p:last-child {
+  color: var(--muted);
+}
+
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  padding: 4px 0 0;
+  gap: 14px;
+  list-style: none;
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 116px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+    #0a0f14;
+}
+
+.brand-logo-plate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 82px;
+  padding: 12px 18px;
+  border-radius: 6px;
+}
+
+.brand-mark img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 56px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 16px rgba(0, 0, 0, 0.38));
+}
+
+.brand-carrier img,
+.brand-american-standard img,
+.brand-bryant img,
+.brand-daikin img,
+.brand-ibc img,
+.brand-keeprite img,
+.brand-lennox img,
+.brand-rheem img,
+.brand-trane img,
+.brand-york img {
+  max-height: 72px;
+}
+
+.brand-kinghome img {
+  max-height: 88px;
+}
+
+.brand-kinghome .brand-logo-plate {
+  padding-block: 4px;
+}
+
+.brand-navien img {
+  max-height: 34px;
+}
+
+.brand-john-wood img,
+.brand-kepler img {
+  max-height: 44px;
+}
+
+.brand-amana img,
+.brand-american-standard img,
+.brand-ecobee img,
+.brand-kepler img,
+.brand-keeprite img {
+  filter: brightness(0) invert(1) drop-shadow(0 5px 16px rgba(0, 0, 0, 0.38));
+}
+
+.brands-hero {
+  min-height: 640px;
+}
+
+.brands-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.72fr);
+  align-items: center;
+  gap: 44px;
+}
+
+.hero-brand-panel {
+  position: relative;
+  display: grid;
+  min-height: 390px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 50% 44%, rgba(54, 169, 255, 0.16), transparent 34%),
+    linear-gradient(135deg, rgba(255, 116, 51, 0.08), rgba(54, 169, 255, 0.06)),
+    rgba(7, 9, 12, 0.72);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.hero-brand-panel::before,
+.hero-brand-panel::after {
+  position: absolute;
+  inset: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  content: "";
+}
+
+.hero-brand-panel::after {
+  inset: 92px;
+  border-color: rgba(54, 169, 255, 0.2);
+}
+
+.brand-orbit {
+  position: absolute;
+  display: grid;
+  width: 146px;
+  min-height: 96px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  background: rgba(10, 15, 20, 0.92);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
+}
+
+.brand-orbit:nth-child(1) {
+  top: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.brand-orbit:nth-child(2) {
+  top: 118px;
+  right: 34px;
+}
+
+.brand-orbit:nth-child(3) {
+  right: 72px;
+  bottom: 48px;
+}
+
+.brand-orbit:nth-child(4) {
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.brand-orbit:nth-child(5) {
+  bottom: 72px;
+  left: 38px;
+}
+
+.brand-orbit:nth-child(6) {
+  top: 118px;
+  left: 34px;
+}
+
+.brand-orbit:nth-child(7) {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.brand-orbit img {
+  max-height: 46px;
+}
+
+.brand-choice-section,
+.brand-priority-section,
+.brand-directory-section,
+.tier-section,
+.technology-section,
+.utility-brand-section {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent),
+    var(--bg);
+}
+
+.brand-choice-grid,
+.cost-efficiency-grid,
+.commercial-brand-grid,
+.utility-brand-grid,
+.installation-message-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.76fr);
+  align-items: center;
+  gap: 36px;
+}
+
+.brand-statement {
+  border-left: 3px solid var(--blue);
+  padding: 28px 30px;
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.12), transparent),
+    rgba(255, 255, 255, 0.03);
+}
+
+.brand-statement p {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.priority-grid,
+.technology-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.priority-card,
+.technology-block,
+.brand-process-step,
+.tier-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+    var(--panel);
+}
+
+.priority-card,
+.technology-block {
+  min-height: 205px;
+  padding: 26px;
+}
+
+.priority-card h3,
+.technology-block h3,
+.tier-panel h3,
+.brand-process-step h3,
+.brand-detail-card h3 {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.15;
+}
+
+.priority-card p,
+.technology-block p,
+.brand-process-step p,
+.brand-detail-card p,
+.commercial-brand-grid p,
+.utility-brand-grid p,
+.cost-efficiency-grid p {
+  color: var(--muted);
+}
+
+.brand-filter-bar {
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.brand-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  gap: 16px;
+  list-style: none;
+}
+
+.brand-detail-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    #0a0f14;
+  overflow: hidden;
+  transition: transform 180ms ease, border-color 180ms ease, opacity 180ms ease;
+}
+
+.brand-detail-card:hover {
+  border-color: rgba(54, 169, 255, 0.42);
+  transform: translateY(-3px);
+}
+
+.brand-detail-card[hidden] {
+  display: none;
+}
+
+.brand-detail-logo {
+  display: grid;
+  min-height: 128px;
+  padding: 14px;
+  place-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at 50% 0, rgba(54, 169, 255, 0.09), transparent 58%),
+    rgba(255, 255, 255, 0.018);
+}
+
+.brand-detail-copy {
+  display: grid;
+  align-content: start;
+  padding: 22px;
+  gap: 16px;
+}
+
+.brand-card-kicker {
+  margin: 0 0 7px;
+  color: var(--orange);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.brand-card-more {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 14px;
+}
+
+.brand-card-more summary {
+  color: var(--blue);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.brand-card-more ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 14px 0 0;
+  padding: 0;
+  gap: 8px;
+  list-style: none;
+}
+
+.brand-card-more li {
+  padding: 5px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  color: var(--steel);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.brand-empty {
+  margin: 24px 0 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+.tier-grid,
+.brand-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.tier-panel {
+  padding: 28px;
+}
+
+.tier-panel:nth-child(2) {
+  border-color: rgba(54, 169, 255, 0.34);
+}
+
+.tier-panel:nth-child(3) {
+  border-color: rgba(255, 116, 51, 0.34);
+}
+
+.cost-efficiency-section {
+  border-block: 1px solid var(--line);
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.08), transparent 44%),
+    linear-gradient(270deg, rgba(255, 116, 51, 0.09), transparent 44%),
+    #090d11;
+}
+
+.efficiency-scale {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 132px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+  gap: 16px;
+  text-align: center;
+}
+
+.efficiency-scale::before,
+.efficiency-scale::after {
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--orange));
+  content: "";
+}
+
+.efficiency-scale span:first-child {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.efficiency-scale strong {
+  grid-column: 2;
+  grid-row: 1;
+  padding: 10px 16px;
+  border: 1px solid rgba(54, 169, 255, 0.38);
+  border-radius: 999px;
+  background: rgba(54, 169, 255, 0.12);
+  color: var(--text);
+}
+
+.efficiency-scale span:last-child {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.efficiency-scale span {
+  color: var(--steel);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.brand-process-step {
+  min-height: 205px;
+  padding: 26px;
+}
+
+.brand-process-step span {
+  display: inline-flex;
+  margin-bottom: 28px;
+  color: var(--blue);
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.installation-message {
+  padding: 92px 0;
+  border-block: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 116, 51, 0.16), transparent 36%),
+    radial-gradient(circle at 86% 76%, rgba(54, 169, 255, 0.14), transparent 35%),
+    #080b0f;
+}
+
+.installation-message h2 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 4.2rem);
+  line-height: 0.98;
+}
+
+.installation-message p {
+  max-width: 670px;
+  color: var(--steel);
+  font-size: 1.12rem;
+}
+
+.installation-checks,
+.commercial-equipment-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 10px;
+  list-style: none;
+}
+
+.installation-checks {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.installation-checks li,
+.commercial-equipment-list li {
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--steel);
+  font-weight: 800;
+}
+
+.commercial-brand-section {
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.045), transparent),
+    var(--bg-soft);
+}
+
+.commercial-equipment-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.utility-brand-grid {
+  align-items: stretch;
+}
+
+.utility-brand-grid > article {
+  display: grid;
+  align-content: start;
+  border-top: 1px solid var(--line);
+  padding-top: 28px;
+  gap: 14px;
+}
+
+.brand-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 8px 0 0;
+  padding: 0;
+  gap: 10px;
+  list-style: none;
+}
+
+.brand-strip-card {
+  display: grid;
+  min-height: 94px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  background: rgba(10, 15, 20, 0.78);
+}
+
+.brand-strip-card img {
+  max-height: 44px;
+}
+
+.split-section {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent),
+    #0a0e12;
+}
+
+.split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.split-panel {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.split-panel img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.split-panel > div {
+  padding: 32px;
+}
+
+.split-panel-warm .eyebrow {
+  color: var(--orange);
+}
+
+.check-list {
+  display: grid;
+  margin: 24px 0;
+  padding: 0;
+  gap: 12px;
+  list-style: none;
+}
+
+.check-list li {
+  position: relative;
+  padding-left: 27px;
+  color: var(--steel);
+}
+
+.check-list li::before {
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 13px;
+  height: 2px;
+  background: var(--blue);
+  content: "";
+}
+
+.columns {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gallery-section {
+  background: var(--bg);
+}
+
+.gallery-shell {
+  display: grid;
+  gap: 24px;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-bar button {
+  min-height: 38px;
+  padding: 8px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.filter-bar button.active,
+.filter-bar button:hover {
+  border-color: rgba(54, 169, 255, 0.46);
+  background: rgba(54, 169, 255, 0.14);
+  color: var(--text);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.gallery-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #05080b;
+  cursor: zoom-in;
+  text-align: left;
+}
+
+.gallery-card[hidden] {
+  display: none;
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  object-fit: cover;
+  transition: transform 240ms ease;
+}
+
+.home-gallery-section .gallery-card {
+  aspect-ratio: 700 / 520;
+  min-height: 0;
+}
+
+.home-gallery-section .gallery-card img {
+  min-height: 0;
+}
+
+.gallery-card:hover img {
+  transform: scale(1.035);
+}
+
+.gallery-card::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.88));
+  content: "";
+}
+
+.gallery-card span {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  bottom: 17px;
+  left: 18px;
+}
+
+.gallery-card small {
+  display: block;
+}
+
+.section-action {
+  margin-top: 28px;
+}
+
+.work-marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 14px 0;
+}
+
+.work-marquee::before,
+.work-marquee::after {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: min(12vw, 120px);
+  content: "";
+  pointer-events: none;
+}
+
+.work-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg), transparent);
+}
+
+.work-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg), transparent);
+}
+
+.marquee-viewport {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: work-marquee-scroll var(--scroll-duration, 36s) linear infinite;
+  will-change: transform;
+}
+
+.work-marquee .marquee-track {
+  animation: none;
+}
+
+.work-marquee.is-dragging .marquee-viewport {
+  cursor: grabbing;
+}
+
+.work-marquee.is-dragging .marquee-track {
+  animation-play-state: paused;
+}
+
+.work-marquee.is-dragging .marquee-card {
+  cursor: grabbing;
+}
+
+.marquee-group {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 18px;
+  padding-right: 18px;
+}
+
+.marquee-card {
+  position: relative;
+  width: clamp(270px, 30vw, 430px);
+  aspect-ratio: 4 / 5;
+  flex: 0 0 auto;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #05070a;
+  cursor: zoom-in;
+  text-align: left;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.28);
+}
+
+.marquee-card::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 48%, rgba(0, 0, 0, 0.88));
+  content: "";
+  pointer-events: none;
+}
+
+.marquee-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms ease;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.marquee-card:hover img {
+  transform: scale(1.035);
+}
+
+.marquee-caption {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  bottom: 16px;
+  left: 18px;
+}
+
+.marquee-caption small {
+  display: block;
+}
+
+.marquee-caption small {
+  color: var(--orange);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+@keyframes work-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.why-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.05), transparent 42%),
+    var(--bg-soft);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: 52px;
+}
+
+.why-intro {
+  position: sticky;
+  top: 104px;
+  align-self: start;
+}
+
+.why-list,
+.standalone-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.why-card,
+.process-card,
+.review-card,
+.service-aside,
+.about-card,
+.contact-info,
+.form-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.why-card {
+  padding: 24px;
+}
+
+.why-card p {
+  margin-bottom: 0;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.process-card {
+  padding: 22px;
+  background: var(--panel);
+}
+
+.process-card span {
+  display: block;
+  margin-bottom: 26px;
+  color: var(--orange);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.process-card p {
+  margin-bottom: 0;
+  font-size: 0.94rem;
+}
+
+.reviews-section {
+  background: #090d11;
+}
+
+.google-reviews-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 28px;
+  border: 1px solid rgba(54, 169, 255, 0.22);
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.13), transparent 58%),
+    var(--panel);
+}
+
+.google-reviews-panel h3 {
+  margin-bottom: 10px;
+  font-size: 1.65rem;
+}
+
+.google-reviews-panel p:last-child {
+  margin-bottom: 0;
+}
+
+.google-reviews-actions {
+  justify-content: flex-end;
+}
+
+.review-marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 6px 0;
+}
+
+.review-marquee::before,
+.review-marquee::after {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: min(10vw, 110px);
+  content: "";
+  pointer-events: none;
+}
+
+.review-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, #090d11, transparent);
+}
+
+.review-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, #090d11, transparent);
+}
+
+.review-marquee:hover .marquee-track,
+.review-marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+.review-marquee .marquee-group {
+  align-items: flex-start;
+}
+
+.review-slide-card {
+  display: grid;
+  align-content: start;
+  width: clamp(330px, 36vw, 470px);
+  min-height: 360px;
+  flex: 0 0 auto;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    var(--panel);
+  color: var(--muted);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+  transition: transform 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.review-slide-card:hover {
+  border-color: rgba(54, 169, 255, 0.46);
+  color: var(--steel);
+  transform: translateY(-2px);
+}
+
+.review-source {
+  margin-bottom: 10px;
+  color: var(--orange);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.review-slide-card strong {
+  margin-bottom: 5px;
+  color: var(--text);
+  font-size: 1.18rem;
+  line-height: 1.12;
+}
+
+.review-rating-row {
+  display: flex;
+  align-items: center;
+  margin: 16px 0 15px;
+}
+
+.review-stars {
+  color: #ffb238;
+  font-size: 1rem;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.review-slide-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.54;
+}
+
+.review-slide-card em {
+  margin-top: 22px;
+  color: var(--blue);
+  font-style: normal;
+  font-weight: 900;
+}
+
+.review-card {
+  padding: 24px;
+  background: var(--panel);
+}
+
+.review-card h3 {
+  margin-bottom: 12px;
+}
+
+.review-card p:last-child {
+  margin-bottom: 0;
+}
+
+.reviews-hero {
+  background-position: center;
+}
+
+.reviews-profile-section {
+  padding: 48px 0 78px;
+  background: #090d11;
+}
+
+.reviews-profile-panel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: center;
+  padding: 26px;
+  border: 1px solid rgba(54, 169, 255, 0.22);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.13), transparent 42%),
+    linear-gradient(135deg, rgba(255, 116, 51, 0.07), transparent 70%),
+    var(--panel);
+  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.24);
+}
+
+.google-profile-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  font-weight: 900;
+}
+
+.reviews-profile-panel h2 {
+  margin-bottom: 8px;
+  font-size: 1.85rem;
+}
+
+.reviews-profile-panel p:last-child {
+  margin-bottom: 0;
+}
+
+.reviews-grid-section {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent 28%),
+    var(--bg);
+}
+
+.reviews-page-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.reviews-page-card {
+  display: flex;
+  min-width: 0;
+  min-height: 360px;
+  flex-direction: column;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.042), transparent),
+    var(--panel);
+  color: var(--muted);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.22);
+}
+
+.reviews-page-card-top {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 13px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.review-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(54, 169, 255, 0.24);
+  border-radius: 50%;
+  background: rgba(54, 169, 255, 0.1);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.reviews-page-card h3 {
+  overflow-wrap: anywhere;
+  margin-bottom: 0;
+  font-size: 1.06rem;
+}
+
+.review-page-stars {
+  display: inline-flex;
+  margin-bottom: 16px;
+  color: #ffb238;
+  font-size: 1rem;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.review-page-copy {
+  margin-bottom: 20px;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.review-page-copy p {
+  margin-bottom: 12px;
+}
+
+.review-page-copy p:last-child {
+  margin-bottom: 0;
+}
+
+details.review-page-copy summary {
+  display: grid;
+  gap: 12px;
+  cursor: pointer;
+  list-style: none;
+}
+
+details.review-page-copy summary::-webkit-details-marker {
+  display: none;
+}
+
+details.review-page-copy summary strong {
+  color: var(--blue);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+details.review-page-copy[open] summary span {
+  display: none;
+}
+
+.review-page-full {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.review-google-link {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  margin-top: auto;
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.review-google-link:hover {
+  color: #62bdff;
+}
+
+.featured-reviews-section {
+  background: #090d11;
+}
+
+.featured-review-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.featured-review-card {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.25fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.09), transparent 44%),
+    var(--panel);
+  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.24);
+}
+
+.featured-review-photo,
+.reviews-work-card {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: #05080b;
+  cursor: pointer;
+  text-align: left;
+}
+
+.featured-review-photo img,
+.reviews-work-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.featured-review-photo:hover img,
+.reviews-work-card:hover img {
+  transform: scale(1.035);
+}
+
+.featured-review-photo::after,
+.reviews-work-card::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 36%, rgba(7, 9, 12, 0.82));
+  content: "";
+}
+
+.featured-review-photo span,
+.reviews-work-card span,
+.reviews-work-card strong {
+  position: absolute;
+  z-index: 1;
+  left: 18px;
+}
+
+.featured-review-photo span,
+.reviews-work-card span {
+  bottom: 48px;
+  color: var(--blue);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.reviews-work-card strong {
+  right: 18px;
+  bottom: 18px;
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.05;
+}
+
+.featured-review-copy {
+  padding: 28px;
+}
+
+.featured-review-copy h3 {
+  font-size: 1.45rem;
+}
+
+.featured-review-copy blockquote {
+  margin: 18px 0 22px;
+  padding: 0;
+}
+
+.featured-review-copy blockquote p {
+  margin-bottom: 13px;
+  color: #cfd7e0;
+}
+
+.review-themes-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.055), transparent 44%),
+    var(--bg-soft);
+}
+
+.review-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.review-theme-card {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--panel);
+}
+
+.review-theme-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(54, 169, 255, 0.25);
+  border-radius: 8px;
+  background: rgba(54, 169, 255, 0.1);
+  color: var(--blue);
+}
+
+.review-theme-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.review-theme-card p:last-child {
+  margin-bottom: 0;
+}
+
+.review-quote-strip {
+  overflow: hidden;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.12), transparent 48%, rgba(255, 116, 51, 0.1)),
+    #080c10;
+}
+
+.review-quote-track {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: min(var(--max), calc(100% - 40px));
+  margin-inline: auto;
+  gap: 10px;
+}
+
+.review-quote-track span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--steel);
+  font-size: 0.92rem;
+  font-weight: 850;
+}
+
+.reviews-work-section {
+  background: var(--bg);
+}
+
+.reviews-work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.reviews-work-card {
+  min-height: 270px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.service-area {
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.04), transparent),
+    var(--bg);
+}
+
+.service-area-grid {
+  display: grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: 42px;
+  align-items: center;
+}
+
+.area-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.area-cloud a {
+  padding: 12px 15px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--steel);
+  font-weight: 800;
+}
+
+.area-cloud a:hover {
+  border-color: rgba(54, 169, 255, 0.5);
+  color: var(--text);
+}
+
+.final-cta {
+  padding: 58px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.16), transparent 55%),
+    linear-gradient(270deg, rgba(255, 116, 51, 0.14), transparent 58%),
+    #0d1116;
+}
+
+.final-cta-shell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.final-cta h2 {
+  max-width: 650px;
+}
+
+.final-cta p:last-child {
+  max-width: 620px;
+  margin-bottom: 0;
+}
+
+.page-hero {
+  display: grid;
+  align-items: end;
+  min-height: 430px;
+  padding: 110px 0 62px;
+}
+
+.page-hero h1 {
+  max-width: 850px;
+}
+
+.compact-hero {
+  min-height: 430px;
+}
+
+.service-hero,
+.commercial-hero {
+  min-height: 520px;
+}
+
+.text-hero {
+  background: var(--bg-soft);
+}
+
+.text-hero::before {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.1), transparent),
+    var(--bg-soft);
+}
+
+.service-detail-grid,
+.commercial-grid,
+.about-grid,
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 40px;
+  align-items: start;
+}
+
+.detail-copy {
+  max-width: 780px;
+}
+
+.detail-copy p {
+  font-size: 1.06rem;
+}
+
+.wide-copy {
+  max-width: 920px;
+}
+
+.service-aside {
+  position: sticky;
+  top: 104px;
+  display: grid;
+  padding: 26px;
+  gap: 14px;
+  background: var(--panel);
+}
+
+.service-aside h2,
+.contact-info h2,
+.form-panel h2,
+.about-card h2 {
+  font-size: 1.35rem;
+}
+
+.service-aside ul {
+  display: grid;
+  margin: 0 0 8px;
+  padding-left: 20px;
+  color: var(--steel);
+  gap: 8px;
+}
+
+.standards-section {
+  padding: 46px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #0d1116;
+}
+
+.standards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 28px;
+}
+
+.standard-card {
+  display: grid;
+  grid-template-rows: 124px auto 1fr;
+  justify-items: center;
+  align-items: start;
+  gap: 14px;
+  padding: 0 18px;
+  text-align: center;
+}
+
+.standard-logo {
+  display: grid;
+  width: min(100%, 260px);
+  height: 124px;
+  align-self: center;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.standard-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.standard-logo-csa {
+  width: min(100%, 282px);
+  height: 112px;
+}
+
+.standard-logo-tssa {
+  width: 122px;
+  height: 122px;
+}
+
+.standard-logo-hrai {
+  width: 174px;
+  height: 136px;
+}
+
+.standard-card h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.08rem;
+}
+
+.standard-card p {
+  max-width: 310px;
+  margin: 0;
+  color: var(--steel);
+  font-size: 1rem;
+}
+
+.heating-section {
+  padding: 82px 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent),
+    var(--bg);
+}
+
+.heating-warning-section,
+.heating-equipment-section {
+  background:
+    radial-gradient(circle at 12% 12%, rgba(54, 169, 255, 0.08), transparent 34%),
+    var(--bg);
+}
+
+.heating-warning-grid,
+.heating-installation-grid,
+.heating-maintenance-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.heating-warning-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.heating-card,
+.heating-decision-panel,
+.heating-install-card,
+.heating-maintenance-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    #0b1117;
+}
+
+.heating-card,
+.heating-install-card {
+  display: grid;
+  align-content: start;
+  min-height: 176px;
+  padding: 22px;
+  gap: 12px;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.heating-card:hover,
+.heating-install-card:hover {
+  border-color: rgba(54, 169, 255, 0.44);
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.075), rgba(255, 255, 255, 0.012)),
+    #0b1117;
+  transform: translateY(-2px);
+}
+
+.heating-icon,
+.heating-info-icon {
+  display: inline-grid;
+  place-items: center;
+  color: var(--blue);
+}
+
+.heating-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(54, 169, 255, 0.24);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 0, rgba(54, 169, 255, 0.16), transparent 65%),
+    rgba(54, 169, 255, 0.055);
+}
+
+.heating-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.heating-icon svg,
+.heating-info-icon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.heating-card h3,
+.heating-decision-panel h3,
+.heating-install-card h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.08rem;
+  line-height: 1.18;
+}
+
+.heating-card p,
+.heating-install-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.heating-info-section {
+  padding: 0;
+  border-top: 1px solid rgba(54, 169, 255, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.08), transparent 42%),
+    linear-gradient(270deg, rgba(151, 34, 34, 0.1), transparent 46%),
+    #080c10;
+}
+
+.heating-info-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+}
+
+.heating-info-item {
+  display: flex;
+  align-items: center;
+  min-height: 86px;
+  padding: 18px 20px;
+  gap: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 900;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+}
+
+.heating-info-item:last-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.heating-info-icon {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+}
+
+.heating-info-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.heating-decision-section {
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.035), transparent 48%),
+    var(--bg-soft);
+}
+
+.heating-decision-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.heating-decision-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 28px;
+}
+
+.heating-decision-panel::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), rgba(54, 169, 255, 0.08));
+  content: "";
+}
+
+.heating-decision-panel-warm::before {
+  background: linear-gradient(90deg, rgba(151, 34, 34, 0.9), rgba(255, 116, 51, 0.14));
+}
+
+.heating-panel-label {
+  display: block;
+  margin-bottom: 22px;
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.heating-decision-panel ul {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 11px;
+  list-style: none;
+}
+
+.heating-decision-panel li {
+  position: relative;
+  padding-left: 25px;
+  color: var(--steel);
+  line-height: 1.45;
+}
+
+.heating-decision-panel li::before {
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 12px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--blue);
+  content: "";
+}
+
+.heating-decision-panel-warm li::before {
+  background: var(--orange);
+}
+
+.heating-equipment-layout,
+.heating-maintenance-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.58fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 34px;
+}
+
+.heating-equipment-copy {
+  position: sticky;
+  top: 104px;
+}
+
+.heating-equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.heating-option-card {
+  min-height: 205px;
+}
+
+.heating-equipment-grid .heating-option-card:nth-child(5) {
+  grid-column: 1 / -1;
+  min-height: 158px;
+}
+
+.heating-installation-section {
+  padding: 82px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at 50% 0, rgba(54, 169, 255, 0.13), transparent 34%),
+    #080b0f;
+}
+
+.heating-installation-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.heating-install-card {
+  min-height: 188px;
+}
+
+.heating-maintenance-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.06), transparent 48%),
+    #090d11;
+}
+
+.heating-maintenance-layout {
+  align-items: center;
+}
+
+.heating-maintenance-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.heating-maintenance-card {
+  display: flex;
+  align-items: center;
+  min-height: 66px;
+  padding: 14px 16px;
+  gap: 11px;
+}
+
+.heating-maintenance-card span {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  place-items: center;
+  border: 1px solid rgba(54, 169, 255, 0.44);
+  border-radius: 50%;
+  background: rgba(54, 169, 255, 0.08);
+}
+
+.heating-maintenance-card span::before {
+  width: 7px;
+  height: 4px;
+  border-bottom: 2px solid var(--blue);
+  border-left: 2px solid var(--blue);
+  content: "";
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+
+.heating-maintenance-card strong {
+  color: var(--steel);
+  font-size: 0.86rem;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  line-height: 1.18;
+  text-transform: uppercase;
+}
+
+.cooling-section {
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.035), transparent 46%),
+    var(--bg);
+}
+
+.cooling-warning-grid,
+.cooling-installation-grid,
+.cooling-performance-grid,
+.cooling-maintenance-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.cooling-warning-grid,
+.cooling-installation-grid,
+.cooling-performance-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cooling-card,
+.cooling-decision-panel,
+.cooling-install-card,
+.cooling-performance-item,
+.cooling-maintenance-card,
+.cooling-refrigerant-panel,
+.cooling-component,
+.cooling-component-center {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    #0a1016;
+}
+
+.cooling-card,
+.cooling-install-card {
+  display: grid;
+  align-content: start;
+  min-height: 178px;
+  padding: 22px;
+  gap: 12px;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.cooling-card:hover,
+.cooling-install-card:hover,
+.cooling-performance-item:hover {
+  border-color: rgba(54, 169, 255, 0.48);
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.08), rgba(255, 255, 255, 0.012)),
+    #0a1016;
+  transform: translateY(-2px);
+}
+
+.cooling-icon {
+  display: inline-grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgba(54, 169, 255, 0.26);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 0, rgba(54, 169, 255, 0.16), transparent 65%),
+    rgba(54, 169, 255, 0.055);
+  color: var(--blue);
+}
+
+.cooling-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cooling-card h3,
+.cooling-decision-panel h3,
+.cooling-install-card h3,
+.cooling-performance-item h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.08rem;
+  line-height: 1.18;
+}
+
+.cooling-card p,
+.cooling-install-card p,
+.cooling-performance-item p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.cooling-decision-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.06), transparent 46%),
+    var(--bg-soft);
+}
+
+.cooling-decision-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.cooling-decision-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 28px;
+}
+
+.cooling-decision-panel::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), rgba(54, 169, 255, 0.08));
+  content: "";
+}
+
+.cooling-decision-panel-replace::before {
+  background: linear-gradient(90deg, rgba(151, 34, 34, 0.9), rgba(255, 116, 51, 0.14));
+}
+
+.cooling-panel-label {
+  display: block;
+  margin-bottom: 22px;
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.cooling-decision-panel ul {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 11px;
+  list-style: none;
+}
+
+.cooling-decision-panel li {
+  position: relative;
+  padding-left: 25px;
+  color: var(--steel);
+  line-height: 1.45;
+}
+
+.cooling-decision-panel li::before {
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 12px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--blue);
+  content: "";
+}
+
+.cooling-decision-panel-replace li::before {
+  background: var(--orange);
+}
+
+.cooling-system-section {
+  border-top: 1px solid rgba(54, 169, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at 72% 12%, rgba(54, 169, 255, 0.13), transparent 34%),
+    #080c10;
+}
+
+.cooling-system-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.62fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 42px;
+}
+
+.cooling-system-copy p {
+  color: var(--steel);
+}
+
+.cooling-component-map {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 18px;
+  gap: 12px;
+  border: 1px solid rgba(54, 169, 255, 0.14);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    rgba(7, 11, 15, 0.72);
+  background-size: 34px 34px;
+}
+
+.cooling-component-map::before {
+  position: absolute;
+  inset: 28px;
+  border: 1px solid rgba(54, 169, 255, 0.16);
+  border-radius: 8px;
+  content: "";
+  pointer-events: none;
+}
+
+.cooling-component-center {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-column: 1 / -1;
+  min-height: 92px;
+  place-items: center;
+  padding: 18px;
+  text-align: center;
+}
+
+.cooling-component-center strong {
+  color: var(--text);
+  font-size: 1.28rem;
+}
+
+.cooling-component-center span {
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.cooling-component {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  min-height: 74px;
+  padding: 12px;
+  gap: 10px;
+}
+
+.cooling-component .cooling-icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+}
+
+.cooling-component .cooling-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.cooling-component strong {
+  color: var(--steel);
+  font-size: 0.86rem;
+  line-height: 1.2;
+}
+
+.cooling-equipment-layout,
+.cooling-maintenance-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.58fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 34px;
+}
+
+.cooling-equipment-copy {
+  position: sticky;
+  top: 104px;
+}
+
+.cooling-equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.cooling-option-card {
+  min-height: 214px;
+}
+
+.cooling-equipment-grid .cooling-option-card:nth-child(5) {
+  grid-column: 1 / -1;
+  min-height: 158px;
+}
+
+.cooling-installation-section {
+  padding: 82px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at 50% 0, rgba(54, 169, 255, 0.14), transparent 34%),
+    #080b0f;
+}
+
+.cooling-install-card {
+  min-height: 188px;
+}
+
+.cooling-performance-section {
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.04), transparent 52%),
+    #090d11;
+}
+
+.cooling-performance-item {
+  display: flex;
+  align-items: flex-start;
+  min-height: 126px;
+  padding: 20px;
+  gap: 14px;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.cooling-performance-item .cooling-icon {
+  flex: 0 0 40px;
+}
+
+.cooling-diagnostics-section {
+  background: var(--bg-soft);
+}
+
+.cooling-diagnostics-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.62fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 34px;
+}
+
+.cooling-problem-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cooling-problem-list span {
+  min-height: 44px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  background: rgba(7, 11, 15, 0.74);
+  color: var(--steel);
+  font-weight: 800;
+}
+
+.cooling-refrigerant-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.08), transparent 48%),
+    #070b0f;
+}
+
+.cooling-refrigerant-panel {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1fr);
+  align-items: center;
+  padding: 32px;
+  gap: 28px;
+}
+
+.cooling-refrigerant-panel h2 {
+  margin-bottom: 14px;
+}
+
+.cooling-refrigerant-panel p {
+  margin-bottom: 0;
+  color: var(--steel);
+}
+
+.cooling-refrigerant-checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cooling-refrigerant-checks div,
+.cooling-maintenance-card {
+  display: flex;
+  align-items: center;
+  min-height: 62px;
+  padding: 14px 16px;
+  gap: 11px;
+}
+
+.cooling-refrigerant-checks div {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.cooling-refrigerant-checks span,
+.cooling-maintenance-card span {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  place-items: center;
+  border: 1px solid rgba(54, 169, 255, 0.44);
+  border-radius: 50%;
+  background: rgba(54, 169, 255, 0.08);
+}
+
+.cooling-refrigerant-checks span::before,
+.cooling-maintenance-card span::before {
+  width: 7px;
+  height: 4px;
+  border-bottom: 2px solid var(--blue);
+  border-left: 2px solid var(--blue);
+  content: "";
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+
+.cooling-refrigerant-checks strong,
+.cooling-maintenance-card strong {
+  color: var(--steel);
+  font-size: 0.86rem;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  line-height: 1.18;
+  text-transform: uppercase;
+}
+
+.cooling-maintenance-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.06), transparent 48%),
+    #090d11;
+}
+
+.cooling-maintenance-layout {
+  align-items: center;
+}
+
+.cooling-maintenance-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cooling-maintenance-card {
+  min-height: 66px;
+}
+
+.heat-pump-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.045), transparent 48%),
+    linear-gradient(270deg, rgba(151, 34, 34, 0.06), transparent 52%),
+    var(--bg);
+}
+
+.heat-pump-basics-grid,
+.heat-pump-winter-grid,
+.heat-pump-hybrid-grid,
+.heat-pump-system-grid,
+.heat-pump-efficiency-grid,
+.heat-pump-defrost-grid,
+.heat-pump-diagnostics-grid,
+.heat-pump-selection-layout,
+.heat-pump-maintenance-layout {
+  display: grid;
+  align-items: start;
+  gap: 34px;
+}
+
+.heat-pump-basics-grid,
+.heat-pump-winter-grid,
+.heat-pump-hybrid-grid,
+.heat-pump-system-grid,
+.heat-pump-efficiency-grid,
+.heat-pump-defrost-grid,
+.heat-pump-diagnostics-grid {
+  grid-template-columns: minmax(280px, 0.62fr) minmax(0, 1fr);
+}
+
+.heat-pump-selection-layout,
+.heat-pump-maintenance-layout {
+  grid-template-columns: minmax(280px, 0.58fr) minmax(0, 1fr);
+}
+
+.heat-pump-sticky-copy {
+  position: sticky;
+  top: 104px;
+}
+
+.heat-pump-icon {
+  display: inline-grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgba(54, 169, 255, 0.26);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 0, rgba(54, 169, 255, 0.16), transparent 65%),
+    rgba(54, 169, 255, 0.055);
+  color: var(--blue);
+}
+
+.heat-pump-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.heat-pump-card,
+.heat-pump-install-card,
+.heat-pump-mode-card,
+.heat-pump-winter-panel,
+.heat-pump-factor-list div,
+.heat-pump-hybrid-flow,
+.heat-pump-hybrid-flow > div,
+.heat-pump-system-map div,
+.heat-pump-indicators div,
+.heat-pump-defrost-list div,
+.heat-pump-comparison-card,
+.heat-pump-problem-list span,
+.heat-pump-maintenance-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    #0a1016;
+}
+
+.heat-pump-card,
+.heat-pump-install-card {
+  display: grid;
+  align-content: start;
+  min-height: 182px;
+  padding: 22px;
+  gap: 12px;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.heat-pump-card:hover,
+.heat-pump-install-card:hover {
+  border-color: rgba(54, 169, 255, 0.48);
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.08), rgba(255, 255, 255, 0.012)),
+    #0a1016;
+  transform: translateY(-2px);
+}
+
+.heat-pump-card h3,
+.heat-pump-install-card h3,
+.heat-pump-mode-card h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.08rem;
+  line-height: 1.18;
+}
+
+.heat-pump-card p,
+.heat-pump-install-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.heat-pump-callout {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 6px;
+  padding: 12px 14px;
+  border: 1px solid rgba(54, 169, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(54, 169, 255, 0.08);
+  color: var(--text);
+  font-weight: 900;
+}
+
+.heat-pump-mode-visual {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.heat-pump-mode-card {
+  display: grid;
+  min-height: 220px;
+  align-content: center;
+  padding: 26px;
+  gap: 14px;
+}
+
+.heat-pump-mode-card strong {
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.heat-pump-mode-heating .heat-pump-icon,
+.heat-pump-hybrid-furnace .heat-pump-icon,
+.heat-pump-comparison-card-warm .heat-pump-icon {
+  border-color: rgba(255, 116, 51, 0.28);
+  background:
+    radial-gradient(circle at 50% 0, rgba(151, 34, 34, 0.22), transparent 65%),
+    rgba(151, 34, 34, 0.09);
+  color: var(--orange);
+}
+
+.heat-pump-winter-section,
+.heat-pump-system-section,
+.heat-pump-diagnostics-section {
+  background: var(--bg-soft);
+}
+
+.heat-pump-winter-panel {
+  padding: 30px;
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.08), rgba(151, 34, 34, 0.04)),
+    #0a1016;
+}
+
+.heat-pump-winter-panel p {
+  color: var(--steel);
+}
+
+.heat-pump-factor-list,
+.heat-pump-defrost-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.heat-pump-factor-list div,
+.heat-pump-defrost-list div {
+  display: flex;
+  align-items: center;
+  min-height: 76px;
+  padding: 14px;
+  gap: 12px;
+}
+
+.heat-pump-factor-list .heat-pump-icon,
+.heat-pump-defrost-list .heat-pump-icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+}
+
+.heat-pump-factor-list .heat-pump-icon svg,
+.heat-pump-defrost-list .heat-pump-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.heat-pump-factor-list strong,
+.heat-pump-defrost-list strong {
+  color: var(--steel);
+  font-size: 0.9rem;
+  line-height: 1.24;
+}
+
+.heat-pump-hybrid-section {
+  border-top: 1px solid rgba(54, 169, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.heat-pump-hybrid-grid p {
+  color: var(--steel);
+}
+
+.heat-pump-hybrid-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr);
+  align-items: stretch;
+  padding: 18px;
+  gap: 12px;
+}
+
+.heat-pump-hybrid-flow > div {
+  display: grid;
+  align-content: center;
+  min-height: 190px;
+  padding: 22px;
+  gap: 10px;
+}
+
+.heat-pump-hybrid-flow small {
+  color: var(--muted);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.heat-pump-hybrid-flow strong {
+  color: var(--text);
+  font-size: 1.25rem;
+}
+
+.heat-pump-hybrid-flow em {
+  color: var(--steel);
+  font-style: normal;
+}
+
+.heat-pump-flow-arrow {
+  position: relative;
+  align-self: center;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--orange));
+}
+
+.heat-pump-flow-arrow::after {
+  position: absolute;
+  top: 50%;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--orange);
+  border-right: 2px solid var(--orange);
+  content: "";
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.heat-pump-fit-section {
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.03), transparent 48%),
+    #080c10;
+}
+
+.heat-pump-card-grid,
+.heat-pump-installation-grid,
+.heat-pump-selection-grid,
+.heat-pump-maintenance-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.heat-pump-card-grid,
+.heat-pump-installation-grid,
+.heat-pump-maintenance-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.heat-pump-selection-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.heat-pump-selection-grid .heat-pump-card:nth-child(5) {
+  grid-column: 1 / -1;
+  min-height: 158px;
+}
+
+.heat-pump-installation-section {
+  padding: 82px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at 38% 0, rgba(54, 169, 255, 0.13), transparent 34%),
+    radial-gradient(circle at 70% 8%, rgba(151, 34, 34, 0.11), transparent 28%),
+    #080b0f;
+}
+
+.heat-pump-install-card {
+  min-height: 188px;
+}
+
+.heat-pump-system-map {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.heat-pump-system-map div {
+  display: flex;
+  align-items: center;
+  min-height: 76px;
+  padding: 14px;
+  gap: 12px;
+}
+
+.heat-pump-system-map .heat-pump-icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+}
+
+.heat-pump-system-map .heat-pump-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.heat-pump-system-map strong {
+  color: var(--steel);
+  line-height: 1.24;
+}
+
+.heat-pump-efficiency-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.055), transparent 44%),
+    #090d11;
+}
+
+.heat-pump-indicators {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.heat-pump-indicators div {
+  position: relative;
+  overflow: hidden;
+  min-height: 170px;
+  padding: 26px;
+}
+
+.heat-pump-indicators div::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), rgba(54, 169, 255, 0.08));
+  content: "";
+}
+
+.heat-pump-indicators div:nth-child(2)::before {
+  background: linear-gradient(90deg, var(--orange), rgba(151, 34, 34, 0.08));
+}
+
+.heat-pump-indicators span {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.heat-pump-indicators strong {
+  color: var(--steel);
+  font-weight: 700;
+}
+
+.heat-pump-defrost-section {
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.035), transparent 52%),
+    #080c10;
+}
+
+.heat-pump-defrost-grid p {
+  color: var(--steel);
+}
+
+.heat-pump-comparison-section {
+  background: var(--bg);
+}
+
+.heat-pump-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.heat-pump-comparison-card {
+  padding: 28px;
+}
+
+.heat-pump-comparison-card > p {
+  color: var(--steel);
+}
+
+.heat-pump-mini-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.heat-pump-mini-compare div {
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.heat-pump-mini-compare h3 {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+}
+
+.heat-pump-mini-compare p {
+  margin: 0 0 8px;
+  color: var(--muted);
+}
+
+.heat-pump-problem-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.heat-pump-problem-list span {
+  min-height: 44px;
+  padding: 12px 14px;
+  color: var(--steel);
+  font-weight: 800;
+}
+
+.heat-pump-maintenance-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.045), transparent 42%),
+    linear-gradient(270deg, rgba(151, 34, 34, 0.055), transparent 48%),
+    #090d11;
+}
+
+.heat-pump-maintenance-layout {
+  align-items: center;
+}
+
+.heat-pump-maintenance-card {
+  display: flex;
+  align-items: center;
+  min-height: 66px;
+  padding: 14px 16px;
+  gap: 11px;
+}
+
+.heat-pump-maintenance-card span {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  place-items: center;
+  border: 1px solid rgba(54, 169, 255, 0.44);
+  border-radius: 50%;
+  background: rgba(54, 169, 255, 0.08);
+}
+
+.heat-pump-maintenance-card span::before {
+  width: 7px;
+  height: 4px;
+  border-bottom: 2px solid var(--blue);
+  border-left: 2px solid var(--blue);
+  content: "";
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+
+.heat-pump-maintenance-card strong {
+  color: var(--steel);
+  font-size: 0.86rem;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  line-height: 1.18;
+  text-transform: uppercase;
+}
+
+.ductless-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.04), transparent 48%),
+    linear-gradient(270deg, rgba(151, 34, 34, 0.04), transparent 56%),
+    var(--bg);
+}
+
+.ductless-basics-grid,
+.ductless-zoning-grid,
+.ductless-design-grid,
+.ductless-placement-grid,
+.ductless-line-grid,
+.ductless-winter-grid,
+.ductless-mode-grid,
+.ductless-diagnostics-grid,
+.ductless-controls-grid,
+.ductless-maintenance-layout {
+  display: grid;
+  align-items: start;
+  gap: 34px;
+}
+
+.ductless-basics-grid,
+.ductless-zoning-grid,
+.ductless-design-grid,
+.ductless-placement-grid,
+.ductless-line-grid,
+.ductless-winter-grid,
+.ductless-mode-grid,
+.ductless-diagnostics-grid,
+.ductless-controls-grid {
+  grid-template-columns: minmax(280px, 0.62fr) minmax(0, 1fr);
+}
+
+.ductless-maintenance-layout {
+  grid-template-columns: minmax(280px, 0.58fr) minmax(0, 1fr);
+  align-items: center;
+}
+
+.ductless-icon {
+  display: inline-grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  overflow: hidden;
+  place-items: center;
+  border: 1px solid rgba(54, 169, 255, 0.26);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 0, rgba(54, 169, 255, 0.16), transparent 65%),
+    rgba(54, 169, 255, 0.055);
+  color: var(--blue);
+}
+
+.ductless-icon svg {
+  width: 22px;
+  height: 22px;
+  max-width: 22px;
+  max-height: 22px;
+  flex: 0 0 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.ductless-card,
+.ductless-install-card,
+.ductless-system-panel,
+.ductless-flow,
+.ductless-flow-step,
+.ductless-zone-visual div,
+.ductless-check-panel,
+.ductless-factor-list span,
+.ductless-photo-pair button,
+.ductless-winter-panel div,
+.ductless-comparison-card,
+.ductless-heat-pump-compare-panel,
+.ductless-mini-compare div,
+.ductless-mode-list span,
+.ductless-problem-list span,
+.ductless-control-list div,
+.ductless-maintenance-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    #0a1016;
+}
+
+.ductless-card,
+.ductless-install-card {
+  display: grid;
+  align-content: start;
+  min-height: 178px;
+  padding: 22px;
+  gap: 12px;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.ductless-card:hover,
+.ductless-install-card:hover {
+  border-color: rgba(54, 169, 255, 0.48);
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.08), rgba(255, 255, 255, 0.012)),
+    #0a1016;
+  transform: translateY(-2px);
+}
+
+.ductless-card-grid,
+.ductless-installation-grid,
+.ductless-maintenance-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.ductless-card-grid,
+.ductless-installation-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ductless-maintenance-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ductless-card h3,
+.ductless-install-card h3,
+.ductless-system-panel h3,
+.ductless-comparison-card h3,
+.ductless-mini-compare h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.08rem;
+  line-height: 1.18;
+}
+
+.ductless-card p,
+.ductless-install-card p,
+.ductless-system-panel p,
+.ductless-comparison-card li,
+.ductless-mini-compare p {
+  color: var(--muted);
+}
+
+.ductless-callout,
+.ductless-note {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 6px;
+  padding: 12px 14px;
+  border: 1px solid rgba(54, 169, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(54, 169, 255, 0.08);
+  color: var(--text);
+  font-weight: 900;
+}
+
+.ductless-note {
+  margin-top: 16px;
+}
+
+.ductless-note-warm {
+  border-color: rgba(255, 116, 51, 0.28);
+  background: rgba(151, 34, 34, 0.08);
+}
+
+.ductless-basics-section,
+.ductless-line-section,
+.ductless-installation-section,
+.ductless-mode-section {
+  border-top: 1px solid rgba(54, 169, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ductless-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr) 42px minmax(0, 1fr) 42px minmax(0, 1fr);
+  align-items: stretch;
+  padding: 16px;
+  gap: 10px;
+}
+
+.ductless-flow-step {
+  display: grid;
+  min-height: 142px;
+  place-items: center;
+  padding: 18px;
+  gap: 12px;
+  text-align: center;
+}
+
+.ductless-flow-step strong {
+  color: var(--text);
+  line-height: 1.15;
+}
+
+.ductless-flow-arrow,
+.ductless-mini-flow i {
+  position: relative;
+  align-self: center;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), rgba(255, 116, 51, 0.86));
+}
+
+.ductless-flow-arrow::after,
+.ductless-mini-flow i::after {
+  position: absolute;
+  top: 50%;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid rgba(255, 116, 51, 0.9);
+  border-right: 2px solid rgba(255, 116, 51, 0.9);
+  content: "";
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.ductless-applications-section,
+.ductless-placement-section,
+.ductless-diagnostics-section {
+  background: var(--bg-soft);
+}
+
+.ductless-system-types-section,
+.ductless-installation-section {
+  padding: 82px 0;
+  background:
+    radial-gradient(circle at 28% 0, rgba(54, 169, 255, 0.13), transparent 34%),
+    radial-gradient(circle at 78% 8%, rgba(151, 34, 34, 0.09), transparent 28%),
+    #080b0f;
+}
+
+.ductless-system-type-grid,
+.ductless-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ductless-system-panel,
+.ductless-comparison-card,
+.ductless-heat-pump-compare-panel {
+  padding: 28px;
+}
+
+.ductless-system-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.ductless-system-panel::before,
+.ductless-comparison-card::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), rgba(54, 169, 255, 0.08));
+  content: "";
+}
+
+.ductless-system-panel-warm::before {
+  background: linear-gradient(90deg, var(--orange), rgba(151, 34, 34, 0.08));
+}
+
+.ductless-mini-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 38px minmax(0, 1fr);
+  align-items: center;
+  margin: 18px 0;
+  gap: 10px;
+}
+
+.ductless-mini-flow span {
+  min-height: 62px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text);
+  font-weight: 900;
+  text-align: center;
+}
+
+.ductless-system-panel strong {
+  display: block;
+  margin: 18px 0 10px;
+  color: var(--steel);
+}
+
+.ductless-system-panel ul,
+.ductless-comparison-card ul {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 9px;
+  list-style: none;
+}
+
+.ductless-system-panel li,
+.ductless-comparison-card li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.ductless-system-panel li::before,
+.ductless-comparison-card li::before {
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 10px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--blue);
+  content: "";
+}
+
+.ductless-zone-visual {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ductless-zone-visual div {
+  display: grid;
+  min-height: 178px;
+  align-content: center;
+  padding: 22px;
+  gap: 12px;
+  text-align: center;
+}
+
+.ductless-zone-visual strong {
+  color: var(--text);
+  font-size: 1.12rem;
+}
+
+.ductless-zone-visual em {
+  color: var(--blue);
+  font-size: 1.55rem;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.ductless-factor-list,
+.ductless-problem-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ductless-factor-list span,
+.ductless-problem-list span,
+.ductless-mode-list span {
+  min-height: 44px;
+  padding: 12px 14px;
+  color: var(--steel);
+  font-weight: 800;
+}
+
+.ductless-placement-copy {
+  position: sticky;
+  top: 104px;
+}
+
+.ductless-check-panel {
+  padding: 28px;
+}
+
+.ductless-check-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ductless-check-grid div,
+.ductless-maintenance-card {
+  display: flex;
+  align-items: center;
+  min-height: 66px;
+  gap: 11px;
+}
+
+.ductless-check-grid div {
+  padding: 14px 0;
+}
+
+.ductless-check-grid span,
+.ductless-maintenance-card span {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  place-items: center;
+  border: 1px solid rgba(54, 169, 255, 0.44);
+  border-radius: 50%;
+  background: rgba(54, 169, 255, 0.08);
+}
+
+.ductless-check-grid span::before,
+.ductless-maintenance-card span::before {
+  width: 7px;
+  height: 4px;
+  border-bottom: 2px solid var(--blue);
+  border-left: 2px solid var(--blue);
+  content: "";
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+
+.ductless-check-grid strong,
+.ductless-maintenance-card strong {
+  color: var(--steel);
+  font-size: 0.86rem;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  line-height: 1.18;
+  text-transform: uppercase;
+}
+
+.ductless-photo-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.ductless-photo-pair button {
+  position: relative;
+  overflow: hidden;
+  min-height: 430px;
+  padding: 0;
+  border-color: rgba(54, 169, 255, 0.16);
+  cursor: zoom-in;
+}
+
+.ductless-photo-pair img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.ductless-photo-pair button:hover img {
+  transform: scale(1.035);
+}
+
+.ductless-photo-pair button::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 44%, rgba(0, 0, 0, 0.82));
+  content: "";
+}
+
+.ductless-photo-pair span {
+  position: absolute;
+  z-index: 1;
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  color: var(--blue);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.ductless-pull-quote {
+  margin: 24px 0 0;
+  padding: 18px 20px;
+  border-left: 3px solid var(--blue);
+  background: rgba(54, 169, 255, 0.07);
+  color: var(--text);
+  font-size: 1.08rem;
+  font-weight: 900;
+}
+
+.ductless-winter-section,
+.ductless-controls-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.045), transparent 42%),
+    linear-gradient(270deg, rgba(151, 34, 34, 0.055), transparent 48%),
+    #090d11;
+}
+
+.ductless-winter-panel,
+.ductless-control-list,
+.ductless-mode-list {
+  display: grid;
+  gap: 12px;
+}
+
+.ductless-winter-panel {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ductless-winter-panel div,
+.ductless-control-list div {
+  display: flex;
+  align-items: center;
+  min-height: 76px;
+  padding: 14px;
+  gap: 12px;
+}
+
+.ductless-winter-panel .ductless-icon,
+.ductless-control-list .ductless-icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+}
+
+.ductless-winter-panel .ductless-icon svg,
+.ductless-control-list .ductless-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ductless-winter-panel strong,
+.ductless-control-list strong {
+  color: var(--steel);
+  line-height: 1.24;
+}
+
+.ductless-comparison-section {
+  background: var(--bg);
+}
+
+.ductless-comparison-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.ductless-heat-pump-compare-section {
+  background: var(--bg-soft);
+}
+
+.ductless-heat-pump-compare-panel {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.55fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 22px;
+}
+
+.ductless-mini-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ductless-mini-compare div {
+  padding: 18px;
+}
+
+.ductless-mini-compare p {
+  margin: 0 0 8px;
+}
+
+.ductless-mode-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ductless-maintenance-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.045), transparent 48%),
+    var(--bg);
+}
+
+.ductless-maintenance-card {
+  padding: 14px 16px;
+}
+
+.faq-section {
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.04), transparent),
+    var(--bg);
+}
+
+.faq-shell {
+  max-width: 1050px;
+}
+
+.faq-list {
+  display: grid;
+  gap: 12px;
+}
+
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    var(--panel);
+  overflow: hidden;
+}
+
+.faq-item[open] {
+  border-color: rgba(54, 169, 255, 0.42);
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 64px;
+  padding: 18px 22px;
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 900;
+  line-height: 1.25;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::before {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  place-items: center;
+  border: 1px solid rgba(54, 169, 255, 0.38);
+  border-radius: 50%;
+  color: var(--blue);
+  content: "+";
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.faq-item[open] summary::before {
+  content: "-";
+}
+
+.faq-item summary:hover {
+  color: var(--blue);
+}
+
+.faq-item p {
+  max-width: 870px;
+  margin: 0;
+  padding: 0 26px 24px 60px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.faq-item[open] p {
+  animation: faq-reveal 180ms ease;
+}
+
+@keyframes faq-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.capability-grid div {
+  display: grid;
+  min-height: 150px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  gap: 8px;
+}
+
+.capability-grid strong {
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.capability-grid span {
+  color: var(--muted);
+}
+
+.about-card,
+.contact-info,
+.form-panel {
+  padding: 28px;
+  background: var(--panel);
+}
+
+.about-card,
+.contact-info {
+  display: grid;
+  gap: 12px;
+}
+
+.about-card a,
+.contact-info a {
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 850;
+}
+
+.about-card span,
+.contact-info span {
+  color: var(--muted);
+}
+
+.contact-grid {
+  grid-template-columns: 340px minmax(0, 1fr);
+}
+
+.contact-form {
+  display: grid;
+  gap: 17px;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 8px;
+}
+
+.contact-form label span,
+.radio-row legend {
+  color: var(--steel);
+  font-size: 0.9rem;
+  font-weight: 850;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 13px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: #090d11;
+  color: var(--text);
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.about-hero {
+  min-height: clamp(540px, 78svh, 680px);
+  padding: 110px 0 50px;
+  background-position: center right;
+}
+
+.about-hero::before {
+  background:
+    linear-gradient(90deg, rgba(7, 9, 12, 0.98) 0%, rgba(7, 9, 12, 0.9) 36%, rgba(7, 9, 12, 0.42) 68%, rgba(7, 9, 12, 0.74) 100%),
+    linear-gradient(180deg, rgba(7, 9, 12, 0.1), rgba(7, 9, 12, 0.84));
+}
+
+.about-hero-grid {
+  display: grid;
+  min-height: clamp(430px, 62svh, 560px);
+  align-items: end;
+}
+
+.about-hero-copy {
+  max-width: 760px;
+}
+
+.about-hero-copy h1 {
+  max-width: 720px;
+}
+
+.about-hero-copy p:not(.eyebrow) {
+  max-width: 680px;
+}
+
+.about-hero .button-row {
+  margin-top: 24px;
+}
+
+.about-hero-panel {
+  display: flex;
+  flex-wrap: wrap;
+  width: min(100%, 700px);
+  margin-top: 22px;
+  gap: 10px;
+}
+
+.about-hero-panel span {
+  position: relative;
+  flex: 0 1 auto;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(7, 9, 12, 0.66);
+  color: var(--text);
+  font-size: 0.95rem;
+  backdrop-filter: blur(10px);
+}
+
+.about-hero-panel span + span {
+  border-left: 1px solid var(--line);
+}
+
+.about-hero-panel span::before {
+  width: 7px;
+  height: 7px;
+  margin-right: 10px;
+  border-radius: 999px;
+  background: var(--blue);
+  content: "";
+}
+
+.about-intro-section,
+.about-approach-section,
+.about-capabilities-section,
+.about-work-section,
+.about-workmanship-section,
+.about-technical-section,
+.about-process-section,
+.about-info-section,
+.about-values-section,
+.about-instagram-section {
+  padding: 76px 0;
+}
+
+.about-intro-section {
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.055), transparent 42%),
+    var(--bg);
+}
+
+.about-section-copy {
+  max-width: 700px;
+}
+
+.about-section-copy p:not(.eyebrow) {
+  max-width: 670px;
+}
+
+.about-section-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.about-intro-grid,
+.about-feature-grid,
+.about-technical-grid,
+.about-info-grid {
+  display: grid;
+  align-items: center;
+  gap: 52px;
+}
+
+.about-intro-grid {
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1fr);
+}
+
+.about-intro-photo,
+.about-feature-photo {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #05080b;
+  box-shadow: var(--shadow);
+}
+
+.about-intro-photo {
+  max-width: 500px;
+  justify-self: end;
+  aspect-ratio: 4 / 5;
+}
+
+.about-intro-photo::before,
+.about-feature-photo::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.42)),
+    linear-gradient(90deg, rgba(54, 169, 255, 0.12), transparent 28%);
+  content: "";
+  pointer-events: none;
+}
+
+.about-intro-photo img,
+.about-feature-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-intro-photo figcaption {
+  position: absolute;
+  z-index: 2;
+  bottom: 26px;
+  left: 26px;
+  width: min(78%, 390px);
+  max-width: calc(100% - 52px);
+  padding: 18px 20px 18px 28px;
+  border: 1px solid rgba(128, 167, 195, 0.24);
+  border-radius: 10px;
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.08), transparent 36%),
+    rgba(10, 15, 20, 0.82);
+  color: var(--text);
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(54, 169, 255, 0.04);
+  backdrop-filter: blur(10px) saturate(120%);
+}
+
+.about-intro-photo figcaption::before {
+  position: absolute;
+  top: 17px;
+  bottom: 17px;
+  left: 14px;
+  width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(116, 205, 255, 0.92), rgba(54, 169, 255, 0.42));
+  box-shadow: 0 0 14px rgba(54, 169, 255, 0.28);
+  content: "";
+}
+
+.about-intro-photo figcaption::after {
+  position: absolute;
+  z-index: -1;
+  top: 16px;
+  bottom: 16px;
+  left: -20px;
+  width: 60px;
+  background: radial-gradient(circle at left center, rgba(54, 169, 255, 0.18), transparent 68%);
+  content: "";
+  pointer-events: none;
+}
+
+.about-intro-photo.reveal figcaption {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 240ms ease 90ms, transform 260ms ease 90ms;
+}
+
+.about-intro-photo.reveal.is-visible figcaption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-caption-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--blue);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.about-caption-quote {
+  display: block;
+  color: rgba(248, 250, 252, 0.86);
+  font-size: clamp(1rem, 1.2vw, 1.24rem);
+  font-weight: 700;
+  line-height: 1.28;
+}
+
+.about-caption-quote strong,
+.about-caption-quote span {
+  display: block;
+}
+
+.about-caption-quote strong {
+  color: var(--text);
+  font-weight: 950;
+}
+
+.about-approach-section {
+  background:
+    linear-gradient(180deg, rgba(255, 116, 51, 0.035), transparent 44%),
+    var(--bg-soft);
+}
+
+.about-approach-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.34fr) minmax(0, 0.66fr);
+  align-items: start;
+  gap: 36px;
+}
+
+.about-sticky-copy {
+  position: sticky;
+  top: 112px;
+}
+
+.about-principles-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 0;
+  gap: 14px;
+}
+
+.about-principle-row {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.025);
+  gap: 12px;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.about-principle-row:hover {
+  border-color: rgba(54, 169, 255, 0.34);
+  background: rgba(54, 169, 255, 0.025);
+}
+
+.about-principle-number {
+  color: var(--blue);
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 0.95;
+}
+
+.about-principle-row h3 {
+  margin-bottom: 8px;
+  font-size: 1.12rem;
+}
+
+.about-principle-row p {
+  max-width: 680px;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.about-principle-row .text-link {
+  display: inline-flex;
+  margin-top: 12px;
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.about-chip-list,
+.about-service-tags {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: 40px;
+  margin: 16px 0 0;
+  padding: 0;
+  gap: 8px;
+  list-style: none;
+}
+
+.about-chip-list li,
+.about-service-tags li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: 100%;
+  padding: 6px 12px;
+  border: 1px solid rgba(54, 169, 255, 0.26);
+  border-radius: 999px;
+  background: rgba(9, 14, 19, 0.78);
+  color: rgba(235, 241, 247, 0.9);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.05;
+  text-align: center;
+  text-transform: uppercase;
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.about-chip-list li:hover,
+.about-service-tags li:hover {
+  border-color: rgba(54, 169, 255, 0.42);
+  background: rgba(54, 169, 255, 0.07);
+  color: var(--text);
+}
+
+.about-closing-line {
+  margin: 26px 0 0;
+  padding: 18px 20px;
+  border-left: 3px solid var(--orange);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.about-capability-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 22px;
+}
+
+.about-capability-panel {
+  display: grid;
+  overflow: hidden;
+  grid-template-rows: clamp(260px, 26vw, 340px) auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.08), transparent 40%),
+    var(--panel);
+}
+
+.about-capability-panel-warm {
+  background:
+    linear-gradient(180deg, rgba(255, 116, 51, 0.075), transparent 40%),
+    var(--panel);
+}
+
+.about-capability-panel img {
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+  object-fit: cover;
+}
+
+.about-capability-image-rtu {
+  object-position: center 42%;
+}
+
+.about-capability-panel > div {
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+  gap: 13px;
+}
+
+.about-capability-panel h3 {
+  max-width: 500px;
+  font-size: 1.36rem;
+}
+
+.about-capability-panel p {
+  max-width: 560px;
+  margin-bottom: 0;
+}
+
+.about-service-tags {
+  margin: 2px 0 8px;
+}
+
+.about-capability-panel .button {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.about-work-section {
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.06), transparent 35%),
+    var(--bg-soft);
+}
+
+.about-work-header,
+.about-instagram-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 24px;
+}
+
+.about-work-header .section-heading,
+.about-instagram-header p:last-child {
+  margin-bottom: 0;
+}
+
+.about-work-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.8fr) minmax(0, 0.8fr);
+  grid-template-rows: repeat(2, minmax(180px, 230px));
+  gap: 14px;
+}
+
+.about-work-item {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #05070a;
+  cursor: zoom-in;
+  text-align: left;
+}
+
+.about-work-item:nth-child(1) {
+  grid-row: 1 / span 2;
+}
+
+.about-work-item:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.about-work-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.about-work-item:hover img,
+.instagram-tile:hover img {
+  transform: scale(1.035);
+}
+
+.about-work-item::after,
+.instagram-tile::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 46%, rgba(0, 0, 0, 0.86));
+  content: "";
+}
+
+.about-work-item span,
+.instagram-tile span {
+  position: absolute;
+  z-index: 2;
+  right: 14px;
+  bottom: 13px;
+  left: 14px;
+  color: var(--text);
+  font-size: 0.86rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.about-workmanship-section {
+  background:
+    linear-gradient(135deg, rgba(255, 116, 51, 0.055), transparent 42%),
+    var(--bg);
+}
+
+.about-feature-grid {
+  grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+}
+
+.about-feature-photo {
+  aspect-ratio: 5 / 4;
+}
+
+.about-feature-copy {
+  max-width: 620px;
+}
+
+.workmanship-list {
+  display: grid;
+  margin: 24px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.workmanship-list li {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  font-weight: 900;
+  gap: 12px;
+}
+
+.workmanship-list li span {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  border: 1px solid rgba(54, 169, 255, 0.52);
+}
+
+.workmanship-list li span::before {
+  position: absolute;
+  top: 8px;
+  left: 4px;
+  width: 8px;
+  height: 2px;
+  background: var(--blue);
+  content: "";
+}
+
+.about-feature-copy blockquote {
+  margin: 28px 0 0;
+  padding: 22px 24px;
+  border-left: 4px solid var(--blue);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-size: 1.32rem;
+  font-weight: 900;
+  line-height: 1.22;
+}
+
+.about-technical-section {
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.06), transparent 44%),
+    var(--bg-soft);
+}
+
+.about-technical-grid {
+  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+}
+
+.about-technical-grid .button {
+  margin-top: 10px;
+}
+
+.technical-callouts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.technical-callout {
+  display: grid;
+  align-content: space-between;
+  min-height: 116px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    var(--panel);
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.technical-callout:hover {
+  border-color: rgba(54, 169, 255, 0.34);
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.12), rgba(255, 255, 255, 0.025)),
+    var(--panel);
+  transform: translateY(-2px);
+}
+
+.technical-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(128, 167, 195, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(54, 169, 255, 0.1), rgba(6, 12, 18, 0.62)),
+    rgba(8, 15, 22, 0.7);
+  color: var(--blue);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 18px rgba(54, 169, 255, 0.08);
+  transition: border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.technical-icon svg {
+  width: 22px;
+  height: 22px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.technical-callout:hover .technical-icon {
+  border-color: rgba(54, 169, 255, 0.4);
+  color: #74cdff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 20px rgba(54, 169, 255, 0.14);
+}
+
+.technical-callout h3 {
+  margin: 20px 0 0;
+  font-size: 1rem;
+}
+
+.about-process-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0;
+}
+
+.about-process-grid::before {
+  position: absolute;
+  top: 30px;
+  right: 8%;
+  left: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(54, 169, 255, 0.7), rgba(255, 116, 51, 0.4));
+  content: "";
+}
+
+.about-process-step {
+  position: relative;
+  padding: 0 16px 0 0;
+}
+
+.about-process-step > span {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 18px;
+  place-items: center;
+  border: 1px solid rgba(54, 169, 255, 0.42);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.about-process-step h3 {
+  margin-bottom: 7px;
+  font-size: 1rem;
+}
+
+.about-process-step p {
+  max-width: 180px;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.about-info-section {
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.055), transparent 46%),
+    var(--bg-soft);
+}
+
+.about-info-grid {
+  grid-template-columns: minmax(300px, 0.78fr) minmax(0, 1.22fr);
+  align-items: stretch;
+  gap: 18px;
+}
+
+.about-contact-panel,
+.about-area-panel,
+.about-brands-link {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.about-contact-panel,
+.about-area-panel {
+  padding: 30px;
+}
+
+.about-contact-panel dl {
+  display: grid;
+  margin: 24px 0;
+  gap: 12px;
+}
+
+.about-contact-panel dl div {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.about-contact-panel dt {
+  color: var(--muted-2);
+  font-weight: 850;
+}
+
+.about-contact-panel dd {
+  margin: 0;
+  color: var(--text);
+  font-weight: 850;
+}
+
+.about-contact-panel a {
+  color: var(--text);
+}
+
+.about-area-panel {
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.08), transparent 46%),
+    var(--panel);
+}
+
+.about-area-panel h2 {
+  max-width: 740px;
+  font-size: 2rem;
+}
+
+.about-area-cloud {
+  margin-top: 24px;
+}
+
+.about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.about-value {
+  min-height: 190px;
+  padding: 26px 24px;
+  border-right: 1px solid var(--line);
+}
+
+.about-value:last-child {
+  border-right: 0;
+}
+
+.about-value > span {
+  display: block;
+  margin-bottom: 32px;
+  color: var(--blue);
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.about-value h3 {
+  font-size: 1.25rem;
+}
+
+.about-value p {
+  margin-bottom: 0;
+}
+
+.about-brands-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  margin-top: 22px;
+  padding: 24px 28px 24px 32px;
+  gap: 24px;
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.11), rgba(255, 116, 51, 0.035)),
+    var(--panel);
+}
+
+.about-brands-link::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  background: var(--blue);
+  content: "";
+}
+
+.about-brands-link h2 {
+  max-width: 720px;
+  margin-bottom: 6px;
+  font-size: 1.55rem;
+}
+
+.about-brands-link p:last-child {
+  max-width: 640px;
+  margin-bottom: 0;
+}
+
+.about-instagram-section {
+  background:
+    linear-gradient(90deg, rgba(54, 169, 255, 0.045), transparent 46%),
+    #090d11;
+}
+
+.about-instagram-header h2 {
+  font-size: clamp(2rem, 4.4vw, 3.3rem);
+}
+
+.instagram-preview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.instagram-tile {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #05070a;
+}
+
+.instagram-tile::before {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  right: 14px;
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.86);
+  border-radius: 8px;
+  opacity: 0;
+  content: "";
+  transition: opacity 180ms ease;
+}
+
+.instagram-tile:hover::before {
+  opacity: 1;
+}
+
+.instagram-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.about-final-cta {
+  padding: 90px 0;
+  border-top: 1px solid var(--line);
+  background:
+    linear-gradient(90deg, rgba(7, 9, 12, 0.96), rgba(7, 9, 12, 0.82) 52%, rgba(7, 9, 12, 0.68)),
+    linear-gradient(135deg, rgba(54, 169, 255, 0.18), rgba(255, 116, 51, 0.08)),
+    url("/assets/work/commercial-hvac-03.webp") center / cover;
+}
+
+.about-final-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, auto);
+  align-items: center;
+  gap: 34px;
+}
+
+.about-final-shell h2 {
+  max-width: 740px;
+}
+
+.about-final-shell p:last-child {
+  max-width: 760px;
+  margin-bottom: 0;
+}
+
+@media (max-width: 1120px) {
+  .about-principles-list {
+    grid-template-columns: 1fr;
+  }
+
+  .about-process-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 18px;
+  }
+
+  .about-process-grid::before {
+    display: none;
+  }
+
+  .about-work-grid {
+    grid-template-rows: repeat(2, minmax(170px, 210px));
+  }
+
+  .about-values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-value:nth-child(2) {
+    border-right: 0;
+  }
+
+  .about-value:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 920px) {
+  .about-intro-grid,
+  .about-approach-grid,
+  .about-feature-grid,
+  .about-technical-grid,
+  .about-info-grid,
+  .about-final-shell,
+  .about-capability-split {
+    grid-template-columns: 1fr;
+  }
+
+  .about-sticky-copy {
+    position: static;
+  }
+
+  .about-intro-photo {
+    justify-self: start;
+    width: min(100%, 560px);
+  }
+
+  .about-capability-panel {
+    min-height: auto;
+    grid-template-rows: auto auto;
+  }
+
+  .about-capability-panel img {
+    max-height: 280px;
+  }
+
+  .about-capability-panel .button {
+    margin-top: 18px;
+  }
+
+  .technical-callouts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-work-header,
+  .about-instagram-header,
+  .about-brands-link {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .instagram-preview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-final-shell {
+    justify-items: start;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-about main {
+    padding-bottom: 86px;
+  }
+
+  .about-hero {
+    min-height: auto;
+    padding: 74px 0 84px;
+    background-position: 60% center;
+  }
+
+  .about-hero-grid {
+    min-height: auto;
+  }
+
+  .about-hero-panel {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 14px;
+    gap: 6px;
+  }
+
+  .about-hero-panel span + span {
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .about-hero-panel span {
+    min-height: 44px;
+    justify-content: center;
+    padding: 7px 6px;
+    font-size: 0.7rem;
+    line-height: 1.14;
+    text-align: center;
+  }
+
+  .about-hero-panel span::before {
+    display: none;
+  }
+
+  .about-hero .button-row {
+    margin-top: 18px;
+  }
+
+  .about-intro-section,
+  .about-approach-section,
+  .about-capabilities-section,
+  .about-work-section,
+  .about-workmanship-section,
+  .about-technical-section,
+  .about-process-section,
+  .about-info-section,
+  .about-values-section,
+  .about-instagram-section {
+    padding: 56px 0;
+  }
+
+  .about-intro-grid,
+  .about-approach-grid,
+  .about-feature-grid,
+  .about-technical-grid,
+  .about-info-grid {
+    gap: 30px;
+  }
+
+  .about-intro-photo,
+  .about-feature-photo {
+    aspect-ratio: 4 / 3;
+  }
+
+  .about-intro-photo,
+  .about-feature-photo {
+    max-height: 300px;
+  }
+
+  .about-intro-photo figcaption {
+    bottom: 14px;
+    left: 14px;
+    width: min(84%, 320px);
+    max-width: calc(100% - 28px);
+    padding: 13px 14px 13px 22px;
+    border-radius: 9px;
+  }
+
+  .about-intro-photo figcaption::before {
+    top: 13px;
+    bottom: 13px;
+    left: 11px;
+    width: 2px;
+  }
+
+  .about-caption-label {
+    margin-bottom: 6px;
+    font-size: 0.66rem;
+  }
+
+  .about-caption-quote {
+    font-size: 0.94rem;
+    line-height: 1.24;
+  }
+
+  .about-service-tags {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-principle-row {
+    grid-template-columns: 38px minmax(0, 1fr);
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .about-principle-number {
+    font-size: 1.3rem;
+  }
+
+  .about-capability-panel img {
+    min-height: 190px;
+    max-height: 220px;
+  }
+
+  .about-capability-panel > div,
+  .about-contact-panel,
+  .about-area-panel,
+  .about-brands-link {
+    padding: 22px;
+  }
+
+  .about-work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    gap: 10px;
+  }
+
+  .about-work-item,
+  .about-work-item:nth-child(1),
+  .about-work-item:nth-child(4) {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 1;
+  }
+
+  .about-work-item span,
+  .instagram-tile span {
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    font-size: 0.72rem;
+  }
+
+  .about-process-grid,
+  .about-values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .about-process-step {
+    min-height: 156px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .about-process-step > span {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 12px;
+  }
+
+  .about-process-step p {
+    max-width: none;
+    font-size: 0.86rem;
+  }
+
+  .technical-callouts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .technical-callout {
+    min-height: 94px;
+    padding: 14px;
+  }
+
+  .technical-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .technical-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .technical-callout h3 {
+    margin-top: 12px;
+    font-size: 0.9rem;
+  }
+
+  .about-value,
+  .about-value:nth-child(2),
+  .about-value:nth-child(-n + 2) {
+    min-height: 160px;
+    padding: 18px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .about-value:nth-child(2),
+  .about-value:nth-child(4) {
+    border-right: 0;
+  }
+
+  .about-value:nth-child(3),
+  .about-value:nth-child(4) {
+    border-bottom: 0;
+  }
+
+  .about-value:last-child {
+    border-bottom: 0;
+  }
+
+  .about-value > span {
+    margin-bottom: 16px;
+  }
+
+  .about-value h3 {
+    font-size: 1.05rem;
+  }
+
+  .about-value p {
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .about-contact-panel dl div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .about-area-panel h2 {
+    font-size: 1.38rem;
+    line-height: 1.12;
+  }
+
+  .about-final-cta {
+    padding: 64px 0 112px;
+  }
+}
+
+@media (max-width: 430px) {
+  .instagram-preview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-chip-list {
+    gap: 7px;
+    grid-auto-rows: 38px;
+  }
+
+  .about-chip-list li {
+    width: auto;
+    padding: 6px 9px;
+    font-size: 0.61rem;
+    letter-spacing: 0.025em;
+  }
+
+  .about-service-tags li {
+    width: auto;
+  }
+}
+
+@media (max-width: 340px) {
+  .about-chip-list,
+  .about-service-tags {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 36px;
+  }
+}
+
+.radio-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  gap: 12px 22px;
+}
+
+.radio-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--steel);
+}
+
+.radio-row input {
+  width: auto;
+  min-height: auto;
+}
+
+.form-status {
+  min-height: 24px;
+  margin: 0;
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.form-status a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-section a {
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.site-footer {
+  padding: 72px 0 92px;
+  background: #05070a;
+}
+
+.footer-shell {
+  display: grid;
+  grid-template-columns: 1.35fr 0.7fr 0.9fr 1.25fr;
+  width: min(1280px, calc(100% - 40px));
+  margin-inline: auto;
+  gap: 42px;
+}
+
+.footer-brand p {
+  max-width: 390px;
+}
+
+.footer-logo {
+  width: 154px;
+  height: 96px;
+}
+
+.footer-logo img {
+  width: 154px;
+}
+
+.footer-contact,
+.footer-col {
+  display: grid;
+  align-content: start;
+  gap: 9px;
+}
+
+.footer-contact a,
+.footer-contact span,
+.footer-col a,
+.footer-col span {
+  color: var(--muted);
+}
+
+.footer-contact a:hover,
+.footer-col a:hover {
+  color: var(--text);
+}
+
+.footer-col h2 {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.footer-areas div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer-areas span {
+  display: inline-flex;
+  padding: 6px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.84rem;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  width: min(1280px, calc(100% - 40px));
+  margin: 42px auto 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  gap: 18px;
+}
+
+.footer-bottom p {
+  margin-bottom: 0;
+}
+
+.footer-bottom a {
+  color: var(--muted);
+}
+
+.mobile-contact-bar {
+  position: fixed;
+  z-index: 800;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  display: none;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: rgba(7, 9, 12, 0.94);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.mobile-contact-bar a {
+  flex: 1;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+
+.mobile-contact-bar a:first-child {
+  background: var(--blue);
+  color: #03111c;
+}
+
+.mobile-contact-bar a:last-child {
+  color: var(--text);
+}
+
+.lightbox {
+  position: fixed;
+  z-index: 1100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  background: rgba(0, 0, 0, 0.88);
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox figure {
+  width: min(1080px, 100%);
+  margin: 0;
+}
+
+.lightbox img {
+  width: 100%;
+  max-height: 78svh;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  object-fit: contain;
+  background: #05070a;
+}
+
+.lightbox figcaption {
+  margin-top: 12px;
+  color: var(--text);
+  font-weight: 850;
+  text-align: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.lightbox-close::before,
+.lightbox-close::after {
+  position: absolute;
+  top: 22px;
+  left: 12px;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  content: "";
+}
+
+.lightbox-close::before {
+  transform: rotate(45deg);
+}
+
+.lightbox-close::after {
+  transform: rotate(-45deg);
+}
+
+.reveal {
+  opacity: 1;
+  transform: none;
+  transition: transform 180ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.technical-callout.reveal.is-visible:hover {
+  transform: translateY(-2px);
+}
+
+@media (min-width: 760px) {
+  h1 {
+    font-size: 4rem;
+  }
+
+  .hero h1 {
+    font-size: 4.85rem;
+  }
+}
+
+@media (min-width: 1180px) {
+  h1 {
+    font-size: 4.5rem;
+  }
+
+  .hero h1 {
+    font-size: 5.45rem;
+  }
+
+  h2 {
+    font-size: 2.7rem;
+  }
+}
+
+@media (max-width: 1120px) {
+  .desktop-nav {
+    gap: 2px;
+  }
+
+  .desktop-nav > a,
+  .nav-dropdown > summary {
+    padding-inline: 9px;
+  }
+
+  .header-phone {
+    display: none;
+  }
+
+  .services-grid,
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .brand-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .brand-detail-grid,
+  .priority-grid,
+  .technology-grid,
+  .brand-process-grid,
+  .heating-warning-grid,
+  .heating-installation-grid,
+  .heating-maintenance-grid,
+  .cooling-warning-grid,
+  .cooling-installation-grid,
+  .cooling-performance-grid,
+  .cooling-maintenance-grid,
+  .heat-pump-card-grid,
+  .heat-pump-installation-grid,
+  .heat-pump-maintenance-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .heating-info-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .commercial-equipment-list,
+  .installation-checks {
+    grid-template-columns: 1fr;
+  }
+
+  .process-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .footer-shell {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 920px) {
+  .desktop-nav,
+  .header-actions .button-small {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .mobile-nav {
+    position: fixed;
+    z-index: 850;
+    top: 84px;
+    right: 0;
+    left: 0;
+    display: none;
+    max-height: calc(100svh - 84px);
+    overflow-y: auto;
+    padding: 16px 20px 28px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(7, 9, 12, 0.98);
+  }
+
+  .site-header[data-open="true"] .mobile-nav {
+    display: grid;
+    gap: 8px;
+  }
+
+  .mobile-nav a,
+  .mobile-nav summary {
+    display: flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 11px 12px;
+    border-radius: 6px;
+    color: var(--text);
+    font-weight: 850;
+  }
+
+  .mobile-nav details div {
+    display: grid;
+    padding-left: 12px;
+  }
+
+  .mobile-nav details div a {
+    color: var(--muted);
+  }
+
+  .trust-shell {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trust-shell div:nth-child(3) {
+    border-left: 1px solid var(--line);
+  }
+
+  .brand-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px 20px;
+  }
+
+  .split-grid,
+  .why-grid,
+  .service-area-grid,
+  .service-detail-grid,
+  .heating-decision-grid,
+  .heating-equipment-layout,
+  .heating-maintenance-layout,
+  .cooling-decision-grid,
+  .cooling-system-grid,
+  .cooling-equipment-layout,
+  .cooling-maintenance-layout,
+  .cooling-diagnostics-grid,
+  .cooling-refrigerant-panel,
+  .heat-pump-basics-grid,
+  .heat-pump-winter-grid,
+  .heat-pump-hybrid-grid,
+  .heat-pump-system-grid,
+  .heat-pump-efficiency-grid,
+  .heat-pump-defrost-grid,
+  .heat-pump-diagnostics-grid,
+  .heat-pump-selection-layout,
+  .heat-pump-maintenance-layout,
+  .commercial-grid,
+  .about-grid,
+  .contact-grid,
+  .brands-hero-grid,
+  .brand-choice-grid,
+  .cost-efficiency-grid,
+  .commercial-brand-grid,
+  .utility-brand-grid,
+  .installation-message-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brands-hero {
+    min-height: auto;
+  }
+
+  .hero-brand-panel {
+    min-height: 360px;
+  }
+
+  .tier-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-intro,
+  .service-aside,
+  .heating-equipment-copy,
+  .cooling-equipment-copy,
+  .heat-pump-sticky-copy {
+    position: static;
+  }
+
+  .final-cta-shell {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .footer-shell {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    width: min(100% - 28px, var(--max));
+  }
+
+  .header-shell {
+    width: calc(100% - 24px);
+    min-height: 74px;
+  }
+
+  .site-logo {
+    width: 96px;
+    height: 60px;
+  }
+
+  .site-logo img {
+    width: 96px;
+  }
+
+  .mobile-nav {
+    top: 74px;
+    max-height: calc(100svh - 74px);
+  }
+
+  .hero {
+    height: 76svh;
+    min-height: 510px;
+    background-position: 64% center;
+  }
+
+  .hero::before,
+  .page-hero::before {
+    background:
+      linear-gradient(90deg, rgba(7, 9, 12, 0.98), rgba(7, 9, 12, 0.78)),
+      linear-gradient(180deg, rgba(7, 9, 12, 0.12), rgba(7, 9, 12, 0.88));
+  }
+
+  .hero-content {
+    padding: 48px 0 36px;
+  }
+
+  .hero h1,
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .hero p,
+  .page-hero p {
+    font-size: 1rem;
+  }
+
+  .button-row,
+  .hero-meta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .trust-shell,
+  .services-grid,
+  .brand-grid,
+  .gallery-grid,
+  .why-list,
+  .standalone-list,
+  .process-grid,
+  .brand-detail-grid,
+  .priority-grid,
+  .technology-grid,
+  .brand-process-grid,
+  .standards-grid,
+  .heating-warning-grid,
+  .heating-info-strip,
+  .heating-decision-grid,
+  .heating-equipment-grid,
+  .heating-installation-grid,
+  .heating-maintenance-grid,
+  .cooling-warning-grid,
+  .cooling-component-map,
+  .cooling-decision-grid,
+  .cooling-equipment-grid,
+  .cooling-installation-grid,
+  .cooling-performance-grid,
+  .cooling-maintenance-grid,
+  .cooling-problem-list,
+  .cooling-refrigerant-checks,
+  .heat-pump-mode-visual,
+  .heat-pump-factor-list,
+  .heat-pump-card-grid,
+  .heat-pump-selection-grid,
+  .heat-pump-installation-grid,
+  .heat-pump-system-map,
+  .heat-pump-indicators,
+  .heat-pump-defrost-list,
+  .heat-pump-comparison-grid,
+  .heat-pump-mini-compare,
+  .heat-pump-problem-list,
+  .heat-pump-maintenance-grid,
+  .field-grid,
+  .capability-grid,
+  .columns,
+  .footer-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .trust-shell div,
+  .trust-shell div:first-child,
+  .trust-shell div:nth-child(3) {
+    min-height: auto;
+    border-right: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .brand-mark {
+    min-height: 104px;
+    padding: 10px;
+  }
+
+  .brand-logo-plate {
+    min-height: 74px;
+    padding: 12px;
+  }
+
+  .brand-mark img {
+    max-height: 48px;
+  }
+
+  .brands-hero-grid {
+    gap: 28px;
+  }
+
+  .hero-brand-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: auto;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .hero-brand-panel::before,
+  .hero-brand-panel::after {
+    display: none;
+  }
+
+  .brand-orbit,
+  .brand-orbit:nth-child(n) {
+    position: static;
+    width: auto;
+    min-height: 86px;
+    transform: none;
+  }
+
+  .brand-orbit img {
+    max-height: 42px;
+  }
+
+  .brand-detail-logo {
+    min-height: 112px;
+  }
+
+  .brand-detail-copy,
+  .priority-card,
+  .technology-block,
+  .tier-panel,
+  .brand-process-step,
+  .heating-card,
+  .heating-decision-panel,
+  .heating-install-card,
+  .cooling-card,
+  .cooling-decision-panel,
+  .cooling-install-card,
+  .heat-pump-card,
+  .heat-pump-install-card,
+  .heat-pump-comparison-card,
+  .heat-pump-winter-panel {
+    padding: 22px;
+  }
+
+  .heating-card,
+  .heating-install-card,
+  .heating-option-card,
+  .heating-equipment-grid .heating-option-card:nth-child(5),
+  .cooling-card,
+  .cooling-install-card,
+  .cooling-option-card,
+  .cooling-equipment-grid .cooling-option-card:nth-child(5),
+  .heat-pump-card,
+  .heat-pump-install-card,
+  .heat-pump-selection-grid .heat-pump-card:nth-child(5) {
+    grid-column: auto;
+    min-height: auto;
+  }
+
+  .heating-info-item {
+    min-height: 70px;
+    padding: 16px;
+  }
+
+  .heating-maintenance-card {
+    min-height: 58px;
+  }
+
+  .efficiency-scale {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .efficiency-scale::before,
+  .efficiency-scale::after {
+    display: none;
+  }
+
+  .efficiency-scale span:first-child,
+  .efficiency-scale strong,
+  .efficiency-scale span:last-child {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .installation-message {
+    padding: 72px 0;
+  }
+
+  .commercial-equipment-list,
+  .installation-checks,
+  .brand-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  .heating-section,
+  .heating-installation-section,
+  .cooling-section,
+  .cooling-installation-section,
+  .heat-pump-section,
+  .heat-pump-installation-section {
+    padding: 60px 0;
+  }
+
+  .heat-pump-hybrid-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .heat-pump-flow-arrow {
+    width: 2px;
+    height: 34px;
+    justify-self: center;
+    background: linear-gradient(180deg, var(--blue), var(--orange));
+  }
+
+  .heat-pump-flow-arrow::after {
+    top: auto;
+    right: auto;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%) rotate(135deg);
+  }
+
+  .section-heading {
+    margin-bottom: 28px;
+  }
+
+  .service-card {
+    min-height: auto;
+  }
+
+  .split-panel img {
+    height: 240px;
+  }
+
+  .split-panel > div,
+  .about-card,
+  .contact-info,
+  .form-panel {
+    padding: 22px;
+  }
+
+  .standards-section {
+    padding: 44px 0;
+  }
+
+  .standard-card {
+    padding: 8px 0;
+  }
+
+  .faq-item summary {
+    gap: 12px;
+    padding: 17px 18px;
+  }
+
+  .faq-item p {
+    padding: 0 18px 20px 52px;
+    font-size: 0.96rem;
+  }
+
+  .gallery-card,
+  .gallery-card img {
+    min-height: 245px;
+  }
+
+  .google-reviews-panel {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+
+  .google-reviews-actions {
+    justify-content: stretch;
+  }
+
+  .review-slide-card {
+    width: min(82vw, 360px);
+    min-height: 360px;
+  }
+
+  .review-marquee {
+    margin-right: -14px;
+    margin-left: -14px;
+  }
+
+  .review-marquee::before,
+  .review-marquee::after {
+    width: 54px;
+  }
+
+  .work-marquee {
+    margin-right: -14px;
+    margin-left: -14px;
+  }
+
+  .work-marquee::before,
+  .work-marquee::after {
+    width: 54px;
+  }
+
+  .marquee-group {
+    gap: 12px;
+    padding-right: 12px;
+  }
+
+  .marquee-card {
+    width: min(78vw, 330px);
+  }
+
+  .marquee-caption {
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
+  }
+
+  .page-hero,
+  .compact-hero,
+  .service-hero,
+  .commercial-hero {
+    min-height: 380px;
+    padding: 86px 0 46px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+  }
+
+  .site-footer {
+    padding-bottom: 106px;
+  }
+
+  .mobile-contact-bar {
+    display: flex;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero h1,
+  h1 {
+    font-size: 2.28rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .filter-bar button {
+    flex: 1 1 calc(50% - 8px);
+  }
+}
+
+@media (max-width: 1120px) {
+  .reviews-page-grid,
+  .review-theme-grid,
+  .reviews-work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 920px) {
+  .reviews-profile-panel,
+  .featured-review-card {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-review-photo {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 700px) {
+  .reviews-profile-section {
+    padding: 34px 0 58px;
+  }
+
+  .reviews-profile-panel {
+    align-items: start;
+    padding: 22px;
+  }
+
+  .reviews-page-grid,
+  .review-theme-grid,
+  .reviews-work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews-page-card {
+    min-height: auto;
+  }
+
+  .featured-review-copy {
+    padding: 22px;
+  }
+
+  .review-quote-track {
+    width: min(100% - 28px, var(--max));
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 1120px) {
+  .ductless-card-grid,
+  .ductless-installation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ductless-heat-pump-compare-panel {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .ductless-photo-pair button {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 920px) {
+  .ductless-basics-grid,
+  .ductless-zoning-grid,
+  .ductless-design-grid,
+  .ductless-placement-grid,
+  .ductless-line-grid,
+  .ductless-winter-grid,
+  .ductless-mode-grid,
+  .ductless-diagnostics-grid,
+  .ductless-controls-grid,
+  .ductless-maintenance-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ductless-placement-copy {
+    position: static;
+  }
+
+  .ductless-section .section-heading,
+  .ductless-placement-copy .section-heading {
+    max-width: 680px;
+  }
+}
+
+@media (max-width: 700px) {
+  .ductless-system-types-section,
+  .ductless-installation-section {
+    padding: 58px 0;
+  }
+
+  .ductless-flow {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .ductless-flow-step {
+    min-height: 112px;
+    padding: 16px;
+  }
+
+  .ductless-flow-arrow,
+  .ductless-mini-flow i {
+    width: 2px;
+    height: 28px;
+    justify-self: center;
+    background: linear-gradient(180deg, var(--blue), rgba(255, 116, 51, 0.86));
+  }
+
+  .ductless-flow-arrow::after,
+  .ductless-mini-flow i::after {
+    top: auto;
+    right: 50%;
+    bottom: -2px;
+    transform: translateX(50%) rotate(135deg);
+  }
+
+  .ductless-card-grid,
+  .ductless-installation-grid,
+  .ductless-maintenance-grid,
+  .ductless-system-type-grid,
+  .ductless-comparison-grid,
+  .ductless-zone-visual,
+  .ductless-factor-list,
+  .ductless-check-grid,
+  .ductless-photo-pair,
+  .ductless-winter-panel,
+  .ductless-mini-compare,
+  .ductless-mode-list,
+  .ductless-problem-list {
+    grid-template-columns: 1fr;
+  }
+
+  .ductless-card,
+  .ductless-install-card,
+  .ductless-system-panel,
+  .ductless-check-panel,
+  .ductless-comparison-card,
+  .ductless-heat-pump-compare-panel {
+    padding: 20px;
+  }
+
+  .ductless-card,
+  .ductless-install-card,
+  .ductless-zone-visual div,
+  .ductless-photo-pair button {
+    min-height: auto;
+  }
+
+  .ductless-photo-pair button {
+    aspect-ratio: 4 / 5;
+  }
+
+  .ductless-mini-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .ductless-mini-flow span {
+    min-height: 56px;
+  }
+
+  .ductless-callout,
+  .ductless-note {
+    display: flex;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .technical-callout:hover,
+  .technical-callout.reveal.is-visible:hover {
+    transform: none;
+  }
+
+  .about-intro-photo.reveal figcaption {
+    opacity: 1;
+    transform: none;
+  }
+
+  .marquee-viewport {
+    overflow-x: auto;
+  }
+
+  .marquee-track {
+    animation: none !important;
+    transform: none;
+  }
+
+  .marquee-group[aria-hidden="true"] {
+    display: none;
+  }
+}
