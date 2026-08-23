@@ -1,7 +1,7 @@
 node_modules/
 .vercel/
 dist/
-work/
-audit-screenshots/
+/work/
+/audit-screenshots/
 .DS_Store
 Thumbs.db
