@@ -6572,26 +6572,57 @@ details.review-page-copy[open] summary span {
     max-height: calc(100svh - 74px);
   }
 
+  .hero,
+  .page-hero {
+    background-image:
+      linear-gradient(rgba(146, 176, 186, 0.4), rgba(78, 97, 106, 0.24)),
+      var(--mobile-hero-image, var(--hero-image));
+    background-blend-mode: screen, normal;
+  }
+
   .hero {
     height: 76svh;
     min-height: 510px;
-    background-image:
-      linear-gradient(rgba(110, 144, 152, 0.28), rgba(50, 69, 76, 0.18)),
-      var(--hero-image);
     background-position: 38% center;
-    background-blend-mode: screen, normal;
+  }
+
+  .page-hero {
+    background-position: 56% center;
   }
 
   .hero::before {
     background:
-      linear-gradient(90deg, rgba(7, 9, 12, 0.86) 0%, rgba(7, 9, 12, 0.72) 46%, rgba(7, 9, 12, 0.34) 78%, rgba(7, 9, 12, 0.54) 100%),
-      linear-gradient(180deg, rgba(7, 9, 12, 0.04), rgba(7, 9, 12, 0.68));
+      linear-gradient(90deg, rgba(7, 9, 12, 0.78) 0%, rgba(7, 9, 12, 0.54) 48%, rgba(7, 9, 12, 0.18) 80%, rgba(7, 9, 12, 0.3) 100%),
+      linear-gradient(180deg, rgba(7, 9, 12, 0.02), rgba(7, 9, 12, 0.48));
   }
 
   .page-hero::before {
     background:
-      linear-gradient(90deg, rgba(7, 9, 12, 0.98), rgba(7, 9, 12, 0.78)),
-      linear-gradient(180deg, rgba(7, 9, 12, 0.12), rgba(7, 9, 12, 0.88));
+      linear-gradient(90deg, rgba(7, 9, 12, 0.82) 0%, rgba(7, 9, 12, 0.56) 58%, rgba(7, 9, 12, 0.2) 100%),
+      linear-gradient(180deg, rgba(7, 9, 12, 0.03), rgba(7, 9, 12, 0.5));
+  }
+
+  .service-hero {
+    background-position: 52% center;
+  }
+
+  .water-heating-hero {
+    background-position: 58% center;
+  }
+
+  .brands-hero,
+  .commercial-hero {
+    background-position: 62% center;
+  }
+
+  .reviews-hero,
+  .contact-hero {
+    background-position: center;
+  }
+
+  .hero-content,
+  .page-hero > .container {
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.82);
   }
 
   .hero-content {

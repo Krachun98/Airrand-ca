@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "water-heating-panels-20260823";
+const assetVersion = "mobile-generated-hero-brightness-20260823b";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -31,6 +31,35 @@ const escapeHtml = (value = "") =>
 const asset = (name) => `/assets/${name}`;
 const pageUrl = (pathname) => new URL(pathname, `${site.baseUrl}/`).toString();
 const link = (pathname) => pathname;
+
+const mobileHeroSourceImages = new Set([
+  "hero-hvac-work.webp",
+  "shop-background.webp",
+  "air-conditioning-installation.webp",
+  "furnace-installation.webp",
+  "heat-pump-installation.webp",
+  "ductless-installation.webp",
+  "ductwork-installation.webp",
+  "gas-line-installation.webp",
+  "water-heater-installation.webp",
+  "tankless-water-heater.webp",
+  "humidifier-installation.webp",
+  "gas-fireplace-installation.webp",
+  "residential-hvac-house.webp",
+  "contact-background.webp",
+  "contact-airrand-background.webp",
+  "about-background.webp",
+]);
+
+const mobileHeroImage = (name) => {
+  if (!mobileHeroSourceImages.has(name)) return "";
+  return `mobile-hero/${path.basename(name, ".webp")}-mobile.webp`;
+};
+
+const heroImageStyle = (name) => {
+  const mobileImage = mobileHeroImage(name);
+  return `--hero-image: url('${asset(name)}')${mobileImage ? `; --mobile-hero-image: url('${asset(mobileImage)}')` : ""}`;
+};
 
 const serviceBySlug = new Map(services.map((service) => [service.slug, service]));
 
@@ -930,7 +959,7 @@ function brandsPage() {
       ]),
     ],
     body: `
-      <section class="page-hero brands-hero" style="--hero-image: url('${asset("hero-hvac-work.webp")}')">
+      <section class="page-hero brands-hero" style="${heroImageStyle("hero-hvac-work.webp")}">
         <div class="container brands-hero-grid">
           <div>
             <p class="eyebrow">Equipment Options</p>
@@ -1413,7 +1442,7 @@ function reviewsPage() {
     image: "shop-background.webp",
     schema: [businessSchema(), breadcrumbs([{ name: "Home", url: "/" }, { name: "Reviews", url: "/reviews/" }])],
     body: `
-      <section class="page-hero compact-hero reviews-hero" style="--hero-image: url('${asset("shop-background.webp")}')">
+      <section class="page-hero compact-hero reviews-hero" style="${heroImageStyle("shop-background.webp")}">
         <div class="container">
           <p class="eyebrow">Customer Reviews</p>
           <h1>What Airrand Customers Say</h1>
@@ -2934,7 +2963,7 @@ function waterHeatingPage(service) {
       ]),
     ],
     body: `
-      <section class="page-hero service-hero water-heating-hero" style="--hero-image: url('${asset(service.image)}')">
+      <section class="page-hero service-hero water-heating-hero" style="${heroImageStyle(service.image)}">
         <div class="container">
           <p class="eyebrow">Water Heating</p>
           <h1>Water Heating Solutions for the Greater Toronto Area</h1>
@@ -5225,7 +5254,7 @@ function homePage() {
     image: "hero-hvac-work.webp",
     schema: [businessSchema(), websiteSchema()],
     body: `
-      <section class="hero" style="--hero-image: url('${asset("hero-hvac-work.webp")}')">
+      <section class="hero" style="${heroImageStyle("hero-hvac-work.webp")}">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
           <p class="eyebrow">Residential & Commercial HVAC | Greater Toronto Area</p>
@@ -5359,7 +5388,7 @@ function servicesPage() {
     image: "shop-background.webp",
     schema: [businessSchema(), breadcrumbs([{ name: "Home", url: "/" }, { name: "Services", url: "/services/" }])],
     body: `
-      <section class="page-hero compact-hero" style="--hero-image: url('${asset("shop-background.webp")}')">
+      <section class="page-hero compact-hero" style="${heroImageStyle("shop-background.webp")}">
         <div class="container">
           <p class="eyebrow">Services</p>
           <h1>Complete HVAC Solutions</h1>
@@ -5461,7 +5490,7 @@ function servicePage(service) {
       ]),
     ],
     body: `
-      <section class="page-hero service-hero" style="--hero-image: url('${asset(service.image)}')">
+      <section class="page-hero service-hero" style="${heroImageStyle(service.image)}">
         <div class="container">
           <p class="eyebrow">${escapeHtml(service.group)} Service</p>
           <h1>${escapeHtml(heroHeading)}</h1>
@@ -5550,7 +5579,7 @@ function residentialPage() {
       ]),
     ],
     body: `
-      <section class="page-hero compact-hero" style="--hero-image: url('${asset("residential-hvac-house.webp")}')">
+      <section class="page-hero compact-hero" style="${heroImageStyle("residential-hvac-house.webp")}">
         <div class="container">
           <p class="eyebrow">Residential HVAC</p>
           <h1>Heating, cooling and indoor comfort for homes across the GTA.</h1>
@@ -5611,7 +5640,7 @@ function commercialPage() {
       ]),
     ],
     body: `
-      <section class="page-hero commercial-hero" style="--hero-image: url('${asset("hero-hvac-work.webp")}')">
+      <section class="page-hero commercial-hero" style="${heroImageStyle("hero-hvac-work.webp")}">
         <div class="container">
           <p class="eyebrow">Commercial HVAC</p>
           <h1>Mechanical HVAC work for commercial spaces across the GTA.</h1>
@@ -5668,7 +5697,7 @@ function galleryPage() {
       ]),
     ],
     body: `
-      <section class="page-hero compact-hero" style="--hero-image: url('${asset("hero-hvac-work.webp")}')">
+      <section class="page-hero compact-hero" style="${heroImageStyle("hero-hvac-work.webp")}">
         <div class="container">
           <p class="eyebrow">Gallery</p>
           <h1>HVAC work, equipment and mechanical detail.</h1>
@@ -5931,7 +5960,7 @@ function aboutPage() {
       ]),
     ],
     body: `
-      <section class="page-hero about-hero" style="--hero-image: url('${asset("work/commercial-hvac-03.webp")}')">
+      <section class="page-hero about-hero" style="${heroImageStyle("work/commercial-hvac-03.webp")}">
         <div class="container about-hero-grid">
           <div class="about-hero-copy">
             <p class="eyebrow">About Airrand</p>
@@ -6238,7 +6267,7 @@ function contactPage() {
       ]),
     ],
     body: `
-      <section class="page-hero contact-hero" style="--hero-image: url('${asset(contactHeroImage)}')">
+      <section class="page-hero contact-hero" style="${heroImageStyle(contactHeroImage)}">
         <div class="container">
           <p class="eyebrow">Contact</p>
           <h1>Request a quote or book HVAC service.</h1>
