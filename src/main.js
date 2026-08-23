@@ -286,38 +286,164 @@ if (lightbox && lightboxImage && lightboxCaption && lightboxClose) {
   });
 }
 
+const quotePhotoLimit = 6;
+const quoteMaxOriginalPhotoBytes = 16 * 1024 * 1024;
+const quoteMaxPreparedPhotoBytes = 3200 * 1024;
+const quotePhotoMaxDimension = 1280;
+
+const setFormStatus = (status, message, state = "") => {
+  if (!status) return;
+  status.classList.remove("is-success", "is-error");
+  if (state) status.classList.add(`is-${state}`);
+  status.textContent = message;
+};
+
+const fileToDataUrl = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => resolve(reader.result));
+    reader.addEventListener("error", () => reject(new Error("One of the selected photos could not be read.")));
+    reader.readAsDataURL(file);
+  });
+
+const imageFromDataUrl = (dataUrl) =>
+  new Promise((resolve, reject) => {
+    const image = new Image();
+    image.addEventListener("load", () => resolve(image));
+    image.addEventListener("error", () => reject(new Error("Please upload JPG, PNG or WebP photos.")));
+    image.src = dataUrl;
+  });
+
+const canvasToBlob = (canvas) =>
+  new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (blob) {
+        resolve(blob);
+      } else {
+        reject(new Error("One of the selected photos could not be prepared."));
+      }
+    }, "image/jpeg", 0.72);
+  });
+
+const safePhotoName = (name, index) => {
+  const baseName = String(name || `photo-${index + 1}`)
+    .replace(/\.[^.]+$/, "")
+    .replace(/[^a-z0-9._-]+/gi, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
+  return `${baseName || `photo-${index + 1}`}.jpg`;
+};
+
+const prepareQuotePhoto = async (file, index) => {
+  if (!file.type.startsWith("image/")) {
+    throw new Error("Please upload image files only.");
+  }
+
+  if (file.size > quoteMaxOriginalPhotoBytes) {
+    throw new Error("One selected photo is too large. Please choose photos under 16 MB.");
+  }
+
+  const dataUrl = await fileToDataUrl(file);
+  const image = await imageFromDataUrl(dataUrl);
+  const scale = Math.min(1, quotePhotoMaxDimension / Math.max(image.naturalWidth, image.naturalHeight));
+  const width = Math.max(1, Math.round(image.naturalWidth * scale));
+  const height = Math.max(1, Math.round(image.naturalHeight * scale));
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const context = canvas.getContext("2d");
+
+  if (!context) {
+    throw new Error("The selected photos could not be prepared in this browser.");
+  }
+
+  context.drawImage(image, 0, 0, width, height);
+  const blob = await canvasToBlob(canvas);
+  const compressedDataUrl = await fileToDataUrl(blob);
+
+  return {
+    filename: safePhotoName(file.name, index),
+    contentType: "image/jpeg",
+    size: blob.size,
+    content: String(compressedDataUrl).split(",")[1] || "",
+  };
+};
+
+const prepareQuotePhotos = async (files) => {
+  if (files.length > quotePhotoLimit) {
+    throw new Error(`Please upload ${quotePhotoLimit} photos or fewer.`);
+  }
+
+  const prepared = [];
+  let preparedBytes = 0;
+
+  for (const [index, file] of files.entries()) {
+    const photo = await prepareQuotePhoto(file, index);
+    preparedBytes += photo.size;
+
+    if (preparedBytes > quoteMaxPreparedPhotoBytes) {
+      throw new Error("The selected photos are too large to send through the form. Please upload fewer photos or call Airrand directly.");
+    }
+
+    prepared.push(photo);
+  }
+
+  return prepared;
+};
+
 document.querySelectorAll("[data-contact-form]").forEach((form) => {
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
     const data = new FormData(form);
     const status = form.querySelector("[data-form-status]");
+    const submitButton = form.querySelector('button[type="submit"]');
     const photos = form.querySelector('input[type="file"]');
-    const toEmail = "info@airrand.ca";
-    const selectedPhotos = photos instanceof HTMLInputElement && photos.files && photos.files.length > 0;
-    const subject = encodeURIComponent(`Airrand ${data.get("service") || "HVAC"} request`);
-    const bodyLines = [
-      `Name: ${data.get("name") || ""}`,
-      `Phone: ${data.get("phone") || ""}`,
-      `Email: ${data.get("email") || ""}`,
-      `Service Needed: ${data.get("service") || ""}`,
-      `Project Type: ${data.get("projectType") || ""}`,
-      `Source: ${data.get("context") || "website"}`,
-      `Photos selected: ${selectedPhotos ? "Yes - attach before sending" : "No"}`,
-      "",
-      "Message:",
-      data.get("message") || "",
-    ];
-    const body = encodeURIComponent(bodyLines.join("\n"));
-    const mailtoUrl = `mailto:${toEmail}?subject=${subject}&body=${body}`;
+    const selectedPhotos = photos instanceof HTMLInputElement && photos.files ? Array.from(photos.files) : [];
 
-    if (status) {
-      const photoNote = selectedPhotos ? " Attach the selected photos before sending." : "";
-      const fallbackLink = document.createElement("a");
-      fallbackLink.href = mailtoUrl;
-      fallbackLink.textContent = toEmail;
-      status.textContent = "Opening an email addressed to ";
-      status.append(fallbackLink, `.${photoNote} Send the email to complete the request.`);
+    if (data.get("company")) {
+      setFormStatus(status, "Request sent. Airrand will contact you shortly.", "success");
+      form.reset();
+      return;
     }
-    window.location.href = mailtoUrl;
+
+    setFormStatus(status, selectedPhotos.length ? "Preparing photos and sending your request..." : "Sending your request...");
+    if (submitButton) submitButton.disabled = true;
+
+    try {
+      const payload = {
+        name: data.get("name") || "",
+        phone: data.get("phone") || "",
+        email: data.get("email") || "",
+        service: data.get("service") || "",
+        projectType: data.get("projectType") || "",
+        context: data.get("context") || "website",
+        message: data.get("message") || "",
+        photos: await prepareQuotePhotos(selectedPhotos),
+      };
+
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.error || "The request could not be sent. Please call Airrand or email info@airrand.ca directly.");
+      }
+
+      setFormStatus(status, "Request sent to Airrand. We will contact you shortly.", "success");
+      form.reset();
+    } catch (error) {
+      setFormStatus(status, error.message || "The request could not be sent. Please call Airrand or email info@airrand.ca directly.", "error");
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 });

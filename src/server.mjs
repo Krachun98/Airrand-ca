@@ -3,6 +3,7 @@ import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import quoteHandler from "../api/quote.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
@@ -53,8 +54,31 @@ async function findFile(urlPath) {
   return null;
 }
 
+function apiResponse(response) {
+  return {
+    setHeader(name, value) {
+      response.setHeader(name, value);
+    },
+    status(code) {
+      response.statusCode = code;
+      return this;
+    },
+    json(body) {
+      response.setHeader("content-type", "application/json; charset=utf-8");
+      response.end(JSON.stringify(body));
+      return this;
+    },
+  };
+}
+
 const server = createServer(async (request, response) => {
   const requestUrl = new URL(request.url || "/", `http://localhost:${port}`);
+
+  if (requestUrl.pathname === "/api/quote") {
+    await quoteHandler(request, apiResponse(response));
+    return;
+  }
+
   const file = await findFile(requestUrl.pathname);
 
   if (!file) {

@@ -340,7 +340,7 @@ function servicesGrid(items = services) {
 
 function contactForm(context = "quote") {
   return `
-    <form class="contact-form" data-contact-form>
+    <form class="contact-form" action="/api/quote" method="post" enctype="multipart/form-data" data-contact-form>
       <div class="field-grid">
         <label>
           <span>Name</span>
@@ -376,6 +376,10 @@ function contactForm(context = "quote") {
       <label>
         <span>Upload Photos</span>
         <input name="photos" type="file" accept="image/*" multiple>
+      </label>
+      <label class="form-honeypot" aria-hidden="true" tabindex="-1">
+        <span>Company</span>
+        <input name="company" type="text" autocomplete="off" tabindex="-1">
       </label>
       <input type="hidden" name="context" value="${escapeHtml(context)}">
       <button class="button button-primary" type="submit">Request a Quote</button>
@@ -5325,10 +5329,10 @@ function privacyPage() {
       <section class="section legal-section">
         <div class="container detail-copy wide-copy">
           <h2>Information submitted through forms</h2>
-          <p>When you contact Airrand, you may choose to provide your name, phone number, email address, service need, project type, message and optional photos. This information is used to respond to your request.</p>
+          <p>When you contact Airrand, you may choose to provide your name, phone number, email address, service need, project type, message and optional photos. This information is sent to Airrand by the configured website email service and used to respond to your request.</p>
           <h2>Contact</h2>
           <p>For privacy questions, contact Airrand at <a href="mailto:${site.email}">${site.email}</a>.</p>
-          <p>This policy should be reviewed by Airrand before publication and expanded if analytics, advertising pixels, CRM systems or third-party form tools are added.</p>
+          <p>This policy should be reviewed by Airrand before publication and expanded if analytics, advertising pixels, CRM systems or additional third-party tools are added.</p>
         </div>
       </section>
     `,
