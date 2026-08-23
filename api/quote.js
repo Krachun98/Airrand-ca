@@ -106,7 +106,8 @@ export default async function handler(request, response) {
 
   if (!process.env.RESEND_API_KEY) {
     return response.status(503).json({
-      error: "Email sending is not configured yet. Add RESEND_API_KEY in Vercel, then redeploy.",
+      error:
+        "Email sending is not configured on this server. In Vercel, confirm RESEND_API_KEY is saved for Production, then redeploy. Localhost will not send unless RESEND_API_KEY is set locally.",
     });
   }
 
@@ -155,8 +156,12 @@ export default async function handler(request, response) {
 
     if (!resendResponse.ok) {
       console.error("Resend email error", result);
+      const resendMessage =
+        cleanText(result.message, 500) ||
+        cleanText(result.error, 500) ||
+        cleanText(result.name, 200);
       return response.status(502).json({
-        error: "The request could not be sent right now. Please call Airrand or email info@airrand.ca directly.",
+        error: `The request reached the email service but was rejected. Check that airrand.ca is verified in Resend and that QUOTE_FROM_EMAIL uses that verified domain.${resendMessage ? ` Resend said: ${resendMessage}` : ""}`,
       });
     }
 

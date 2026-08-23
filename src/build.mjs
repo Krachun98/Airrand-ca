@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "quote-request-form-20260823";
+const assetVersion = "quote-request-email-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -377,10 +377,7 @@ function contactForm(context = "quote") {
         <span>Upload Photos</span>
         <input name="photos" type="file" accept="image/*" multiple>
       </label>
-      <label class="form-honeypot" aria-hidden="true" tabindex="-1">
-        <span>Company</span>
-        <input name="company" type="text" autocomplete="off" tabindex="-1">
-      </label>
+      <input class="form-honeypot" name="company" type="hidden" autocomplete="off" tabindex="-1" value="">
       <input type="hidden" name="context" value="${escapeHtml(context)}">
       <button class="button button-primary" type="submit">Request a Quote</button>
       <p class="form-status" aria-live="polite" data-form-status></p>

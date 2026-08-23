@@ -4197,8 +4197,8 @@ details.review-page-copy[open] summary span {
   gap: 8px;
 }
 
-.contact-form .form-honeypot {
-  display: none;
+.form-honeypot {
+  display: none !important;
 }
 
 .contact-form label span,
