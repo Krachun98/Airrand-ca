@@ -74,7 +74,7 @@ function apiResponse(response) {
 const server = createServer(async (request, response) => {
   const requestUrl = new URL(request.url || "/", `http://localhost:${port}`);
 
-  if (requestUrl.pathname === "/api/quote") {
+  if (requestUrl.pathname === "/api/quote" || requestUrl.pathname === "/api/quote/") {
     await quoteHandler(request, apiResponse(response));
     return;
   }

@@ -427,7 +427,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
         photos: await prepareQuotePhotos(selectedPhotos),
       };
 
-      const response = await fetch("/api/quote", {
+      const response = await fetch("/api/quote/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -435,7 +435,11 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(result.error || "The request could not be sent. Please call Airrand or email info@airrand.ca directly.");
+        const fallbackMessage =
+          response.status === 404
+            ? "The website quote form endpoint is not active on this deployment yet. Please call Airrand or email info@airrand.ca directly."
+            : "The request could not be sent. Please call Airrand or email info@airrand.ca directly.";
+        throw new Error(result.error || fallbackMessage);
       }
 
       setFormStatus(status, "Request sent to Airrand. We will contact you shortly.", "success");

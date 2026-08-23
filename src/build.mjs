@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "quote-request-email-20260823";
+const assetVersion = "quote-api-route-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -340,7 +340,7 @@ function servicesGrid(items = services) {
 
 function contactForm(context = "quote") {
   return `
-    <form class="contact-form" action="/api/quote" method="post" enctype="multipart/form-data" data-contact-form>
+    <form class="contact-form" action="/api/quote/" method="post" enctype="multipart/form-data" data-contact-form>
       <div class="field-grid">
         <label>
           <span>Name</span>
