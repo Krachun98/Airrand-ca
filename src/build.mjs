@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "mobile-generated-hero-brightness-20260823b";
+const assetVersion = "mobile-hero-dark-balance-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
