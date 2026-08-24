@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "hrv-erv-controls-layout-20260823";
+const assetVersion = "humidifier-flow-word-fit-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -6429,6 +6429,963 @@ function servicesPage() {
   };
 }
 
+const humidifierTypes = [
+  {
+    key: "bypass",
+    icon: "pad",
+    eyebrow: "Bypass",
+    title: "Bypass Humidifier",
+    text:
+      "A bypass humidifier uses the furnace blower and a small bypass duct to move air through a wetted evaporative pad.",
+    flow: ["Supply Air", "Humidifier Pad", "Return Air"],
+    flowNote:
+      "The exact supply and return relationship depends on the equipment and duct layout. Airrand reviews the installation instead of assuming one universal orientation.",
+    strengths: [
+      "Simple design",
+      "No dedicated humidifier fan",
+      "Lower electrical demand",
+      "Common residential application",
+      "Generally straightforward maintenance",
+    ],
+    considerations: [
+      "Requires suitable duct layout",
+      "Uses furnace airflow",
+      "Requires bypass ducting",
+      "Typically lower output than steam systems",
+    ],
+  },
+  {
+    key: "fan",
+    icon: "fan",
+    eyebrow: "Fan-Powered",
+    title: "Fan-Powered Humidifier",
+    text:
+      "A fan-powered humidifier uses its own internal fan to move air across the wetted evaporative pad, so it does not need the same bypass duct arrangement as a traditional bypass model.",
+    flow: ["Internal Fan", "Water Panel", "Conditioned Air"],
+    flowNote:
+      "Fan-assisted equipment can be useful where duct layout makes a bypass route difficult or where higher evaporative output is needed.",
+    strengths: [
+      "More installation flexibility",
+      "No bypass duct between supply and return",
+      "Higher evaporative output than many basic bypass models",
+      "Useful where bypass routing is difficult",
+    ],
+    considerations: [
+      "Requires electrical power",
+      "Contains an additional fan or motor",
+      "Still uses an evaporative water panel",
+      "Output depends on equipment and conditions",
+    ],
+  },
+  {
+    key: "steam",
+    icon: "steam",
+    eyebrow: "Steam",
+    title: "Steam Humidifier",
+    text:
+      "A steam humidifier heats water to create steam, then introduces that steam into the duct system.",
+    flow: ["Water", "Steam Generator", "Duct Injection"],
+    flowNote:
+      "Steam systems can provide significantly more humidification capacity, but they also require more involved installation and maintenance.",
+    strengths: [
+      "High humidification capacity",
+      "Less dependent on furnace heat for evaporation",
+      "Can provide more precise humidity control",
+      "Suitable for higher humidification demand",
+    ],
+    considerations: [
+      "Higher equipment cost",
+      "Higher electrical demand",
+      "Requires suitable electrical service",
+      "Requires water and drainage",
+      "Periodic canister, electrode or equipment maintenance depending on design",
+    ],
+  },
+];
+
+const humidifierComparisonRows = [
+  ["Uses furnace airflow", "Yes", "Partially / airflow assisted", "No for evaporation"],
+  ["Dedicated fan", "No", "Yes", "Not for evaporation"],
+  ["Bypass duct required", "Usually", "No", "No"],
+  ["Water panel", "Yes", "Yes", "Depends on design"],
+  ["Electrical demand", "Low", "Moderate", "Higher"],
+  ["Humidification capacity", "Moderate", "Moderate to higher", "High"],
+  ["Installation complexity", "Lower", "Moderate", "Higher"],
+  ["Best suited for", "Typical homes", "Layout constraints / higher output", "Higher demand / premium control"],
+];
+
+const humidifierSelectionItems = [
+  {
+    icon: "home-size",
+    title: "Home Size",
+    text: "Larger homes may require more humidification capacity.",
+  },
+  {
+    icon: "tightness",
+    title: "Building Tightness",
+    text: "Air leakage affects how quickly moisture leaves the home.",
+  },
+  {
+    icon: "runtime",
+    title: "HVAC Runtime",
+    text: "Evaporative humidifiers depend partly on airflow and system operation.",
+  },
+  {
+    icon: "duct",
+    title: "Duct Layout",
+    text: "Available supply and return locations affect installation options.",
+  },
+  {
+    icon: "drain",
+    title: "Water & Drain Access",
+    text: "Humidifiers need appropriate water supply and, depending on type, drainage.",
+  },
+  {
+    icon: "electric",
+    title: "Electrical Capacity",
+    text: "Steam and powered equipment may require dedicated electrical consideration.",
+  },
+];
+
+const humidifierIntegrationItems = [
+  ["duct", "Supply duct"],
+  ["duct", "Return duct"],
+  ["fan", "Furnace blower"],
+  ["controls", "Humidifier control"],
+  ["controls", "Thermostat"],
+  ["water", "Water supply"],
+  ["drain", "Drain"],
+  ["electric", "Electrical"],
+  ["sensor", "Outdoor sensor where applicable"],
+];
+
+const humidifierInstallItems = [
+  ["selection", "Equipment Selection", "Select the humidifier type and capacity appropriate for the application."],
+  ["location", "Mounting Location", "Choose an accessible duct or wall location suitable for the equipment."],
+  ["duct", "Duct Integration", "Install bypass or steam distribution components where required."],
+  ["water", "Water Supply", "Provide a suitable water connection and shutoff."],
+  ["drain", "Drainage", "Provide proper drainage where required."],
+  ["electric", "Electrical", "Connect powered equipment according to requirements."],
+  ["controls", "Controls", "Configure humidistat, thermostat or automatic controls."],
+  ["airflow", "Airflow", "Verify airflow through evaporative equipment."],
+  ["testing", "Startup & Testing", "Confirm water flow, drainage and humidity call operation."],
+];
+
+const humidifierProblems = [
+  ["humidity", "Not producing humidity"],
+  ["water", "Water not flowing"],
+  ["water", "Excessive water use"],
+  ["drain", "Leaking"],
+  ["drain", "Drain blockage"],
+  ["scale", "Water panel heavily scaled"],
+  ["valve", "Solenoid valve problems"],
+  ["controls", "Humidistat / control problems"],
+  ["fan", "Fan not operating"],
+  ["steam", "Steam canister / electrode issues"],
+  ["home-size", "Low humidity despite operation"],
+  ["warning", "Condensation from excessive settings"],
+];
+
+const humidifierMaintenanceGroups = [
+  {
+    title: "Bypass",
+    icon: "pad",
+    items: [
+      "Replace / inspect water panel",
+      "Clean distribution tray",
+      "Inspect drain",
+      "Check solenoid",
+      "Verify bypass damper position",
+      "Inspect water line",
+    ],
+  },
+  {
+    title: "Fan-Powered",
+    icon: "fan",
+    items: [
+      "Water panel",
+      "Distribution tray",
+      "Drain",
+      "Solenoid",
+      "Internal fan",
+      "Electrical connections",
+    ],
+  },
+  {
+    title: "Steam",
+    icon: "steam",
+    items: [
+      "Canister / electrode assembly depending on equipment",
+      "Drain system",
+      "Water connections",
+      "Steam hose / distribution tube",
+      "Electrical components",
+      "Controls",
+    ],
+  },
+];
+
+const humidifierFaqs = [
+  {
+    question: "What is the difference between a bypass and fan-powered humidifier?",
+    answer:
+      "Bypass humidifiers use HVAC airflow through a bypass duct. Fan-powered humidifiers use an internal fan and generally do not require a bypass duct between supply and return.",
+  },
+  {
+    question: "What is the difference between evaporative and steam humidifiers?",
+    answer:
+      "Evaporative systems rely on water evaporating across a panel. Steam humidifiers actively heat water to create steam and introduce it into the duct system.",
+  },
+  {
+    question: "Is a steam humidifier better?",
+    answer:
+      "Not automatically. Steam can provide higher output and more control, but it also has higher installation, electrical and maintenance requirements.",
+  },
+  {
+    question: "How do I know which humidifier I need?",
+    answer:
+      "The home, ductwork, HVAC equipment, humidity demand, water and drain access, electrical capacity and budget should be evaluated before selecting a humidifier.",
+  },
+  {
+    question: "Why is my house still dry with the humidifier running?",
+    answer:
+      "Possible causes include airflow, water flow, equipment capacity, building leakage, outdoor conditions, controls or maintenance. The humidifier and the HVAC system should be checked together.",
+  },
+  {
+    question: "Why are my windows sweating?",
+    answer:
+      "The humidity setting may be too high for current outdoor conditions or the building envelope. As outdoor temperatures fall, lower indoor humidity may be appropriate to reduce condensation risk.",
+  },
+  {
+    question: "Does a whole-home humidifier run all year?",
+    answer:
+      "Generally, humidification is mainly used during dry heating-season conditions. Controls and operation depend on the installation and equipment.",
+  },
+  {
+    question: "How often does the humidifier pad need replacement?",
+    answer:
+      "Replacement frequency depends on equipment, water quality, runtime and manufacturer guidance. Water panels should be inspected as part of humidifier maintenance.",
+  },
+  {
+    question: "Does a steam humidifier use a lot of electricity?",
+    answer:
+      "Steam humidifiers have significantly higher electrical demand than basic evaporative humidifiers because they actively boil or heat water. Exact demand depends on the model.",
+  },
+  {
+    question: "Can a humidifier work with a heat pump?",
+    answer:
+      "Potentially, but equipment type and integration matter. Steam systems may be better suited in some applications because they do not depend on hot furnace supply air for evaporation.",
+  },
+  {
+    question: "Can Airrand install whole-home furnace humidifiers from major brands?",
+    answer:
+      "Yes. Airrand can review the HVAC system, equipment requirements and manufacturer instructions, then install a compatible whole-home humidifier with proper controls, water and drain setup.",
+  },
+];
+
+const humidifierIcons = {
+  water: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M12 3s6 6.2 6 11a6 6 0 0 1-12 0c0-4.8 6-11 6-11z" />
+      <path d="M9 15c1.2 1.4 4 1.4 6 0" />
+    </svg>
+  `,
+  airflow: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 8h10a3 3 0 1 0-3-3" />
+      <path d="M4 12h16" />
+      <path d="M4 16h12a3 3 0 1 1-3 3" />
+    </svg>
+  `,
+  pad: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="6" y="4" width="12" height="16" rx="2" />
+      <path d="M9 7h6" />
+      <path d="M9 10h6" />
+      <path d="M9 13h6" />
+      <path d="M9 16h6" />
+    </svg>
+  `,
+  fan: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <circle cx="12" cy="12" r="2" />
+      <path d="M12 10c-1-4 2-6 5-5 1.4 2.7 0 5.2-3.7 6" />
+      <path d="M10.4 13.2c-4 1.2-6.2-1.6-5.2-4.6 3-.9 5.1.8 6.3 4.1" />
+      <path d="M13.5 13.1c3 2.8 2.1 6.3-.8 7.3-2.4-2-2.2-4.8.2-7.2" />
+    </svg>
+  `,
+  steam: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M8 20c-1.5-2.5 1.5-4.3 0-6.8C7 11.5 7.4 9.8 9.1 8.5" />
+      <path d="M13 20c-1.5-2.5 1.5-4.3 0-6.8-1-1.7-.6-3.4 1.1-4.7" />
+      <path d="M18 20c-1.5-2.5 1.5-4.3 0-6.8-1-1.7-.6-3.4 1.1-4.7" />
+      <path d="M6 5h11" />
+    </svg>
+  `,
+  duct: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 7h10v5h6" />
+      <path d="M4 17h7v-5" />
+      <path d="M14 4v6" />
+      <path d="M20 9v6" />
+    </svg>
+  `,
+  controls: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="7" y="3" width="10" height="18" rx="2" />
+      <path d="M10 7h4" />
+      <circle cx="12" cy="13" r="2" />
+    </svg>
+  `,
+  drain: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M6 5h12" />
+      <path d="M8 5v6a4 4 0 0 0 8 0V5" />
+      <path d="M12 15v5" />
+      <path d="M9 20h6" />
+    </svg>
+  `,
+  electric: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M13 2L5 14h6l-1 8 8-12h-6z" />
+    </svg>
+  `,
+  sensor: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M14 14.8V5a3 3 0 0 0-6 0v9.8a5 5 0 1 0 6 0z" />
+      <path d="M11 6h5" />
+      <path d="M11 10h4" />
+    </svg>
+  `,
+  "home-size": `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 11l8-7 8 7" />
+      <path d="M6 10v10h12V10" />
+      <path d="M9 20v-6h6v6" />
+    </svg>
+  `,
+  tightness: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="5" y="5" width="14" height="14" rx="2" />
+      <path d="M8 12h8" />
+      <path d="M12 8v8" />
+      <path d="M8 8l8 8" />
+    </svg>
+  `,
+  runtime: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <circle cx="12" cy="12" r="8" />
+      <path d="M12 7v5l3 2" />
+    </svg>
+  `,
+  location: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M12 21s6-5.2 6-11a6 6 0 0 0-12 0c0 5.8 6 11 6 11z" />
+      <circle cx="12" cy="10" r="2" />
+    </svg>
+  `,
+  selection: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M5 6h14" />
+      <path d="M5 12h14" />
+      <path d="M5 18h14" />
+      <path d="M9 6l2 2 4-4" />
+    </svg>
+  `,
+  testing: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M5 16a7 7 0 0 1 14 0" />
+      <path d="M12 16l4-5" />
+      <path d="M8 20h8" />
+    </svg>
+  `,
+  valve: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 12h16" />
+      <path d="M8 8l8 8" />
+      <path d="M16 8l-8 8" />
+      <path d="M12 4v4" />
+    </svg>
+  `,
+  scale: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M7 4h10v16H7z" />
+      <path d="M10 7h4" />
+      <path d="M9 11h6" />
+      <path d="M10 15h4" />
+    </svg>
+  `,
+  warning: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M12 3l9 16H3z" />
+      <path d="M12 8v5" />
+      <path d="M12 17h.01" />
+    </svg>
+  `,
+  portable: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="7" y="5" width="10" height="14" rx="2" />
+      <path d="M10 9h4" />
+      <path d="M9 19v2" />
+      <path d="M15 19v2" />
+    </svg>
+  `,
+  ventilation: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 9h10a3 3 0 1 0-3-3" />
+      <path d="M4 15h16" />
+      <path d="M17 11l4 4-4 4" />
+    </svg>
+  `,
+};
+
+function humidifierIcon(key) {
+  return humidifierIcons[key] ?? humidifierIcons.water;
+}
+
+function humidifierLinearFlow(items, className = "") {
+  return `
+    <div class="humidifier-linear-flow ${className}" aria-label="${escapeHtml(items.join(" to "))}">
+      ${items
+        .map(
+          (item, index) => `
+            <div class="humidifier-flow-node">
+              <span>${escapeHtml(item)}</span>
+            </div>
+            ${index < items.length - 1 ? `<span class="humidifier-flow-arrow" aria-hidden="true"></span>` : ""}
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function humidifierIconGrid(items, className = "humidifier-card-grid") {
+  return `
+    <div class="${className}">
+      ${items
+        .map(
+          (item) => `
+            <article class="humidifier-card reveal">
+              <span class="humidifier-icon" aria-hidden="true">${humidifierIcon(item.icon)}</span>
+              <h3>${escapeHtml(item.title)}</h3>
+              <p>${escapeHtml(item.text)}</p>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function humidifierTypeOverview() {
+  return `
+    <div class="humidifier-type-grid">
+      ${humidifierTypes
+        .map(
+          (type) => `
+            <article class="humidifier-type-card humidifier-type-${type.key} reveal">
+              <span class="humidifier-icon" aria-hidden="true">${humidifierIcon(type.icon)}</span>
+              <p class="eyebrow">${escapeHtml(type.eyebrow)}</p>
+              <h3>${escapeHtml(type.title)}</h3>
+              <p>${escapeHtml(type.text)}</p>
+              <div class="humidifier-mini-flow">
+                ${humidifierLinearFlow(type.flow)}
+              </div>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function humidifierTypeDetails() {
+  return `
+    <div class="humidifier-detail-stack">
+      ${humidifierTypes
+        .map(
+          (type) => `
+            <article class="humidifier-detail-card humidifier-type-${type.key} reveal" id="${type.key}-humidifier">
+              <div class="humidifier-detail-copy">
+                <span class="humidifier-icon" aria-hidden="true">${humidifierIcon(type.icon)}</span>
+                <h3>${escapeHtml(type.title)}</h3>
+                <p>${escapeHtml(type.text)}</p>
+                <strong class="humidifier-statement">${escapeHtml(type.flowNote)}</strong>
+              </div>
+              <div class="humidifier-detail-flow">
+                ${humidifierLinearFlow(type.flow)}
+              </div>
+              <div class="humidifier-detail-lists">
+                <div>
+                  <strong>Potential strengths</strong>
+                  <ul class="humidifier-list">
+                    ${inlineList(type.strengths)}
+                  </ul>
+                </div>
+                <div>
+                  <strong>Considerations</strong>
+                  <ul class="humidifier-list">
+                    ${inlineList(type.considerations)}
+                  </ul>
+                </div>
+              </div>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function humidifierComparisonMarkup() {
+  return `
+    <div class="humidifier-comparison-wrap">
+      <table class="humidifier-comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Bypass</th>
+            <th>Fan-Powered</th>
+            <th>Steam</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${humidifierComparisonRows
+            .map(
+              ([feature, bypass, fan, steam]) => `
+                <tr>
+                  <th scope="row">${escapeHtml(feature)}</th>
+                  <td>${escapeHtml(bypass)}</td>
+                  <td>${escapeHtml(fan)}</td>
+                  <td>${escapeHtml(steam)}</td>
+                </tr>
+              `,
+            )
+            .join("")}
+        </tbody>
+      </table>
+      <div class="humidifier-comparison-cards">
+        ${humidifierComparisonRows
+          .map(
+            ([feature, bypass, fan, steam]) => `
+              <article>
+                <h3>${escapeHtml(feature)}</h3>
+                <dl>
+                  <div><dt>Bypass</dt><dd>${escapeHtml(bypass)}</dd></div>
+                  <div><dt>Fan-Powered</dt><dd>${escapeHtml(fan)}</dd></div>
+                  <div><dt>Steam</dt><dd>${escapeHtml(steam)}</dd></div>
+                </dl>
+              </article>
+            `,
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
+function humidifierIntegrationGrid() {
+  return `
+    <div class="humidifier-integration-grid" aria-label="Whole-home humidifier integration points">
+      ${humidifierIntegrationItems
+        .map(
+          ([iconKey, title]) => `
+            <article>
+              <span class="humidifier-mini-icon" aria-hidden="true">${humidifierIcon(iconKey)}</span>
+              <strong>${escapeHtml(title)}</strong>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function humidifierProblemGrid() {
+  return `
+    <div class="humidifier-problem-grid">
+      ${humidifierProblems
+        .map(
+          ([iconKey, title]) => `
+            <article class="humidifier-problem-tile reveal">
+              <span class="humidifier-mini-icon" aria-hidden="true">${humidifierIcon(iconKey)}</span>
+              <strong>${escapeHtml(title)}</strong>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function humidifierMaintenanceGrid() {
+  return `
+    <div class="humidifier-maintenance-grid">
+      ${humidifierMaintenanceGroups
+        .map(
+          (group) => `
+            <article class="humidifier-maintenance-card reveal">
+              <span class="humidifier-icon" aria-hidden="true">${humidifierIcon(group.icon)}</span>
+              <h3>${escapeHtml(group.title)}</h3>
+              <ul class="humidifier-list">
+                ${inlineList(group.items)}
+              </ul>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function humidifiersPage(service) {
+  const related = ["furnaces", "heat-pumps", "hrv-erv", "ductwork"]
+    .map((slug) => serviceBySlug.get(slug))
+    .filter(Boolean);
+  const work = servicePhotos(service);
+
+  return {
+    pathname: `/services/${service.slug}/`,
+    title: "Whole-Home Humidifier Installation & Service GTA | Airrand",
+    description:
+      "Airrand installs and services bypass, fan-powered and steam whole-home humidifiers throughout the Greater Toronto Area, including controls, water connections and HVAC integration.",
+    current: "services",
+    image: service.image,
+    schema: [
+      businessSchema(),
+      serviceSchema(service),
+      faqSchema(humidifierFaqs),
+      breadcrumbs([
+        { name: "Home", url: "/" },
+        { name: "Services", url: "/services/" },
+        { name: service.title, url: `/services/${service.slug}/` },
+      ]),
+    ],
+    body: `
+      <section class="page-hero service-hero humidifier-hero" style="${heroImageStyle(service.image)}">
+        <div class="container">
+          <p class="eyebrow">Indoor Air Service</p>
+          <h1>Whole-Home Humidifier Services in the Greater Toronto Area</h1>
+          <p>Airrand installs and services whole-home humidifiers that help manage dry winter air throughout the home using the central HVAC system.</p>
+          ${ctaButtons()}
+        </div>
+      </section>
+
+      <section class="section humidifier-section humidifier-overview-section">
+        <div class="container service-detail-grid">
+          <article class="detail-copy">
+            <p class="eyebrow">What Airrand Handles</p>
+            <h2>Whole-home humidifier work with equipment, airflow, water, drainage and controls in mind.</h2>
+            <p>${escapeHtml(service.intro)} The right humidifier has to fit the home, duct system, furnace or air handler, available utilities and service access.</p>
+            <ul class="check-list">
+              ${service.details.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ul>
+          </article>
+          <aside class="service-aside humidifier-aside">
+            <h2>Common Applications</h2>
+            <ul>
+              ${service.applications.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ul>
+            <a class="button button-primary" href="${link("/contact/#quote-form")}">Book Humidifier Service</a>
+            <a class="button button-secondary" href="tel:${site.phoneTel}">Call ${site.phone}</a>
+          </aside>
+        </div>
+      </section>
+
+      ${standardsStrip()}
+
+      <section class="section humidifier-section">
+        <div class="container humidifier-split">
+          <article>
+            <p class="eyebrow">Winter Comfort</p>
+            <h2>Why Homes Get Dry in Winter</h2>
+            <p>Cold outdoor air generally contains less moisture than warm indoor air can hold. When that outdoor air enters the home and is heated, indoor relative humidity can drop.</p>
+            <p>That may contribute to dry skin, dry throat, static electricity, dry woodwork and general winter discomfort. Airrand keeps the discussion practical and avoids medical claims.</p>
+          </article>
+          <aside class="humidifier-flow-panel">
+            ${humidifierLinearFlow(["Cold Outdoor Air", "Heated Indoors", "Lower Relative Humidity"])}
+          </aside>
+        </div>
+      </section>
+
+      <section class="section humidifier-section humidifier-how-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "How It Works",
+            title: "Humidity Added Through the HVAC System",
+            text:
+              "A whole-home humidifier adds moisture to air moving through the furnace or air handler system. Depending on the type, moisture may be added through an evaporative pad, a powered fan or steam injected into the duct system.",
+            align: "center",
+          })}
+          <div class="humidifier-system-flow">
+            ${humidifierLinearFlow(["Water Supply", "Humidifier", "Furnace / Airflow", "Home"])}
+          </div>
+        </div>
+      </section>
+
+      <section class="section humidifier-section humidifier-types-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Humidifier Types",
+            title: "Bypass, Fan-Powered or Steam?",
+            text:
+              "Whole-home duct-mounted humidifiers are not all the same. The right approach depends on the home, HVAC system, duct layout, utilities and humidity demand.",
+            align: "center",
+          })}
+          ${humidifierTypeOverview()}
+        </div>
+      </section>
+
+      <section class="section humidifier-section humidifier-type-detail-section">
+        <div class="container">
+          ${humidifierTypeDetails()}
+        </div>
+      </section>
+
+      <section class="section humidifier-section humidifier-comparison-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Comparison",
+            title: "Which Type of Humidifier Makes Sense?",
+            text:
+              "The table keeps the comparison high level. Airrand does not use hard capacity claims unless the actual equipment and home are being reviewed.",
+            align: "center",
+          })}
+          ${humidifierComparisonMarkup()}
+          <p class="humidifier-note">The right choice depends on the home, HVAC system, duct layout, humidity demand, available utilities and budget.</p>
+        </div>
+      </section>
+
+      <section class="section humidifier-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "System Fit",
+            title: "Choosing the Right Humidifier Is More Than Picking a Box",
+            text:
+              "A whole-home humidifier has to match the building and the equipment it connects to. Airrand keeps this practical instead of using DIY sizing formulas.",
+            align: "center",
+          })}
+          ${humidifierIconGrid(humidifierSelectionItems, "humidifier-card-grid")}
+        </div>
+      </section>
+
+      <section class="section humidifier-section humidifier-temperature-section">
+        <div class="container humidifier-split">
+          <article>
+            <p class="eyebrow">Winter Control</p>
+            <h2>More Humidity Is Not Always Better</h2>
+            <p>Indoor humidity should generally be adjusted based on outdoor temperature and building conditions. As outdoor temperatures fall, excessive indoor humidity can contribute to condensation on windows, exterior walls and other cold surfaces.</p>
+            <strong class="humidifier-statement">The goal is comfortable humidity without creating condensation problems.</strong>
+          </article>
+          <aside class="humidifier-temperature-panel">
+            <div>
+              <span>Warmer winter day</span>
+              <strong>Higher humidity may be acceptable</strong>
+            </div>
+            <div>
+              <span>Very cold day</span>
+              <strong>Lower humidity may be appropriate</strong>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section humidifier-section">
+        <div class="container humidifier-two-panel-grid">
+          <article class="humidifier-feature-panel reveal">
+            <p class="eyebrow">Controls</p>
+            <h2>Manual Humidistat</h2>
+            <span class="humidifier-icon" aria-hidden="true">${humidifierIcon("controls")}</span>
+            <p>The homeowner adjusts the humidity setting. Manual control may require seasonal adjustment as outdoor temperatures change.</p>
+          </article>
+          <article class="humidifier-feature-panel humidifier-feature-panel-warm reveal">
+            <p class="eyebrow">Automatic Control</p>
+            <h2>Automatic Humidity Control</h2>
+            <span class="humidifier-icon" aria-hidden="true">${humidifierIcon("sensor")}</span>
+            <p>Some systems can use outdoor-temperature information or integrated controls to adjust humidity demand more automatically. Control capability varies by humidifier, thermostat, furnace, manufacturer and accessories.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section humidifier-section humidifier-integration-section">
+        <div class="container humidifier-split">
+          <article>
+            <p class="eyebrow">System Integration</p>
+            <h2>The Humidifier Has to Work With the HVAC System</h2>
+            <p>Proper installation can involve the furnace or air handler, ductwork, water supply, drainage, electrical wiring, controls and outdoor-temperature sensing where applicable.</p>
+            <strong class="humidifier-statement">Humidifier performance depends on both the humidifier and the airflow system it is connected to.</strong>
+          </article>
+          <aside class="humidifier-map-panel">
+            ${humidifierIntegrationGrid()}
+          </aside>
+        </div>
+      </section>
+
+      <section class="section humidifier-section">
+        <div class="container humidifier-two-panel-grid">
+          <article class="humidifier-feature-panel reveal">
+            <p class="eyebrow">Bypass Systems</p>
+            <h2>Bypass Humidifiers Need Proper Airflow</h2>
+            <p>A bypass humidifier relies on a pressure difference across the duct system to move air through the humidifier.</p>
+            <ul class="humidifier-list">
+              ${inlineList(["Supply / return locations", "Airflow", "Bypass routing", "Duct space", "Service access"])}
+            </ul>
+          </article>
+          <article class="humidifier-feature-panel humidifier-feature-panel-warm reveal">
+            <p class="eyebrow">Installation Detail</p>
+            <h2>Water and Drainage Are Part of the Installation</h2>
+            <p>Humidifier systems may require a water supply connection, shutoff valve, appropriate tubing or piping, drain connection, proper slope and serviceable routing.</p>
+            <strong class="humidifier-statement">Water piping should be installed cleanly and left accessible for service.</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="section humidifier-section humidifier-install-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Installation Standard",
+            title: "What Proper Whole-Home Humidifier Installation Includes",
+            text:
+              "The equipment, ductwork, water, drainage, power, controls and startup checks all affect how the system performs after Airrand leaves.",
+            align: "center",
+          })}
+          <div class="humidifier-install-grid">
+            ${humidifierInstallItems
+              .map(
+                ([iconKey, title, text]) => `
+                  <article class="humidifier-install-card reveal">
+                    <span class="humidifier-icon" aria-hidden="true">${humidifierIcon(iconKey)}</span>
+                    <h3>${escapeHtml(title)}</h3>
+                    <p>${escapeHtml(text)}</p>
+                  </article>
+                `,
+              )
+              .join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="section humidifier-section humidifier-problems-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Diagnostics",
+            title: "Common Whole-Home Humidifier Problems",
+            text:
+              "Humidifier problems can involve water flow, airflow, controls, drainage or the humidifier itself.",
+            align: "center",
+          })}
+          ${humidifierProblemGrid()}
+        </div>
+      </section>
+
+      <section class="section humidifier-section humidifier-maintenance-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Maintenance",
+            title: "Different Humidifiers Have Different Maintenance Needs",
+            text:
+              "Maintenance depends on the humidifier type, water quality, runtime and manufacturer recommendations.",
+            align: "center",
+          })}
+          ${humidifierMaintenanceGrid()}
+          <div class="section-action">
+            <a class="button button-primary" href="${link("/contact/#quote-form")}">Book Humidifier Service</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section humidifier-section">
+        <div class="container humidifier-split">
+          <article>
+            <p class="eyebrow">Long-Term Performance</p>
+            <h2>Water Quality Affects Humidifier Maintenance</h2>
+            <p>Minerals in the water can accumulate on evaporative pads, distribution trays, steam components and drain systems.</p>
+            <p>Maintenance requirements depend on water quality, equipment type, runtime and manufacturer recommendations.</p>
+          </article>
+          <aside class="humidifier-scale-panel">
+            <span class="humidifier-icon" aria-hidden="true">${humidifierIcon("scale")}</span>
+            <h3>Scale buildup is a maintenance issue, not just a cosmetic one.</h3>
+            <p>Keeping humidifier components clean supports water flow, drainage and long-term operation.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section humidifier-section humidifier-compare-services-section">
+        <div class="container humidifier-two-panel-grid">
+          <article class="humidifier-feature-panel reveal">
+            <p class="eyebrow">Humidification</p>
+            <h2>Humidification and Ventilation Do Different Jobs</h2>
+            <div class="humidifier-mini-compare">
+              <div>
+                <span class="humidifier-icon" aria-hidden="true">${humidifierIcon("water")}</span>
+                <strong>Humidifier</strong>
+                <p>Adds moisture to indoor air.</p>
+              </div>
+              <div>
+                <span class="humidifier-icon" aria-hidden="true">${humidifierIcon("ventilation")}</span>
+                <strong>HRV / ERV</strong>
+                <p>Exchanges stale indoor air with outdoor air.</p>
+              </div>
+            </div>
+            <p>Ventilation can affect humidity, but an HRV or ERV is not the same thing as a whole-home humidifier.</p>
+            <a class="button button-secondary" href="${link("/services/hrv-erv/")}">Learn About HRV / ERV Ventilation</a>
+          </article>
+          <article class="humidifier-feature-panel humidifier-feature-panel-warm reveal">
+            <p class="eyebrow">Whole-Home Comfort</p>
+            <h2>Whole-Home vs. Portable Humidification</h2>
+            <div class="humidifier-mini-compare">
+              <div>
+                <span class="humidifier-icon" aria-hidden="true">${humidifierIcon("portable")}</span>
+                <strong>Portable Unit</strong>
+                <p>Serves a room or small area and requires manual refilling.</p>
+              </div>
+              <div>
+                <span class="humidifier-icon" aria-hidden="true">${humidifierIcon("duct")}</span>
+                <strong>Whole-Home</strong>
+                <p>Integrates with central HVAC and is connected to a water supply.</p>
+              </div>
+            </div>
+            <p>Whole-home humidification is designed to support humidity throughout the ducted home, but the right choice still depends on the application.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section gallery-section humidifier-gallery-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Recent Work",
+            title: "Recent Whole-Home Humidifier Installations",
+            text:
+              "A look at recent Airrand humidifier and indoor-air installations throughout the GTA.",
+          })}
+          ${workSlider(work.photos, "Recent whole-home humidifier installations")}
+        </div>
+      </section>
+
+      ${faqSection(service, humidifierFaqs)}
+
+      <section class="section muted-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Related Services",
+            title: "Connected HVAC services from Airrand.",
+            text:
+              "Whole-home humidity control often connects with heating equipment, ductwork, ventilation and heat-pump integration.",
+          })}
+          ${servicesGrid(related)}
+        </div>
+      </section>
+      ${serviceAreaSection()}
+      ${finalCta({
+        title: "Need whole-home humidifier help?",
+        text:
+          "Share the home, HVAC system, humidity concern and location so Airrand can recommend the right next step.",
+      })}
+    `,
+  };
+}
+
 const hrvApplications = [
   {
     icon: "home",
@@ -7316,6 +8273,9 @@ function servicePage(service) {
   }
   if (service.slug === "gas-lines") {
     return gasLinesPage(service);
+  }
+  if (service.slug === "humidifiers") {
+    return humidifiersPage(service);
   }
   if (service.slug === "hrv-erv") {
     return hrvErvPage(service);

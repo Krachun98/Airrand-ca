@@ -4535,6 +4535,794 @@ details.review-page-copy[open] summary span {
   max-height: 42px;
 }
 
+.humidifier-hero::before {
+  background:
+    linear-gradient(90deg, rgba(7, 9, 12, 0.97) 0%, rgba(7, 9, 12, 0.74) 45%, rgba(7, 9, 12, 0.42) 78%, rgba(7, 9, 12, 0.68) 100%),
+    linear-gradient(180deg, rgba(7, 9, 12, 0.12), rgba(7, 9, 12, 0.84));
+}
+
+.humidifier-section {
+  background:
+    radial-gradient(circle at 14% 0, rgba(54, 169, 255, 0.055), transparent 34%),
+    radial-gradient(circle at 88% 12%, rgba(255, 116, 51, 0.03), transparent 31%),
+    var(--bg);
+}
+
+.humidifier-overview-section,
+.humidifier-how-section,
+.humidifier-comparison-section,
+.humidifier-temperature-section,
+.humidifier-integration-section,
+.humidifier-install-section,
+.humidifier-problems-section,
+.humidifier-maintenance-section,
+.humidifier-compare-services-section {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent),
+    var(--bg-soft);
+}
+
+.humidifier-aside {
+  border-color: rgba(54, 169, 255, 0.22);
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.09), transparent 48%),
+    var(--panel);
+}
+
+.humidifier-split,
+.humidifier-two-panel-grid {
+  display: grid;
+  gap: clamp(24px, 4vw, 46px);
+  align-items: center;
+}
+
+.humidifier-split {
+  grid-template-columns: minmax(0, 0.9fr) minmax(380px, 1.1fr);
+}
+
+.humidifier-two-panel-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.humidifier-flow-panel,
+.humidifier-map-panel,
+.humidifier-type-card,
+.humidifier-detail-card,
+.humidifier-card,
+.humidifier-feature-panel,
+.humidifier-install-card,
+.humidifier-problem-tile,
+.humidifier-maintenance-card,
+.humidifier-scale-panel,
+.humidifier-temperature-panel,
+.humidifier-comparison-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    #0f151b;
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.24);
+}
+
+.humidifier-flow-panel,
+.humidifier-map-panel,
+.humidifier-feature-panel,
+.humidifier-scale-panel,
+.humidifier-temperature-panel {
+  padding: clamp(22px, 3vw, 32px);
+}
+
+.humidifier-linear-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.humidifier-flow-node {
+  display: grid;
+  min-width: 0;
+  min-height: 84px;
+  flex: 1 1 0;
+  place-items: center;
+  padding: 15px;
+  border: 1px solid rgba(54, 169, 255, 0.2);
+  border-radius: var(--radius);
+  background: rgba(7, 12, 17, 0.78);
+  text-align: center;
+}
+
+.humidifier-flow-node span {
+  color: var(--text);
+  font-weight: 900;
+  line-height: 1.16;
+}
+
+.humidifier-flow-arrow {
+  position: relative;
+  width: 34px;
+  align-self: center;
+  height: 2px;
+  flex: 0 0 34px;
+  background: linear-gradient(90deg, rgba(54, 169, 255, 0.15), rgba(54, 169, 255, 0.95));
+  color: var(--blue);
+}
+
+.humidifier-flow-arrow::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  content: "";
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.humidifier-system-flow {
+  max-width: 980px;
+  margin: 34px auto 0;
+  padding: 24px;
+  border: 1px solid rgba(54, 169, 255, 0.18);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 20% 12%, rgba(54, 169, 255, 0.09), transparent 34%),
+    radial-gradient(circle at 82% 84%, rgba(255, 116, 51, 0.045), transparent 34%),
+    #0b1117;
+}
+
+.humidifier-type-grid,
+.humidifier-card-grid,
+.humidifier-install-grid,
+.humidifier-maintenance-grid,
+.humidifier-problem-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.humidifier-type-grid,
+.humidifier-card-grid,
+.humidifier-install-grid,
+.humidifier-maintenance-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.humidifier-problem-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.humidifier-type-card,
+.humidifier-card,
+.humidifier-install-card,
+.humidifier-maintenance-card {
+  display: grid;
+  align-content: start;
+  min-height: 210px;
+  padding: 22px;
+  gap: 12px;
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.humidifier-type-card {
+  min-height: 360px;
+}
+
+.humidifier-type-card:hover,
+.humidifier-card:hover,
+.humidifier-install-card:hover,
+.humidifier-maintenance-card:hover,
+.humidifier-problem-tile:hover {
+  border-color: rgba(54, 169, 255, 0.38);
+  transform: translateY(-2px);
+}
+
+.humidifier-type-steam,
+.humidifier-feature-panel-warm,
+.humidifier-maintenance-card:nth-child(3) {
+  background:
+    radial-gradient(circle at 100% 0, rgba(255, 116, 51, 0.09), transparent 46%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    #11161b;
+}
+
+.humidifier-icon,
+.humidifier-mini-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(54, 169, 255, 0.36);
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.14), rgba(54, 169, 255, 0.045));
+  color: var(--blue);
+}
+
+.humidifier-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+}
+
+.humidifier-mini-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border-radius: 7px;
+}
+
+.humidifier-type-steam .humidifier-icon,
+.humidifier-type-steam .humidifier-mini-icon,
+.humidifier-feature-panel-warm .humidifier-icon,
+.humidifier-maintenance-card:nth-child(3) .humidifier-icon,
+.humidifier-scale-panel .humidifier-icon {
+  border-color: rgba(255, 116, 51, 0.34);
+  background:
+    linear-gradient(180deg, rgba(255, 116, 51, 0.14), rgba(255, 116, 51, 0.045));
+  color: var(--orange);
+}
+
+.humidifier-icon svg,
+.humidifier-mini-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.humidifier-mini-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.humidifier-type-card h3,
+.humidifier-detail-card h3,
+.humidifier-card h3,
+.humidifier-feature-panel h2,
+.humidifier-install-card h3,
+.humidifier-maintenance-card h3,
+.humidifier-scale-panel h3 {
+  margin: 0;
+}
+
+.humidifier-type-card p:not(.eyebrow),
+.humidifier-detail-card p,
+.humidifier-card p,
+.humidifier-feature-panel p,
+.humidifier-install-card p,
+.humidifier-scale-panel p {
+  margin: 0;
+  color: var(--steel);
+}
+
+.humidifier-mini-flow {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.humidifier-mini-flow .humidifier-linear-flow {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.humidifier-mini-flow .humidifier-flow-node {
+  min-height: 52px;
+}
+
+.humidifier-mini-flow .humidifier-flow-arrow {
+  width: 2px;
+  height: 22px;
+  justify-self: center;
+  flex-basis: auto;
+  background: linear-gradient(180deg, rgba(54, 169, 255, 0.15), rgba(54, 169, 255, 0.95));
+}
+
+.humidifier-mini-flow .humidifier-flow-arrow::after {
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(135deg);
+}
+
+.humidifier-detail-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.humidifier-detail-card {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.74fr) minmax(0, 1.26fr);
+  grid-template-areas:
+    "copy lists"
+    "flow lists";
+  align-items: start;
+  padding: clamp(22px, 3vw, 32px);
+  gap: 20px 28px;
+}
+
+.humidifier-detail-copy {
+  grid-area: copy;
+  display: grid;
+  align-content: start;
+  max-width: 520px;
+  gap: 12px;
+}
+
+.humidifier-detail-flow {
+  grid-area: flow;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid rgba(54, 169, 255, 0.18);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 15% 12%, rgba(54, 169, 255, 0.075), transparent 38%),
+    linear-gradient(135deg, rgba(54, 169, 255, 0.05), rgba(7, 10, 14, 0.58) 44%, rgba(7, 10, 14, 0.74));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.humidifier-detail-flow .humidifier-linear-flow {
+  display: grid;
+  grid-template-columns: minmax(76px, 1fr) 14px minmax(76px, 1fr) 14px minmax(96px, 1.12fr);
+  align-items: center;
+  gap: 5px;
+}
+
+.humidifier-detail-flow .humidifier-flow-arrow {
+  width: 100%;
+  height: 2px;
+  flex: initial;
+  justify-self: center;
+  background: linear-gradient(90deg, rgba(54, 169, 255, 0.1), rgba(54, 169, 255, 0.95));
+}
+
+.humidifier-detail-flow .humidifier-flow-arrow::after {
+  width: 8px;
+  height: 8px;
+  border-width: 2px;
+}
+
+.humidifier-detail-flow .humidifier-flow-node {
+  width: 100%;
+  min-height: 64px;
+  padding: 10px 5px;
+  border-color: rgba(54, 169, 255, 0.26);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(9, 16, 23, 0.96), rgba(5, 9, 13, 0.94)),
+    rgba(5, 9, 13, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 10px 22px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.humidifier-detail-flow .humidifier-flow-node span {
+  max-width: 100%;
+  font-size: 0.82rem;
+  line-height: 1.12;
+  letter-spacing: 0;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  hyphens: none;
+}
+
+.humidifier-detail-lists {
+  grid-area: lists;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.humidifier-detail-lists > div {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  min-height: 100%;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.095);
+  border-radius: var(--radius);
+  background: rgba(7, 10, 14, 0.62);
+}
+
+.humidifier-detail-lists strong,
+.humidifier-maintenance-card h3 {
+  color: var(--text);
+}
+
+.humidifier-list {
+  display: grid;
+  margin: 12px 0 0;
+  padding: 0;
+  gap: 8px;
+  list-style: none;
+  color: var(--steel);
+}
+
+.humidifier-list li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.humidifier-list li::before {
+  position: absolute;
+  top: 0.7em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--blue);
+  content: "";
+}
+
+.humidifier-type-steam .humidifier-list li::before,
+.humidifier-feature-panel-warm .humidifier-list li::before,
+.humidifier-maintenance-card:nth-child(3) .humidifier-list li::before {
+  background: var(--orange);
+}
+
+.humidifier-statement {
+  display: block;
+  margin-top: 6px;
+  padding: 16px 18px;
+  border-left: 3px solid var(--blue);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: rgba(54, 169, 255, 0.07);
+  color: var(--text);
+}
+
+.humidifier-feature-panel-warm .humidifier-statement {
+  border-left-color: var(--orange);
+  background: rgba(255, 116, 51, 0.055);
+}
+
+.humidifier-comparison-wrap {
+  overflow: hidden;
+  padding: 18px;
+}
+
+.humidifier-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.humidifier-comparison-table th,
+.humidifier-comparison-table td {
+  padding: 16px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--steel);
+  text-align: left;
+  vertical-align: top;
+}
+
+.humidifier-comparison-table thead th {
+  color: var(--text);
+  font-size: 0.8rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.humidifier-comparison-table tbody th {
+  width: 27%;
+  color: var(--text);
+}
+
+.humidifier-comparison-table tbody tr:last-child th,
+.humidifier-comparison-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.humidifier-comparison-cards {
+  display: none;
+}
+
+.humidifier-note {
+  max-width: 760px;
+  margin: 20px auto 0;
+  color: var(--steel);
+  text-align: center;
+}
+
+.humidifier-temperature-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.humidifier-temperature-panel div {
+  display: grid;
+  min-height: 128px;
+  align-content: center;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.095);
+  border-radius: var(--radius);
+  background: rgba(7, 10, 14, 0.64);
+}
+
+.humidifier-temperature-panel span {
+  color: var(--blue);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.humidifier-temperature-panel div:last-child span {
+  color: var(--orange);
+}
+
+.humidifier-temperature-panel strong {
+  margin-top: 8px;
+  color: var(--text);
+  font-size: 1.25rem;
+  line-height: 1.16;
+}
+
+.humidifier-feature-panel {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+.humidifier-integration-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.humidifier-integration-grid article {
+  display: grid;
+  min-height: 88px;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  padding: 13px;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.07), transparent 48%),
+    rgba(7, 12, 17, 0.72);
+}
+
+.humidifier-integration-grid strong,
+.humidifier-problem-tile strong {
+  color: var(--text);
+  font-weight: 900;
+  line-height: 1.16;
+}
+
+.humidifier-install-card {
+  min-height: 182px;
+}
+
+.humidifier-problem-tile {
+  display: grid;
+  min-height: 82px;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  padding: 15px;
+  gap: 12px;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.humidifier-maintenance-card {
+  min-height: 340px;
+}
+
+.humidifier-scale-panel {
+  display: grid;
+  max-width: 560px;
+  justify-self: end;
+  gap: 14px;
+}
+
+.humidifier-mini-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.humidifier-mini-compare > div {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(7, 10, 14, 0.58);
+}
+
+.humidifier-mini-compare strong {
+  color: var(--text);
+}
+
+.humidifier-mini-compare p {
+  color: var(--steel);
+}
+
+.humidifier-compare-services-section .button {
+  justify-self: start;
+}
+
+.humidifier-gallery-section .section-heading {
+  max-width: 780px;
+}
+
+@media (max-width: 1120px) {
+  .humidifier-detail-card {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "flow"
+      "lists";
+  }
+
+  .humidifier-card-grid,
+  .humidifier-install-grid,
+  .humidifier-problem-grid,
+  .humidifier-integration-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .humidifier-split {
+    grid-template-columns: 1fr;
+  }
+
+  .humidifier-scale-panel {
+    justify-self: stretch;
+  }
+
+  .humidifier-detail-lists {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 920px) {
+  .humidifier-type-grid,
+  .humidifier-maintenance-grid,
+  .humidifier-two-panel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .humidifier-type-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .humidifier-hero {
+    background-position: 54% center;
+  }
+
+  .humidifier-linear-flow {
+    flex-direction: column;
+  }
+
+  .humidifier-flow-arrow {
+    width: 2px;
+    height: 28px;
+    flex: 0 0 28px;
+    align-self: center;
+    background: linear-gradient(180deg, rgba(54, 169, 255, 0.15), rgba(54, 169, 255, 0.95));
+  }
+
+  .humidifier-flow-arrow::after {
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) rotate(135deg);
+  }
+
+  .humidifier-flow-node {
+    min-height: 72px;
+  }
+
+  .humidifier-flow-panel,
+  .humidifier-map-panel,
+  .humidifier-feature-panel,
+  .humidifier-scale-panel,
+  .humidifier-temperature-panel,
+  .humidifier-system-flow {
+    padding: 20px;
+  }
+
+  .humidifier-card-grid,
+  .humidifier-install-grid,
+  .humidifier-problem-grid,
+  .humidifier-integration-grid,
+  .humidifier-mini-compare,
+  .humidifier-detail-lists {
+    grid-template-columns: 1fr;
+  }
+
+  .humidifier-detail-flow {
+    padding: 16px;
+  }
+
+  .humidifier-detail-flow .humidifier-linear-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .humidifier-detail-flow .humidifier-flow-arrow {
+    width: 2px;
+    height: 26px;
+    justify-self: center;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(54, 169, 255, 0.15), rgba(54, 169, 255, 0.95));
+    box-shadow: none;
+  }
+
+  .humidifier-detail-flow .humidifier-flow-arrow::before {
+    display: none;
+  }
+
+  .humidifier-detail-flow .humidifier-flow-arrow::after {
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) rotate(135deg);
+  }
+
+  .humidifier-comparison-table {
+    display: none;
+  }
+
+  .humidifier-comparison-cards {
+    display: grid;
+    gap: 12px;
+  }
+
+  .humidifier-comparison-cards article {
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.095);
+    border-radius: var(--radius);
+    background: rgba(7, 10, 14, 0.64);
+  }
+
+  .humidifier-comparison-cards h3 {
+    margin: 0 0 12px;
+    color: var(--text);
+    font-size: 1rem;
+  }
+
+  .humidifier-comparison-cards dl,
+  .humidifier-comparison-cards dd {
+    margin: 0;
+  }
+
+  .humidifier-comparison-cards dl {
+    display: grid;
+    gap: 8px;
+  }
+
+  .humidifier-comparison-cards dl div {
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .humidifier-comparison-cards dt {
+    color: var(--blue);
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+  }
+
+  .humidifier-comparison-cards dd {
+    color: var(--steel);
+  }
+
+  .humidifier-problem-tile,
+  .humidifier-integration-grid article {
+    min-height: 70px;
+  }
+}
+
 .hrv-hero::before {
   background:
     linear-gradient(90deg, rgba(7, 9, 12, 0.96) 0%, rgba(7, 9, 12, 0.74) 44%, rgba(7, 9, 12, 0.38) 76%, rgba(7, 9, 12, 0.68) 100%),

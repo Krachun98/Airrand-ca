@@ -341,16 +341,25 @@ export const services = [
     image: "humidifier-installation.webp",
     short: "Whole-home humidity control.",
     intro:
-      "Airrand installs whole-home humidifiers to help support winter comfort and indoor air quality.",
+      "Airrand installs and services whole-home humidifiers that help manage dry winter air throughout the home using the central HVAC system.",
     meta:
-      "Whole-home humidifier installation and replacement for homes in Toronto and the Greater Toronto Area.",
+      "Airrand installs and services bypass, fan-powered and steam whole-home humidifiers throughout the Greater Toronto Area, including controls, water connections and HVAC integration.",
     details: [
-      "Whole-home humidifier installation",
-      "Furnace-side integration",
-      "Water and drain connections",
-      "Controls setup and walkthrough",
+      "Bypass humidifier installation",
+      "Fan-powered humidifier installation",
+      "Steam humidifier installation and service",
+      "Furnace and duct integration",
+      "Water, drain and control setup",
+      "Humidifier diagnostics and maintenance",
     ],
-    applications: ["Home comfort", "Winter dryness", "Indoor air quality"],
+    applications: [
+      "Dry winter comfort",
+      "Forced-air homes",
+      "Furnace-side installation",
+      "Whole-home humidity support",
+      "Control upgrades",
+      "Humidifier service",
+    ],
   },
   {
     title: "Gas Fireplaces",
