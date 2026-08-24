@@ -239,16 +239,26 @@ export const services = [
     image: "ductwork-installation.webp",
     short: "Custom residential and commercial duct fabrication and installation.",
     intro:
-      "Airrand designs and installs ductwork with clean routing, proper support and practical service access.",
+      "Airrand designs, installs and modifies residential and commercial duct systems with proper airflow, clean routing, strong supports and practical service access.",
     meta:
-      "Residential and commercial ductwork installation, modification and replacement in the Greater Toronto Area.",
+      "Airrand designs, installs and modifies residential and commercial HVAC ductwork throughout the Greater Toronto Area, including spiral duct, sheet metal, supply and return systems and ventilation ductwork.",
     details: [
       "New duct installation",
       "Duct modifications and replacements",
-      "Commercial ventilation pathways",
-      "Airflow-focused routing and transitions",
+      "Supply and return air systems",
+      "Spiral and rectangular ductwork",
+      "Airflow-focused routing, transitions and supports",
     ],
-    applications: ["Renovations", "Commercial fit-outs", "Mechanical rooms", "Ventilation upgrades"],
+    applications: [
+      "Residential HVAC systems",
+      "Renovations and additions",
+      "Basement renovations",
+      "Commercial fit-outs",
+      "Rooftop units",
+      "Make-up air systems",
+      "Mechanical rooms",
+      "Ventilation upgrades",
+    ],
   },
   {
     title: "Gas Lines",

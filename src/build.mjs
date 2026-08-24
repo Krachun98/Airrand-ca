@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "humidifier-flow-word-fit-20260823";
+const assetVersion = "ductwork-page-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -2092,6 +2092,66 @@ function serviceFaqs(service) {
         question: "Can ductless replace my entire furnace and AC system?",
         answer:
           "It depends on the home, heating load, room layout, equipment design and whether every important area can be served properly. Airrand can review whether ductless is a targeted solution or a broader replacement strategy.",
+      },
+    ];
+  }
+
+  if (service.slug === "ductwork") {
+    return [
+      {
+        question: "Can Airrand install new ductwork?",
+        answer:
+          "Yes. Airrand installs new ductwork for appropriate residential and commercial HVAC, ventilation, renovation and fit-out projects throughout the GTA.",
+      },
+      {
+        question: "Can existing ductwork be modified?",
+        answer:
+          "Yes. Existing systems can often be modified for renovations, equipment replacements, layout changes, new rooms, register relocation or return-air improvements.",
+      },
+      {
+        question: "Why is one room hotter or colder than the others?",
+        answer:
+          "Uneven temperatures can be related to airflow, duct design, return air, insulation, building heat gain or loss, equipment capacity or system setup. It should be evaluated as part of the complete HVAC system.",
+      },
+      {
+        question: "Can you add a new supply vent?",
+        answer:
+          "Potentially. The existing duct system, available airflow, branch location and return-air path should be reviewed before adding a new supply branch.",
+      },
+      {
+        question: "Why are my vents noisy?",
+        answer:
+          "Noisy vents can be related to restrictive grilles, high air velocity, duct sizing, fittings, loose metal, vibration or equipment airflow. Noise is often a system issue rather than one isolated part.",
+      },
+      {
+        question: "What is static pressure?",
+        answer:
+          "Static pressure is resistance to airflow inside the HVAC system. Filters, coils, ductwork, fittings, dampers, registers and grilles all add resistance that the blower has to work through.",
+      },
+      {
+        question: "Does bigger ductwork mean more airflow?",
+        answer:
+          "Not automatically. Airflow depends on the complete system, including blower performance, duct layout, fittings, registers, return air and equipment requirements.",
+      },
+      {
+        question: "Can ductwork be moved during a renovation?",
+        answer:
+          "Often yes, but structure, ceiling space, airflow, service access and other building systems need to be considered before ductwork is moved.",
+      },
+      {
+        question: "Should ductwork be insulated?",
+        answer:
+          "Some ductwork should be insulated depending on location, air temperature, condensation risk, building conditions and application. It is not one universal requirement for every duct.",
+      },
+      {
+        question: "What is spiral duct?",
+        answer:
+          "Spiral duct is rigid round metal duct often used in commercial and exposed applications. It can provide a clean finished appearance and an efficient round airflow path.",
+      },
+      {
+        question: "Does Airrand handle commercial ductwork?",
+        answer:
+          "Yes. Airrand handles appropriate commercial HVAC and ventilation ductwork, including fit-outs, rooftop equipment connections, spiral duct, rectangular duct, main trunks and mechanical room work.",
       },
     ];
   }
@@ -7386,6 +7446,598 @@ function humidifiersPage(service) {
   };
 }
 
+const ductworkSystemEffects = [
+  "Airflow",
+  "Comfort",
+  "Equipment performance",
+  "Noise",
+  "Temperature consistency",
+  "Energy use",
+  "System reliability",
+];
+
+const ductworkSizingFactors = [
+  "Equipment airflow",
+  "Branch length",
+  "Duct dimensions",
+  "Number of fittings",
+  "Available space",
+  "Register requirements",
+  "Static pressure",
+  "System layout",
+];
+
+const ductworkDuctTypes = [
+  {
+    icon: "rectangular",
+    title: "Rectangular Duct",
+    text: "Common for trunks, mechanical rooms, equipment connections, commercial systems and tight ceiling spaces.",
+    items: ["Main trunks", "Plenums", "Equipment connections", "Commercial systems"],
+  },
+  {
+    icon: "round",
+    title: "Round Duct",
+    text: "Common for residential branches, smaller air runs, flexible routing and efficient airflow paths.",
+    items: ["Residential branches", "Smaller runs", "Clean air paths", "Routing flexibility"],
+  },
+  {
+    icon: "spiral",
+    title: "Spiral Duct",
+    text: "Common for commercial applications, exposed ceilings, long round duct runs and finished installations.",
+    items: ["Commercial fit-outs", "Exposed ceilings", "Long runs", "Finished spaces"],
+  },
+];
+
+const ductworkResidentialProjects = [
+  "Basement finishing",
+  "Renovations",
+  "Additions",
+  "Furnace replacement modifications",
+  "Heat-pump conversions",
+  "New supply runs",
+  "New returns",
+  "Moving registers",
+  "Correcting poor routing",
+];
+
+const ductworkCommercialScope = [
+  "Rooftop units",
+  "Main trunks",
+  "Spiral duct",
+  "Rectangular duct",
+  "Diffusers",
+  "Return-air systems",
+  "Exhaust",
+  "Make-up air",
+  "Mechanical rooms",
+  "Ceiling coordination",
+];
+
+const ductworkNewModified = [
+  {
+    title: "New Duct Installation",
+    text: "Used for new construction, additions, commercial fit-outs, major renovations and new HVAC systems.",
+    items: ["New construction", "Additions", "Commercial fit-outs", "Major renovations", "New HVAC systems"],
+  },
+  {
+    title: "Duct Modifications",
+    text: "Used when existing systems need to adapt to equipment replacement, layout changes or airflow issues.",
+    items: ["Equipment replacement", "Layout changes", "New rooms", "Register relocation", "Return-air improvements"],
+  },
+];
+
+const ductworkWorkmanshipItems = [
+  {
+    icon: "seal",
+    title: "Duct Sealing",
+    text: "Joints, seams, connections, plenums and equipment transitions should be sealed appropriately.",
+  },
+  {
+    icon: "insulation",
+    title: "Insulation",
+    text: "Some ductwork needs insulation for heat transfer, condensation control or acoustic reasons.",
+  },
+  {
+    icon: "noise",
+    title: "Noise Control",
+    text: "High velocity, restrictive grilles, sharp fittings, vibration and blower issues can all affect sound.",
+  },
+  {
+    icon: "supports",
+    title: "Supports & Hangers",
+    text: "Good ductwork should be straight, secure, aligned and organized before the ceiling is closed.",
+  },
+  {
+    icon: "service",
+    title: "Service Access",
+    text: "Duct placement should not unnecessarily block filters, coils, dampers, motors or equipment panels.",
+  },
+  {
+    icon: "equipment",
+    title: "Equipment Changes",
+    text: "New furnaces, coils or heat pumps can require plenums, transitions, return changes or filter rack work.",
+  },
+];
+
+const ductworkInstallItems = [
+  ["airflow", "Airflow Planning", "Determine how air needs to move through the building."],
+  ["sizing", "Duct Sizing", "Select appropriate duct sizes for system conditions."],
+  ["route", "Routing", "Plan paths around structure and other trades."],
+  ["fabrication", "Fabrication", "Build transitions, plenums and fittings accurately."],
+  ["supports", "Supports", "Provide proper hangers and support."],
+  ["seal", "Sealing", "Seal joints and connections appropriately."],
+  ["insulation", "Insulation", "Insulate ducts where required."],
+  ["register", "Registers & Diffusers", "Coordinate final air-delivery points."],
+  ["review", "Final Airflow Review", "Verify the finished system operates as intended."],
+];
+
+const ductworkProblems = [
+  "Weak airflow",
+  "Uneven temperatures",
+  "Noisy vents",
+  "Undersized ducts",
+  "Poor return airflow",
+  "Loose ductwork",
+  "Leaking joints",
+  "Crushed flexible duct",
+  "Poor transitions",
+  "Unsupported duct",
+  "Condensation",
+  "Poor register placement",
+];
+
+const ductworkMaterialPanels = [
+  {
+    title: "Sheet Metal",
+    text: "Rigid ductwork can support clean routing, long-term durability and a lower risk of deformation when installed correctly.",
+    items: ["Rigid construction", "Clean routing", "Durability", "Lower deformation risk"],
+  },
+  {
+    title: "Flexible Duct",
+    text: "Flex duct can be useful in certain applications, especially short final connections, but poor installation can make it restrictive.",
+    items: ["Short final connections", "Some residential applications", "Useful routing flexibility", "Avoid crushing, kinking and excessive length"],
+  },
+];
+
+function ductworkIcon(key) {
+  const icons = {
+    airflow: `<path d="M4 8h10a3 3 0 1 0-3-3" /><path d="M4 12h16" /><path d="M4 16h12a3 3 0 1 1-3 3" />`,
+    return: `<path d="M18 7H8a4 4 0 0 0 0 8h8" /><path d="M12 11l4 4-4 4" />`,
+    duct: `<path d="M4 8h12l4 4-4 4H4Z" /><path d="M8 8v8" /><path d="M12 8v8" />`,
+    rectangular: `<rect x="4" y="7" width="16" height="10" rx="2" /><path d="M8 7v10" /><path d="M16 7v10" />`,
+    round: `<circle cx="12" cy="12" r="7" /><path d="M5 12h14" /><path d="M12 5v14" />`,
+    spiral: `<path d="M5 9c3-4 11-4 14 0" /><path d="M5 12c3-4 11-4 14 0" /><path d="M5 15c3-4 11-4 14 0" />`,
+    pressure: `<path d="M6 16a6 6 0 1 1 12 0" /><path d="M12 16l3-5" /><path d="M4 20h16" />`,
+    fitting: `<path d="M4 8h9v4h7" /><path d="M13 8v8" /><path d="M4 16h9" />`,
+    seal: `<path d="M5 12h14" /><path d="M8 8l8 8" /><path d="M8 16l8-8" />`,
+    insulation: `<path d="M5 7h14v10H5Z" /><path d="M8 7v10" /><path d="M12 7v10" /><path d="M16 7v10" />`,
+    noise: `<path d="M5 14h3l4 4V6L8 10H5Z" /><path d="M16 9c1 1 1.5 2 1.5 3s-.5 2-1.5 3" /><path d="M19 7c1.6 1.6 2.4 3.2 2.4 5S20.6 15.4 19 17" />`,
+    supports: `<path d="M7 4v6" /><path d="M17 4v6" /><path d="M5 10h14v7H5Z" /><path d="M8 20h8" />`,
+    service: `<path d="M7 4h10v16H7Z" /><path d="M10 8h4" /><path d="M10 12h4" /><path d="M10 16h2" />`,
+    equipment: `<rect x="6" y="4" width="12" height="16" rx="2" /><path d="M9 8h6" /><path d="M9 12h6" /><path d="M9 16h3" />`,
+    register: `<rect x="5" y="6" width="14" height="12" rx="2" /><path d="M8 9h8" /><path d="M8 12h8" /><path d="M8 15h8" />`,
+    sizing: `<path d="M5 19V5h14" /><path d="M5 9h5" /><path d="M5 13h8" /><path d="M13 17l5-5" /><path d="M15 12h3v3" />`,
+    route: `<path d="M4 7h6a3 3 0 0 1 3 3v4a3 3 0 0 0 3 3h4" /><path d="M17 14l3 3-3 3" />`,
+    fabrication: `<path d="M5 7h9l5 5-5 5H5Z" /><path d="M14 7v10" />`,
+    review: `<path d="M6 6h12v14H6Z" /><path d="M9 13l2 2 4-5" /><path d="M9 8h6" />`,
+  };
+
+  return `
+    <span class="ductwork-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" role="img" focusable="false">
+        ${icons[key] ?? icons.duct}
+      </svg>
+    </span>
+  `;
+}
+
+function ductworkPillList(items) {
+  return `<ul class="ductwork-pill-list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+}
+
+function ductworkFlow(items, className = "") {
+  return `
+    <div class="ductwork-flow ${className}" aria-label="${escapeHtml(items.join(" to "))}">
+      ${items
+        .map(
+          (item, index) => `
+            <span>${escapeHtml(item)}</span>
+            ${index < items.length - 1 ? `<i aria-hidden="true"></i>` : ""}
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function ductworkCardGrid(items, className = "ductwork-card-grid") {
+  return `
+    <div class="${className}">
+      ${items
+        .map(
+          (item) => `
+            <article class="ductwork-card reveal">
+              ${ductworkIcon(item.icon ?? "duct")}
+              <h3>${escapeHtml(item.title)}</h3>
+              <p>${escapeHtml(item.text)}</p>
+              ${item.items ? ductworkPillList(item.items) : ""}
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function ductworkPage(service) {
+  const related = ["commercial-hvac", "furnaces", "heat-pumps", "hrv-erv"]
+    .map((slug) => serviceBySlug.get(slug))
+    .filter(Boolean);
+  const work = servicePhotos(service);
+  const faqs = serviceFaqs(service);
+  const firstPhoto = work.photos[0] ?? installationPhotos.ductwork?.[0];
+  const secondPhoto = work.photos[3] ?? installationPhotos.ductwork?.[3] ?? firstPhoto;
+
+  return {
+    pathname: "/services/ductwork/",
+    title: "Ductwork Design & Installation GTA | Airrand",
+    description:
+      "Airrand designs, installs and modifies residential and commercial HVAC ductwork throughout the Greater Toronto Area, including spiral duct, sheet metal, supply and return systems and ventilation ductwork.",
+    current: "services",
+    image: service.image,
+    schema: [
+      businessSchema(),
+      serviceSchema(service),
+      faqSchema(faqs),
+      breadcrumbs([
+        { name: "Home", url: "/" },
+        { name: "Services", url: "/services/" },
+        { name: "Ductwork", url: "/services/ductwork/" },
+      ]),
+    ],
+    body: `
+      <section class="page-hero service-hero ductwork-hero" style="${heroImageStyle(service.image)}">
+        <div class="container">
+          <p class="eyebrow">Air Distribution</p>
+          <h1>Ductwork Design &amp; Installation in the Greater Toronto Area</h1>
+          <p>Airrand designs, installs and modifies residential and commercial duct systems with proper airflow, clean routing, strong supports and practical service access.</p>
+          ${ctaButtons()}
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-overview-section">
+        <div class="container service-detail-grid">
+          <article class="detail-copy">
+            <p class="eyebrow">Complete Air Distribution</p>
+            <h2>Ductwork is more than sheet metal between equipment and rooms.</h2>
+            <p>Airrand handles residential and commercial ductwork for HVAC systems, renovations, additions, commercial fit-outs, rooftop equipment, ventilation systems, mechanical rooms and duct modifications across the GTA.</p>
+            <ul class="check-list">
+              ${service.details.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ul>
+          </article>
+          <aside class="service-aside">
+            <h2>Common Applications</h2>
+            <ul>
+              ${service.applications.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ul>
+            <a class="button button-primary" href="${link(quoteRequestPath)}">Request a Quote</a>
+            <a class="button button-secondary" href="tel:${site.phoneTel}">Call ${site.phone}</a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-system-section">
+        <div class="container ductwork-system-grid">
+          <div>
+            <p class="eyebrow">System Performance</p>
+            <h2>Good Equipment Still Needs Good Airflow</h2>
+            <p>A furnace, air conditioner or heat pump can only perform properly if conditioned air can move through the building as intended.</p>
+            <p class="ductwork-statement">The HVAC equipment creates the heating or cooling. The ductwork has to deliver it.</p>
+          </div>
+          <div class="ductwork-flow-panel">
+            ${ductworkFlow(["Furnace / Air Handler", "Supply Duct", "Rooms", "Return Air", "Equipment"])}
+            ${ductworkPillList(ductworkSystemEffects)}
+          </div>
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-supply-return-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Airflow Basics",
+            title: "Supply Air and Return Air Work Together",
+            text:
+              "A balanced air-distribution system needs both a supply path and a return path.",
+            align: "center",
+          })}
+          <div class="ductwork-two-panel-grid">
+            <article class="ductwork-panel ductwork-supply-panel reveal">
+              ${ductworkIcon("airflow")}
+              <h3>Supply Air</h3>
+              <p>Carries conditioned air from the HVAC equipment to occupied spaces.</p>
+              ${ductworkPillList(["Floor registers", "Wall registers", "Ceiling diffusers", "Commercial supply grilles"])}
+            </article>
+            <article class="ductwork-panel ductwork-return-panel reveal">
+              ${ductworkIcon("return")}
+              <h3>Return Air</h3>
+              <p>Carries air from the building back to the furnace or air handler.</p>
+              <p class="ductwork-note">Increasing supply airflow without an adequate return-air path does not automatically improve system performance.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-sizing-section">
+        <div class="container ductwork-split">
+          <div>
+            <p class="eyebrow">Duct Design</p>
+            <h2>Duct Size Affects How Much Air Can Move</h2>
+            <p>Duct systems should be designed around required airflow and system conditions, not rule-of-thumb assumptions.</p>
+            <p class="ductwork-statement">A duct that is too small can restrict airflow. A duct that is unnecessarily large may create other design and installation challenges.</p>
+          </div>
+          <div class="ductwork-factor-grid">
+            ${ductworkSizingFactors.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-pressure-section">
+        <div class="container ductwork-pressure-grid">
+          <div>
+            <p class="eyebrow">Airflow Resistance</p>
+            <h2>What Is Static Pressure?</h2>
+            <p>Static pressure is resistance to airflow inside the HVAC system. Air has to move through filters, coils, ductwork, fittings, dampers, registers and grilles.</p>
+            <p class="ductwork-note">Static pressure should be evaluated in the context of the equipment and system design.</p>
+          </div>
+          <div class="ductwork-pressure-panel">
+            ${ductworkFlow(["Blower", "Filter", "Coil", "Ductwork", "Fittings", "Register"], "ductwork-pressure-flow")}
+            ${ductworkCardGrid(
+              [
+                { icon: "pressure", title: "Reduced Airflow", text: "Excessive resistance can reduce how much air reaches the spaces." },
+                { icon: "equipment", title: "Blower Workload", text: "The blower has to work through the actual installed system." },
+                { icon: "noise", title: "Noise & Comfort", text: "Resistance can contribute to sound, uneven comfort and equipment issues." },
+              ],
+              "ductwork-mini-card-grid",
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-fitting-section">
+        <div class="container ductwork-fitting-grid">
+          <div>
+            <p class="eyebrow">Airflow Detail</p>
+            <h2>Duct Fittings Are Part of the Design</h2>
+            <p>Airflow changes direction through elbows, tees, wyes, transitions, reducers, boots and takeoffs. Poor fitting design can create unnecessary resistance and turbulence.</p>
+            ${ductworkPillList(["Elbows", "Tees", "Wyes", "Transitions", "Reducers", "Boots", "Takeoffs"])}
+          </div>
+          <div class="ductwork-comparison">
+            <article>
+              <strong>Abrupt Transition</strong>
+              <span>More turbulent airflow</span>
+            </article>
+            <article>
+              <strong>Gradual Transition</strong>
+              <span>Smoother airflow path where the application allows</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-transition-section">
+        <div class="container ductwork-photo-split">
+          <div>
+            <p class="eyebrow">Fabrication</p>
+            <h2>Good Transitions Should Match the Equipment and Duct System</h2>
+            <p>Transitions connect different duct sizes, shapes, equipment openings, plenums and branch systems. Good transitions should change size logically, support airflow, fit the available space, maintain service access and look deliberate.</p>
+          </div>
+          ${
+            secondPhoto
+              ? `<button class="ductwork-photo-card" type="button" data-lightbox-src="${asset(secondPhoto.image)}" data-lightbox-title="${escapeHtml(secondPhoto.category)}" data-lightbox-alt="${escapeHtml(secondPhoto.alt)}">
+                  <img src="${asset(secondPhoto.image)}" alt="${escapeHtml(secondPhoto.alt)}" loading="lazy" width="760" height="620">
+                  <span>Real Airrand sheet-metal work</span>
+                </button>`
+              : ""
+          }
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-types-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Duct Types",
+            title: "Rectangular, Round and Spiral Ductwork",
+            text:
+              "The appropriate duct type depends on space, airflow, appearance, application and project requirements.",
+            align: "center",
+          })}
+          ${ductworkCardGrid(ductworkDuctTypes, "ductwork-type-grid")}
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-spiral-section">
+        <div class="container ductwork-photo-split ductwork-photo-split-reverse">
+          ${
+            firstPhoto
+              ? `<button class="ductwork-photo-card" type="button" data-lightbox-src="${asset(firstPhoto.image)}" data-lightbox-title="${escapeHtml(firstPhoto.category)}" data-lightbox-alt="${escapeHtml(firstPhoto.alt)}">
+                  <img src="${asset(firstPhoto.image)}" alt="${escapeHtml(firstPhoto.alt)}" loading="lazy" width="760" height="620">
+                  <span>Commercial ductwork from Airrand's gallery</span>
+                </button>`
+              : ""
+          }
+          <div>
+            <p class="eyebrow">Commercial Ductwork</p>
+            <h2>Spiral Ductwork for Clean Commercial Installations</h2>
+            <p>Spiral duct can provide strong rigid construction, a clean finished appearance, an efficient round airflow path and good suitability for exposed ceilings or long straight duct runs.</p>
+            <blockquote class="ductwork-quote">Exposed ductwork becomes part of the finished space, so workmanship matters.</blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-res-com-section">
+        <div class="container ductwork-two-panel-grid">
+          <article class="ductwork-panel reveal">
+            <p class="eyebrow">Residential</p>
+            <h2>Residential Ductwork Has to Fit the House</h2>
+            <p>Residential ductwork has to work with the real framing, finished areas, equipment location and comfort goals.</p>
+            ${ductworkPillList(ductworkResidentialProjects)}
+          </article>
+          <article class="ductwork-panel ductwork-commercial-panel reveal">
+            <p class="eyebrow">Commercial</p>
+            <h2>Commercial Air Distribution Requires Coordination</h2>
+            <p>Commercial ductwork has to work mechanically while fitting around structure, electrical, plumbing, fire protection and architectural requirements.</p>
+            ${ductworkPillList(ductworkCommercialScope)}
+            <a class="button button-secondary" href="${link("/commercial/")}">View Commercial HVAC</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-project-types-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Project Types",
+            title: "New Duct Systems and Existing-System Modifications",
+            text:
+              "Modifying one branch can sometimes affect the rest of the system, so changes should be reviewed as part of the whole air-distribution layout.",
+            align: "center",
+          })}
+          ${ductworkCardGrid(ductworkNewModified, "ductwork-two-panel-grid")}
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-comfort-section">
+        <div class="container ductwork-card-grid">
+          <article class="ductwork-card reveal">
+            ${ductworkIcon("return")}
+            <p class="eyebrow">Return System</p>
+            <h2>Return Air Is Often Overlooked</h2>
+            <p>A good supply-air system still needs air to return to the furnace or air handler. Limited return capacity, closed room doors, poor return locations, undersized returns and restrictive grilles can all matter.</p>
+          </article>
+          <article class="ductwork-card reveal">
+            ${ductworkIcon("airflow")}
+            <p class="eyebrow">Comfort Problems</p>
+            <h2>Uneven Temperatures Can Be an Air-Distribution Problem</h2>
+            <p>Hot and cold rooms can be related to duct sizing, register location, return-air path, balancing, insulation, building load, equipment capacity or duct leakage.</p>
+          </article>
+          <article class="ductwork-card reveal">
+            ${ductworkIcon("register")}
+            <p class="eyebrow">Air Balancing</p>
+            <h2>Air Has to Be Distributed Where It Is Needed</h2>
+            <p>Dampers and branch design can influence how airflow is distributed between areas. Comfort problems should be evaluated as part of the complete HVAC system.</p>
+            ${ductworkFlow(["Main Trunk", "Zone A", "Zone B", "Zone C"], "ductwork-zone-flow")}
+          </article>
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-workmanship-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Workmanship",
+            title: "Ductwork Details That Affect the Finished System",
+            text:
+              "Clean ductwork is planned for airflow, supports, sealing, insulation, noise, access and future service.",
+            align: "center",
+          })}
+          ${ductworkCardGrid(ductworkWorkmanshipItems)}
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-install-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Installation Standard",
+            title: "What Proper Ductwork Installation Actually Includes",
+            text:
+              "Air distribution is planning, sizing, fabrication, routing, support and final review working together.",
+            align: "center",
+          })}
+          <div class="ductwork-install-grid">
+            ${ductworkInstallItems
+              .map(
+                ([icon, title, text]) => `
+                  <article class="ductwork-install-card reveal">
+                    ${ductworkIcon(icon)}
+                    <h3>${escapeHtml(title)}</h3>
+                    <p>${escapeHtml(text)}</p>
+                  </article>
+                `,
+              )
+              .join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-problems-section">
+        <div class="container ductwork-problems-grid">
+          <div>
+            <p class="eyebrow">Diagnostics</p>
+            <h2>Common Ductwork Problems</h2>
+            <p>Airflow issues should be diagnosed before assuming the equipment itself is the problem.</p>
+          </div>
+          <div class="ductwork-problem-list">
+            ${ductworkProblems.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="section ductwork-section ductwork-material-section">
+        <div class="container ductwork-material-grid">
+          <article class="ductwork-myth-panel">
+            <p class="eyebrow">Capacity Myth</p>
+            <h2>Bigger Ductwork Does Not Create More Heating or Cooling</h2>
+            <p>Ductwork distributes the capacity produced by the HVAC equipment. Increasing duct size does not increase the furnace or air conditioner's rated output. The duct system should be designed to deliver the required airflow appropriately.</p>
+          </article>
+          ${ductworkMaterialPanels
+            .map(
+              (panel) => `
+                <article class="ductwork-panel reveal">
+                  <p class="eyebrow">Duct Materials</p>
+                  <h3>${escapeHtml(panel.title)}</h3>
+                  <p>${escapeHtml(panel.text)}</p>
+                  ${ductworkPillList(panel.items)}
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+      </section>
+
+      <section class="section gallery-section ductwork-gallery-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Recent Work",
+            title: "Recent Ductwork Installations",
+            text:
+              "A look at recent Airrand residential and commercial ductwork installations throughout the GTA.",
+          })}
+          ${workSlider(work.photos, "Recent ductwork installations")}
+        </div>
+      </section>
+
+      ${standardsStrip()}
+      ${faqSection(service, faqs)}
+
+      <section class="section muted-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Related Services",
+            title: "Connected HVAC services from Airrand.",
+            text:
+              "Ductwork often connects with equipment replacement, heat pumps, furnaces, ventilation and commercial mechanical work.",
+          })}
+          ${servicesGrid(related)}
+        </div>
+      </section>
+      ${serviceAreaSection()}
+      ${finalCta({
+        title: "Need ductwork help in the GTA?",
+        text:
+          "Share the property type, location, equipment photos and ductwork concern so Airrand can recommend the right next step.",
+      })}
+    `,
+  };
+}
+
 const hrvApplications = [
   {
     icon: "home",
@@ -8276,6 +8928,9 @@ function servicePage(service) {
   }
   if (service.slug === "humidifiers") {
     return humidifiersPage(service);
+  }
+  if (service.slug === "ductwork") {
+    return ductworkPage(service);
   }
   if (service.slug === "hrv-erv") {
     return hrvErvPage(service);
