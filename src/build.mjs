@@ -32,6 +32,7 @@ const asset = (name) => `/assets/${name}`;
 const pageUrl = (pathname) => new URL(pathname, `${site.baseUrl}/`).toString();
 const link = (pathname) => pathname;
 const quoteRequestPath = "/contact/#quote-form";
+const serviceHref = (slug) => (slug === "commercial-hvac" ? "/commercial/" : `/services/${slug}/`);
 
 const mobileHeroSourceImages = new Set([
   "hero-hvac-work.webp",
@@ -212,13 +213,12 @@ function sectionHeading({ eyebrow, title, text, align = "left" }) {
 function header(current = "home") {
   const navServices = navServiceGroups
     .map(([label, slug]) => {
-      const service = serviceBySlug.get(slug);
-      return `<a href="${link(`/services/${slug}/`)}">${escapeHtml(label)}</a>`;
+      return `<a href="${link(serviceHref(slug))}">${escapeHtml(label)}</a>`;
     })
     .join("");
 
   const mobileServices = navServiceGroups
-    .map(([label, slug]) => `<a href="${link(`/services/${slug}/`)}">${escapeHtml(label)}</a>`)
+    .map(([label, slug]) => `<a href="${link(serviceHref(slug))}">${escapeHtml(label)}</a>`)
     .join("");
 
   return `
@@ -275,7 +275,7 @@ function header(current = "home") {
 function footer() {
   const serviceLinks = services
     .slice(0, 10)
-    .map((service) => `<a href="${link(`/services/${service.slug}/`)}">${escapeHtml(service.title)}</a>`)
+    .map((service) => `<a href="${link(serviceHref(service.slug))}">${escapeHtml(service.title)}</a>`)
     .join("");
   const areaList = serviceAreas.map((area) => `<span>${escapeHtml(area)}</span>`).join("");
 
@@ -352,7 +352,7 @@ function trustBar() {
 
 function serviceCard(service) {
   return `
-    <a class="service-card reveal" href="${link(`/services/${service.slug}/`)}">
+    <a class="service-card reveal" href="${link(serviceHref(service.slug))}">
       <span class="service-card-image">
         <img src="${asset(service.image)}" alt="${escapeHtml(service.title)} service equipment" loading="lazy" width="640" height="480">
       </span>
