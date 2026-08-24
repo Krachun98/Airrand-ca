@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "hrv-erv-image-20260823";
+const assetVersion = "hrv-erv-controls-layout-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -6429,12 +6429,896 @@ function servicesPage() {
   };
 }
 
+const hrvApplications = [
+  {
+    icon: "home",
+    title: "Newer Homes",
+    text: "Tighter construction can benefit from controlled fresh-air ventilation.",
+  },
+  {
+    icon: "ducts",
+    title: "Major Renovations",
+    text: "Air-sealing and envelope upgrades can change how a home naturally exchanges air.",
+  },
+  {
+    icon: "fresh",
+    title: "Indoor Air Quality Upgrades",
+    text: "Ventilation can help replace stale indoor air with controlled outdoor air.",
+  },
+  {
+    icon: "space",
+    title: "Finished Basements",
+    text: "Additional occupied areas can increase ventilation requirements.",
+  },
+  {
+    icon: "people",
+    title: "High Occupancy Homes",
+    text: "More people generally produce more moisture, odors and indoor contaminants.",
+  },
+  {
+    icon: "controls",
+    title: "Limited Natural Ventilation",
+    text: "Mechanical ventilation is more predictable than relying on leakage or open windows.",
+  },
+];
+
+const hrvDuctRoutingItems = [
+  ["intake", "Intake Location", "Fresh air starts with the right exterior location."],
+  ["exhaust", "Exhaust Location", "Stale air needs a proper discharge path."],
+  ["ducts", "Duct Length", "Longer runs add resistance and planning requirements."],
+  ["ducts", "Number of Fittings", "Turns and transitions affect airflow."],
+  ["insulation", "Insulation", "Cold-side ducting may need protection."],
+  ["humidity", "Condensation Control", "Moisture and cold surfaces have to be considered."],
+  ["selection", "Supports", "Ductwork should be secured and serviceable."],
+  ["fan", "Airflow Resistance", "The unit has to move air through the real route."],
+  ["location", "Service Access", "Filters, core and fans need room for maintenance."],
+];
+
+const hrvControlItems = [
+  ["fan", "Low-Speed Ventilation", "Steady background air exchange"],
+  ["controls", "Intermittent Operation", "Scheduled ventilation cycles"],
+  ["fresh", "High-Speed Boost", "Extra airflow when needed"],
+  ["controls", "Timer Controls", "Temporary run periods"],
+  ["humidity", "Bathroom Boost", "Humidity and odor response"],
+  ["humidity", "Humidity-Based Control", "Model-dependent moisture settings"],
+  ["controls", "Wall Controller", "Simple homeowner interface"],
+  ["unit", "HVAC Integration", "Coordinated with the air handler"],
+];
+
+const hrvInstallItems = [
+  ["selection", "Equipment Selection", "Choose equipment suitable for the building and application."],
+  ["location", "Unit Location", "Provide service access and appropriate installation conditions."],
+  ["intake", "Fresh-Air Intake", "Route outdoor intake appropriately."],
+  ["exhaust", "Exhaust-Air Termination", "Provide appropriate exhaust routing and termination."],
+  ["ducts", "Ductwork", "Size and route ventilation ductwork appropriately."],
+  ["insulation", "Insulation", "Insulate cold-side ductwork where required."],
+  ["drain", "Drainage", "Provide condensate drainage where applicable."],
+  ["controls", "Controls", "Configure system controls and boost functions."],
+  ["balance", "Balancing", "Set and verify supply and exhaust airflow."],
+];
+
+const hrvProblems = [
+  ["fan", "Unit not operating"],
+  ["fresh", "Weak airflow"],
+  ["noise", "Excessive noise"],
+  ["snow", "Frozen core"],
+  ["drain", "Water leaking"],
+  ["filter", "Dirty filters"],
+  ["intake", "Blocked intake / exhaust"],
+  ["controls", "Control problems"],
+  ["balance", "Imbalanced airflow"],
+  ["humidity", "Condensation issues"],
+  ["fan", "Fan problems"],
+  ["ducts", "Poor fresh-air distribution"],
+];
+
+const hrvFaqs = [
+  {
+    question: "What is the difference between an HRV and ERV?",
+    answer:
+      "An HRV primarily transfers heat between outgoing stale air and incoming fresh air. An ERV performs the same basic ventilation function but can also transfer some moisture between the air streams.",
+  },
+  {
+    question: "Do I need an HRV or ERV?",
+    answer:
+      "The right choice depends on the home, humidity conditions, climate, occupancy and ventilation requirements. Airrand can review the building and explain which approach makes sense.",
+  },
+  {
+    question: "Does an HRV heat my house?",
+    answer:
+      "No. An HRV recovers some heat from outgoing indoor air to temper incoming outdoor air, but it does not heat the incoming air to indoor temperature by itself.",
+  },
+  {
+    question: "Does an ERV control humidity?",
+    answer:
+      "An ERV can transfer some moisture between air streams, but it is not a dedicated humidifier or dehumidifier. Proper humidity control equipment may still be needed.",
+  },
+  {
+    question: "Should an HRV run all the time?",
+    answer:
+      "Operating strategy depends on the equipment, building and ventilation requirements. Some systems use continuous low-speed ventilation while others use scheduled or boost operation.",
+  },
+  {
+    question: "Why is my HRV leaking water?",
+    answer:
+      "Drainage, condensation, freezing, blocked components or maintenance issues can contribute to water problems. The equipment, drain route and operating conditions should be checked.",
+  },
+  {
+    question: "Why is my HRV freezing?",
+    answer:
+      "Cold-weather frost can occur in the recovery core. Different manufacturers use different defrost strategies, so the equipment and installation need to be reviewed together.",
+  },
+  {
+    question: "How often should HRV filters be cleaned?",
+    answer:
+      "Maintenance intervals depend on the equipment, environment and usage. Filters, the core, drain pan, exterior hoods and fans should be inspected periodically.",
+  },
+  {
+    question: "Can an HRV work with my existing furnace?",
+    answer:
+      "Often yes, but the best integration depends on the duct system, furnace or air handler, controls, house layout and ventilation goals.",
+  },
+  {
+    question: "Does an HRV replace bathroom fans?",
+    answer:
+      "Not universally. Ventilation design varies, and local requirements and system design determine the correct exhaust strategy for bathrooms and other rooms.",
+  },
+  {
+    question: "Can Airrand balance an HRV / ERV?",
+    answer:
+      "Yes. Airflow setup and balancing are part of proper ventilation work, because supply and exhaust flows need to be set appropriately for the system to operate as intended.",
+  },
+];
+
+const hrvIcons = {
+  fresh: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 8h10a3 3 0 1 0-3-3" />
+      <path d="M4 12h16" />
+      <path d="M4 16h12a3 3 0 1 1-3 3" />
+    </svg>
+  `,
+  exhaust: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M5 6h9" />
+      <path d="M5 12h14" />
+      <path d="M5 18h9" />
+      <path d="M17 8l4 4-4 4" />
+    </svg>
+  `,
+  home: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 11l8-7 8 7" />
+      <path d="M6 10v10h12V10" />
+      <path d="M10 20v-6h4v6" />
+    </svg>
+  `,
+  unit: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="5" y="4" width="14" height="16" rx="2" />
+      <path d="M8 8h8" />
+      <path d="M8 12h8" />
+      <path d="M8 16h5" />
+    </svg>
+  `,
+  heat: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M8 19c-1.4-2.4 1.4-4 0-6.3C7 11 7.4 9.2 9.2 8" />
+      <path d="M13 19c-1.4-2.4 1.4-4 0-6.3C12 11 12.4 9.2 14.2 8" />
+      <path d="M18 19c-1.4-2.4 1.4-4 0-6.3C17 11 17.4 9.2 19.2 8" />
+    </svg>
+  `,
+  humidity: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M12 3s6 6.2 6 11a6 6 0 0 1-12 0c0-4.8 6-11 6-11z" />
+      <path d="M9 15c1.2 1.4 4 1.4 6 0" />
+    </svg>
+  `,
+  ducts: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 7h10v5h6" />
+      <path d="M4 17h7v-5" />
+      <path d="M14 4v6" />
+      <path d="M20 9v6" />
+    </svg>
+  `,
+  fan: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <circle cx="12" cy="12" r="2" />
+      <path d="M12 10c-1-4 2-6 5-5 1.4 2.7 0 5.2-3.7 6" />
+      <path d="M10.4 13.2c-4 1.2-6.2-1.6-5.2-4.6 3-.9 5.1.8 6.3 4.1" />
+      <path d="M13.5 13.1c3 2.8 2.1 6.3-.8 7.3-2.4-2-2.2-4.8.2-7.2" />
+    </svg>
+  `,
+  filter: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M5 5h14l-6 7v5l-2 2v-7z" />
+      <path d="M8 9h8" />
+    </svg>
+  `,
+  core: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="5" y="5" width="14" height="14" rx="2" />
+      <path d="M8 8l8 8" />
+      <path d="M16 8l-8 8" />
+    </svg>
+  `,
+  drain: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M6 5h12" />
+      <path d="M8 5v6a4 4 0 0 0 8 0V5" />
+      <path d="M12 15v5" />
+      <path d="M9 20h6" />
+    </svg>
+  `,
+  controls: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="7" y="3" width="10" height="18" rx="2" />
+      <path d="M10 7h4" />
+      <circle cx="12" cy="13" r="2" />
+    </svg>
+  `,
+  balance: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M12 4v16" />
+      <path d="M5 8h14" />
+      <path d="M7 8l-3 6h6z" />
+      <path d="M17 8l-3 6h6z" />
+    </svg>
+  `,
+  pressure: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M5 16a7 7 0 0 1 14 0" />
+      <path d="M12 16l4-5" />
+      <path d="M8 20h8" />
+    </svg>
+  `,
+  intake: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 12h12" />
+      <path d="M12 8l4 4-4 4" />
+      <path d="M20 6v12" />
+    </svg>
+  `,
+  commercial: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 20h16" />
+      <path d="M6 20V6h8v14" />
+      <path d="M14 10h4v10" />
+      <path d="M8 9h3" />
+      <path d="M8 13h3" />
+    </svg>
+  `,
+  people: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+      <path d="M4 20a5 5 0 0 1 10 0" />
+      <path d="M17 11a2.5 2.5 0 1 0 0-5" />
+      <path d="M16 15a4.5 4.5 0 0 1 4 5" />
+    </svg>
+  `,
+  space: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 20h16" />
+      <path d="M6 20V8l6-4 6 4v12" />
+      <path d="M9 20v-5h6v5" />
+      <path d="M8 11h2" />
+      <path d="M14 11h2" />
+    </svg>
+  `,
+  snow: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M12 3v18" />
+      <path d="M5 7l14 10" />
+      <path d="M19 7L5 17" />
+      <path d="M8 3l4 4 4-4" />
+      <path d="M8 21l4-4 4 4" />
+    </svg>
+  `,
+  noise: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 14h4l5 4V6L8 10H4z" />
+      <path d="M16 9c1 1.2 1 4.8 0 6" />
+      <path d="M19 7c2 2.8 2 7.2 0 10" />
+    </svg>
+  `,
+  insulation: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="5" y="5" width="14" height="14" rx="2" />
+      <path d="M8 8h8" />
+      <path d="M8 12h8" />
+      <path d="M8 16h8" />
+    </svg>
+  `,
+  location: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M12 21s6-5.2 6-11a6 6 0 0 0-12 0c0 5.8 6 11 6 11z" />
+      <circle cx="12" cy="10" r="2" />
+    </svg>
+  `,
+  selection: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M5 6h14" />
+      <path d="M5 12h14" />
+      <path d="M5 18h14" />
+      <path d="M9 6l2 2 4-4" />
+    </svg>
+  `,
+};
+
+function hrvIcon(key) {
+  return hrvIcons[key] ?? hrvIcons.unit;
+}
+
+function hrvIconCardGrid(items, className = "hrv-card-grid") {
+  return `
+    <div class="${className}">
+      ${items
+        .map(
+          (item) => `
+            <article class="hrv-icon-card reveal">
+              <span class="hrv-icon" aria-hidden="true">${hrvIcon(item.icon)}</span>
+              <h3>${escapeHtml(item.title)}</h3>
+              <p>${escapeHtml(item.text)}</p>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function hrvLinearFlow(items) {
+  return `
+    <div class="hrv-linear-flow" aria-label="${escapeHtml(items.join(" to "))}">
+      ${items
+        .map(
+          (item, index) => `
+            <div class="hrv-flow-node">
+              <span>${escapeHtml(item)}</span>
+            </div>
+            ${index < items.length - 1 ? `<span class="hrv-flow-arrow" aria-hidden="true"></span>` : ""}
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function hrvAirflowDiagram() {
+  const paths = [
+    ["fresh", "Outdoor Fresh Air", "enters the ventilation unit"],
+    ["home", "Fresh Air to Home", "tempered fresh air is supplied indoors"],
+    ["exhaust", "Stale Air from Home", "stale indoor air returns to the unit"],
+    ["intake", "Exhaust Air Outdoors", "stale air is discharged outside"],
+  ];
+  const renderPath = ([iconKey, title, text], index) => `
+    <article class="hrv-path-card ${index >= 2 ? "hrv-path-card-exhaust" : ""}">
+      <span class="hrv-icon" aria-hidden="true">${hrvIcon(iconKey)}</span>
+      <h3>${escapeHtml(title)}</h3>
+      <p>${escapeHtml(text)}</p>
+    </article>
+  `;
+
+  return `
+    <div class="hrv-airflow-diagram" aria-label="HRV and ERV airflow paths">
+      <div class="hrv-path-grid">
+        ${paths.slice(0, 2).map(renderPath).join("")}
+      </div>
+      <div class="hrv-core-row">
+        <span aria-hidden="true"></span>
+        <div class="hrv-core">
+          <span class="hrv-icon" aria-hidden="true">${hrvIcon("core")}</span>
+          <strong>Recovery Core</strong>
+          <small>Air streams stay separate while energy transfers through the core.</small>
+        </div>
+        <span aria-hidden="true"></span>
+      </div>
+      <div class="hrv-path-grid">
+        ${paths.slice(2).map((path, index) => renderPath(path, index + 2)).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function hrvControlGrid() {
+  return `
+    <div class="hrv-control-grid" aria-label="HRV and ERV control options">
+      ${hrvControlItems
+        .map(
+          ([iconKey, title, text]) => `
+            <article class="hrv-control-card">
+              <span class="hrv-mini-icon" aria-hidden="true">${hrvIcon(iconKey)}</span>
+              <strong>${escapeHtml(title)}</strong>
+              <small>${escapeHtml(text)}</small>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function hrvRoutingGrid() {
+  return `
+    <div class="hrv-routing-grid" aria-label="HRV and ERV duct routing considerations">
+      ${hrvDuctRoutingItems
+        .map(
+          ([iconKey, title, text]) => `
+            <article class="hrv-routing-card">
+              <span class="hrv-mini-icon" aria-hidden="true">${hrvIcon(iconKey)}</span>
+              <div>
+                <strong>${escapeHtml(title)}</strong>
+                <small>${escapeHtml(text)}</small>
+              </div>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function hrvWorkPhotos() {
+  return [
+    ...(installationPhotos.ductwork ?? []).slice(0, 4),
+    ...(installationPhotos["commercial-hvac"] ?? []).slice(0, 2),
+    ...(installationPhotos.furnaces ?? []).slice(0, 2),
+  ].map((photo) => ({
+    ...photo,
+    category: photo.category === "Furnaces" ? "Mechanical Room" : photo.category,
+    filter: "ductwork",
+  }));
+}
+
+function hrvErvPage(service) {
+  const related = ["ductwork", "humidifiers", "furnaces", "commercial-hvac"]
+    .map((slug) => serviceBySlug.get(slug))
+    .filter(Boolean);
+  const work = hrvWorkPhotos();
+
+  return {
+    pathname: `/services/${service.slug}/`,
+    title: "HRV & ERV Installation & Service GTA | Airrand",
+    description:
+      "Airrand installs and services HRV and ERV whole-home ventilation systems throughout the Greater Toronto Area, including fresh-air ducting, controls, balancing and HVAC integration.",
+    current: "services",
+    image: service.image,
+    schema: [
+      businessSchema(),
+      serviceSchema(service),
+      faqSchema(hrvFaqs),
+      breadcrumbs([
+        { name: "Home", url: "/" },
+        { name: "Services", url: "/services/" },
+        { name: service.title, url: `/services/${service.slug}/` },
+      ]),
+    ],
+    body: `
+      <section class="page-hero service-hero hrv-hero" style="${heroImageStyle(service.image)}">
+        <div class="container">
+          <p class="eyebrow">Ventilation Service</p>
+          <h1>HRV &amp; ERV Ventilation Services in the Greater Toronto Area</h1>
+          <p>Airrand installs and services HRV and ERV systems that bring controlled fresh air into homes and buildings while exhausting stale indoor air.</p>
+          <div class="hrv-hero-points" aria-label="HRV and ERV service focus">
+            <span>Fresh air</span>
+            <span>Controlled exhaust</span>
+            <span>Energy recovery</span>
+          </div>
+          ${ctaButtons()}
+        </div>
+      </section>
+
+      <section class="section hrv-section hrv-overview-section">
+        <div class="container service-detail-grid">
+          <article class="detail-copy">
+            <p class="eyebrow">What Airrand Handles</p>
+            <h2>Whole-home ventilation work with equipment, ductwork, controls and balancing in mind.</h2>
+            <p>${escapeHtml(service.intro)} The goal is not just to mount a ventilation box near the furnace. The full system has to move air correctly, exhaust stale air properly and remain serviceable after installation.</p>
+            <ul class="check-list">
+              ${service.details.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ul>
+          </article>
+          <aside class="service-aside hrv-aside">
+            <h2>Common Applications</h2>
+            <ul>
+              ${service.applications.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ul>
+            <a class="button button-primary" href="${link("/contact/#quote-form")}">Book Ventilation Service</a>
+            <a class="button button-secondary" href="tel:${site.phoneTel}">Call ${site.phone}</a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section hrv-section hrv-need-section">
+        <div class="container hrv-split">
+          <article>
+            <p class="eyebrow">Whole-Home Ventilation</p>
+            <h2>Tighter Homes Need Controlled Fresh Air</h2>
+            <p>Modern GTA homes are often built or renovated to reduce uncontrolled air leakage. That can improve energy performance, but stale indoor air may not naturally escape as quickly.</p>
+            <p>A mechanical ventilation system can provide fresh outdoor air, controlled exhaust and more predictable air exchange without relying on random leakage through the building envelope.</p>
+          </article>
+          <aside class="hrv-visual-panel">
+            ${hrvLinearFlow(["Outdoor Fresh Air", "Home", "Stale Air Exhausted"])}
+          </aside>
+        </div>
+      </section>
+
+      <section class="section hrv-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "How It Works",
+            title: "Fresh Air In. Stale Air Out.",
+            text:
+              "HRV and ERV systems move fresh outdoor air and stale indoor air through separate paths. The two air streams remain separated while energy is transferred through the recovery core.",
+            align: "center",
+          })}
+          ${hrvAirflowDiagram()}
+        </div>
+      </section>
+
+      <section class="section hrv-section hrv-definition-section">
+        <div class="container hrv-two-panel-grid">
+          <article class="hrv-feature-panel reveal">
+            <p class="eyebrow">Heat Recovery</p>
+            <h2>What Is an HRV?</h2>
+            <p>A Heat Recovery Ventilator exchanges stale indoor air with fresh outdoor air while transferring heat between the two air streams.</p>
+            <div class="hrv-mini-transfer">
+              ${hrvLinearFlow(["Warm Indoor Exhaust", "Heat Transfer", "Cold Outdoor Fresh Air"])}
+            </div>
+            <ul class="check-list">
+              <li>Warm indoor exhaust air transfers heat to colder incoming outdoor air in winter.</li>
+              <li>The air streams remain separated.</li>
+              <li>The incoming air is tempered, not fully heated by the HRV alone.</li>
+            </ul>
+          </article>
+          <article class="hrv-feature-panel hrv-feature-panel-alt reveal">
+            <p class="eyebrow">Energy Recovery</p>
+            <h2>What Is an ERV?</h2>
+            <p>An Energy Recovery Ventilator performs the same basic ventilation function, but it can transfer both heat and some moisture between the incoming and outgoing air streams.</p>
+            <div class="hrv-mini-transfer hrv-mini-transfer-alt">
+              ${hrvLinearFlow(["Fresh Air", "Heat + Some Moisture", "Exhaust Air"])}
+            </div>
+            <ul class="check-list">
+              <li>Moisture transfer can help reduce how much moisture is lost or introduced through ventilation.</li>
+              <li>An ERV is not a humidifier or dehumidifier.</li>
+              <li>Moisture performance depends on the building and operating conditions.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section hrv-section hrv-comparison-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "System Comparison",
+            title: "HRV vs. ERV",
+            text:
+              "Neither system is automatically better. The right choice depends on the building, climate, humidity conditions and ventilation requirements.",
+            align: "center",
+          })}
+          <div class="hrv-comparison-grid">
+            <article class="hrv-comparison-card reveal">
+              <span class="hrv-icon" aria-hidden="true">${hrvIcon("heat")}</span>
+              <p class="eyebrow">HRV</p>
+              <h3>Transfers primarily heat</h3>
+              <ul class="check-list">
+                ${inlineList(["Winter ventilation", "Indoor humidity levels", "Building characteristics", "Climate", "Occupancy"])}
+              </ul>
+            </article>
+            <article class="hrv-comparison-card hrv-comparison-card-erv reveal">
+              <span class="hrv-icon" aria-hidden="true">${hrvIcon("humidity")}</span>
+              <p class="eyebrow">ERV</p>
+              <h3>Transfers heat + some moisture</h3>
+              <ul class="check-list">
+                ${inlineList(["Humidity management", "Building characteristics", "Occupancy", "Seasonal conditions", "Ventilation load"])}
+              </ul>
+            </article>
+          </div>
+          <div class="section-action">
+            <a class="button button-primary" href="${link("/contact/#quote-form")}">Ask Airrand Which System Fits Your Home</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section hrv-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Applications",
+            title: "When a Ventilation System Makes Sense",
+            text:
+              "Controlled ventilation can be useful when the building, occupancy or renovation work changes how the home exchanges air.",
+            align: "center",
+          })}
+          ${hrvIconCardGrid(hrvApplications)}
+        </div>
+      </section>
+
+      <section class="section hrv-section hrv-duct-section">
+        <div class="container hrv-two-panel-grid">
+          <article class="hrv-feature-panel reveal">
+            <p class="eyebrow">Duct Design</p>
+            <h2>Fresh-Air Duct Routing Matters</h2>
+            <p>HRV and ERV performance depends heavily on how the duct system is designed. A good ventilation unit connected to poor ductwork will not perform like a good ventilation system.</p>
+            ${hrvRoutingGrid()}
+          </article>
+          <article class="hrv-feature-panel hrv-feature-panel-alt reveal">
+            <p class="eyebrow">Exterior Terminations</p>
+            <h2>Fresh-Air Intake and Exhaust Placement Matter</h2>
+            <p>Fresh-air intake and stale-air exhaust locations should be planned so exhaust is not immediately drawn back into the intake. Weather protection, serviceability, obstructions and manufacturer requirements all matter.</p>
+            <ul class="check-list">
+              ${inlineList(["Suitable wall or roof locations", "Clear exterior hoods", "Weather protection", "Serviceable routing", "Manufacturer and code requirements"])}
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section hrv-section hrv-balance-section">
+        <div class="container hrv-split">
+          <article>
+            <p class="eyebrow">Airflow Balancing</p>
+            <h2>A Ventilation System Has to Be Balanced</h2>
+            <p>HRV and ERV systems move two separate air streams: fresh air supplied and stale air exhausted. Those flows should be set appropriately so the system operates as intended.</p>
+            <p>Improper balance can affect building pressure, comfort, system performance, air distribution and ventilation effectiveness.</p>
+            <strong class="hrv-statement">Installing the equipment is only part of the job. Airflow setup matters.</strong>
+          </article>
+          <aside class="hrv-balance-visual" aria-label="Balanced supply and exhaust airflow">
+            <div>
+              <span>Supply Air</span>
+              <strong>100%</strong>
+            </div>
+            <span class="hrv-balance-center" aria-hidden="true">${hrvIcon("balance")}</span>
+            <div>
+              <span>Exhaust Air</span>
+              <strong>100%</strong>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section hrv-section hrv-pressure-section">
+        <div class="container">
+          ${sectionHeading({
+            title: "Balanced Ventilation vs. Pressure Problems",
+            text: "The explanation stays high level, but the idea is important: supply and exhaust should be considered together.",
+            align: "center",
+          })}
+          <div class="hrv-pressure-grid">
+            ${[
+              ["balance", "Balanced", "Supply and exhaust are appropriately matched."],
+              ["exhaust", "Too Much Exhaust", "Can contribute to negative building pressure."],
+              ["fresh", "Too Much Supply", "Can contribute to positive building pressure."],
+            ]
+              .map(
+                ([iconKey, title, text]) => `
+                  <article class="hrv-pressure-card reveal">
+                    <span class="hrv-icon" aria-hidden="true">${hrvIcon(iconKey)}</span>
+                    <h3>${escapeHtml(title)}</h3>
+                    <p>${escapeHtml(text)}</p>
+                  </article>
+                `,
+              )
+              .join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="section hrv-section">
+        <div class="container hrv-two-panel-grid">
+          <article class="hrv-feature-panel reveal">
+            <p class="eyebrow">System Integration</p>
+            <h2>HRV / ERV Integration With Your HVAC System</h2>
+            <p>Ventilation systems can be configured differently depending on the building. The best arrangement depends on existing ductwork, furnace or air handler, house layout, ventilation goals and equipment design.</p>
+            <ul class="check-list">
+              ${inlineList(["Dedicated ventilation ductwork", "Partial connection to central ductwork", "Connection to return-air system", "Independent supply and exhaust points"])}
+            </ul>
+          </article>
+          <article class="hrv-feature-panel reveal">
+            <p class="eyebrow">Controls</p>
+            <h2>Does the Furnace Blower Need to Run?</h2>
+            <p>Depending on how the ventilation system is connected, the central blower may need to operate during ventilation cycles. Other systems may use more independent ducting.</p>
+            <p>The correct control strategy depends on duct configuration, equipment, controls and air distribution requirements.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section hrv-section hrv-controls-section">
+        <div class="container hrv-two-panel-grid">
+          <article class="hrv-feature-panel reveal">
+            <p class="eyebrow">Controls</p>
+            <h2>Ventilation Should Match How the Home Is Used</h2>
+            <p>Control options vary by model and installation. HRV and ERV controls may support continuous low-speed ventilation, intermittent operation, high-speed boost, timer controls, bathroom boost, humidity-based operation or HVAC control integration.</p>
+            ${hrvControlGrid()}
+          </article>
+          <article class="hrv-feature-panel hrv-feature-panel-alt reveal">
+            <p class="eyebrow">Boost Ventilation</p>
+            <h2>Extra Ventilation When You Need It</h2>
+            <p>Some systems can temporarily increase ventilation during activities that create more humidity or odors, such as showers, cooking or large gatherings.</p>
+            <p>An HRV or ERV does not automatically replace dedicated kitchen exhaust requirements.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section hrv-section hrv-winter-section">
+        <div class="container hrv-two-panel-grid">
+          <article class="hrv-feature-panel reveal">
+            <p class="eyebrow">Winter Operation</p>
+            <h2>Ventilation Equipment Can Produce Condensate</h2>
+            <p>During cold-weather operation, moisture can condense inside some ventilation equipment. Proper installation may require a drain connection, slope, freeze protection considerations and accessible routing.</p>
+            <strong class="hrv-statement">Drainage is part of the installation, not an afterthought.</strong>
+          </article>
+          <article class="hrv-feature-panel reveal">
+            <p class="eyebrow">Cold Weather</p>
+            <h2>What Happens During Very Cold Weather?</h2>
+            <p>During cold outdoor conditions, frost can develop in the heat-recovery core. Many systems use a defrost strategy to manage this.</p>
+            <ul class="check-list">
+              ${inlineList(["Adjust airflow", "Recirculate indoor air", "Change fan operation", "Enter a timed defrost cycle"])}
+            </ul>
+            <p>Defrost behavior varies by manufacturer and model.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section hrv-section">
+        <div class="container hrv-split">
+          <article>
+            <p class="eyebrow">Maintenance</p>
+            <h2>Filters and Recovery Cores Need Attention</h2>
+            <p>HRV and ERV systems contain components that require periodic inspection and cleaning. Maintenance requirements vary by equipment, environment and usage.</p>
+            <ul class="check-list">
+              ${inlineList(["Fresh-air filter", "Exhaust-air filter", "Recovery core", "Drain pan", "Condensate drain", "Exterior intake hood", "Exterior exhaust hood", "Fans"])}
+            </ul>
+          </article>
+          <aside class="hrv-feature-panel hrv-maintenance-panel">
+            <span class="hrv-icon" aria-hidden="true">${hrvIcon("filter")}</span>
+            <h3>Maintenance supports airflow, drainage and long-term operation.</h3>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section hrv-section hrv-problems-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Diagnostics",
+            title: "Common Ventilation System Problems",
+            text:
+              "Ventilation problems can involve the equipment, controls, ductwork or airflow setup.",
+            align: "center",
+          })}
+          <div class="hrv-problem-grid">
+            ${hrvProblems
+              .map(
+                ([iconKey, title]) => `
+                  <article class="hrv-problem-tile reveal">
+                    <span class="hrv-mini-icon" aria-hidden="true">${hrvIcon(iconKey)}</span>
+                    <strong>${escapeHtml(title)}</strong>
+                  </article>
+                `,
+              )
+              .join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="section hrv-section">
+        <div class="container hrv-two-panel-grid">
+          <article class="hrv-feature-panel reveal">
+            <p class="eyebrow">Humidity</p>
+            <h2>Ventilation and Humidity Are Connected</h2>
+            <p>Ventilation affects indoor moisture levels because outdoor and indoor air are continually being exchanged. In winter, outdoor air is often drier once heated indoors, and higher ventilation rates can contribute to lower indoor humidity.</p>
+            <p>An ERV can transfer some moisture between air streams, but an ERV is not a whole-home humidifier.</p>
+            <a class="button button-secondary" href="${link("/services/humidifiers/")}">View Whole-Home Humidifiers</a>
+          </article>
+          <article class="hrv-feature-panel hrv-feature-panel-alt reveal">
+            <h2>Ventilation and Filtration Do Different Jobs</h2>
+            <div class="hrv-mini-compare">
+              <div>
+                <span class="hrv-icon" aria-hidden="true">${hrvIcon("fresh")}</span>
+                <strong>Ventilation</strong>
+                <p>Replaces stale indoor air with outdoor air.</p>
+              </div>
+              <div>
+                <span class="hrv-icon" aria-hidden="true">${hrvIcon("filter")}</span>
+                <strong>Filtration</strong>
+                <p>Removes particles from air moving through a filter.</p>
+              </div>
+            </div>
+            <p>A good indoor-air strategy may use both, but they solve different problems.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section hrv-section hrv-install-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Installation Standard",
+            title: "What Proper HRV / ERV Installation Actually Includes",
+            text:
+              "A ventilation system is equipment, ductwork, controls, drainage, terminations and airflow setup working together.",
+            align: "center",
+          })}
+          <div class="hrv-install-grid">
+            ${hrvInstallItems
+              .map(
+                ([iconKey, title, text]) => `
+                  <article class="hrv-install-card reveal">
+                    <span class="hrv-icon" aria-hidden="true">${hrvIcon(iconKey)}</span>
+                    <h3>${escapeHtml(title)}</h3>
+                    <p>${escapeHtml(text)}</p>
+                  </article>
+                `,
+              )
+              .join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="section hrv-section hrv-residential-commercial-section">
+        <div class="container hrv-two-panel-grid">
+          <article class="hrv-feature-panel reveal">
+            <p class="eyebrow">Residential</p>
+            <h2>Residential Ventilation</h2>
+            <ul class="check-list">
+              ${inlineList(["New homes", "Renovations", "Basement finishing", "Indoor air upgrades", "Existing-system replacement"])}
+            </ul>
+          </article>
+          <article class="hrv-feature-panel hrv-feature-panel-alt reveal">
+            <p class="eyebrow">Light Commercial</p>
+            <h2>Commercial Mechanical Capability</h2>
+            <ul class="check-list">
+              ${inlineList(["Offices", "Small commercial spaces", "Mechanical-room ventilation integration", "HVAC upgrades"])}
+            </ul>
+            <a class="button button-secondary" href="${link("/commercial/")}">View Commercial HVAC</a>
+          </article>
+        </div>
+      </section>
+
+      ${standardsStrip()}
+
+      <section class="section gallery-section hrv-gallery-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Recent Work",
+            title: "Ventilation & Ductwork Projects",
+            text:
+              "A look at recent Airrand ventilation, ductwork and mechanical installations throughout the GTA.",
+          })}
+          ${workSlider(work, "Ventilation and ductwork projects")}
+        </div>
+      </section>
+
+      ${faqSection(service, hrvFaqs)}
+
+      <section class="section muted-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Related Services",
+            title: "Connected HVAC services from Airrand.",
+            text:
+              "Ventilation often connects with ductwork, humidity control, heating equipment and commercial mechanical work.",
+          })}
+          ${servicesGrid(related)}
+        </div>
+      </section>
+      ${serviceAreaSection()}
+      ${finalCta({
+        title: "Need HRV or ERV help in the GTA?",
+        text:
+          "Share the home, equipment, ventilation concern and location so Airrand can recommend the right next step.",
+      })}
+    `,
+  };
+}
+
 function servicePage(service) {
   if (service.slug === "water-heaters") {
     return waterHeatingPage(service);
   }
   if (service.slug === "gas-lines") {
     return gasLinesPage(service);
+  }
+  if (service.slug === "hrv-erv") {
+    return hrvErvPage(service);
   }
 
   const isCoolingPage = service.slug === "air-conditioning";

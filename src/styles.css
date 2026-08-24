@@ -4535,6 +4535,707 @@ details.review-page-copy[open] summary span {
   max-height: 42px;
 }
 
+.hrv-hero::before {
+  background:
+    linear-gradient(90deg, rgba(7, 9, 12, 0.96) 0%, rgba(7, 9, 12, 0.74) 44%, rgba(7, 9, 12, 0.38) 76%, rgba(7, 9, 12, 0.68) 100%),
+    linear-gradient(180deg, rgba(7, 9, 12, 0.12), rgba(7, 9, 12, 0.82));
+}
+
+.hrv-hero-points {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 22px 0 4px;
+  gap: 10px;
+}
+
+.hrv-hero-points span {
+  padding: 8px 12px;
+  border: 1px solid rgba(54, 169, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(54, 169, 255, 0.08);
+  color: #d7ecff;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.hrv-section {
+  background:
+    radial-gradient(circle at 12% 0, rgba(54, 169, 255, 0.055), transparent 34%),
+    radial-gradient(circle at 88% 14%, rgba(255, 116, 51, 0.032), transparent 30%),
+    var(--bg);
+}
+
+.hrv-overview-section,
+.hrv-need-section,
+.hrv-comparison-section,
+.hrv-duct-section,
+.hrv-balance-section,
+.hrv-pressure-section,
+.hrv-controls-section,
+.hrv-winter-section,
+.hrv-problems-section,
+.hrv-install-section,
+.hrv-residential-commercial-section {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent),
+    var(--bg-soft);
+}
+
+.hrv-aside {
+  border-color: rgba(54, 169, 255, 0.22);
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.095), transparent 48%),
+    var(--panel);
+}
+
+.hrv-split,
+.hrv-two-panel-grid {
+  display: grid;
+  gap: clamp(24px, 4vw, 46px);
+  align-items: center;
+}
+
+.hrv-split {
+  grid-template-columns: minmax(0, 0.86fr) minmax(380px, 1.14fr);
+}
+
+.hrv-two-panel-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.hrv-visual-panel,
+.hrv-feature-panel,
+.hrv-icon-card,
+.hrv-path-card,
+.hrv-core,
+.hrv-comparison-card,
+.hrv-pressure-card,
+.hrv-maintenance-panel,
+.hrv-install-card,
+.hrv-problem-tile {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    #0f151b;
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.24);
+}
+
+.hrv-visual-panel,
+.hrv-feature-panel,
+.hrv-comparison-card,
+.hrv-maintenance-panel {
+  padding: clamp(22px, 3vw, 32px);
+}
+
+.hrv-feature-panel {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+.hrv-feature-panel-alt,
+.hrv-comparison-card-erv {
+  background:
+    radial-gradient(circle at 100% 0, rgba(255, 116, 51, 0.09), transparent 46%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    #11161b;
+}
+
+.hrv-feature-panel h2,
+.hrv-feature-panel h3,
+.hrv-comparison-card h3,
+.hrv-pressure-card h3,
+.hrv-install-card h3 {
+  margin: 0;
+}
+
+.hrv-feature-panel p,
+.hrv-icon-card p,
+.hrv-path-card p,
+.hrv-comparison-card p:not(.eyebrow),
+.hrv-pressure-card p,
+.hrv-install-card p {
+  margin: 0;
+  color: var(--steel);
+}
+
+.hrv-icon,
+.hrv-mini-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(54, 169, 255, 0.36);
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.14), rgba(54, 169, 255, 0.045));
+  color: var(--blue);
+}
+
+.hrv-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+}
+
+.hrv-mini-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border-radius: 7px;
+}
+
+.hrv-icon svg,
+.hrv-mini-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hrv-linear-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr) 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.hrv-flow-node {
+  min-height: 86px;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  border: 1px solid rgba(54, 169, 255, 0.2);
+  border-radius: var(--radius);
+  background: rgba(7, 12, 17, 0.78);
+  text-align: center;
+}
+
+.hrv-flow-node span {
+  color: var(--text);
+  font-weight: 900;
+}
+
+.hrv-flow-arrow {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(54, 169, 255, 0.15), rgba(54, 169, 255, 0.95));
+  color: var(--blue);
+}
+
+.hrv-flow-arrow::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  content: "";
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.hrv-mini-transfer {
+  margin: 4px 0;
+  padding: 14px;
+  border: 1px solid rgba(54, 169, 255, 0.16);
+  border-radius: var(--radius);
+  background: rgba(4, 8, 12, 0.54);
+}
+
+.hrv-mini-transfer-alt {
+  border-color: rgba(255, 116, 51, 0.18);
+}
+
+.hrv-airflow-diagram {
+  display: grid;
+  max-width: 960px;
+  margin: 34px auto 0;
+  gap: 14px;
+}
+
+.hrv-path-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.hrv-core-row {
+  display: grid;
+  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);
+  align-items: center;
+  gap: 16px;
+}
+
+.hrv-core-row > span {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(54, 169, 255, 0.55), transparent);
+}
+
+.hrv-core {
+  display: grid;
+  width: min(310px, 100%);
+  min-height: 124px;
+  place-items: center;
+  justify-self: center;
+  padding: 18px 22px;
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 0, rgba(54, 169, 255, 0.18), transparent 68%),
+    #0b1117;
+}
+
+.hrv-core small {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.hrv-path-card {
+  min-height: 156px;
+  display: grid;
+  align-content: start;
+  padding: 24px;
+  gap: 10px;
+}
+
+.hrv-path-card-exhaust {
+  border-color: rgba(255, 116, 51, 0.16);
+}
+
+.hrv-path-card-exhaust .hrv-icon,
+.hrv-feature-panel-alt .hrv-icon,
+.hrv-comparison-card-erv .hrv-icon {
+  border-color: rgba(255, 116, 51, 0.34);
+  background:
+    linear-gradient(180deg, rgba(255, 116, 51, 0.14), rgba(255, 116, 51, 0.045));
+  color: var(--orange);
+}
+
+.hrv-card-grid,
+.hrv-install-grid,
+.hrv-pressure-grid,
+.hrv-problem-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.hrv-card-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hrv-icon-card,
+.hrv-install-card {
+  display: grid;
+  align-content: start;
+  min-height: 178px;
+  padding: 22px;
+  gap: 12px;
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.hrv-icon-card:hover,
+.hrv-install-card:hover,
+.hrv-problem-tile:hover,
+.hrv-pressure-card:hover {
+  border-color: rgba(54, 169, 255, 0.38);
+  transform: translateY(-2px);
+}
+
+.hrv-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.hrv-comparison-card {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+.hrv-chip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hrv-chip-grid span {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--steel);
+  font-weight: 850;
+}
+
+.hrv-routing-grid,
+.hrv-control-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.hrv-routing-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hrv-control-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hrv-controls-section .hrv-two-panel-grid {
+  grid-template-columns: 1fr;
+  width: 100%;
+  max-width: 100%;
+  gap: 16px;
+}
+
+.hrv-controls-section .hrv-feature-panel {
+  padding-block: 24px;
+}
+
+.hrv-controls-section .hrv-control-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.hrv-controls-section .hrv-feature-panel-alt {
+  grid-template-columns: minmax(220px, 0.52fr) minmax(0, 1fr);
+  align-items: center;
+  padding-block: 22px;
+}
+
+.hrv-controls-section .hrv-feature-panel-alt p:not(.eyebrow) {
+  margin: 0;
+}
+
+.hrv-controls-section .hrv-feature-panel-alt p:not(.eyebrow):last-child {
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 116, 51, 0.16);
+  border-radius: var(--radius);
+  background: rgba(255, 116, 51, 0.045);
+}
+
+.hrv-routing-card,
+.hrv-control-card {
+  position: relative;
+  min-width: 0;
+  display: grid;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.075), transparent 48%),
+    rgba(7, 12, 17, 0.72);
+}
+
+.hrv-routing-card {
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: start;
+  min-height: 104px;
+  padding: 14px;
+}
+
+.hrv-control-card {
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: start;
+  min-height: 96px;
+  padding: 14px 15px;
+}
+
+.hrv-routing-card::before,
+.hrv-control-card::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  border-radius: var(--radius) 0 0 var(--radius);
+  background: linear-gradient(180deg, rgba(54, 169, 255, 0.95), rgba(54, 169, 255, 0.08));
+  content: "";
+}
+
+.hrv-routing-card:nth-child(3n)::before,
+.hrv-routing-card:nth-child(6n)::before,
+.hrv-control-card:nth-child(3n)::before,
+.hrv-control-card:nth-child(6n)::before {
+  background: linear-gradient(180deg, rgba(255, 116, 51, 0.82), rgba(255, 116, 51, 0.06));
+}
+
+.hrv-routing-card .hrv-mini-icon,
+.hrv-control-card .hrv-mini-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.hrv-routing-card strong,
+.hrv-control-card strong {
+  display: block;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.15;
+}
+
+.hrv-routing-card small,
+.hrv-control-card small {
+  display: block;
+  margin-top: 4px;
+  color: rgba(197, 203, 211, 0.82);
+  font-size: 0.78rem;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.hrv-statement {
+  display: block;
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-left: 3px solid var(--blue);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: rgba(54, 169, 255, 0.07);
+  color: var(--text);
+}
+
+.hrv-balance-visual {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px minmax(0, 1fr);
+  align-items: center;
+  padding: clamp(24px, 4vw, 42px);
+  gap: 18px;
+  border: 1px solid rgba(54, 169, 255, 0.2);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(54, 169, 255, 0.14), transparent 54%),
+    #0e141a;
+}
+
+.hrv-balance-visual > div {
+  display: grid;
+  min-height: 132px;
+  place-items: center;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(7, 10, 14, 0.74);
+  text-align: center;
+}
+
+.hrv-balance-visual span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hrv-balance-visual strong {
+  color: var(--text);
+  font-size: 2rem;
+}
+
+.hrv-balance-center {
+  width: 74px;
+  height: 74px;
+  justify-self: center;
+  border-radius: 999px;
+}
+
+.hrv-pressure-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hrv-pressure-card {
+  display: grid;
+  min-height: 168px;
+  align-content: start;
+  padding: 22px;
+  gap: 12px;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.hrv-maintenance-panel {
+  display: grid;
+  min-height: 260px;
+  align-content: center;
+  justify-items: start;
+  gap: 18px;
+}
+
+.hrv-maintenance-panel h3 {
+  max-width: 420px;
+  margin: 0;
+  font-size: 1.55rem;
+}
+
+.hrv-problem-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.hrv-problem-tile {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 12px;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.hrv-problem-tile strong {
+  line-height: 1.18;
+}
+
+.hrv-mini-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.hrv-mini-compare > div {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(7, 10, 14, 0.58);
+}
+
+.hrv-mini-compare p {
+  color: var(--steel);
+}
+
+.hrv-install-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hrv-gallery-section .section-heading {
+  max-width: 760px;
+}
+
+@media (max-width: 1120px) {
+  .hrv-card-grid,
+  .hrv-install-grid,
+  .hrv-routing-grid,
+  .hrv-problem-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hrv-controls-section .hrv-control-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hrv-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 920px) {
+  .hrv-two-panel-grid,
+  .hrv-comparison-grid,
+  .hrv-pressure-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hrv-path-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hrv-path-card {
+    min-height: auto;
+  }
+
+  .hrv-balance-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .hrv-balance-center {
+    transform: rotate(90deg);
+  }
+
+  .hrv-controls-section .hrv-feature-panel-alt {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .hrv-hero {
+    background-position: 54% center;
+  }
+
+  .hrv-hero-points {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .hrv-linear-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .hrv-core-row {
+    grid-template-columns: 1fr;
+  }
+
+  .hrv-core-row > span {
+    width: 1px;
+    height: 22px;
+    justify-self: center;
+    background: linear-gradient(180deg, transparent, rgba(54, 169, 255, 0.55), transparent);
+  }
+
+  .hrv-flow-arrow {
+    width: 2px;
+    height: 28px;
+    justify-self: center;
+    background: linear-gradient(180deg, rgba(54, 169, 255, 0.15), rgba(54, 169, 255, 0.95));
+  }
+
+  .hrv-flow-arrow::after {
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) rotate(135deg);
+  }
+
+  .hrv-card-grid,
+  .hrv-install-grid,
+  .hrv-problem-grid,
+  .hrv-routing-grid,
+  .hrv-control-grid,
+  .hrv-chip-grid,
+  .hrv-mini-compare {
+    grid-template-columns: 1fr;
+  }
+
+  .hrv-controls-section .hrv-control-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hrv-visual-panel,
+  .hrv-feature-panel,
+  .hrv-comparison-card,
+  .hrv-maintenance-panel {
+    padding: 20px;
+  }
+
+  .hrv-flow-node {
+    min-height: 72px;
+  }
+
+  .hrv-problem-tile {
+    min-height: 72px;
+  }
+}
+
 .gas-line-hero::before {
   background:
     linear-gradient(90deg, rgba(7, 9, 12, 0.98) 0%, rgba(7, 9, 12, 0.84) 42%, rgba(7, 9, 12, 0.48) 72%, rgba(7, 9, 12, 0.68) 100%),

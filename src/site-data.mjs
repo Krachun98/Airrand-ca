@@ -312,16 +312,27 @@ export const services = [
     image: "hrv-erv-system.png",
     short: "Balanced ventilation and fresh-air solutions.",
     intro:
-      "Airrand installs HRV and ERV ventilation systems that help bring fresh air into tighter homes and buildings.",
+      "Airrand installs and services HRV and ERV systems that bring controlled fresh air into homes and buildings while exhausting stale indoor air.",
     meta:
-      "HRV and ERV ventilation installation for fresh-air exchange and indoor comfort across the GTA.",
+      "Airrand installs and services HRV and ERV whole-home ventilation systems throughout the Greater Toronto Area, including fresh-air ducting, controls, balancing and HVAC integration.",
     details: [
       "HRV and ERV installation",
+      "HRV and ERV service",
       "Fresh-air duct routing",
-      "Ventilation balancing considerations",
+      "Intake and exhaust termination review",
+      "Controls and boost ventilation setup",
+      "Condensate drainage considerations",
+      "Ventilation balancing",
       "Integration with existing HVAC systems",
     ],
-    applications: ["Newer homes", "Renovations", "Indoor air quality upgrades"],
+    applications: [
+      "Newer tighter homes",
+      "Renovations",
+      "Indoor air quality upgrades",
+      "Finished basements",
+      "High-occupancy homes",
+      "Existing HVAC integration",
+    ],
   },
   {
     title: "Humidifiers",
