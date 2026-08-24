@@ -6412,7 +6412,7 @@ function homePage() {
           <div class="why-intro">
             <p class="eyebrow">Why Airrand</p>
             <h2>HVAC work should be clean, correct and built to last.</h2>
-            <p>Airrand's online presence now reflects the way a serious mechanical contractor should present itself: precise, direct and focused on the quality of the work.</p>
+            <p>Airrand approaches HVAC work with a focus on proper installation, clean workmanship, clear communication and long-term reliability.</p>
           </div>
           <div class="why-list">
             ${whyPoints
