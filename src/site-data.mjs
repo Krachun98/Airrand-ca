@@ -309,7 +309,7 @@ export const services = [
     title: "HRV / ERV",
     slug: "hrv-erv",
     group: "Ventilation",
-    image: "ductwork-installation.webp",
+    image: "hrv-erv-system.png",
     short: "Balanced ventilation and fresh-air solutions.",
     intro:
       "Airrand installs HRV and ERV ventilation systems that help bring fresh air into tighter homes and buildings.",
@@ -559,7 +559,7 @@ export const navServiceGroups = [
   ["Ductless", "ductless-systems"],
   ["Water Heating", "water-heaters"],
   ["Gas", "gas-lines"],
-  ["HRV/ERV", "hrv-erv"],
+  ["HRV / ERV", "hrv-erv"],
   ["Ductwork", "ductwork"],
   ["Commercial HVAC", "commercial-hvac"],
 ];

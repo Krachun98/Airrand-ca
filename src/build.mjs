@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "contact-mobile-quote-20260823";
+const assetVersion = "hrv-erv-image-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
