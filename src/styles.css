@@ -4535,7 +4535,701 @@ details.review-page-copy[open] summary span {
   max-height: 42px;
 }
 
+.gas-line-hero::before {
+  background:
+    linear-gradient(90deg, rgba(7, 9, 12, 0.98) 0%, rgba(7, 9, 12, 0.84) 42%, rgba(7, 9, 12, 0.48) 72%, rgba(7, 9, 12, 0.68) 100%),
+    linear-gradient(180deg, rgba(7, 9, 12, 0.16), rgba(7, 9, 12, 0.88));
+}
+
+.gas-line-section {
+  background:
+    radial-gradient(circle at 10% 0, rgba(54, 169, 255, 0.05), transparent 30%),
+    radial-gradient(circle at 92% 12%, rgba(255, 116, 51, 0.045), transparent 34%),
+    var(--bg);
+}
+
+.gas-line-overview-section,
+.gas-line-design-section,
+.gas-line-project-types-section,
+.gas-line-testing-section,
+.gas-line-complete-section,
+.gas-line-materials-section,
+.gas-line-leak-section,
+.gas-line-capability-section {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent),
+    var(--bg-soft);
+}
+
+.gas-line-split,
+.gas-line-photo-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+  gap: 34px;
+  align-items: center;
+}
+
+.gas-line-photo-split {
+  grid-template-columns: minmax(0, 0.82fr) minmax(420px, 1.18fr);
+}
+
+.gas-line-design-section .section-heading {
+  max-width: 720px;
+  margin-bottom: 28px;
+}
+
+.gas-design-layout {
+  grid-template-columns: minmax(0, 0.94fr) minmax(500px, 1.06fr);
+  gap: clamp(34px, 4vw, 56px);
+  align-items: stretch;
+}
+
+.gas-design-factors,
+.gas-design-diagram {
+  min-width: 0;
+}
+
+.gas-design-diagram {
+  display: grid;
+  align-self: stretch;
+  gap: 16px;
+}
+
+.gas-line-split > article p:not(.eyebrow),
+.gas-line-photo-split > article p:not(.eyebrow) {
+  max-width: 670px;
+}
+
+.gas-line-aside {
+  border-color: rgba(255, 116, 51, 0.2);
+  background:
+    linear-gradient(135deg, rgba(255, 116, 51, 0.08), transparent 48%),
+    var(--panel);
+}
+
+.gas-application-grid,
+.gas-technical-grid,
+.gas-material-grid,
+.gas-factor-grid,
+.gas-problem-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.gas-application-grid,
+.gas-technical-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.gas-material-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.gas-factor-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 24px;
+}
+
+.gas-line-design-section .gas-factor-grid {
+  gap: 14px;
+  margin-top: 0;
+}
+
+.gas-problem-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.gas-line-card,
+.gas-line-panel,
+.gas-factor,
+.gas-flow-panel,
+.gas-process-panel,
+.gas-trigger-panel,
+.gas-review-panel,
+.gas-system-map,
+.gas-photo-panel,
+.gas-safety-panel,
+.gas-problem-tile {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+    var(--panel);
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.24);
+}
+
+.gas-line-card,
+.gas-line-panel,
+.gas-factor,
+.gas-review-panel,
+.gas-problem-tile {
+  padding: 22px;
+}
+
+.gas-line-design-section .gas-factor {
+  display: grid;
+  min-height: 152px;
+  align-content: start;
+  gap: 8px;
+  padding: 18px 20px;
+  border-color: rgba(255, 255, 255, 0.11);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    #12181f;
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.2);
+}
+
+.gas-line-card:hover,
+.gas-line-panel:hover,
+.gas-problem-tile:hover {
+  border-color: rgba(54, 169, 255, 0.38);
+  transform: translateY(-2px);
+}
+
+.gas-line-card,
+.gas-line-panel,
+.gas-problem-tile {
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.gas-line-card h3,
+.gas-line-panel h3,
+.gas-review-panel h3 {
+  margin-top: 14px;
+  font-size: 1.12rem;
+}
+
+.gas-line-card p,
+.gas-line-panel p,
+.gas-factor small,
+.gas-system-map small,
+.gas-photo-panel figcaption {
+  color: var(--steel);
+}
+
+.gas-line-design-section .gas-factor strong {
+  display: block;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.15;
+}
+
+.gas-line-design-section .gas-factor small {
+  color: rgba(197, 203, 211, 0.88);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.gas-line-icon,
+.gas-mini-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(54, 169, 255, 0.34);
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.13), rgba(54, 169, 255, 0.045));
+  color: var(--blue);
+}
+
+.gas-line-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+}
+
+.gas-line-design-section .gas-factor .gas-line-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 2px;
+}
+
+.gas-mini-icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  border-radius: 7px;
+}
+
+.gas-line-panel-warm .gas-line-icon,
+.gas-line-card:nth-child(3n) .gas-line-icon,
+.gas-problem-tile:nth-child(4n) .gas-mini-icon,
+.gas-flow-step-warm .gas-line-icon {
+  border-color: rgba(255, 116, 51, 0.35);
+  background:
+    linear-gradient(180deg, rgba(255, 116, 51, 0.15), rgba(255, 116, 51, 0.045));
+  color: var(--orange);
+}
+
+.gas-line-icon svg,
+.gas-mini-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gas-mini-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.gas-line-list {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--steel);
+}
+
+.gas-line-list li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.gas-line-list li::before {
+  position: absolute;
+  top: 0.68em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--blue);
+  content: "";
+}
+
+.gas-line-panel-warm .gas-line-list li::before,
+.gas-safety-panel .gas-line-list li::before {
+  background: var(--orange);
+}
+
+.gas-flow-panel,
+.gas-process-panel {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding: 24px;
+  gap: 12px;
+}
+
+.gas-flow-panel {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
+.gas-line-design-section .gas-flow-panel {
+  min-height: 214px;
+  grid-template-columns: minmax(92px, 1fr) 28px minmax(92px, 1fr) 28px minmax(92px, 1fr) 28px minmax(92px, 1fr);
+  gap: 16px;
+  padding: 32px 30px;
+  background:
+    radial-gradient(circle at 22% 16%, rgba(54, 169, 255, 0.09), transparent 32%),
+    radial-gradient(circle at 88% 20%, rgba(255, 116, 51, 0.07), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+    #12181f;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+}
+
+.gas-process-panel {
+  grid-template-columns: repeat(5, auto);
+  min-height: 180px;
+}
+
+.gas-flow-step,
+.gas-process-step {
+  display: grid;
+  min-width: 0;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.gas-flow-step strong,
+.gas-process-step strong {
+  line-height: 1.2;
+}
+
+.gas-line-design-section .gas-flow-step {
+  min-height: 118px;
+  align-content: center;
+  gap: 12px;
+}
+
+.gas-line-design-section .gas-flow-step .gas-line-icon {
+  width: 44px;
+  height: 44px;
+}
+
+.gas-line-design-section .gas-flow-step strong {
+  max-width: 116px;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.gas-flow-arrow {
+  color: var(--blue);
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.gas-line-design-section .gas-flow-arrow {
+  align-self: center;
+  opacity: 0.95;
+}
+
+.gas-flow-callout {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  overflow: hidden;
+  min-height: 76px;
+  padding: 14px 17px 14px 20px;
+  border: 1px solid rgba(255, 116, 51, 0.22);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(90deg, rgba(255, 116, 51, 0.075), rgba(54, 169, 255, 0.035)),
+    rgba(17, 23, 29, 0.92);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+}
+
+.gas-flow-callout::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--orange), rgba(255, 116, 51, 0.25));
+  content: "";
+}
+
+.gas-flow-callout .gas-mini-icon {
+  border-color: rgba(255, 116, 51, 0.35);
+  background:
+    linear-gradient(180deg, rgba(255, 116, 51, 0.16), rgba(255, 116, 51, 0.05));
+  color: var(--orange);
+}
+
+.gas-flow-callout strong {
+  display: block;
+  color: #fff;
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.gas-flow-callout p {
+  margin: 4px 0 0;
+  color: rgba(197, 203, 211, 0.88);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.gas-line-note,
+.gas-summary-line {
+  border: 1px solid rgba(54, 169, 255, 0.22);
+  border-radius: var(--radius);
+  background: rgba(54, 169, 255, 0.06);
+  color: var(--steel);
+}
+
+.gas-line-note {
+  margin-top: 20px;
+  padding: 15px 16px;
+}
+
+.gas-summary-line {
+  margin: 22px auto 0;
+  max-width: 880px;
+  padding: 16px 18px;
+  text-align: center;
+}
+
+.gas-line-capacity-section .section-heading {
+  margin-bottom: 24px;
+}
+
+.gas-line-capacity-section .button {
+  margin-top: 0;
+}
+
+.gas-trigger-panel,
+.gas-problem-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 20px;
+}
+
+.gas-line-capacity-section .gas-trigger-panel {
+  align-self: center;
+  gap: 14px;
+  padding: 22px;
+  border-color: rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 86% 8%, rgba(255, 116, 51, 0.055), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    rgba(18, 24, 31, 0.98);
+  box-shadow: none;
+}
+
+.gas-trigger-card,
+.gas-performance-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.gas-trigger-card {
+  gap: 14px;
+  min-height: 72px;
+  padding: 12px 15px;
+  border-color: rgba(255, 255, 255, 0.15);
+  background:
+    linear-gradient(145deg, rgba(255, 116, 51, 0.055), transparent 46%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent),
+    rgba(255, 255, 255, 0.04);
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.gas-trigger-card:hover {
+  border-color: rgba(255, 116, 51, 0.34);
+  background:
+    linear-gradient(180deg, rgba(255, 116, 51, 0.075), transparent),
+    rgba(255, 255, 255, 0.04);
+}
+
+.gas-trigger-card .gas-mini-icon {
+  width: 50px;
+  height: 50px;
+  border-color: rgba(255, 116, 51, 0.34);
+  border-radius: 9px;
+  background:
+    linear-gradient(180deg, rgba(255, 116, 51, 0.18), rgba(255, 116, 51, 0.055));
+  color: #ff8a4f;
+}
+
+.gas-trigger-card:hover .gas-mini-icon {
+  border-color: rgba(255, 116, 51, 0.42);
+  color: var(--orange);
+}
+
+.gas-trigger-card .gas-mini-icon svg {
+  width: 30px;
+  height: 30px;
+  stroke-width: 2.05;
+}
+
+.gas-trigger-card strong {
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.24;
+}
+
+.gas-line-performance-section .gas-problem-list {
+  align-self: center;
+  gap: 14px;
+  padding: 0;
+}
+
+.gas-performance-card {
+  gap: 14px;
+  min-height: 76px;
+  padding: 13px 16px;
+  border-color: rgba(255, 255, 255, 0.15);
+  background:
+    linear-gradient(145deg, rgba(54, 169, 255, 0.065), transparent 48%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent),
+    rgba(255, 255, 255, 0.04);
+  transition:
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.gas-performance-card:hover {
+  border-color: rgba(54, 169, 255, 0.36);
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.08), transparent),
+    rgba(255, 255, 255, 0.045);
+}
+
+.gas-performance-card .gas-mini-icon {
+  width: 50px;
+  height: 50px;
+  flex: 0 0 50px;
+  border-color: rgba(54, 169, 255, 0.34);
+  border-radius: 9px;
+  background:
+    linear-gradient(180deg, rgba(54, 169, 255, 0.18), rgba(54, 169, 255, 0.055));
+  color: var(--blue);
+}
+
+.gas-performance-card:hover .gas-mini-icon {
+  border-color: rgba(54, 169, 255, 0.48);
+  color: #64c5ff;
+}
+
+.gas-performance-card .gas-mini-icon svg {
+  width: 30px;
+  height: 30px;
+  stroke-width: 2.05;
+}
+
+.gas-performance-card strong {
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.24;
+}
+
+.gas-dual-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.gas-line-panel {
+  min-height: 100%;
+}
+
+.gas-line-panel-warm {
+  border-color: rgba(255, 116, 51, 0.22);
+  background:
+    linear-gradient(135deg, rgba(255, 116, 51, 0.08), transparent 48%),
+    var(--panel);
+}
+
+.gas-line-panel .button {
+  margin-top: 18px;
+}
+
+.gas-system-map {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+  padding: 18px;
+}
+
+.gas-system-map article {
+  display: grid;
+  min-height: 156px;
+  align-content: start;
+  gap: 9px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.gas-photo-panel {
+  overflow: hidden;
+  margin: 0;
+}
+
+.gas-photo-panel img {
+  width: 100%;
+  height: min(56vw, 520px);
+  min-height: 360px;
+  object-fit: cover;
+}
+
+.gas-photo-panel figcaption {
+  padding: 13px 16px 16px;
+  font-size: 0.9rem;
+}
+
+.gas-line-photo-split blockquote {
+  margin: 24px 0 0;
+  padding: 22px;
+  border-left: 3px solid var(--orange);
+  border-radius: var(--radius);
+  background: rgba(255, 116, 51, 0.06);
+  color: var(--text);
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  font-weight: 900;
+  line-height: 1.08;
+}
+
+.gas-safety-panel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  padding: 28px;
+  border-color: rgba(255, 116, 51, 0.34);
+  background:
+    linear-gradient(90deg, rgba(255, 116, 51, 0.12), transparent 62%),
+    var(--panel);
+}
+
+.gas-safety-panel h2 {
+  margin-bottom: 12px;
+}
+
+.gas-review-panel {
+  border-color: rgba(54, 169, 255, 0.28);
+  background:
+    linear-gradient(135deg, rgba(54, 169, 255, 0.08), transparent 52%),
+    var(--panel);
+}
+
+.gas-problem-tile {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.gas-problem-tile small {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--blue);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.gas-line-work-section {
+  background: var(--bg);
+}
+
 @media (max-width: 1120px) {
+  .gas-application-grid,
+  .gas-technical-grid,
+  .gas-material-grid,
+  .gas-system-map,
+  .gas-problem-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gas-flow-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .gas-flow-panel .gas-flow-arrow {
+    transform: rotate(90deg);
+  }
+
+  .gas-design-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .gas-line-design-section .gas-factor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gas-line-design-section .gas-flow-panel {
+    grid-template-columns: minmax(92px, 1fr) 28px minmax(92px, 1fr) 28px minmax(92px, 1fr) 28px minmax(92px, 1fr);
+  }
+
+  .gas-line-design-section .gas-flow-panel .gas-flow-arrow {
+    transform: none;
+  }
+
   .water-heating-options-grid,
   .water-selection-grid,
   .water-sign-grid,
@@ -4556,6 +5250,20 @@ details.review-page-copy[open] summary span {
 }
 
 @media (max-width: 920px) {
+  .gas-line-split,
+  .gas-line-photo-split,
+  .gas-dual-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .gas-photo-panel img {
+    height: auto;
+  }
+
+  .gas-line-design-section .gas-flow-panel {
+    padding: 28px 24px;
+  }
+
   .water-split-grid,
   .water-dual-panel,
   .water-comparison-grid,
@@ -4570,6 +5278,81 @@ details.review-page-copy[open] summary span {
 }
 
 @media (max-width: 680px) {
+  .gas-application-grid,
+  .gas-technical-grid,
+  .gas-material-grid,
+  .gas-factor-grid,
+  .gas-problem-grid,
+  .gas-trigger-panel,
+  .gas-problem-list,
+  .gas-system-map {
+    grid-template-columns: 1fr;
+  }
+
+  .gas-line-card,
+  .gas-line-panel,
+  .gas-flow-panel,
+  .gas-process-panel,
+  .gas-trigger-panel,
+  .gas-review-panel,
+  .gas-safety-panel,
+  .gas-system-map,
+  .gas-photo-panel,
+  .gas-factor,
+  .gas-problem-tile {
+    padding: 20px;
+  }
+
+  .gas-process-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .gas-process-panel .gas-flow-arrow {
+    transform: rotate(90deg);
+  }
+
+  .gas-line-design-section .section-heading {
+    margin-bottom: 22px;
+  }
+
+  .gas-line-design-section .gas-factor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gas-line-design-section .gas-factor {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .gas-line-design-section .gas-flow-panel {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    min-height: 0;
+    padding: 22px;
+  }
+
+  .gas-line-design-section .gas-flow-panel .gas-flow-arrow {
+    transform: rotate(90deg);
+  }
+
+  .gas-line-design-section .gas-flow-step {
+    min-height: 86px;
+  }
+
+  .gas-flow-callout {
+    align-items: flex-start;
+    min-height: 0;
+    padding: 14px 15px 14px 18px;
+  }
+
+  .gas-safety-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .gas-line-photo-split blockquote {
+    font-size: 1.35rem;
+  }
+
   .water-heating-options-grid,
   .water-selection-grid,
   .water-sign-grid,

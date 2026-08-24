@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "mobile-hero-dark-balance-20260823";
+const assetVersion = "gas-performance-icons-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -1825,6 +1825,61 @@ function serviceFaqs(service) {
     timeline: "Timing depends on access, equipment, parts and the amount of installation, repair or coordination required.",
   };
 
+  if (service.slug === "gas-lines") {
+    return [
+      {
+        question: "Can Airrand run a new gas line?",
+        answer:
+          "Yes. Airrand can evaluate and install gas piping for appropriate HVAC equipment, water heating equipment and approved gas appliances, with the route, equipment load and installation requirements reviewed before work proceeds.",
+      },
+      {
+        question: "Can I add a gas fireplace to my existing gas system?",
+        answer:
+          "Possibly, but the existing gas system should be evaluated for capacity, routing, appliance requirements, shutoff location and the condition of the current piping before a fireplace connection is added.",
+      },
+      {
+        question: "Can I add a tankless water heater to my existing gas line?",
+        answer:
+          "Tankless equipment can have significant gas-input requirements. The existing piping, total connected load, equipment location and manufacturer requirements should be checked before installation.",
+      },
+      {
+        question: "Does changing furnace size affect the gas line?",
+        answer:
+          "Potentially. Equipment input and the total connected load on the gas system should be reviewed when a furnace is replaced with equipment that has different requirements.",
+      },
+      {
+        question: "Can gas lines be moved?",
+        answer:
+          "Yes, depending on the application and route. Relocation may involve pipe sizing, supports, shutoffs, appliance connections and required testing before the system is put back into service.",
+      },
+      {
+        question: "Why does gas-pipe size matter?",
+        answer:
+          "Pipe size affects the ability to deliver adequate gas to connected equipment. Appliance input, pipe length, fittings, pressure and total system load all influence whether a gas line is appropriate.",
+      },
+      {
+        question: "How do I know if my gas line is leaking?",
+        answer:
+          "Do not use DIY test methods. If you smell gas or suspect a leak, leave the area and contact the gas utility or emergency services as appropriate from a safe location.",
+      },
+      {
+        question: "Can Airrand pressure-test gas piping?",
+        answer:
+          "New or modified gas piping can require testing before commissioning. Testing requirements depend on the installation and applicable code requirements.",
+      },
+      {
+        question: "Can Airrand install gas lines outdoors?",
+        answer:
+          "Outdoor piping can be used in appropriate applications with suitable materials, protection, supports and routing. The installation location and equipment requirements need to be reviewed.",
+      },
+      {
+        question: "Does Airrand work on commercial gas piping?",
+        answer:
+          "Yes, for appropriate commercial HVAC and mechanical applications such as rooftop equipment, make-up air units, boilers, unit heaters, mechanical rooms and commercial water-heating equipment.",
+      },
+    ];
+  }
+
   if (service.slug === "water-heaters") {
     return [
       {
@@ -2994,6 +3049,970 @@ function waterHeatingPage(service) {
         title: "Need help with water heating equipment?",
         text:
           "Share photos of the equipment, the property type and what is happening so Airrand can recommend the right next step.",
+      })}
+    `,
+  };
+}
+
+const gasLineDesignFactors = [
+  { title: "Appliance Input", text: "Connected equipment has specific fuel-demand requirements.", icon: "equipment" },
+  { title: "Total Load", text: "New equipment can affect the entire connected gas system.", icon: "load" },
+  { title: "Pipe Length", text: "Longer runs can change piping requirements.", icon: "route" },
+  { title: "Pipe Diameter", text: "Pipe size must suit the connected load and system conditions.", icon: "sizing" },
+  { title: "Fuel Type", text: "Natural gas and propane systems have different requirements.", icon: "flame" },
+  { title: "Existing Capacity", text: "Existing piping should be reviewed before equipment is added.", icon: "meter" },
+  { title: "Pressure", text: "Supply conditions affect gas-fired equipment performance.", icon: "pressure" },
+  { title: "Fittings", text: "Turns and fittings are part of the overall piping design.", icon: "pipe" },
+  { title: "Equipment Location", text: "Access, clearances and serviceability affect routing.", icon: "map" },
+];
+
+const gasLineApplications = [
+  {
+    title: "Furnaces",
+    text: "Gas supply for residential and light-commercial heating equipment.",
+    icon: "furnace",
+  },
+  {
+    title: "Water Heaters",
+    text: "Connections for conventional gas-fired water heaters.",
+    icon: "tank",
+  },
+  {
+    title: "Tankless Water Heaters",
+    text: "Gas supply sized for higher-input tankless equipment where required.",
+    icon: "tankless",
+  },
+  {
+    title: "Boilers",
+    text: "Gas piping for hydronic heating equipment.",
+    icon: "boiler",
+  },
+  {
+    title: "Gas Fireplaces",
+    text: "New or replacement gas connections for approved fireplace installations.",
+    icon: "fireplace",
+  },
+  {
+    title: "Garage Heaters",
+    text: "Gas piping for residential or light-commercial unit heaters.",
+    icon: "garage",
+  },
+  {
+    title: "Rooftop Units",
+    text: "Commercial gas connections for packaged rooftop equipment.",
+    icon: "rooftop",
+  },
+  {
+    title: "Make-Up Air / Commercial Equipment",
+    text: "Gas piping for mechanical systems where applicable.",
+    icon: "commercial",
+  },
+];
+
+const gasLineUpgradeTriggers = [
+  { title: "Adding a tankless water heater", icon: "tankless" },
+  { title: "Adding a gas fireplace", icon: "fireplace" },
+  { title: "Installing a larger furnace", icon: "furnace" },
+  { title: "Adding a garage heater", icon: "garage" },
+  { title: "Adding commercial equipment", icon: "rooftop" },
+  { title: "Replacing several appliances at once", icon: "connectedLoad" },
+];
+
+const gasLineInstallationItems = [
+  ["Proper Sizing", "Gas piping should be sized for connected equipment and system conditions.", "sizing"],
+  ["Approved Materials", "Use materials suitable for the application and installation location.", "materials"],
+  ["Clean Routing", "Route piping logically and avoid unnecessary complexity.", "route"],
+  ["Proper Supports", "Secure piping correctly and maintain a clean installation.", "support"],
+  ["Shutoff Valves", "Provide accessible appliance shutoffs where required.", "valve"],
+  ["Appliance Connections", "Make appropriate final connections to the equipment.", "connection"],
+  ["Pressure Testing", "Test gas piping as required before placing the system into service.", "pressure"],
+  ["Equipment Setup", "Verify appliance gas requirements and operation where part of the project.", "controls"],
+  ["Final Inspection / Commissioning", "Complete checks before the installation is considered finished.", "commission"],
+];
+
+const gasLineCompleteSystems = [
+  ["Gas Supply", "Fuel piping matched to the connected equipment.", "pipe"],
+  ["Venting", "Exhaust routing appropriate for the appliance.", "venting"],
+  ["Combustion Air", "Air requirements considered where applicable.", "air"],
+  ["Drainage", "Condensate or relief drainage where equipment requires it.", "drainage"],
+  ["Electrical", "Power and disconnect needs coordinated with the equipment.", "electrical"],
+  ["Controls", "Thermostats, safeties and equipment controls set up correctly.", "controls"],
+  ["Clearances", "Equipment and piping left serviceable and accessible.", "space"],
+];
+
+const gasLineMaterials = [
+  ["Black Steel / Black Iron", "Common gas-piping material used in many mechanical installations.", "pipe"],
+  ["CSST Where Permitted", "Corrugated stainless steel tubing may be used in approved applications.", "materials"],
+  ["Approved Appliance Connectors", "Final appliance connections should suit the equipment and location.", "connection"],
+  ["Other Approved Materials", "Some applications require materials selected for specific conditions.", "shield"],
+];
+
+const gasLineProblems = [
+  { title: "Undersized piping", group: "Capacity", icon: "sizing" },
+  { title: "Poor routing", group: "Workmanship", icon: "route" },
+  { title: "Missing or inaccessible shutoffs", group: "Serviceability", icon: "valve" },
+  { title: "Corrosion", group: "Condition", icon: "materials" },
+  { title: "Unsupported pipe", group: "Installation", icon: "support" },
+  { title: "Appliance relocation issues", group: "Planning", icon: "map" },
+  { title: "Equipment added without reviewing total load", group: "System load", icon: "load" },
+  { title: "Leaks / failed testing", group: "Verification", icon: "pressure" },
+  { title: "Incorrect appliance connection", group: "Connection", icon: "connection" },
+  { title: "Mechanical-room piping that restricts service access", group: "Access", icon: "space" },
+];
+
+const gasLineDemandReviewItems = [
+  "Whether existing piping is adequate",
+  "Whether a branch needs modification",
+  "Whether the main gas line needs changes",
+  "Whether equipment location affects routing",
+];
+
+const gasResidentialItems = [
+  "Furnaces",
+  "Water heaters",
+  "Tankless",
+  "Fireplaces",
+  "Garage heaters",
+  "Renovations",
+  "Equipment relocation",
+];
+
+const gasCommercialItems = [
+  "Rooftop equipment",
+  "Make-up air units",
+  "Boilers",
+  "Mechanical rooms",
+  "Gas-fired unit heaters",
+  "Commercial water heating",
+  "Equipment replacement",
+];
+
+const gasLineIcons = {
+  meter: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="5" y="8" width="14" height="11" rx="2.5" />
+      <path d="M8 8V5h8v3" />
+      <path d="M9 13h6" />
+      <path d="M10 16h4" />
+      <path d="M3 13h2" />
+      <path d="M19 13h2" />
+    </svg>
+  `,
+  pipe: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 8h10a4 4 0 0 1 4 4v4" />
+      <path d="M4 16h9a5 5 0 0 0 5-5V8" />
+      <path d="M18 8h2" />
+      <path d="M18 16h2" />
+    </svg>
+  `,
+  branch: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 12h6" />
+      <path d="M10 12h10" />
+      <path d="M10 12V6h7" />
+      <path d="M10 12v6h7" />
+      <circle cx="10" cy="12" r="1.5" />
+    </svg>
+  `,
+  equipment: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="5" y="4" width="14" height="16" rx="2" />
+      <path d="M8 8h8" />
+      <path d="M8 12h8" />
+      <path d="M8 16h4" />
+    </svg>
+  `,
+  valve: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 12h6" />
+      <path d="M14 12h6" />
+      <path d="M10 8h4v8h-4Z" />
+      <path d="M9 6h6" />
+      <path d="M12 6v2" />
+    </svg>
+  `,
+  pressure: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M6 16a6 6 0 1 1 12 0" />
+      <path d="M12 16l3-5" />
+      <path d="M5 20h14" />
+      <path d="M8 16h8" />
+    </svg>
+  `,
+  venting: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 15h8a4 4 0 0 0 4-4V5" />
+      <path d="M8 19h7a5 5 0 0 0 5-5V8" />
+      <path d="M16 5h4" />
+      <path d="M20 8h-4" />
+    </svg>
+  `,
+  support: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 10h16" />
+      <path d="M7 10v9" />
+      <path d="M17 10v9" />
+      <path d="M6 19h12" />
+      <path d="M9 6h6" />
+    </svg>
+  `,
+  route: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M5 18h5a4 4 0 0 0 4-4V9a3 3 0 0 1 3-3h2" />
+      <circle cx="5" cy="18" r="1.5" />
+      <circle cx="19" cy="6" r="1.5" />
+      <path d="M9 12h5" />
+    </svg>
+  `,
+  materials: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M5 7h14" />
+      <path d="M5 12h14" />
+      <path d="M5 17h14" />
+      <path d="M8 5v14" />
+      <path d="M16 5v14" />
+    </svg>
+  `,
+  connection: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 12h6" />
+      <path d="M14 12h6" />
+      <path d="M10 8h4v8h-4Z" />
+      <path d="M7 9v6" />
+      <path d="M17 9v6" />
+    </svg>
+  `,
+  commission: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M12 3 19 6v5c0 4.8-2.8 8.1-7 10-4.2-1.9-7-5.2-7-10V6Z" />
+      <path d="M9 12l2 2 4-5" />
+    </svg>
+  `,
+  commercial: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 20V6l8-3 8 3v14" />
+      <path d="M8 9h2" />
+      <path d="M14 9h2" />
+      <path d="M8 13h2" />
+      <path d="M14 13h2" />
+      <path d="M10 20v-4h4v4" />
+    </svg>
+  `,
+  furnace: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="6" y="3.5" width="12" height="17" rx="2" />
+      <path d="M9 7h6" />
+      <path d="M9 10h6" />
+      <path d="M9 13h6" />
+      <path d="M9 17h2" />
+      <path d="M13 17h2" />
+    </svg>
+  `,
+  rooftop: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 18h16" />
+      <path d="M6 14h12v4H6Z" />
+      <path d="M8 10h8v4H8Z" />
+      <path d="M9 7h6" />
+    </svg>
+  `,
+  fireplace: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M5 20V7h14v13" />
+      <path d="M8 20v-8a4 4 0 0 1 8 0v8" />
+      <path d="M12 17c1.3-.9 2-1.9 2-3.1 0-1.1-.7-2-1.5-2.8.1 1.4-1 2.1-1 3.1 0 .8.2 1.7.5 2.8Z" />
+    </svg>
+  `,
+  garage: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 20V9l8-5 8 5v11" />
+      <path d="M7 20v-7h10v7" />
+      <path d="M9 16h6" />
+    </svg>
+  `,
+  load: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M5 19V5" />
+      <path d="M5 19h14" />
+      <path d="M8 16h2" />
+      <path d="M12 13h2" />
+      <path d="M16 9h2" />
+      <path d="M8 8l8 8" />
+    </svg>
+  `,
+  connectedLoad: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="4" y="5" width="6" height="12" rx="1.6" />
+      <rect x="14" y="4" width="6" height="13" rx="1.6" />
+      <path d="M6.5 8h1" />
+      <path d="M16.5 7h1" />
+      <path d="M7 17v2" />
+      <path d="M17 17v2" />
+      <path d="M10 11h4" />
+      <path d="M12 9v4" />
+      <path d="M8 20h8" />
+    </svg>
+  `,
+  air: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 8h10a3 3 0 0 0 0-6" />
+      <path d="M4 13h16" />
+      <path d="M4 18h9a3 3 0 0 1 0 6" />
+    </svg>
+  `,
+  electrical: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="m13 3-7 11h6l-1 7 7-11h-6Z" />
+    </svg>
+  `,
+  spark: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M12 3v4" />
+      <path d="M12 17v4" />
+      <path d="M4.9 4.9l2.8 2.8" />
+      <path d="M16.3 16.3l2.8 2.8" />
+      <path d="M3 12h4" />
+      <path d="M17 12h4" />
+      <path d="M4.9 19.1l2.8-2.8" />
+      <path d="M16.3 7.7l2.8-2.8" />
+      <circle cx="12" cy="12" r="2.5" />
+    </svg>
+  `,
+  lockout: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <rect x="6" y="10" width="12" height="10" rx="2" />
+      <path d="M8.5 10V7.5a3.5 3.5 0 0 1 7 0V10" />
+      <path d="M12 14v2" />
+    </svg>
+  `,
+  pulse: `
+    <svg viewBox="0 0 24 24" role="img" focusable="false">
+      <path d="M4 13h3l2-5 4 10 2-5h5" />
+      <path d="M5 19h14" />
+    </svg>
+  `,
+  drainage: () => waterHeatingIcon("drainage"),
+  controls: () => waterHeatingIcon("controls"),
+  tank: () => waterHeatingIcon("tank"),
+  tankless: () => waterHeatingIcon("tankless"),
+  boiler: () => waterHeatingIcon("boiler"),
+  flame: () => heatingIcon("flame"),
+  shield: () => waterHeatingIcon("shield"),
+  safety: () => waterHeatingIcon("shield"),
+  sizing: () => heatingIcon("sizing"),
+  map: () => heatingIcon("map"),
+  space: () => heatingIcon("home"),
+};
+
+function gasLineIcon(key) {
+  const icon = gasLineIcons[key] ?? gasLineIcons.pipe;
+  return typeof icon === "function" ? icon() : icon;
+}
+
+function gasLineList(items) {
+  return `
+    <ul class="gas-line-list">
+      ${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+    </ul>
+  `;
+}
+
+function gasLineOverviewSection(service) {
+  return `
+    <section class="section gas-line-section gas-line-overview-section">
+      <div class="container service-detail-grid">
+        <article class="detail-copy">
+          <p class="eyebrow">What Airrand Handles</p>
+          <h2>Professional gas piping with sizing, routing and safety in mind.</h2>
+          <p>Gas piping is not simply running a pipe from one point to another. The connected equipment, total fuel demand, route, material, supports, shutoffs, appliance requirements and testing all affect the final scope.</p>
+          <p>Airrand handles new gas-line installations, extensions, modifications and replacement-equipment connections for appropriate residential and commercial HVAC and mechanical applications.</p>
+          <ul class="check-list">
+            ${service.details.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+          </ul>
+        </article>
+        <aside class="service-aside gas-line-aside">
+          <h2>Common Applications</h2>
+          <ul>
+            ${service.applications.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+          </ul>
+          <a class="button button-primary" href="${link("/contact/")}">Book Gas Service</a>
+          <a class="button button-secondary" href="tel:${site.phoneTel}">Call ${site.phone}</a>
+        </aside>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineDesignSection() {
+  return `
+    <section class="section gas-line-section gas-line-design-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "System Design",
+          title: "Gas Lines Have to Match the Equipment They Serve",
+          text:
+            "Gas piping must be sized and routed based on the equipment connected to the system. Airrand reviews the practical requirements without turning the page into a DIY sizing guide.",
+        })}
+        <div class="gas-line-split gas-design-layout">
+          <article class="gas-design-factors">
+          <div class="gas-factor-grid">
+            ${gasLineDesignFactors
+              .map(
+                (item) => `
+                  <div class="gas-factor">
+                    <span class="gas-line-icon" aria-hidden="true">${gasLineIcon(item.icon)}</span>
+                    <strong>${escapeHtml(item.title)}</strong>
+                    <small>${escapeHtml(item.text)}</small>
+                  </div>
+                `,
+              )
+              .join("")}
+          </div>
+          </article>
+          <aside class="gas-design-diagram reveal" aria-label="Gas piping system diagram">
+          <div class="gas-flow-panel">
+            <div class="gas-flow-step">
+              <span class="gas-line-icon" aria-hidden="true">${gasLineIcon("meter")}</span>
+              <strong>Gas Meter / Supply</strong>
+            </div>
+            <span class="gas-flow-arrow" aria-hidden="true">&rarr;</span>
+            <div class="gas-flow-step">
+              <span class="gas-line-icon" aria-hidden="true">${gasLineIcon("pipe")}</span>
+              <strong>Main Gas Line</strong>
+            </div>
+            <span class="gas-flow-arrow" aria-hidden="true">&rarr;</span>
+            <div class="gas-flow-step">
+              <span class="gas-line-icon" aria-hidden="true">${gasLineIcon("branch")}</span>
+              <strong>Branch Lines</strong>
+            </div>
+            <span class="gas-flow-arrow" aria-hidden="true">&rarr;</span>
+            <div class="gas-flow-step gas-flow-step-warm">
+              <span class="gas-line-icon" aria-hidden="true">${gasLineIcon("equipment")}</span>
+              <strong>Equipment</strong>
+            </div>
+          </div>
+          <div class="gas-flow-callout">
+            <span class="gas-mini-icon" aria-hidden="true">${gasLineIcon("load")}</span>
+            <div>
+              <strong>Adding new equipment can change the requirements of the existing gas system.</strong>
+              <p>Existing piping should be evaluated before additional gas-fired equipment is connected.</p>
+            </div>
+          </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineApplicationsSection() {
+  return `
+    <section class="section gas-line-section gas-line-applications-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Common Applications",
+          title: "Gas Piping for HVAC and Mechanical Equipment",
+          text:
+            "Airrand supports gas piping for equipment that needs a properly planned fuel supply, clear access and safe commissioning.",
+        })}
+        <div class="gas-application-grid">
+          ${gasLineApplications
+            .map(
+              (item) => `
+                <article class="gas-line-card reveal">
+                  <span class="gas-line-icon" aria-hidden="true">${gasLineIcon(item.icon)}</span>
+                  <h3>${escapeHtml(item.title)}</h3>
+                  <p>${escapeHtml(item.text)}</p>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineCapacitySection() {
+  return `
+    <section class="section gas-line-section gas-line-capacity-section">
+      <div class="container gas-line-split">
+        <article>
+          ${sectionHeading({
+            eyebrow: "Capacity",
+            title: "When Existing Gas Piping May Not Be Enough",
+            text:
+              "Replacing or adding equipment can change gas demand. The existing gas line should be evaluated for total connected load and system capacity before new equipment is added.",
+          })}
+          <a class="button button-primary" href="${link("/contact/")}">Have Airrand Evaluate Your Gas System</a>
+        </article>
+        <div class="gas-trigger-panel reveal">
+          ${gasLineUpgradeTriggers
+            .map(
+              (item) => `
+                <article class="gas-trigger-card">
+                  <span class="gas-mini-icon" aria-hidden="true">${gasLineIcon(item.icon)}</span>
+                  <strong>${escapeHtml(item.title)}</strong>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineProjectTypesSection() {
+  return `
+    <section class="section gas-line-section gas-line-project-types-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Project Types",
+          title: "New Gas Line or Existing-System Extension?",
+          text:
+            "Both project types need planning. The route, system capacity, supports, shutoffs and equipment requirements should be reviewed before installation.",
+          align: "center",
+        })}
+        <div class="gas-dual-panel">
+          <article class="gas-line-panel reveal">
+            <span class="gas-line-icon" aria-hidden="true">${gasLineIcon("pipe")}</span>
+            <p class="eyebrow">New Gas Line</p>
+            <h3>For new locations and new mechanical scope.</h3>
+            ${gasLineList(["New equipment location", "Renovation", "Addition", "Mechanical room changes", "Commercial fit-out", "New gas appliance"])}
+            <p>Routing, sizing, supports and shutoffs should be planned before installation.</p>
+          </article>
+          <article class="gas-line-panel gas-line-panel-warm reveal">
+            <span class="gas-line-icon" aria-hidden="true">${gasLineIcon("branch")}</span>
+            <p class="eyebrow">Extend / Modify Existing Gas Line</p>
+            <h3>For added, moved or replacement equipment.</h3>
+            ${gasLineList(["New appliance added", "Equipment relocated", "Existing piping rerouted", "Replacement equipment has different requirements"])}
+            <p>Existing pipe size and system capacity should be evaluated before extension.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineInstallationSection() {
+  return `
+    <section class="section gas-line-section gas-line-installation-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Installation Standard",
+          title: "What Proper Gas Line Installation Actually Includes",
+          text:
+            "A professional gas-line installation is planned, supported, connected, tested and commissioned as part of the larger mechanical system.",
+        })}
+        <div class="gas-technical-grid">
+          ${gasLineInstallationItems
+            .map(
+              ([title, text, icon]) => `
+                <article class="gas-line-card reveal">
+                  <span class="gas-line-icon" aria-hidden="true">${gasLineIcon(icon)}</span>
+                  <h3>${escapeHtml(title)}</h3>
+                  <p>${escapeHtml(text)}</p>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineTestingSection() {
+  return `
+    <section class="section gas-line-section gas-line-testing-section">
+      <div class="container gas-line-split">
+        <article>
+          ${sectionHeading({
+            eyebrow: "Verification",
+            title: "Gas Piping Should Be Tested Before It Is Put Into Service",
+            text:
+              "New or modified gas piping needs to be checked for integrity before operation. Pressure testing confirms that the piping system holds appropriately before gas is introduced or equipment is operated.",
+          })}
+          <p class="gas-line-note">Testing requirements depend on the installation and applicable code requirements.</p>
+        </article>
+        <div class="gas-process-panel reveal" aria-label="Gas piping verification sequence">
+          ${["Install", "Test", "Commission"]
+            .map(
+              (step, index) => `
+                <div class="gas-process-step">
+                  <span class="gas-line-icon" aria-hidden="true">${gasLineIcon(index === 0 ? "pipe" : index === 1 ? "pressure" : "commission")}</span>
+                  <strong>${escapeHtml(step)}</strong>
+                </div>
+              `,
+            )
+            .join('<span class="gas-flow-arrow" aria-hidden="true">&rarr;</span>')}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function gasLinePerformanceSection() {
+  const effects = [
+    { title: "Poor burner performance", icon: "flame" },
+    { title: "Ignition issues", icon: "spark" },
+    { title: "Reduced equipment output", icon: "load" },
+    { title: "Lockouts", icon: "lockout" },
+    { title: "Unstable operation", icon: "pulse" },
+  ];
+
+  return `
+    <section class="section gas-line-section gas-line-performance-section">
+      <div class="container gas-line-split">
+        <article>
+          ${sectionHeading({
+            eyebrow: "Equipment Performance",
+            title: "Gas Supply Affects How Equipment Operates",
+            text:
+              "Gas-fired equipment depends on proper supply conditions. Gas pressure and appliance setup should be verified according to the specific equipment requirements.",
+          })}
+          <p class="gas-line-note">Airrand does not use universal pressure numbers as a substitute for reviewing the actual equipment and installation.</p>
+        </article>
+        <div class="gas-problem-list">
+          ${effects
+            .map(
+              (item) => `
+                <article class="gas-performance-card">
+                  <span class="gas-mini-icon" aria-hidden="true">${gasLineIcon(item.icon)}</span>
+                  <strong>${escapeHtml(item.title)}</strong>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineCompleteSystemSection() {
+  return `
+    <section class="section gas-line-section gas-line-complete-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Complete Installation",
+          title: "Gas Supply Is Only One Part of a Gas Appliance Installation",
+          text:
+            "A gas-fired appliance also depends on venting, combustion air, drainage where applicable, electrical, controls and equipment clearances.",
+          align: "center",
+        })}
+        <div class="gas-system-map reveal">
+          ${gasLineCompleteSystems
+            .map(
+              ([title, text, icon]) => `
+                <article>
+                  <span class="gas-line-icon" aria-hidden="true">${gasLineIcon(icon)}</span>
+                  <strong>${escapeHtml(title)}</strong>
+                  <small>${escapeHtml(text)}</small>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+        <p class="gas-summary-line"><strong>A properly sized gas line does not compensate for incorrect venting or equipment setup.</strong></p>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineMechanicalRoomSection(work) {
+  const photo = work.photos[0] ?? {
+    image: "work/homepage-gallery-mechanical-room.webp",
+    alt: "Airrand mechanical room piping installation",
+    category: "Gas Lines",
+  };
+
+  return `
+    <section class="section gas-line-section gas-line-mechanical-room-section">
+      <div class="container gas-line-photo-split">
+        <article>
+          ${sectionHeading({
+            eyebrow: "Mechanical Rooms",
+            title: "Clean Gas Piping Makes Mechanical Rooms Better",
+            text:
+              "Good mechanical-room piping should be straight, supported, serviceable, clearly routed, accessible and organized. The goal is a system that can be understood and serviced later.",
+          })}
+          <blockquote>Mechanical piping should look intentional, not improvised.</blockquote>
+        </article>
+        <figure class="gas-photo-panel reveal">
+          <img src="${asset(photo.image)}" alt="${escapeHtml(photo.alt)}" loading="lazy" width="700" height="820">
+          <figcaption>${escapeHtml(photo.category)} work from Airrand's project gallery.</figcaption>
+        </figure>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineMaterialsSection() {
+  return `
+    <section class="section gas-line-section gas-line-materials-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Materials",
+          title: "Different Applications May Use Different Gas-Piping Materials",
+          text:
+            "Depending on the installation, approved gas piping systems may use different materials. Selection depends on the location, application and applicable code requirements.",
+        })}
+        <div class="gas-material-grid">
+          ${gasLineMaterials
+            .map(
+              ([title, text, icon]) => `
+                <article class="gas-line-card reveal">
+                  <span class="gas-line-icon" aria-hidden="true">${gasLineIcon(icon)}</span>
+                  <h3>${escapeHtml(title)}</h3>
+                  <p>${escapeHtml(text)}</p>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+        <p class="gas-summary-line">The material selected must be appropriate for the location, application and applicable code requirements.</p>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineRoutingSection() {
+  return `
+    <section class="section gas-line-section gas-line-routing-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Routing",
+          title: "Gas Piping Can Run Through Different Environments",
+          text:
+            "Indoor and outdoor gas piping have different practical considerations. Airrand keeps this review high-level for customers and confirms the technical details on site.",
+          align: "center",
+        })}
+        <div class="gas-dual-panel">
+          <article class="gas-line-panel reveal">
+            <span class="gas-line-icon" aria-hidden="true">${gasLineIcon("commercial")}</span>
+            <p class="eyebrow">Indoor</p>
+            <h3>Mechanical rooms and finished spaces.</h3>
+            ${gasLineList(["Protection", "Supports", "Access", "Appliance location", "Mechanical-room layout"])}
+          </article>
+          <article class="gas-line-panel gas-line-panel-warm reveal">
+            <span class="gas-line-icon" aria-hidden="true">${gasLineIcon("route")}</span>
+            <p class="eyebrow">Outdoor</p>
+            <h3>Exterior routing and equipment locations.</h3>
+            ${gasLineList(["Weather exposure", "Corrosion protection", "Supports", "Routing", "Equipment location"])}
+          </article>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineProblemsSection() {
+  return `
+    <section class="section gas-line-section gas-line-problems-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Diagnostics",
+          title: "Common Gas-Piping Issues We Encounter",
+          text:
+            "These concerns should be evaluated by a qualified gas technician. The symptom is only the starting point for a proper review.",
+        })}
+        <div class="gas-problem-grid">
+          ${gasLineProblems
+            .map(
+              (item) => `
+                <article class="gas-problem-tile reveal">
+                  <span class="gas-mini-icon" aria-hidden="true">${gasLineIcon(item.icon)}</span>
+                  <div>
+                    <small>${escapeHtml(item.group)}</small>
+                    <strong>${escapeHtml(item.title)}</strong>
+                  </div>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+        <p class="gas-summary-line">Gas-line concerns should be evaluated by a qualified gas technician.</p>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineLeakSafetySection() {
+  return `
+    <section class="section gas-line-section gas-line-leak-section">
+      <div class="container gas-safety-panel reveal">
+        <span class="gas-line-icon" aria-hidden="true">${gasLineIcon("safety")}</span>
+        <div>
+          <p class="eyebrow">Safety</p>
+          <h2>If You Suspect a Gas Leak</h2>
+          ${gasLineList([
+            "Do not operate electrical switches or create ignition sources.",
+            "Leave the affected area.",
+            "Contact the gas utility or emergency services as appropriate from a safe location.",
+            "Do not attempt to locate or repair the leak yourself.",
+          ])}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineDemandSection() {
+  return `
+    <section class="section gas-line-section gas-line-demand-section">
+      <div class="container gas-line-split">
+        <article>
+          ${sectionHeading({
+            eyebrow: "Equipment Upgrades",
+            title: "New Equipment Can Change Gas Demand",
+            text:
+              "Modern equipment may have different gas-input requirements than the equipment being replaced. High-input tankless units, larger furnaces, boilers, garage heaters and commercial rooftop equipment should be reviewed before connection.",
+          })}
+        </article>
+        <div class="gas-review-panel reveal">
+          <span class="gas-line-icon" aria-hidden="true">${gasLineIcon("load")}</span>
+          <h3>Airrand can evaluate</h3>
+          ${gasLineList(gasLineDemandReviewItems)}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineCapabilitySection() {
+  return `
+    <section class="section gas-line-section gas-line-capability-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Capability",
+          title: "Residential Gas Work. Commercial Mechanical Capability.",
+          text:
+            "Airrand supports gas piping as part of practical residential work and broader commercial HVAC/mechanical scopes.",
+          align: "center",
+        })}
+        <div class="gas-dual-panel">
+          <article class="gas-line-panel reveal">
+            <span class="gas-line-icon" aria-hidden="true">${gasLineIcon("garage")}</span>
+            <p class="eyebrow">Residential</p>
+            <h3>Homes, renovations and equipment replacement.</h3>
+            ${gasLineList(gasResidentialItems)}
+          </article>
+          <article class="gas-line-panel gas-line-panel-warm reveal">
+            <span class="gas-line-icon" aria-hidden="true">${gasLineIcon("commercial")}</span>
+            <p class="eyebrow">Commercial</p>
+            <h3>Mechanical rooms and commercial HVAC equipment.</h3>
+            ${gasLineList(gasCommercialItems)}
+            <a class="button button-secondary" href="${link("/commercial/")}">Commercial HVAC</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function gasLineWorkSection(work) {
+  if (!work.photos.length) return "";
+  const workTitle = "Recent Gas Line Installations";
+
+  return `
+    <section class="section gallery-section gas-line-work-section">
+      <div class="container">
+        ${sectionHeading({
+          eyebrow: "Recent Work",
+          title: workTitle,
+          text: "A look at recent Airrand gas-piping and mechanical installations throughout the GTA.",
+        })}
+        ${workSlider(work.photos, workTitle)}
+      </div>
+    </section>
+  `;
+}
+
+function gasLineFaqSection(faqs) {
+  return `
+    <section class="section faq-section gas-line-faq-section">
+      <div class="container faq-shell">
+        ${sectionHeading({
+          eyebrow: "FAQ",
+          title: "Gas Lines FAQ",
+          text:
+            "Common questions about gas-line installation, equipment connections, pressure testing and residential or commercial gas piping in the Greater Toronto Area.",
+          align: "center",
+        })}
+        <div class="faq-list">
+          ${faqs
+            .map(
+              (faq) => `
+                <details class="faq-item">
+                  <summary><span>${escapeHtml(faq.question)}</span></summary>
+                  <p>${escapeHtml(faq.answer)}</p>
+                </details>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function gasLinesPage(service) {
+  const work = servicePhotos(service);
+  const faqs = serviceFaqs(service);
+  const pageDescription =
+    "Airrand provides professional gas-line installation and gas piping for furnaces, water heaters, tankless systems, fireplaces and HVAC equipment throughout the Greater Toronto Area.";
+
+  return {
+    pathname: `/services/${service.slug}/`,
+    title: "Gas Line Installation & Gas Piping GTA | Airrand",
+    description: pageDescription,
+    current: "services",
+    image: service.image,
+    schema: [
+      businessSchema(),
+      serviceSchema({ ...service, title: "Gas Line Installation", meta: pageDescription }),
+      faqSchema(faqs),
+      breadcrumbs([
+        { name: "Home", url: "/" },
+        { name: "Services", url: "/services/" },
+        { name: "Gas Lines", url: `/services/${service.slug}/` },
+      ]),
+    ],
+    body: `
+      <section class="page-hero service-hero gas-line-hero" style="${heroImageStyle(service.image)}">
+        <div class="container">
+          <p class="eyebrow">Gas Service</p>
+          <h1>Gas Line Installation &amp; Service in the Greater Toronto Area</h1>
+          <p>Airrand provides gas piping for HVAC equipment, water heating, fireplaces and other approved gas appliances with careful sizing, routing and clean workmanship.</p>
+          ${ctaButtons()}
+        </div>
+      </section>
+      ${gasLineOverviewSection(service)}
+      ${standardsStrip()}
+      ${gasLineDesignSection()}
+      ${gasLineApplicationsSection()}
+      ${gasLineCapacitySection()}
+      ${gasLineProjectTypesSection()}
+      ${gasLineInstallationSection()}
+      ${gasLineTestingSection()}
+      ${gasLinePerformanceSection()}
+      ${gasLineCompleteSystemSection()}
+      ${gasLineMechanicalRoomSection(work)}
+      ${gasLineMaterialsSection()}
+      ${gasLineRoutingSection()}
+      ${gasLineProblemsSection()}
+      ${gasLineLeakSafetySection()}
+      ${gasLineDemandSection()}
+      ${gasLineCapabilitySection()}
+      ${gasLineWorkSection(work)}
+      ${gasLineFaqSection(faqs)}
+      ${finalCta({
+        title: "Need gas piping reviewed or installed?",
+        text:
+          "Share the equipment, property type, location and photos so Airrand can review the gas-line scope and recommend the right next step.",
       })}
     `,
   };
@@ -5412,6 +6431,9 @@ function servicesPage() {
 function servicePage(service) {
   if (service.slug === "water-heaters") {
     return waterHeatingPage(service);
+  }
+  if (service.slug === "gas-lines") {
+    return gasLinesPage(service);
   }
 
   const isCoolingPage = service.slug === "air-conditioning";

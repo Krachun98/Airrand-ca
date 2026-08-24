@@ -255,18 +255,18 @@ export const services = [
     slug: "gas-lines",
     group: "Gas",
     image: "gas-line-installation.webp",
-    short: "Professional gas piping for HVAC equipment and appliances.",
+    short: "Gas piping for HVAC equipment, water heating and approved gas appliances.",
     intro:
-      "Airrand provides gas piping for HVAC equipment and gas appliances with careful routing and clean workmanship.",
+      "Airrand provides gas piping for HVAC equipment, water heating, fireplaces and other approved gas appliances with careful sizing, routing and clean workmanship.",
     meta:
-      "Gas line installation and gas piping for HVAC equipment and appliances in Toronto and the GTA.",
+      "Airrand provides professional gas-line installation and gas piping for furnaces, water heaters, tankless systems, fireplaces and HVAC equipment throughout the Greater Toronto Area.",
     details: [
-      "Gas piping for heating equipment",
-      "Gas appliance line installation",
-      "Mechanical room gas connections",
-      "Clear, organized pipe routing",
+      "New gas-line installations",
+      "Gas piping modifications and extensions",
+      "HVAC and water-heating equipment connections",
+      "Pressure testing and commissioning coordination",
     ],
-    applications: ["Furnaces", "Water heaters", "Tankless units", "Gas fireplaces"],
+    applications: ["Furnaces", "Water heaters", "Tankless units", "Boilers", "Gas fireplaces", "Garage heaters", "Rooftop units", "Mechanical rooms"],
   },
   {
     title: "Water Heaters",
