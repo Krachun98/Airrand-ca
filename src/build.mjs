@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "ductwork-page-20260823";
+const assetVersion = "commercial-page-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -9140,18 +9140,369 @@ function residentialPage() {
   };
 }
 
+const commercialPageCapabilityItems = [
+  ["rooftop", "Rooftop Equipment", "Commercial heating and cooling equipment replacement, installation and service."],
+  ["duct", "Ductwork", "Main trunks, branches, transitions, spiral duct and air-distribution systems."],
+  ["fan", "Ventilation", "Fresh air, exhaust, make-up air and commercial ventilation systems."],
+  ["gas", "Gas Piping", "Gas supply for rooftop units, heaters, boilers and other mechanical equipment where applicable."],
+  ["mechanical", "Mechanical Rooms", "Clean equipment layouts, piping, ductwork and service-conscious installation."],
+  ["replace", "Equipment Replacement", "Planning and coordination when existing commercial equipment reaches end of service life."],
+  ["controls", "Controls", "Equipment controls, thermostats and system integration within Airrand's applicable scope."],
+  ["service", "Service & Maintenance", "Diagnostics, repairs and ongoing support for commercial HVAC systems."],
+];
+
+const commercialSystemItems = [
+  ["rooftop", "Rooftop Units", "Packaged commercial heating and cooling equipment."],
+  ["split", "Split Systems", "Commercial indoor and outdoor systems where appropriate."],
+  ["heat-pump", "Heat Pumps", "Commercial heating and cooling applications where suitable."],
+  ["fan", "Make-Up Air Units", "Conditioned replacement air for commercial ventilation systems."],
+  ["exhaust", "Exhaust Systems", "Air removal for appropriate commercial applications."],
+  ["duct", "Duct Systems", "Supply, return and ventilation ductwork."],
+  ["gas", "Gas-Fired Equipment", "Gas-fired mechanical equipment within Airrand's licensed scope."],
+  ["water", "Hydronic Equipment", "Boilers, pumps, fan coils or related systems where applicable."],
+];
+
+const rooftopIncludes = ["Heating", "Cooling", "Supply airflow", "Ventilation", "Economizer functions where equipped", "Controls"];
+const rooftopWork = [
+  "Equipment replacement",
+  "Service and diagnostics",
+  "Gas connections",
+  "Electrical coordination within scope",
+  "Duct transition modifications",
+  "Curb / equipment interface review",
+  "Startup and testing",
+  "Equipment-access coordination where required",
+];
+const rooftopReplacementFactors = [
+  "Existing curb",
+  "Supply opening",
+  "Return opening",
+  "Gas connection",
+  "Electrical requirements",
+  "Controls",
+  "Drainage",
+  "Ventilation requirements",
+  "Equipment dimensions",
+  "Weight",
+  "Service clearances",
+];
+const commercialDuctItems = [
+  "Rectangular duct",
+  "Spiral duct",
+  "Supply trunks",
+  "Return duct",
+  "Transitions",
+  "Equipment connections",
+  "Branch systems",
+  "Diffuser connections",
+  "Ventilation pathways",
+];
+const spiralDuctBenefits = ["Rigid construction", "Clean appearance", "Efficient round airflow path", "Suitable for exposed ceilings", "Long straight commercial runs"];
+const ventilationNeeds = ["Outdoor air", "Exhaust", "Make-up air", "Pressure relationships", "Occupancy", "Equipment ventilation"];
+const makeupAirSupports = ["Commercial exhaust", "Building pressure", "Mechanical ventilation", "Occupied spaces", "Specific process applications where appropriate"];
+const commercialGasApplications = ["Rooftop units", "Make-up air equipment", "Unit heaters", "Boilers", "Water-heating equipment", "Mechanical rooms"];
+const gasReviewItems = ["Equipment input", "Total connected load", "Pipe routing", "Supports", "Shutoffs", "Testing", "Serviceability"];
+const mechanicalRoomItems = ["Heating equipment", "Cooling equipment", "Water heating", "Gas piping", "Ductwork", "Drainage", "Electrical", "Controls"];
+const replacementProjectItems = [
+  "Different cabinet sizes",
+  "Different airflow",
+  "New controls",
+  "Different gas requirements",
+  "New electrical requirements",
+  "Duct modifications",
+  "Ventilation changes",
+  "Drainage changes",
+];
+const retrofitConstraints = [
+  "Existing structure",
+  "Occupied spaces",
+  "Existing electrical",
+  "Plumbing",
+  "Sprinkler systems",
+  "Finished ceilings",
+  "Limited access",
+  "Existing mechanical systems",
+];
+const fitoutItems = [
+  "New supply runs",
+  "New returns",
+  "Diffuser relocation",
+  "Duct modifications",
+  "Exhaust",
+  "Make-up air",
+  "Equipment changes",
+  "Thermostat / control relocation",
+  "Gas piping",
+];
+const coordinationTrades = [
+  ["electrical", "Electrical"],
+  ["water", "Plumbing"],
+  ["fire", "Fire Protection"],
+  ["building", "Structure"],
+  ["architectural", "Architectural"],
+  ["controls", "Controls"],
+];
+const serviceAccessItems = ["Filters", "Motors", "Coils", "Controls", "Gas valves", "Electrical panels", "Drainage", "Belts where applicable", "Service panels"];
+const commercialDiagnosticsItems = [
+  ["heat", "Heating"],
+  ["cool", "Cooling"],
+  ["airflow", "Airflow"],
+  ["controls", "Controls"],
+  ["gas", "Gas"],
+  ["electrical", "Electrical"],
+  ["fan", "Ventilation"],
+  ["rooftop", "Rooftop Equipment"],
+  ["drain", "Drainage"],
+];
+const commercialMaintenanceItems = [
+  "Filters",
+  "Belts where equipped",
+  "Coils",
+  "Drainage",
+  "Motors",
+  "Electrical",
+  "Heating operation",
+  "Refrigeration performance",
+  "Gas operation",
+  "Ventilation",
+  "Controls",
+];
+const commercialReviewItems = [
+  ["equipment", "Existing Equipment", "What is currently installed?"],
+  ["building", "Building Use", "How is the space being used?"],
+  ["airflow", "Airflow", "How is air currently distributed?"],
+  ["fan", "Ventilation", "What outdoor or exhaust airflow is required?"],
+  ["utilities", "Utilities", "Gas, electrical and drainage conditions."],
+  ["access", "Access", "Can equipment be installed and serviced?"],
+  ["duct", "Existing Ductwork", "Can it support the proposed equipment?"],
+  ["schedule", "Project Constraints", "Schedule, occupancy and other trades."],
+];
+const commercialProcessSteps = [
+  ["01", "Site Review", "Understand the existing mechanical system and project requirements."],
+  ["02", "Scope", "Define equipment, modifications and mechanical work."],
+  ["03", "Coordination", "Review routing, access and other project conditions."],
+  ["04", "Installation", "Complete the mechanical work cleanly and deliberately."],
+  ["05", "Startup & Testing", "Verify the system operates as intended within Airrand's scope."],
+  ["06", "Walkthrough", "Review the completed system and relevant operating information."],
+];
+const commercialBuildingTypes = ["Retail", "Offices", "Restaurants", "Warehouses", "Commercial units", "Light industrial", "Multi-use buildings", "Mechanical rooms"];
+const commercialWhyItems = [
+  ["workmanship", "Clean Workmanship", "Mechanical installations should look deliberate."],
+  ["technical", "Technical Execution", "Equipment, airflow, gas, ductwork and controls have to work together."],
+  ["communication", "Communication", "Customers should understand the scope and project status."],
+  ["coordination", "Coordination", "Commercial HVAC has to fit around the building and other trades."],
+  ["service", "Serviceability", "The finished system should remain practical to maintain."],
+  ["long-term", "Long-Term Thinking", "Avoid solving today's problem in a way that creates tomorrow's problem."],
+];
+const commercialFaqs = [
+  {
+    question: "Does Airrand handle rooftop HVAC equipment?",
+    answer: "Airrand works with appropriate commercial rooftop heating and cooling equipment for service, replacement and installation.",
+  },
+  {
+    question: "Does Airrand install commercial ductwork?",
+    answer:
+      "Yes. Airrand handles rectangular duct, round duct, spiral duct, supply and return ductwork and ventilation systems for appropriate commercial projects.",
+  },
+  {
+    question: "Can Airrand work in occupied commercial spaces?",
+    answer:
+      "Often, but project conditions, access, safety and scheduling should be reviewed before work begins. The goal is to plan the work clearly rather than promise zero disruption.",
+  },
+  {
+    question: "Does Airrand handle make-up air systems?",
+    answer: "Airrand works with appropriate commercial ventilation and make-up air equipment within its mechanical scope.",
+  },
+  {
+    question: "Does Airrand install commercial gas piping?",
+    answer:
+      "Yes, for appropriate HVAC and mechanical equipment within licensed scope, including rooftop units, make-up air equipment, unit heaters, boilers and water-heating equipment.",
+  },
+  {
+    question: "Can Airrand replace an existing rooftop unit?",
+    answer: "Yes, subject to evaluating the existing equipment, curb, duct connections, gas, electrical, controls and access conditions.",
+  },
+  {
+    question: "Does Airrand offer commercial HVAC maintenance?",
+    answer:
+      "Airrand provides commercial service and maintenance support for appropriate HVAC equipment. Routine maintenance can help identify developing problems before they become larger service issues.",
+  },
+  {
+    question: "Can Airrand modify existing commercial ductwork?",
+    answer: "Yes, depending on the existing system, airflow requirements, site conditions and project scope.",
+  },
+  {
+    question: "Does Airrand work with general contractors?",
+    answer: "Airrand can work alongside contractors and other trades on appropriate commercial HVAC and mechanical scopes.",
+  },
+  {
+    question: "What information should I provide for a commercial quote?",
+    answer:
+      "Helpful details include the building address, type of space, equipment information if available, photos, drawings where available, description of work, project schedule and contact information.",
+  },
+];
+
+function commercialIcon(key) {
+  const icons = {
+    rooftop: `<path d="M4 15h16v5H4z"/><path d="M7 15V8h10v7"/><path d="M9 11h6"/><path d="M10 5h4"/>`,
+    duct: `<path d="M4 8h11l5 4-5 4H4z"/><path d="M8 8v8"/><path d="M15 8v8"/>`,
+    fan: `<circle cx="12" cy="12" r="2"/><path d="M12 10c1-5 6-5 7-2 1 3-2 5-7 4"/><path d="M14 13c4 3 2 8-1 8-3 0-4-4-1-9"/><path d="M10 13c-5 2-8-2-6-5 2-2 6-1 8 4"/>`,
+    gas: `<path d="M12 3s4 4 4 8a4 4 0 0 1-8 0c0-1.8 1.1-3.2 2.4-4.9"/><path d="M12 13c1-1 1.8-2.2 1.2-4 2.2 2 3.3 6 .3 8.1"/>`,
+    mechanical: `<path d="M5 8h14v11H5z"/><path d="M8 8V5h8v3"/><path d="M8 12h8"/><path d="M8 16h4"/>`,
+    replace: `<path d="M4 7h11a4 4 0 0 1 0 8H8"/><path d="m8 11-4 4 4 4"/><path d="M20 17H9"/>`,
+    controls: `<path d="M7 4h10v16H7z"/><path d="M10 8h4"/><path d="M10 12h4"/><path d="M10 16h2"/>`,
+    service: `<path d="m14.7 6.3 3 3"/><path d="M5 19l4.5-1.2L18 9.3 14.7 6 6.2 14.5z"/>`,
+    split: `<path d="M4 7h7v10H4z"/><path d="M13 9h7v6h-7z"/><path d="M11 12h2"/>`,
+    "heat-pump": `<path d="M7 7h10v10H7z"/><path d="M12 3v4"/><path d="M12 17v4"/><path d="m4 12 3 0"/><path d="m17 12 3 0"/>`,
+    exhaust: `<path d="M4 8h9"/><path d="M4 12h13"/><path d="M4 16h7"/><path d="m15 9 4 3-4 3"/>`,
+    water: `<path d="M12 3s6 6 6 10a6 6 0 0 1-12 0c0-4 6-10 6-10z"/>`,
+    electrical: `<path d="m13 2-7 12h6l-1 8 7-12h-6z"/>`,
+    fire: `<path d="M12 3s5 4.8 5 10a5 5 0 0 1-10 0c0-2 1.2-3.6 2.8-5.7"/><path d="M12 14c1.2-1.3 2-2.9 1.2-5 2.8 2.3 3.6 8-1.2 8"/>`,
+    building: `<path d="M4 20h16"/><path d="M6 20V5h12v15"/><path d="M9 9h2"/><path d="M13 9h2"/><path d="M9 13h2"/><path d="M13 13h2"/>`,
+    architectural: `<path d="M4 18 12 4l8 14"/><path d="M8 18h8"/><path d="M10 14h4"/>`,
+    heat: `<path d="M7 17c0-2 2-2 2-4s-2-2-2-4"/><path d="M12 17c0-2 2-2 2-4s-2-2-2-4"/><path d="M17 17c0-2 2-2 2-4s-2-2-2-4"/>`,
+    cool: `<path d="M12 3v18"/><path d="m5 7 14 10"/><path d="m19 7-14 10"/>`,
+    airflow: `<path d="M4 8h11a3 3 0 1 0-3-3"/><path d="M4 14h14a3 3 0 1 1-3 3"/>`,
+    drain: `<path d="M6 4h12v8a6 6 0 0 1-12 0z"/><path d="M9 20h6"/>`,
+    equipment: `<path d="M5 5h14v14H5z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h4"/>`,
+    utilities: `<path d="M5 7h14"/><path d="M7 7v10"/><path d="M17 7v10"/><path d="M9 17h6"/>`,
+    access: `<path d="M6 5h12v14H6z"/><path d="M10 12h4"/><path d="M15 12h.1"/>`,
+    schedule: `<path d="M7 3v4"/><path d="M17 3v4"/><path d="M4 8h16"/><path d="M5 5h14v16H5z"/>`,
+    workmanship: `<path d="M4 18h16"/><path d="M7 18V9l5-4 5 4v9"/><path d="M10 18v-5h4v5"/>`,
+    technical: `<path d="M12 2v4"/><path d="M12 18v4"/><path d="M4 12H2"/><path d="M22 12h-2"/><circle cx="12" cy="12" r="5"/>`,
+    communication: `<path d="M4 5h16v11H7l-3 3z"/><path d="M8 9h8"/><path d="M8 12h5"/>`,
+    coordination: `<circle cx="12" cy="12" r="3"/><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><path d="m5.6 5.6 2.1 2.1"/><path d="m16.3 16.3 2.1 2.1"/>`,
+    "long-term": `<path d="M4 12a8 8 0 1 1 3 6.2"/><path d="M4 18v-6h6"/><path d="M12 8v5l3 2"/>`,
+  };
+
+  return `
+    <span class="commercial-page-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        ${icons[key] ?? icons.mechanical}
+      </svg>
+    </span>
+  `;
+}
+
+function commercialCardGrid(items, className = "commercial-page-card-grid") {
+  return `
+    <div class="${className}">
+      ${items
+        .map(
+          ([icon, title, text]) => `
+            <article class="commercial-page-card">
+              ${commercialIcon(icon)}
+              <h3>${escapeHtml(title)}</h3>
+              <p>${escapeHtml(text)}</p>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function commercialPillList(items, className = "commercial-page-pill-list") {
+  return `
+    <ul class="${className}">
+      ${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+    </ul>
+  `;
+}
+
+function commercialFlow(items, className = "") {
+  return `
+    <div class="commercial-page-flow ${className}">
+      ${items
+        .map(
+          (item, index) => `
+            <span>${escapeHtml(item)}</span>
+            ${index < items.length - 1 ? `<i aria-hidden="true"></i>` : ""}
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function commercialPhoto(image, alt, caption) {
+  return `
+    <figure class="commercial-page-photo">
+      <img src="${asset(image)}" alt="${escapeHtml(alt)}" loading="lazy" width="920" height="640">
+      ${caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : ""}
+    </figure>
+  `;
+}
+
+function commercialFaqSection() {
+  return `
+    <section class="section commercial-page-faq">
+      <div class="container faq-shell">
+        ${sectionHeading({
+          eyebrow: "FAQ",
+          title: "Commercial HVAC FAQ",
+          text: "Common questions about Airrand commercial HVAC, ductwork, ventilation, gas piping, service and project quotes.",
+          align: "center",
+        })}
+        <div class="faq-list">
+          ${commercialFaqs
+            .map(
+              (faq) => `
+                <details class="faq-item">
+                  <summary><span>${escapeHtml(faq.question)}</span></summary>
+                  <p>${escapeHtml(faq.answer)}</p>
+                </details>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function commercialQuoteButtons(extraClass = "") {
+  return `
+    <div class="button-row ${extraClass}">
+      <a class="button button-primary" href="${link(quoteRequestPath)}">Request a Commercial Quote</a>
+      <a class="button button-secondary" href="tel:${site.phoneTel}">Call ${site.phone}</a>
+    </div>
+  `;
+}
+
 function commercialPage() {
   const commercialServices = services.filter((service) =>
-    ["commercial-hvac", "ductwork", "gas-lines", "hvac-installation", "hvac-repair", "hvac-maintenance", "air-conditioning", "furnaces"].includes(
-      service.slug,
-    ),
+    [
+      "commercial-hvac",
+      "ductwork",
+      "gas-lines",
+      "hvac-installation",
+      "hvac-repair",
+      "hvac-maintenance",
+      "air-conditioning",
+      "furnaces",
+      "heat-pumps",
+      "water-heaters",
+    ].includes(service.slug),
   );
+  const commercialWorkPhotos = [
+    ...(installationPhotos["commercial-hvac"] ?? []),
+    ...(installationPhotos.ductwork ?? []).slice(0, 8),
+    ...(installationPhotos["gas-lines"] ?? []).slice(0, 4),
+  ].map((photo) => ({ ...photo, filter: "commercial" }));
+  const rooftopPhoto = commercialWorkPhotos.find((photo) => photo.image.includes("rooftop")) ?? commercialWorkPhotos[0];
+  const ductPhoto = (installationPhotos.ductwork ?? [])[0];
+  const spiralPhoto = (installationPhotos.ductwork ?? [])[2] ?? ductPhoto;
+  const mechanicalPhoto =
+    commercialWorkPhotos.find((photo) => photo.image.includes("mechanical-room")) ??
+    (installationPhotos["commercial-hvac"] ?? [])[1] ??
+    rooftopPhoto;
 
   return {
     pathname: "/commercial/",
-    title: "Commercial HVAC Services in the GTA",
+    title: "Commercial HVAC & Mechanical Contractor GTA | Airrand",
     description:
-      "Commercial HVAC services for rooftop equipment, ventilation, ductwork, gas piping, mechanical installations, repairs and maintenance across the GTA.",
+      "Airrand provides commercial HVAC and mechanical services throughout the GTA, including rooftop equipment, ductwork, ventilation, make-up air, gas piping, equipment replacement, service and maintenance.",
     current: "commercial",
     image: "hero-hvac-work.webp",
     schema: [
@@ -9164,41 +9515,340 @@ function commercialPage() {
     body: `
       <section class="page-hero commercial-hero" style="${heroImageStyle("hero-hvac-work.webp")}">
         <div class="container">
-          <p class="eyebrow">Commercial HVAC</p>
-          <h1>Mechanical HVAC work for commercial spaces across the GTA.</h1>
-          <p>Airrand supports commercial heating, cooling, ventilation, ductwork, gas piping, rooftop equipment, equipment replacement, service and maintenance.</p>
-          ${ctaButtons()}
-        </div>
-      </section>
-      <section class="section">
-        <div class="container commercial-grid">
-          <article class="detail-copy">
-            <p class="eyebrow">Commercial Capability</p>
-            <h2>Commercial is treated as a real part of the business.</h2>
-            <p>Commercial clients need HVAC scope that is practical, organized and clearly communicated. Airrand supports mechanical work where ventilation, gas piping, equipment access and serviceability all matter.</p>
-          </article>
-          <div class="capability-grid">
-            <div><strong>Rooftop Equipment</strong><span>Heating and cooling equipment coordination and replacement scope.</span></div>
-            <div><strong>Ventilation</strong><span>Commercial airflow, make-up air and ductwork requirements.</span></div>
-            <div><strong>Gas Piping</strong><span>Gas lines for HVAC and related mechanical equipment.</span></div>
-            <div><strong>Maintenance</strong><span>Service and maintenance support for commercial systems.</span></div>
+          <p class="eyebrow">Commercial Mechanical</p>
+          <h1>Commercial HVAC &amp; Mechanical Services Across the GTA</h1>
+          <p>Airrand supports commercial buildings with heating, cooling, ventilation, ductwork, gas piping, rooftop equipment, mechanical upgrades, service and maintenance.</p>
+          ${commercialQuoteButtons()}
+          <div class="commercial-hero-points" aria-label="Commercial capabilities">
+            <span>Commercial HVAC</span>
+            <span>Ventilation</span>
+            <span>Ductwork</span>
+            <span>Gas</span>
+            <span>Mechanical</span>
           </div>
         </div>
       </section>
+
+      <section class="section commercial-page-section commercial-page-capability">
+        <div class="container commercial-page-intro-grid">
+          <article>
+            <p class="eyebrow">Commercial Capability</p>
+            <h2>Commercial Work Is More Than Replacing Equipment</h2>
+            <p>Commercial HVAC projects require coordination between equipment, airflow, controls, piping, ventilation, building conditions and other trades. Airrand approaches the work as a complete mechanical system rather than a collection of individual components.</p>
+            <p class="commercial-page-statement">Commercial mechanical work has to fit the building, the schedule, the equipment and the people who will service it later.</p>
+          </article>
+          ${commercialCardGrid(commercialPageCapabilityItems, "commercial-page-capability-grid")}
+        </div>
+      </section>
+
+      <section class="section muted-section commercial-page-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Equipment & Systems",
+            title: "Commercial HVAC Is a Connected Mechanical System",
+            text:
+              "Commercial work can involve rooftop equipment, duct systems, ventilation, gas-fired equipment, hydronic equipment and service access. Each piece has to work with the building around it.",
+          })}
+          ${commercialCardGrid(commercialSystemItems, "commercial-page-system-grid")}
+        </div>
+      </section>
+
+      <section class="section commercial-page-section">
+        <div class="container commercial-page-feature-grid">
+          <div>
+            <p class="eyebrow">Rooftop HVAC</p>
+            <h2>Rooftop Equipment for Commercial Buildings</h2>
+            <p>Packaged rooftop units can combine heating, cooling, supply airflow, ventilation, economizer functions where equipped and controls in one commercial HVAC system.</p>
+            ${commercialPillList(rooftopIncludes)}
+          </div>
+          ${rooftopPhoto ? commercialPhoto(rooftopPhoto.image, rooftopPhoto.alt, "Commercial rooftop equipment and mechanical work from the Airrand project gallery.") : ""}
+          <article class="commercial-page-panel commercial-page-panel-blue">
+            <h3>Airrand rooftop work may include</h3>
+            ${commercialPillList(rooftopWork)}
+          </article>
+          <article class="commercial-page-panel">
+            <p class="eyebrow">Replacement Planning</p>
+            <h3>New Rooftop Equipment Has to Fit the Existing Building</h3>
+            <p>A replacement unit may fit the heating and cooling load while still requiring mechanical modifications to integrate properly with the existing building.</p>
+            ${commercialPillList(rooftopReplacementFactors, "commercial-page-compact-list")}
+          </article>
+        </div>
+      </section>
+
+      <section class="section muted-section commercial-page-section">
+        <div class="container commercial-page-photo-grid">
+          ${ductPhoto ? commercialPhoto(ductPhoto.image, ductPhoto.alt, "Commercial ductwork, transitions and air-distribution work.") : ""}
+          <div>
+            <p class="eyebrow">Air Distribution</p>
+            <h2>Commercial Ductwork &amp; Air Distribution</h2>
+            <p>Airrand handles appropriate commercial duct systems including rectangular duct, spiral duct, supply trunks, return duct, transitions, equipment connections and ventilation pathways.</p>
+            <p class="commercial-page-statement">Ductwork has to move the required airflow while fitting around structure, electrical, plumbing, fire protection and architectural elements.</p>
+            ${commercialPillList(commercialDuctItems)}
+            <a class="button button-secondary" href="${link("/services/ductwork/")}">Explore Ductwork Services</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section commercial-page-section">
+        <div class="container commercial-page-split">
+          <article>
+            <p class="eyebrow">Sheet Metal</p>
+            <h2>Spiral Duct for Commercial Spaces</h2>
+            <p>Spiral duct can provide rigid construction, clean appearance and an efficient round airflow path for commercial spaces where the ductwork may be visible or run long distances.</p>
+            ${commercialPillList(spiralDuctBenefits)}
+            <blockquote>When ductwork is exposed, workmanship becomes part of the finished space.</blockquote>
+          </article>
+          ${spiralPhoto ? commercialPhoto(spiralPhoto.image, spiralPhoto.alt, "Spiral and commercial ductwork are part of Airrand's broader mechanical capability.") : ""}
+        </div>
+      </section>
+
+      <section class="section muted-section commercial-page-section">
+        <div class="container commercial-page-air-grid">
+          <article>
+            <p class="eyebrow">Building Airflow</p>
+            <h2>Commercial Ventilation Has to Match the Building</h2>
+            <p>Commercial buildings may require systems for outdoor air, exhaust, make-up air, pressure relationships, occupancy and equipment ventilation.</p>
+            ${commercialFlow(["Outdoor Air", "Mechanical Equipment", "Occupied Space", "Exhaust / Return"])}
+            ${commercialPillList(ventilationNeeds)}
+          </article>
+          <article>
+            <p class="eyebrow">Make-Up Air</p>
+            <h2>Replacing the Air That Leaves the Building</h2>
+            <p>When exhaust systems remove air from a building, replacement air may need to be introduced in a controlled way. Make-up air equipment can involve heating, airflow, gas, controls, ductwork and an outdoor-air intake.</p>
+            ${commercialPillList(makeupAirSupports)}
+          </article>
+        </div>
+      </section>
+
+      <section class="section commercial-page-section commercial-pressure-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Air Balance",
+            title: "Commercial Buildings Have to Breathe Properly",
+            text:
+              "Supply and exhaust need to be coordinated at a high level. Too much exhaust can contribute to negative pressure, while too much supply can contribute to positive pressure.",
+            align: "center",
+          })}
+          <div class="commercial-pressure-grid">
+            <article>
+              ${commercialIcon("airflow")}
+              <h3>Balanced</h3>
+              <p>Supply and exhaust appropriately coordinated.</p>
+            </article>
+            <article>
+              ${commercialIcon("exhaust")}
+              <h3>Negative</h3>
+              <p>More air leaving than entering can contribute to drafts, door issues and infiltration.</p>
+            </article>
+            <article>
+              ${commercialIcon("fan")}
+              <h3>Positive</h3>
+              <p>More air entering than leaving can affect comfort and ventilation performance.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section muted-section commercial-page-section">
+        <div class="container commercial-page-split">
+          <article>
+            <p class="eyebrow">Commercial Gas</p>
+            <h2>Gas Piping for Commercial Mechanical Equipment</h2>
+            <p>Commercial gas work should account for equipment input, total connected load, pipe routing, supports, shutoffs, testing and serviceability.</p>
+            ${commercialPillList(commercialGasApplications)}
+            <a class="button button-secondary" href="${link("/services/gas-lines/")}">Explore Gas Piping</a>
+          </article>
+          <article class="commercial-page-panel commercial-page-panel-orange">
+            <h3>Gas piping review includes</h3>
+            ${commercialPillList(gasReviewItems)}
+          </article>
+        </div>
+      </section>
+
+      <section class="section commercial-page-section">
+        <div class="container commercial-page-photo-grid commercial-page-photo-grid-reverse">
+          <div>
+            <p class="eyebrow">Mechanical Rooms</p>
+            <h2>Mechanical Rooms Should Look Intentional</h2>
+            <p>Mechanical rooms often combine heating equipment, cooling equipment, water heating, gas piping, ductwork, drainage, electrical and controls.</p>
+            ${commercialPillList(mechanicalRoomItems)}
+            <blockquote>Clean mechanical work is easier to understand, inspect and service.</blockquote>
+          </div>
+          ${mechanicalPhoto ? commercialPhoto(mechanicalPhoto.image, mechanicalPhoto.alt, "Organized mechanical-room work supports long-term serviceability.") : ""}
+        </div>
+      </section>
+
+      <section class="section muted-section commercial-page-section">
+        <div class="container commercial-page-three-panel">
+          <article>
+            <p class="eyebrow">System Upgrades</p>
+            <h2>Replacing Equipment Without Ignoring the Rest of the System</h2>
+            <p>The replacement equipment may be new, but the building around it is existing. The two have to work together.</p>
+            ${commercialPillList(replacementProjectItems, "commercial-page-compact-list")}
+          </article>
+          <article>
+            <p class="eyebrow">Retrofit Work</p>
+            <h2>Existing Buildings Rarely Give You a Blank Canvas</h2>
+            <p>Airrand looks for practical routing and installation solutions within real site conditions.</p>
+            ${commercialPillList(retrofitConstraints, "commercial-page-compact-list")}
+          </article>
+          <article>
+            <p class="eyebrow">Renovations</p>
+            <h2>HVAC for Commercial Fit-Outs and Renovations</h2>
+            <p>Commercial renovations can require air distribution, ventilation, equipment and gas changes in the same scope.</p>
+            ${commercialPillList(fitoutItems, "commercial-page-compact-list")}
+          </article>
+        </div>
+      </section>
+
+      <section class="section commercial-page-section">
+        <div class="container commercial-page-coordination">
+          <article>
+            <p class="eyebrow">Project Coordination</p>
+            <h2>Mechanical Work Has to Fit Around Other Trades</h2>
+            <p>Commercial HVAC installations rarely exist in isolation. Routing and equipment placement must account for other building systems without implying Airrand is responsible for those separate trade scopes.</p>
+          </article>
+          <div class="commercial-coordination-map">
+            <strong>HVAC</strong>
+            ${coordinationTrades
+              .map(([icon, label]) => `<span>${commercialIcon(icon)}${escapeHtml(label)}</span>`)
+              .join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="section muted-section commercial-page-section">
+        <div class="container commercial-page-service-grid">
+          <article>
+            <p class="eyebrow">Long-Term Operation</p>
+            <h2>Equipment Still Has to Be Serviced After Installation</h2>
+            <p>A mechanical installation is not finished if routine service requires dismantling the surrounding system.</p>
+            ${commercialPillList(serviceAccessItems)}
+          </article>
+          <article>
+            <p class="eyebrow">Diagnostics</p>
+            <h2>Commercial HVAC Service &amp; Troubleshooting</h2>
+            <p>Diagnostics may involve more than one component: equipment, airflow, controls, gas, electrical, ventilation, rooftop equipment and drainage all matter.</p>
+            ${commercialCardGrid(commercialDiagnosticsItems, "commercial-page-mini-grid")}
+            <a class="button button-primary" href="${link(quoteRequestPath)}">Request Commercial Service</a>
+          </article>
+          <article>
+            <p class="eyebrow">Preventive Maintenance</p>
+            <h2>Commercial Equipment Benefits From Planned Maintenance</h2>
+            <p>Routine maintenance can help identify developing problems before they become larger service issues.</p>
+            ${commercialPillList(commercialMaintenanceItems)}
+          </article>
+        </div>
+      </section>
+
+      <section class="section commercial-page-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Project Review",
+            title: "Every Commercial Project Starts With the Building",
+            text:
+              "Commercial HVAC review starts with the existing equipment, building use, airflow, ventilation, utilities, access, ductwork and project constraints.",
+            align: "center",
+          })}
+          ${commercialCardGrid(commercialReviewItems, "commercial-page-review-grid")}
+        </div>
+      </section>
+
+      <section class="section muted-section commercial-page-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "How We Work",
+            title: "From Site Review to Startup",
+            text: "A clear process helps commercial mechanical scopes stay organized from first review through startup and handoff.",
+            align: "center",
+          })}
+          <div class="commercial-process">
+            ${commercialProcessSteps
+              .map(
+                ([number, title, text]) => `
+                  <article>
+                    <span>${escapeHtml(number)}</span>
+                    <h3>${escapeHtml(title)}</h3>
+                    <p>${escapeHtml(text)}</p>
+                  </article>
+                `,
+              )
+              .join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="section commercial-page-section">
+        <div class="container commercial-page-building-grid">
+          <article>
+            <p class="eyebrow">Commercial Applications</p>
+            <h2>Commercial HVAC for Different Building Types</h2>
+            <p>Airrand can review appropriate commercial HVAC and mechanical scopes for retail, offices, restaurants, warehouses, commercial units, light industrial spaces, multi-use buildings and mechanical rooms.</p>
+            ${commercialPillList(commercialBuildingTypes)}
+          </article>
+          <article class="commercial-page-panel">
+            <p class="eyebrow">Different Scale. Same Discipline.</p>
+            <h2>Commercial HVAC Requires Different Coordination</h2>
+            <p>Commercial systems may involve larger airflow, rooftop equipment, multiple zones, ventilation requirements, larger duct systems, other trades, equipment access and occupancy considerations.</p>
+            <p class="commercial-page-statement">The fundamentals remain the same: proper equipment, proper airflow, clean installation and correct setup.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section muted-section commercial-page-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Airrand Projects",
+            title: "See the Work Behind the Finished System",
+            text:
+              "Real Airrand commercial project photos show rooftop equipment, ductwork, ventilation pathways, gas piping and mechanical installation work across the GTA.",
+          })}
+          ${commercialWorkPhotos.length ? workSlider(commercialWorkPhotos, "Airrand commercial HVAC and mechanical project photos") : ""}
+          <div class="commercial-project-link">
+            <a class="button button-secondary" href="${link("/gallery/")}">View Commercial Projects</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section commercial-page-section">
+        <div class="container">
+          ${sectionHeading({
+            eyebrow: "Commercial Approach",
+            title: "What Matters on Commercial Mechanical Work",
+            text:
+              "The details that matter are the same details customers notice later: clean routing, clear communication, coordinated installation and service access.",
+            align: "center",
+          })}
+          ${commercialCardGrid(commercialWhyItems, "commercial-page-why-grid")}
+        </div>
+      </section>
+
       <section class="section muted-section">
         <div class="container">
           ${sectionHeading({
-            eyebrow: "Commercial Services",
+            eyebrow: "Related Commercial Services",
             title: "HVAC and mechanical scopes for commercial properties.",
+            text: "Explore service pages connected to commercial heating, cooling, ductwork, gas, maintenance and mechanical installation work.",
           })}
           ${servicesGrid(commercialServices)}
         </div>
       </section>
+      ${commercialFaqSection()}
       ${serviceAreaSection()}
-      ${finalCta({
-        title: "Planning a commercial HVAC project?",
-        text: "Send the building type, equipment involved and timeline so Airrand can review the scope.",
-      })}
+      <section class="final-cta commercial-final-cta">
+        <div class="container final-cta-shell">
+          <div>
+            <p class="eyebrow">Commercial HVAC &amp; Mechanical</p>
+            <h2>Planning a Commercial HVAC Project?</h2>
+            <p>Whether you are replacing equipment, modifying ductwork, addressing ventilation or planning a larger mechanical scope, Airrand can review the project and discuss the available options.</p>
+          </div>
+          <div class="button-row">
+            <a class="button button-primary" href="${link(quoteRequestPath)}">Request a Commercial Quote</a>
+            <a class="button button-secondary" href="tel:${site.phoneTel}">Call ${site.phone}</a>
+            <a class="button button-secondary" href="${link("/gallery/")}">View Commercial Work</a>
+          </div>
+        </div>
+      </section>
     `,
   };
 }
