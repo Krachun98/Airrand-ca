@@ -18,7 +18,7 @@ const publicDir = path.join(rootDir, "public");
 const distDir = path.join(rootDir, "dist");
 
 const pages = [];
-const assetVersion = "gas-performance-icons-20260823";
+const assetVersion = "contact-mobile-quote-20260823";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -31,6 +31,7 @@ const escapeHtml = (value = "") =>
 const asset = (name) => `/assets/${name}`;
 const pageUrl = (pathname) => new URL(pathname, `${site.baseUrl}/`).toString();
 const link = (pathname) => pathname;
+const quoteRequestPath = "/contact/#quote-form";
 
 const mobileHeroSourceImages = new Set([
   "hero-hvac-work.webp",
@@ -192,7 +193,7 @@ function servicePhotos(service, limit) {
 function ctaButtons(extraClass = "") {
   return `
     <div class="button-row ${extraClass}">
-      <a class="button button-primary" href="${link("/contact/")}">Request a Quote</a>
+      <a class="button button-primary" href="${link(quoteRequestPath)}">Request a Quote</a>
       <a class="button button-secondary" href="tel:${site.phoneTel}">Call ${site.phone}</a>
     </div>
   `;
@@ -244,7 +245,7 @@ function header(current = "home") {
         </nav>
         <div class="header-actions">
           <a class="header-phone" href="tel:${site.phoneTel}">${site.phone}</a>
-          <a class="button button-small" href="${link("/contact/")}">Request a Quote</a>
+          <a class="button button-small" href="${link(quoteRequestPath)}">Request a Quote</a>
           <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="mobile-nav" aria-expanded="false" data-nav-toggle>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -264,7 +265,7 @@ function header(current = "home") {
         <a href="${link("/reviews/")}">Reviews</a>
         <a href="${link("/about/")}">About</a>
         <a href="${link("/contact/")}">Contact</a>
-        <a class="button button-primary" href="${link("/contact/")}">Request a Quote</a>
+        <a class="button button-primary" href="${link(quoteRequestPath)}">Request a Quote</a>
         <a class="button button-secondary" href="tel:${site.phoneTel}">Call ${site.phone}</a>
       </nav>
     </header>
@@ -318,7 +319,7 @@ function footer() {
     </footer>
     <div class="mobile-contact-bar" aria-label="Quick contact">
       <a href="tel:${site.phoneTel}">Call</a>
-      <a href="${link("/contact/")}">Request Quote</a>
+      <a href="${link(quoteRequestPath)}">Request Quote</a>
     </div>
   `;
 }
@@ -7297,7 +7298,7 @@ function contactPage() {
           ${ctaButtons()}
         </div>
       </section>
-      <section class="section">
+      <section class="section contact-section">
         <div class="container contact-grid">
           <aside class="contact-info">
             <h2>${site.legalName}</h2>
@@ -7306,7 +7307,7 @@ function contactPage() {
             <span>Hours: ${site.hours}</span>
             <p>Residential and commercial HVAC service throughout the Greater Toronto Area.</p>
           </aside>
-          <div class="form-panel">
+          <div class="form-panel quote-form-panel" id="quote-form">
             <h2>Quote / Service Request</h2>
             ${contactForm("contact page")}
           </div>
