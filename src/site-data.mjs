@@ -570,6 +570,7 @@ export const navServiceGroups = [
   ["Ductless", "ductless-systems"],
   ["Water Heating", "water-heaters"],
   ["Gas", "gas-lines"],
+  ["Humidifiers", "humidifiers"],
   ["HRV / ERV", "hrv-erv"],
   ["Ductwork", "ductwork"],
   ["Commercial HVAC", "commercial-hvac"],
