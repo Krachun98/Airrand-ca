@@ -2670,6 +2670,25 @@ details.review-page-copy[open] summary span {
   font-size: 1.06rem;
 }
 
+.service-resource-links {
+  margin-top: 16px;
+  color: var(--muted);
+}
+
+.service-resource-links a {
+  color: var(--blue);
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.service-resource-links span {
+  display: inline-block;
+  margin: 0 8px;
+  color: var(--muted-2);
+}
+
 .wide-copy {
   max-width: 920px;
 }

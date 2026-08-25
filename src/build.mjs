@@ -75,10 +75,125 @@ const naturalServiceLabels = {
   "water-heaters": "Water Heater",
 };
 
+const primaryMarkets = "Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities";
+
+const serviceSeoTitles = {
+  "air-conditioning": "Air Conditioning Installation & Repair in Toronto & GTA | Airrand",
+  furnaces: "Furnace Installation & Repair in Toronto & GTA | Airrand",
+  "heat-pumps": "Heat Pump Installation & Service Toronto & GTA | Airrand",
+  "ductless-systems": "Ductless Mini-Split Installation Toronto & GTA | Airrand",
+  "tankless-water-heaters": "Tankless Water Heater Installation Toronto & GTA | Airrand",
+  "gas-fireplaces": "Gas Fireplace Installation & Service Toronto & GTA | Airrand",
+  "hvac-repair": "HVAC Repair Toronto, Vaughan & GTA | Airrand",
+  "hvac-maintenance": "HVAC Maintenance Toronto & GTA | Airrand",
+  "hvac-installation": "HVAC Installation & Replacement Toronto & GTA | Airrand",
+};
+
+const serviceSeoDescriptions = {
+  "air-conditioning":
+    "Airrand provides air conditioning installation, replacement, repair and maintenance throughout Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities.",
+  furnaces:
+    "Furnace installation, replacement and repair for homes and light commercial properties throughout Vaughan, North York, Richmond Hill, Toronto and the GTA.",
+  "heat-pumps":
+    "Airrand installs and services central, air-source and hybrid heat-pump systems throughout Vaughan, North York, Richmond Hill, Toronto and the GTA.",
+  "ductless-systems":
+    "Ductless mini-split installation and service for additions, older homes, finished spaces, suites and hard-to-duct areas throughout Toronto and the GTA.",
+  "tankless-water-heaters":
+    "Tankless water heater installation and replacement for on-demand hot water throughout Vaughan, North York, Richmond Hill, Toronto and the GTA.",
+  "gas-fireplaces":
+    "Gas fireplace installation support and related gas piping services for homes throughout Vaughan, North York, Richmond Hill, Toronto and the GTA.",
+  "hvac-repair":
+    "HVAC repair for heating, cooling and ventilation systems in Toronto, Vaughan, North York, Richmond Hill and surrounding GTA communities.",
+  "hvac-maintenance":
+    "Seasonal residential and commercial HVAC maintenance for heating, cooling and ventilation equipment throughout Toronto and the GTA.",
+  "hvac-installation":
+    "Broad HVAC installation and replacement services for heating, cooling, ductless, heat-pump and water-heating equipment throughout Toronto and the GTA.",
+};
+
+const serviceHeroHeadings = {
+  furnaces: "Furnace Installation & Repair in the Greater Toronto Area",
+  "hvac-installation": "HVAC Installation & Replacement in the Greater Toronto Area",
+};
+
+const serviceLocalCopy = {
+  "air-conditioning": `Airrand provides air-conditioning installation, replacement and service throughout ${primaryMarkets}.`,
+  furnaces: `Airrand provides furnace installation, replacement and repair throughout ${primaryMarkets}.`,
+  "heat-pumps": `Airrand installs and services central, air-source and hybrid heat-pump systems throughout ${primaryMarkets}.`,
+  "ductless-systems": `Airrand installs ductless mini-split systems for additions, older homes, finished spaces, suites and areas without practical duct access throughout ${primaryMarkets}.`,
+  "tankless-water-heaters": `Airrand installs and replaces tankless water heaters throughout ${primaryMarkets}.`,
+  "gas-fireplaces": `Airrand supports gas fireplace projects and related gas piping throughout ${primaryMarkets}.`,
+  "hvac-repair": `Airrand provides HVAC repair throughout Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities.`,
+  "hvac-maintenance": `Airrand provides seasonal residential and commercial HVAC maintenance throughout ${primaryMarkets}.`,
+  "hvac-installation": `This broad installation and replacement page connects homeowners and property managers with the right Airrand service for heating, cooling, ductless, heat-pump and water-heating equipment throughout ${primaryMarkets}.`,
+};
+
+const serviceRelatedSlugs = {
+  "air-conditioning": ["heat-pumps", "ductwork", "hvac-maintenance", "furnaces"],
+  furnaces: ["heat-pumps", "humidifiers", "hvac-maintenance", "air-conditioning"],
+  "heat-pumps": ["furnaces", "air-conditioning", "ductless-systems", "hvac-maintenance"],
+  "ductless-systems": ["heat-pumps", "air-conditioning", "hvac-installation", "hvac-maintenance"],
+  "tankless-water-heaters": ["gas-lines", "water-heaters", "hvac-maintenance", "furnaces"],
+  "gas-fireplaces": ["gas-lines", "furnaces", "hvac-installation", "hvac-repair"],
+  "hvac-repair": ["furnaces", "air-conditioning", "heat-pumps", "ductless-systems"],
+  "hvac-maintenance": ["furnaces", "air-conditioning", "heat-pumps", "humidifiers"],
+  "hvac-installation": ["furnaces", "air-conditioning", "heat-pumps", "ductless-systems", "water-heaters"],
+};
+
+const serviceResourceLinks = {
+  "air-conditioning": [
+    ["/services/heat-pumps/", "heat pump options"],
+    ["/services/ductwork/", "ductwork"],
+    ["/brands/", "equipment brands"],
+  ],
+  furnaces: [
+    ["/services/heat-pumps/", "heat pumps"],
+    ["/services/humidifiers/", "whole-home humidifiers"],
+    ["/brands/", "equipment brands"],
+  ],
+  "heat-pumps": [
+    ["/services/furnaces/", "furnaces"],
+    ["/services/air-conditioning/", "air conditioning"],
+  ],
+  "ductless-systems": [
+    ["/services/heat-pumps/", "heat pumps"],
+    ["/services/air-conditioning/", "central air conditioning"],
+  ],
+  "tankless-water-heaters": [
+    ["/services/gas-lines/", "gas line requirements"],
+    ["/services/water-heaters/", "water heating options"],
+  ],
+  "hvac-installation": [
+    ["/services/furnaces/", "furnaces"],
+    ["/services/air-conditioning/", "air conditioning"],
+    ["/services/heat-pumps/", "heat pumps"],
+    ["/services/ductless-systems/", "ductless systems"],
+    ["/services/water-heaters/", "water heating"],
+  ],
+};
+
 function naturalServiceTitle(service) {
   const originalTitle = serviceBySlug.get(service.slug)?.title;
   if (originalTitle && service.title !== originalTitle) return service.title;
   return naturalServiceLabels[service.slug] ?? service.title;
+}
+
+function relatedServicesFor(slug) {
+  const relatedSlugs = serviceRelatedSlugs[slug];
+  if (!relatedSlugs) return services.filter((item) => item.slug !== slug).slice(0, 4);
+  return relatedSlugs.map((relatedSlug) => serviceBySlug.get(relatedSlug)).filter(Boolean);
+}
+
+function serviceResourceLinksMarkup(slug) {
+  const items = serviceResourceLinks[slug];
+  if (!items?.length) return "";
+  return `
+    <p class="service-resource-links">
+      Related planning pages:
+      ${items
+        .map(([href, label]) => `<a href="${link(href)}">${escapeHtml(label)}</a>`)
+        .join("<span aria-hidden=\"true\">/</span>")}
+    </p>
+  `;
 }
 
 function servicePhrase(service) {
@@ -1511,9 +1626,9 @@ function reviewsPage() {
 
   return {
     pathname: "/reviews/",
-    title: "Customer Reviews | Airrand HVAC in the GTA",
+    title: "Airrand Reviews | HVAC Service Toronto & GTA",
     description:
-      "Read real Airrand customer reviews and see project work from Airrand's heating, cooling, mechanical and HVAC service across the Greater Toronto Area.",
+      "Read real Airrand customer reviews and see heating, cooling, mechanical and HVAC project work from Airrand throughout Toronto and the Greater Toronto Area.",
     current: "reviews",
     image: "shop-background.webp",
     schema: [businessSchema(), breadcrumbs([{ name: "Home", url: "/" }, { name: "Reviews", url: "/reviews/" }])],
@@ -2593,6 +2708,7 @@ function waterHeatingOverviewSection(service) {
           <h2>Water-heating work planned around the full mechanical system.</h2>
           <p>Water-heating equipment is connected to more than just hot and cold water lines. Fuel supply, venting, drainage, controls, clearances and service access all affect the right installation approach.</p>
           <p>Airrand works through tank replacements, tankless upgrades and boiler-related water-heating conversations with practical recommendations for GTA homes and light commercial properties.</p>
+          <p class="service-resource-links">Related planning pages: <a href="${link("/services/tankless-water-heaters/")}">tankless water heaters</a><span aria-hidden="true">/</span><a href="${link("/services/gas-lines/")}">gas line requirements</a><span aria-hidden="true">/</span><a href="${link("/brands/")}">equipment brands</a></p>
           <ul class="check-list">
             ${service.details.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
           </ul>
@@ -3137,11 +3253,11 @@ function waterHeatingPage(service) {
   const work = servicePhotos(service);
   const faqs = serviceFaqs(service);
   const pageDescription =
-    "Airrand installs and services tank water heaters, tankless systems and boilers for residential and light commercial properties throughout the Greater Toronto Area.";
+    "Airrand installs and services tank water heaters, tankless systems and boilers for residential and light commercial properties throughout Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities.";
 
   return {
     pathname: `/services/${service.slug}/`,
-    title: "Water Heater, Tankless & Boiler Services GTA | Airrand",
+    title: "Water Heater Installation & Service Toronto & GTA | Airrand",
     description: pageDescription,
     current: "services",
     image: service.image,
@@ -3160,7 +3276,7 @@ function waterHeatingPage(service) {
         <div class="container">
           <p class="eyebrow">Water Heating</p>
           <h1>Water Heating Solutions for the Greater Toronto Area</h1>
-          <p>Airrand installs, replaces and services tank water heaters, tankless systems and boilers for residential and light commercial applications throughout the GTA.</p>
+          <p>Airrand installs, replaces and services tank water heaters, tankless systems and boilers for residential and light commercial applications throughout Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities.</p>
           ${ctaButtons()}
         </div>
       </section>
@@ -3565,6 +3681,7 @@ function gasLineOverviewSection(service) {
           <h2>Professional gas piping with sizing, routing and safety in mind.</h2>
           <p>Gas piping is not simply running a pipe from one point to another. The connected equipment, total fuel demand, route, material, supports, shutoffs, appliance requirements and testing all affect the final scope.</p>
           <p>Airrand handles new gas-line installations, extensions, modifications and replacement-equipment connections for appropriate residential and commercial HVAC and mechanical applications.</p>
+          <p class="service-resource-links">Gas piping work often connects with <a href="${link("/services/furnaces/")}">furnace replacements</a>, <a href="${link("/services/water-heaters/")}">water heating</a> and <a href="${link("/services/tankless-water-heaters/")}">tankless water heater installations</a>.</p>
           <ul class="check-list">
             ${service.details.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
           </ul>
@@ -4102,11 +4219,11 @@ function gasLinesPage(service) {
   const work = servicePhotos(service);
   const faqs = serviceFaqs(service);
   const pageDescription =
-    "Airrand provides professional gas-line installation and gas piping for furnaces, water heaters, tankless systems, fireplaces and HVAC equipment throughout the Greater Toronto Area.";
+    "Airrand provides professional gas-line installation and gas piping for furnaces, water heaters, tankless systems, fireplaces and HVAC equipment throughout Toronto, Vaughan and the GTA.";
 
   return {
     pathname: `/services/${service.slug}/`,
-    title: "Gas Line Installation & Gas Piping GTA | Airrand",
+    title: "Gas Line Installation Toronto, Vaughan & GTA | Airrand",
     description: pageDescription,
     current: "services",
     image: service.image,
@@ -4125,7 +4242,7 @@ function gasLinesPage(service) {
         <div class="container">
           <p class="eyebrow">Gas Service</p>
           <h1>Gas Line Installation &amp; Service in the Greater Toronto Area</h1>
-          <p>Airrand provides gas piping for HVAC equipment, water heating, fireplaces and other approved gas appliances with careful sizing, routing and clean workmanship.</p>
+          <p>Airrand provides gas piping for HVAC equipment, water heating, fireplaces and other approved gas appliances throughout Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities.</p>
           ${ctaButtons()}
         </div>
       </section>
@@ -6406,9 +6523,9 @@ function heatingEducationSections() {
 function homePage() {
   return {
     pathname: "/",
-    title: "Professional HVAC Solutions for the Greater Toronto Area",
+    title: "HVAC Contractor in Toronto & the GTA | Airrand",
     description:
-      "Airrand provides residential and commercial heating, cooling, ventilation, gas and mechanical HVAC services across the Greater Toronto Area.",
+      "Airrand provides residential and commercial HVAC, gas, water heating and mechanical services throughout Toronto and the Greater Toronto Area.",
     current: "home",
     image: "hero-hvac-work.webp",
     schema: [businessSchema(), websiteSchema()],
@@ -6418,7 +6535,7 @@ function homePage() {
         <div class="container hero-content">
           <p class="eyebrow">Residential & Commercial HVAC | Greater Toronto Area</p>
           <h1>Heating. Cooling. Ventilation. Done Right.</h1>
-          <p>Airrand provides professional HVAC, gas, water heating and mechanical services for homes and commercial properties across the GTA.</p>
+          <p>Airrand provides professional HVAC, gas, water heating and mechanical services for homes and commercial properties across the GTA. Serving homeowners and businesses throughout Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities.</p>
           ${ctaButtons("hero-buttons")}
           <div class="hero-meta" aria-label="Availability and contact">
             <span>24/7 Service Available</span>
@@ -6540,9 +6657,9 @@ function homePage() {
 function servicesPage() {
   return {
     pathname: "/services/",
-    title: "HVAC Services in the GTA",
+    title: "HVAC Services Across Toronto & the GTA | Airrand",
     description:
-      "Explore Airrand's residential and commercial HVAC services, including AC, furnaces, heat pumps, ductless, gas lines, ductwork, water heaters and commercial HVAC.",
+      "Explore Airrand residential and commercial HVAC and mechanical services throughout Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities.",
     current: "services",
     image: "shop-background.webp",
     schema: [businessSchema(), breadcrumbs([{ name: "Home", url: "/" }, { name: "Services", url: "/services/" }])],
@@ -6550,8 +6667,8 @@ function servicesPage() {
       <section class="page-hero compact-hero" style="${heroImageStyle("shop-background.webp")}">
         <div class="container">
           <p class="eyebrow">Services</p>
-          <h1>Complete HVAC Solutions</h1>
-          <p>Heating, cooling, gas, ventilation, water heating, repair, maintenance and commercial HVAC services throughout the Greater Toronto Area.</p>
+          <h1>HVAC Services Across Toronto &amp; the GTA</h1>
+          <p>Airrand provides residential and commercial HVAC and mechanical services throughout Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities.</p>
           ${ctaButtons()}
         </div>
       </section>
@@ -7183,17 +7300,18 @@ function humidifiersPage(service) {
     .map((slug) => serviceBySlug.get(slug))
     .filter(Boolean);
   const work = servicePhotos(service);
+  const pageDescription =
+    "Airrand installs and services bypass, fan-powered and steam whole-home humidifiers throughout Vaughan, North York, Richmond Hill, Toronto and the GTA.";
 
   return {
     pathname: `/services/${service.slug}/`,
-    title: "Whole-Home Humidifier Installation & Service GTA | Airrand",
-    description:
-      "Airrand installs and services bypass, fan-powered and steam whole-home humidifiers throughout the Greater Toronto Area, including controls, water connections and HVAC integration.",
+    title: "Whole-Home Humidifier Installation Toronto & GTA | Airrand",
+    description: pageDescription,
     current: "services",
     image: service.image,
     schema: [
       businessSchema(),
-      serviceSchema(service),
+      serviceSchema({ ...service, meta: pageDescription }),
       faqSchema(humidifierFaqs),
       breadcrumbs([
         { name: "Home", url: "/" },
@@ -7206,7 +7324,7 @@ function humidifiersPage(service) {
         <div class="container">
           <p class="eyebrow">Indoor Air Service</p>
           <h1>Whole-Home Humidifier Services in the Greater Toronto Area</h1>
-          <p>Airrand installs and services whole-home humidifiers that help manage dry winter air throughout the home using the central HVAC system.</p>
+          <p>Airrand installs and services whole-home humidifiers throughout Vaughan, North York, Richmond Hill, Toronto and the GTA, helping manage dry winter air through the central HVAC system.</p>
           ${ctaButtons()}
         </div>
       </section>
@@ -7758,17 +7876,18 @@ function ductworkPage(service) {
   const secondPhoto = work.photos[3] ?? installationPhotos.ductwork?.[3] ?? firstPhoto;
   const firstPhotoAlt = firstPhoto ? displayPhotoAlt(firstPhoto) : "";
   const secondPhotoAlt = secondPhoto ? displayPhotoAlt(secondPhoto) : "";
+  const pageDescription =
+    "Airrand designs, installs and modifies residential and commercial HVAC ductwork throughout Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities.";
 
   return {
     pathname: "/services/ductwork/",
-    title: "Ductwork Design & Installation GTA | Airrand",
-    description:
-      "Airrand designs, installs and modifies residential and commercial HVAC ductwork throughout the Greater Toronto Area, including spiral duct, sheet metal, supply and return systems and ventilation ductwork.",
+    title: "Ductwork Installation & Modification Toronto & GTA | Airrand",
+    description: pageDescription,
     current: "services",
     image: service.image,
     schema: [
       businessSchema(),
-      serviceSchema(service),
+      serviceSchema({ ...service, meta: pageDescription }),
       faqSchema(faqs),
       breadcrumbs([
         { name: "Home", url: "/" },
@@ -7780,8 +7899,8 @@ function ductworkPage(service) {
       <section class="page-hero service-hero ductwork-hero" style="${heroImageStyle(service.image)}">
         <div class="container">
           <p class="eyebrow">Air Distribution</p>
-          <h1>Ductwork Design &amp; Installation in the Greater Toronto Area</h1>
-          <p>Airrand designs, installs and modifies residential and commercial duct systems with proper airflow, clean routing, strong supports and practical service access.</p>
+          <h1>Ductwork Design, Installation &amp; Modification in the GTA</h1>
+          <p>Airrand designs, installs and modifies residential and commercial duct systems throughout Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities, with proper airflow, clean routing, strong supports and practical service access.</p>
           ${ctaButtons()}
         </div>
       </section>
@@ -8566,17 +8685,18 @@ function hrvErvPage(service) {
     .map((slug) => serviceBySlug.get(slug))
     .filter(Boolean);
   const work = hrvWorkPhotos();
+  const pageDescription =
+    "Airrand installs and services HRV and ERV whole-home ventilation systems throughout Vaughan, North York, Richmond Hill, Toronto and the GTA.";
 
   return {
     pathname: `/services/${service.slug}/`,
-    title: "HRV & ERV Installation & Service GTA | Airrand",
-    description:
-      "Airrand installs and services HRV and ERV whole-home ventilation systems throughout the Greater Toronto Area, including fresh-air ducting, controls, balancing and HVAC integration.",
+    title: "HRV & ERV Installation Toronto & GTA | Airrand",
+    description: pageDescription,
     current: "services",
     image: service.image,
     schema: [
       businessSchema(),
-      serviceSchema(service),
+      serviceSchema({ ...service, meta: pageDescription }),
       faqSchema(hrvFaqs),
       breadcrumbs([
         { name: "Home", url: "/" },
@@ -8589,7 +8709,7 @@ function hrvErvPage(service) {
         <div class="container">
           <p class="eyebrow">Ventilation Service</p>
           <h1>HRV &amp; ERV Ventilation Services in the Greater Toronto Area</h1>
-          <p>Airrand installs and services HRV and ERV systems that bring controlled fresh air into homes and buildings while exhausting stale indoor air.</p>
+          <p>Airrand installs and services HRV and ERV systems throughout Vaughan, North York, Richmond Hill, Toronto and the GTA, bringing controlled fresh air into homes and buildings while exhausting stale indoor air.</p>
           <div class="hrv-hero-points" aria-label="HRV and ERV service focus">
             <span>Fresh air</span>
             <span>Controlled exhaust</span>
@@ -9020,26 +9140,30 @@ function servicePage(service) {
   const isCoolingPage = service.slug === "air-conditioning";
   const isHeatPumpPage = service.slug === "heat-pumps";
   const isDuctlessPage = service.slug === "ductless-systems";
-  const related = services.filter((item) => item.slug !== service.slug).slice(0, 4);
+  const related = relatedServicesFor(service.slug);
   const work = servicePhotos(service);
   const faqs = serviceFaqs(service);
   const customWorkCopy = serviceWorkCopy[service.slug];
   const serviceLabel = naturalServiceTitle(service);
   const serviceLabelPhrase = servicePhrase(service);
-  const pageTitle = isCoolingPage
-    ? "Air Conditioning Services GTA | AC Repair & Installation | Airrand"
-    : isHeatPumpPage
+  const pageTitle =
+    serviceSeoTitles[service.slug] ??
+    (isCoolingPage
+      ? "Air Conditioning Services GTA | AC Repair & Installation | Airrand"
+      : isHeatPumpPage
       ? "Heat Pump Installation & Service GTA | Airrand"
       : isDuctlessPage
       ? "Ductless Mini Split Installation & Service GTA | Airrand"
-    : `${serviceLabel} Services in the GTA`;
-  const pageDescription = isCoolingPage
-    ? "Airrand provides air conditioning installation, replacement, repair and maintenance for residential and commercial properties throughout the Greater Toronto Area."
-    : isHeatPumpPage
+      : `${serviceLabel} Services in the GTA`);
+  const pageDescription =
+    serviceSeoDescriptions[service.slug] ??
+    (isCoolingPage
+      ? "Airrand provides air conditioning installation, replacement, repair and maintenance for residential and commercial properties throughout the Greater Toronto Area."
+      : isHeatPumpPage
       ? "Airrand installs and services heat-pump systems for homes and commercial properties throughout the Greater Toronto Area, including central and hybrid heating and cooling systems."
       : isDuctlessPage
       ? "Airrand installs and services ductless mini-split and multi-zone systems for homes and commercial spaces throughout the Greater Toronto Area."
-    : service.meta;
+      : service.meta);
   const workTitle = customWorkCopy
     ? customWorkCopy.title
     : isHeatPumpPage
@@ -9058,9 +9182,11 @@ function servicePage(service) {
     : work.exact
     ? `A look at recent Airrand ${photoSourceLabels[service.slug] ?? service.title.toLowerCase()} work throughout the GTA.`
     : "A look at recent Airrand HVAC and mechanical work throughout the GTA.";
-  const heroHeading = isDuctlessPage
-    ? "Ductless Mini-Split Services in the Greater Toronto Area"
-    : `${serviceLabel} Services in the Greater Toronto Area`;
+  const heroHeading =
+    serviceHeroHeadings[service.slug] ??
+    (isDuctlessPage
+      ? "Ductless Mini-Split Services in the Greater Toronto Area"
+      : `${serviceLabel} Services in the Greater Toronto Area`);
   const detailHeading = isDuctlessPage
     ? "Professional ductless heating and cooling work with proper sizing, placement and clean installation."
     : `Professional ${serviceLabelPhrase} work with clear scope and clean execution.`;
@@ -9091,7 +9217,7 @@ function servicePage(service) {
     image: service.image,
     schema: [
       businessSchema(),
-      serviceSchema(service),
+      serviceSchema({ ...service, meta: pageDescription }),
       faqSchema(faqs),
       breadcrumbs([
         { name: "Home", url: "/" },
@@ -9105,6 +9231,7 @@ function servicePage(service) {
           <p class="eyebrow">${escapeHtml(service.group)} Service</p>
           <h1>${escapeHtml(heroHeading)}</h1>
           <p>${escapeHtml(service.intro)}</p>
+          ${serviceLocalCopy[service.slug] ? `<p>${escapeHtml(serviceLocalCopy[service.slug])}</p>` : ""}
           ${ctaButtons()}
         </div>
       </section>
@@ -9114,6 +9241,7 @@ function servicePage(service) {
             <p class="eyebrow">What Airrand Handles</p>
             <h2>${escapeHtml(detailHeading)}</h2>
             <p>${escapeHtml(detailText)}</p>
+            ${serviceResourceLinksMarkup(service.slug)}
             <ul class="check-list">
               ${service.details.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
             </ul>
@@ -9176,9 +9304,9 @@ function residentialPage() {
 
   return {
     pathname: "/residential/",
-    title: "Residential HVAC Services in the GTA",
+    title: "Residential HVAC Services Toronto & GTA | Airrand",
     description:
-      "Residential HVAC installation, repair and maintenance for heating, cooling, ductless, water heating and indoor air quality across the GTA.",
+      "Residential HVAC installation, repair and maintenance for heating, cooling, ductless, water heating and indoor air quality throughout Toronto and the GTA.",
     current: "services",
     image: "residential-hvac-house.webp",
     schema: [
@@ -9194,6 +9322,7 @@ function residentialPage() {
           <p class="eyebrow">Residential HVAC</p>
           <h1>Heating, cooling and indoor comfort for homes across the GTA.</h1>
           <p>Airrand handles equipment replacement, repairs, maintenance, ductless systems, water heating and indoor air quality work for residential properties.</p>
+          <p>Airrand works with homeowners throughout Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities.</p>
           ${ctaButtons()}
         </div>
       </section>
@@ -9950,9 +10079,9 @@ function commercialPage() {
 function galleryPage() {
   return {
     pathname: "/gallery/",
-    title: "HVAC Gallery",
+    title: "HVAC Installation Gallery Toronto & GTA | Airrand",
     description:
-      "Browse Airrand's HVAC gallery for heating, cooling, ductwork, gas, ductless, water heating and commercial mechanical visuals.",
+      "Browse recent Airrand heating, cooling, ductwork, gas, ductless, water heating and commercial installations throughout Toronto and the GTA.",
     current: "gallery",
     image: "hero-hvac-work.webp",
     schema: [
@@ -9967,7 +10096,7 @@ function galleryPage() {
         <div class="container">
           <p class="eyebrow">Gallery</p>
           <h1>HVAC work, equipment and mechanical detail.</h1>
-          <p>Browse recent Airrand heating, cooling, ductwork, gas, ductless, water heating and commercial HVAC work throughout the GTA.</p>
+          <p>Browse recent Airrand heating, cooling, ductwork, gas, ductless, water heating and commercial HVAC work throughout the GTA. Projects include work across Vaughan, North York, Richmond Hill, Toronto and surrounding communities.</p>
           ${ctaButtons()}
         </div>
       </section>
@@ -10232,6 +10361,7 @@ function aboutPage() {
             <p class="eyebrow">About Airrand</p>
             <h1>HVAC Work Done With Care, Clarity and Technical Discipline.</h1>
             <p>Airrand provides residential and commercial heating, cooling, ventilation, gas and mechanical HVAC services throughout the Greater Toronto Area.</p>
+            <p>Airrand serves residential and commercial customers throughout Vaughan, North York, Richmond Hill, Toronto and the surrounding GTA.</p>
             <p>Our approach is simple: choose the right equipment, install it properly, keep the work clean and make sure the customer understands the system when we're finished.</p>
             <div class="button-row">
               <a class="button button-primary" href="${link("/gallery/")}">View Gallery</a>
@@ -10520,9 +10650,9 @@ function contactPage() {
 
   return {
     pathname: "/contact/",
-    title: "Contact Airrand",
+    title: "Contact Airrand | HVAC Service in Vaughan, North York & GTA",
     description:
-      "Contact Airrand Corp for 24/7 residential and commercial HVAC service, quotes and project requests throughout the Greater Toronto Area.",
+      "Contact Airrand Corp for 24/7 HVAC service, quotes and project requests throughout Vaughan, North York, Richmond Hill, Toronto and the GTA.",
     current: "contact",
     image: contactHeroImage,
     schema: [
@@ -10537,7 +10667,7 @@ function contactPage() {
         <div class="container">
           <p class="eyebrow">Contact</p>
           <h1>Request a quote or book HVAC service.</h1>
-          <p>Call Airrand for urgent service or send a short request with the equipment, location and property type.</p>
+          <p>Call Airrand for urgent service or send a short request with the equipment, location and property type. Airrand serves Vaughan, North York, Richmond Hill, Toronto and surrounding GTA communities.</p>
           ${ctaButtons()}
         </div>
       </section>
