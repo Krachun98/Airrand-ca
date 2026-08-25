@@ -110,6 +110,41 @@ const photoSourceLabels = {
   "water-heaters": "water heater installation",
 };
 
+const serviceWorkCopy = {
+  "air-conditioning": {
+    title: "Recent Air Conditioning Installations",
+    text: "A look at recent Airrand air-conditioning installations throughout the GTA.",
+  },
+  "commercial-hvac": {
+    title: "Commercial HVAC & Mechanical Projects",
+    text: "A look at recent Airrand commercial HVAC and mechanical work throughout the GTA.",
+  },
+  furnaces: {
+    title: "Recent furnace installations.",
+    text: "A look at recent Airrand furnace installations throughout the GTA.",
+  },
+  "gas-fireplaces": {
+    title: "Gas & Mechanical Projects",
+    text: "A look at recent Airrand gas and mechanical installations throughout the GTA.",
+  },
+  "hvac-installation": {
+    title: "Recent HVAC Installations",
+    text: "A look at recent Airrand heating, cooling and mechanical installations throughout the GTA.",
+  },
+  "hvac-maintenance": {
+    title: "HVAC Equipment & Mechanical Work",
+    text: "A look at recent Airrand HVAC equipment and mechanical installations throughout the GTA.",
+  },
+  "hvac-repair": {
+    title: "HVAC Service & Mechanical Work",
+    text: "A look at recent Airrand HVAC and mechanical work throughout the GTA.",
+  },
+  "tankless-water-heaters": {
+    title: "Recent tankless water heater installations.",
+    text: "A look at recent Airrand tankless water-heater installations throughout the GTA.",
+  },
+};
+
 function projectPhotos() {
   const order = [
     "commercial-hvac",
@@ -3804,7 +3839,7 @@ function gasLineMechanicalRoomSection(work) {
         </article>
         <figure class="gas-photo-panel reveal">
           <img src="${asset(photo.image)}" alt="${escapeHtml(photo.alt)}" loading="lazy" width="700" height="820">
-          <figcaption>${escapeHtml(photo.category)} work from Airrand's project gallery.</figcaption>
+          <figcaption>Recent Airrand gas and mechanical work.</figcaption>
         </figure>
       </div>
     </section>
@@ -7861,7 +7896,7 @@ function ductworkPage(service) {
             firstPhoto
               ? `<button class="ductwork-photo-card" type="button" data-lightbox-src="${asset(firstPhoto.image)}" data-lightbox-title="${escapeHtml(firstPhoto.category)}" data-lightbox-alt="${escapeHtml(firstPhoto.alt)}">
                   <img src="${asset(firstPhoto.image)}" alt="${escapeHtml(firstPhoto.alt)}" loading="lazy" width="760" height="620">
-                  <span>Commercial ductwork from Airrand's gallery</span>
+                  <span>Commercial ductwork installation detail</span>
                 </button>`
               : ""
           }
@@ -8942,6 +8977,7 @@ function servicePage(service) {
   const related = services.filter((item) => item.slug !== service.slug).slice(0, 4);
   const work = servicePhotos(service);
   const faqs = serviceFaqs(service);
+  const customWorkCopy = serviceWorkCopy[service.slug];
   const pageTitle = isCoolingPage
     ? "Air Conditioning Services GTA | AC Repair & Installation | Airrand"
     : isHeatPumpPage
@@ -8956,20 +8992,24 @@ function servicePage(service) {
       : isDuctlessPage
       ? "Airrand installs and services ductless mini-split and multi-zone systems for homes and commercial spaces throughout the Greater Toronto Area."
     : service.meta;
-  const workTitle = isHeatPumpPage
+  const workTitle = customWorkCopy
+    ? customWorkCopy.title
+    : isHeatPumpPage
     ? "Heat Pump & High-Efficiency System Installations"
     : isDuctlessPage
     ? "Recent Ductless Installations"
     : work.exact
     ? photoHeadings[service.slug] ?? `Recent ${service.title.toLowerCase()} work.`
-    : "Related project photos from Airrand's work.";
-  const workText = isHeatPumpPage
+    : "Recent Airrand Work";
+  const workText = customWorkCopy
+    ? customWorkCopy.text
+    : isHeatPumpPage
     ? "A look at recent Airrand heating and cooling installations throughout the GTA."
     : isDuctlessPage
     ? "A look at recent Airrand ductless and mini-split installations throughout the GTA."
     : work.exact
-    ? `These photos come from Airrand's existing ${photoSourceLabels[service.slug] ?? service.title.toLowerCase()} gallery.`
-    : "This service does not currently have its own dedicated photo set, so these are relevant examples from Airrand's existing project gallery.";
+    ? `A look at recent Airrand ${photoSourceLabels[service.slug] ?? service.title.toLowerCase()} work throughout the GTA.`
+    : "A look at recent Airrand HVAC and mechanical work throughout the GTA.";
   const heroHeading = isDuctlessPage
     ? "Ductless Mini-Split Services in the Greater Toronto Area"
     : `${service.title} Services in the Greater Toronto Area`;
@@ -9561,7 +9601,7 @@ function commercialPage() {
             <p>Packaged rooftop units can combine heating, cooling, supply airflow, ventilation, economizer functions where equipped and controls in one commercial HVAC system.</p>
             ${commercialPillList(rooftopIncludes)}
           </div>
-          ${rooftopPhoto ? commercialPhoto(rooftopPhoto.image, rooftopPhoto.alt, "Commercial rooftop equipment and mechanical work from the Airrand project gallery.") : ""}
+          ${rooftopPhoto ? commercialPhoto(rooftopPhoto.image, rooftopPhoto.alt, "Recent Airrand commercial rooftop equipment and mechanical work.") : ""}
           <article class="commercial-page-panel commercial-page-panel-blue">
             <h3>Airrand rooftop work may include</h3>
             ${commercialPillList(rooftopWork)}
@@ -9873,7 +9913,7 @@ function galleryPage() {
         <div class="container">
           <p class="eyebrow">Gallery</p>
           <h1>HVAC work, equipment and mechanical detail.</h1>
-          <p>Browse heating, cooling, ductwork, gas, ductless, water heating and commercial HVAC photos from Airrand's existing gallery.</p>
+          <p>Browse recent Airrand heating, cooling, ductwork, gas, ductless, water heating and commercial HVAC work throughout the GTA.</p>
           ${ctaButtons()}
         </div>
       </section>
