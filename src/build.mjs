@@ -6398,7 +6398,7 @@ function homePage() {
             eyebrow: "Gallery",
             title: "Real installation photos from Airrand's gallery.",
             text:
-              "Browse heating, cooling, ductwork, gas, water heating and commercial installation photos pulled from the existing Airrand gallery.",
+              "Browse recent Airrand heating, cooling, ductwork, gas, water heating and commercial installations throughout the GTA.",
           })}
           ${galleryGrid({ projects: homeGalleryPreviewPhotos })}
           <div class="section-action">
