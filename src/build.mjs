@@ -33,6 +33,16 @@ const pageUrl = (pathname) => new URL(pathname, `${site.baseUrl}/`).toString();
 const link = (pathname) => pathname;
 const quoteRequestPath = "/contact/#quote-form";
 const serviceHref = (slug) => (slug === "commercial-hvac" ? "/commercial/" : `/services/${slug}/`);
+const businessEntityId = `${site.baseUrl}/#localbusiness`;
+const websiteEntityId = `${site.baseUrl}/#website`;
+const schemaServiceAreas = [
+  { "@type": "AdministrativeArea", name: "Greater Toronto Area" },
+  { "@type": "City", name: "Toronto" },
+  { "@type": "City", name: "Vaughan" },
+  { "@type": "Place", name: "North York" },
+  { "@type": "City", name: "Richmond Hill" },
+];
+const businessSameAs = [site.instagram, site.googleReviewsUrl].filter(Boolean);
 
 const mobileHeroSourceImages = new Set([
   "hero-hvac-work.webp",
@@ -1769,6 +1779,7 @@ function finalCta({
 function layout({ title, description, pathname, current, body, schema = [], image = "hero-hvac-work.webp" }) {
   const canonical = pageUrl(pathname);
   const pageTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+  const socialImage = pageUrl(asset(image).slice(1));
   const bodyClass = current ? `page-${String(current).replace(/[^a-z0-9-]/gi, "-").toLowerCase()}` : "page-default";
   const jsonLd = schema.length
     ? `<script type="application/ld+json">${JSON.stringify(schema.length === 1 ? schema[0] : schema)}</script>`
@@ -1786,8 +1797,13 @@ function layout({ title, description, pathname, current, body, schema = [], imag
   <meta property="og:title" content="${escapeHtml(pageTitle)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="${pageUrl(asset(image).slice(1))}">
+  <meta property="og:image" content="${socialImage}">
+  <meta property="og:site_name" content="${escapeHtml(site.name)}">
+  <meta property="og:locale" content="en_CA">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(pageTitle)}">
+  <meta name="twitter:description" content="${escapeHtml(description)}">
+  <meta name="twitter:image" content="${socialImage}">
   <meta name="theme-color" content="#07090c">
   <link rel="icon" href="${asset("airrand-logo-tight.png")}?v=${assetVersion}" type="image/png">
   <link rel="apple-touch-icon" href="${asset("airrand-logo-tight.png")}?v=${assetVersion}">
@@ -1817,15 +1833,19 @@ function layout({ title, description, pathname, current, body, schema = [], imag
 function businessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": ["HVACBusiness", "LocalBusiness"],
+    "@type": ["Organization", "LocalBusiness", "HVACBusiness"],
+    "@id": businessEntityId,
     name: site.legalName,
     url: site.baseUrl,
     telephone: site.phone,
     email: site.email,
+    description: site.description,
+    logo: pageUrl("assets/airrand-logo-tight.png"),
     image: pageUrl("assets/airrand-logo-tight.png"),
-    areaServed: ["Greater Toronto Area", ...serviceAreas],
+    areaServed: schemaServiceAreas,
     openingHours: "Mo-Su 00:00-23:59",
-    sameAs: [site.instagram],
+    sameAs: businessSameAs,
+    hasMap: site.googleReviewsUrl,
   };
 }
 
@@ -1833,8 +1853,11 @@ function websiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": websiteEntityId,
     name: site.name,
     url: site.baseUrl,
+    publisher: { "@id": businessEntityId },
+    inLanguage: "en-CA",
   };
 }
 
@@ -1842,6 +1865,7 @@ function breadcrumbs(items) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${pageUrl(items[items.length - 1]?.url ?? "/")}#breadcrumb`,
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
@@ -1859,14 +1883,8 @@ function serviceSchema(service) {
     "@type": "Service",
     name: `${serviceTitle} Services`,
     serviceType: serviceTitle,
-    provider: {
-      "@type": "HVACBusiness",
-      name: site.legalName,
-      telephone: site.phone,
-      email: site.email,
-      url: site.baseUrl,
-    },
-    areaServed: ["Greater Toronto Area", ...serviceAreas],
+    provider: { "@id": businessEntityId },
+    areaServed: schemaServiceAreas,
     description: service.meta,
   };
 }
