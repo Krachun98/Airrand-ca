@@ -3,6 +3,18 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/projects",
+      "destination": "/gallery/",
+      "permanent": true
+    },
+    {
+      "source": "/projects/",
+      "destination": "/gallery/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/quote/",

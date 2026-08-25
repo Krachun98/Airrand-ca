@@ -65,6 +65,30 @@ const heroImageStyle = (name) => {
 
 const serviceBySlug = new Map(services.map((service) => [service.slug, service]));
 
+const naturalServiceLabels = {
+  "ductless-systems": "Ductless System",
+  "gas-fireplaces": "Gas Fireplace",
+  "gas-lines": "Gas Line",
+  "heat-pumps": "Heat Pump",
+  humidifiers: "Humidifier",
+  "tankless-water-heaters": "Tankless Water Heater",
+  "water-heaters": "Water Heater",
+};
+
+function naturalServiceTitle(service) {
+  const originalTitle = serviceBySlug.get(service.slug)?.title;
+  if (originalTitle && service.title !== originalTitle) return service.title;
+  return naturalServiceLabels[service.slug] ?? service.title;
+}
+
+function servicePhrase(service) {
+  return naturalServiceTitle(service)
+    .toLowerCase()
+    .replace(/\bhvac\b/g, "HVAC")
+    .replace(/\bhrv\b/g, "HRV")
+    .replace(/\berv\b/g, "ERV");
+}
+
 const photoFallbacks = {
   "heat-pumps": "air-conditioning",
   "hrv-erv": "ductwork",
@@ -472,6 +496,14 @@ function contactForm(context = "quote") {
   `;
 }
 
+function displayPhotoAlt(photo, { preserveProjectGalleryAlt = false } = {}) {
+  const alt = String(photo.alt ?? "");
+  if (preserveProjectGalleryAlt) return alt;
+  return alt
+    .replace(/\s+photo from the Airrand project gallery$/i, " by Airrand")
+    .replace(/\s+from the Airrand project gallery$/i, " by Airrand");
+}
+
 function galleryGrid({ limit, filters = false, projects = projectPhotos() } = {}) {
   const visibleProjects = typeof limit === "number" ? projects.slice(0, limit) : projects;
   const filterButtons = filters
@@ -495,32 +527,36 @@ function galleryGrid({ limit, filters = false, projects = projectPhotos() } = {}
       ${filterButtons}
       <div class="gallery-grid">
         ${visibleProjects
-          .map(
-            (project) => `
-              <button class="gallery-card reveal" type="button" data-gallery-item data-filter-value="${escapeHtml(project.filter)}" data-lightbox-src="${asset(project.image)}" data-lightbox-title="${escapeHtml(project.category)}" data-lightbox-alt="${escapeHtml(project.alt)}">
-                <img src="${asset(project.image)}" alt="${escapeHtml(project.alt)}" loading="lazy" width="700" height="520">
+          .map((project) => {
+            const projectAlt = displayPhotoAlt(project);
+            return `
+              <button class="gallery-card reveal" type="button" data-gallery-item data-filter-value="${escapeHtml(project.filter)}" data-lightbox-src="${asset(project.image)}" data-lightbox-title="${escapeHtml(project.category)}" data-lightbox-alt="${escapeHtml(projectAlt)}">
+                <img src="${asset(project.image)}" alt="${escapeHtml(projectAlt)}" loading="lazy" width="700" height="520">
                 <span>
                   <small>${escapeHtml(project.category)}</small>
                 </span>
               </button>
-            `,
-          )
+            `;
+          })
           .join("")}
       </div>
     </div>
   `;
 }
 
-function workSlider(projects, label) {
+function workSlider(projects, label, { preserveProjectGalleryAlt = false } = {}) {
   const duration = `${Math.max(28, projects.length * 4)}s`;
-  const renderCard = (project, index, clone = false) => `
-    <button class="marquee-card" type="button" data-lightbox-src="${asset(project.image)}" data-lightbox-title="${escapeHtml(project.category)}" data-lightbox-alt="${escapeHtml(project.alt)}" tabindex="${clone ? "-1" : "0"}">
-      <img src="${asset(project.image)}" alt="${escapeHtml(project.alt)}" loading="eager" decoding="async" width="520" height="650" draggable="false">
+  const renderCard = (project, index, clone = false) => {
+    const projectAlt = displayPhotoAlt(project, { preserveProjectGalleryAlt });
+    return `
+    <button class="marquee-card" type="button" data-lightbox-src="${asset(project.image)}" data-lightbox-title="${escapeHtml(project.category)}" data-lightbox-alt="${escapeHtml(projectAlt)}" tabindex="${clone ? "-1" : "0"}">
+      <img src="${asset(project.image)}" alt="${escapeHtml(projectAlt)}" loading="eager" decoding="async" width="520" height="650" draggable="false">
       <span class="marquee-caption">
         <small>${escapeHtml(project.category)}</small>
       </span>
     </button>
   `;
+  };
 
   return `
     <div class="work-marquee" aria-label="${escapeHtml(label)}">
@@ -1374,10 +1410,12 @@ function reviewCard(review) {
 }
 
 function featuredReviewCard(review, photo) {
+  const photoAlt = displayPhotoAlt(photo);
+
   return `
     <article class="featured-review-card reveal">
-      <button class="featured-review-photo" type="button" data-lightbox-src="${asset(photo.image)}" data-lightbox-title="${escapeHtml(photo.category)}" data-lightbox-alt="${escapeHtml(photo.alt)}">
-        <img src="${asset(photo.image)}" alt="${escapeHtml(photo.alt)}" loading="lazy" width="760" height="620">
+      <button class="featured-review-photo" type="button" data-lightbox-src="${asset(photo.image)}" data-lightbox-title="${escapeHtml(photo.category)}" data-lightbox-alt="${escapeHtml(photoAlt)}">
+        <img src="${asset(photo.image)}" alt="${escapeHtml(photoAlt)}" loading="lazy" width="760" height="620">
         <span>Recent Airrand Work</span>
       </button>
       <div class="featured-review-copy">
@@ -1402,9 +1440,11 @@ function reviewThemeCard(theme) {
 }
 
 function reviewWorkCard(photo) {
+  const photoAlt = displayPhotoAlt(photo);
+
   return `
-    <button class="reviews-work-card reveal" type="button" data-lightbox-src="${asset(photo.image)}" data-lightbox-title="${escapeHtml(photo.category)}" data-lightbox-alt="${escapeHtml(photo.alt)}">
-      <img src="${asset(photo.image)}" alt="${escapeHtml(photo.alt)}" loading="lazy" width="640" height="520">
+    <button class="reviews-work-card reveal" type="button" data-lightbox-src="${asset(photo.image)}" data-lightbox-title="${escapeHtml(photo.category)}" data-lightbox-alt="${escapeHtml(photoAlt)}">
+      <img src="${asset(photo.image)}" alt="${escapeHtml(photoAlt)}" loading="lazy" width="640" height="520">
       <span>Recent Airrand Work</span>
       <strong>${escapeHtml(photo.category)}</strong>
     </button>
@@ -1510,7 +1550,7 @@ function reviewsPage() {
             eyebrow: "Google Reviews",
             title: "Real customer feedback from Airrand's Google profile.",
             text:
-              "These reviews use the customer names, ratings and review text already available in the Airrand project. Each card keeps the Google listing one click away for verification.",
+              "These reviews use Airrand's customer names, ratings and review text from Google. Each card keeps the Google listing one click away for verification.",
           })}
           <div class="reviews-page-grid">
             ${googleReviews.map((review) => reviewCard(review)).join("")}
@@ -1538,7 +1578,7 @@ function reviewsPage() {
             eyebrow: "What Customers Notice",
             title: "What Customers Consistently Mention",
             text:
-              "The themes below are based on recurring wording and patterns in the review text already available for Airrand.",
+              "The themes below are based on recurring wording and patterns in Airrand's customer reviews.",
           })}
           <div class="review-theme-grid">
             ${reviewThemes.map(reviewThemeCard).join("")}
@@ -1697,11 +1737,13 @@ function breadcrumbs(items) {
 }
 
 function serviceSchema(service) {
+  const serviceTitle = naturalServiceTitle(service);
+
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `${service.title} Services`,
-    serviceType: service.title,
+    name: `${serviceTitle} Services`,
+    serviceType: serviceTitle,
     provider: {
       "@type": "HVACBusiness",
       name: site.legalName,
@@ -3824,6 +3866,7 @@ function gasLineMechanicalRoomSection(work) {
     alt: "Airrand mechanical room piping installation",
     category: "Gas Lines",
   };
+  const photoAlt = displayPhotoAlt(photo);
 
   return `
     <section class="section gas-line-section gas-line-mechanical-room-section">
@@ -3838,7 +3881,7 @@ function gasLineMechanicalRoomSection(work) {
           <blockquote>Mechanical piping should look intentional, not improvised.</blockquote>
         </article>
         <figure class="gas-photo-panel reveal">
-          <img src="${asset(photo.image)}" alt="${escapeHtml(photo.alt)}" loading="lazy" width="700" height="820">
+          <img src="${asset(photo.image)}" alt="${escapeHtml(photoAlt)}" loading="lazy" width="700" height="820">
           <figcaption>Recent Airrand gas and mechanical work.</figcaption>
         </figure>
       </div>
@@ -5600,14 +5643,15 @@ function ductlessLineRoutingSection() {
         </article>
         <div class="ductless-photo-pair">
           ${photos
-            .map(
-              (photo) => `
-                <button type="button" data-lightbox-src="${asset(photo.image)}" data-lightbox-title="${escapeHtml(photo.category)}" data-lightbox-alt="${escapeHtml(photo.alt)}">
-                  <img src="${asset(photo.image)}" alt="${escapeHtml(photo.alt)}" loading="lazy" width="640" height="700">
+            .map((photo) => {
+              const photoAlt = displayPhotoAlt(photo);
+              return `
+                <button type="button" data-lightbox-src="${asset(photo.image)}" data-lightbox-title="${escapeHtml(photo.category)}" data-lightbox-alt="${escapeHtml(photoAlt)}">
+                  <img src="${asset(photo.image)}" alt="${escapeHtml(photoAlt)}" loading="lazy" width="640" height="700">
                   <span>Recent Ductless Work</span>
                 </button>
-              `,
-            )
+              `;
+            })
             .join("")}
         </div>
       </div>
@@ -7712,6 +7756,8 @@ function ductworkPage(service) {
   const faqs = serviceFaqs(service);
   const firstPhoto = work.photos[0] ?? installationPhotos.ductwork?.[0];
   const secondPhoto = work.photos[3] ?? installationPhotos.ductwork?.[3] ?? firstPhoto;
+  const firstPhotoAlt = firstPhoto ? displayPhotoAlt(firstPhoto) : "";
+  const secondPhotoAlt = secondPhoto ? displayPhotoAlt(secondPhoto) : "";
 
   return {
     pathname: "/services/ductwork/",
@@ -7868,8 +7914,8 @@ function ductworkPage(service) {
           </div>
           ${
             secondPhoto
-              ? `<button class="ductwork-photo-card" type="button" data-lightbox-src="${asset(secondPhoto.image)}" data-lightbox-title="${escapeHtml(secondPhoto.category)}" data-lightbox-alt="${escapeHtml(secondPhoto.alt)}">
-                  <img src="${asset(secondPhoto.image)}" alt="${escapeHtml(secondPhoto.alt)}" loading="lazy" width="760" height="620">
+              ? `<button class="ductwork-photo-card" type="button" data-lightbox-src="${asset(secondPhoto.image)}" data-lightbox-title="${escapeHtml(secondPhoto.category)}" data-lightbox-alt="${escapeHtml(secondPhotoAlt)}">
+                  <img src="${asset(secondPhoto.image)}" alt="${escapeHtml(secondPhotoAlt)}" loading="lazy" width="760" height="620">
                   <span>Real Airrand sheet-metal work</span>
                 </button>`
               : ""
@@ -7894,8 +7940,8 @@ function ductworkPage(service) {
         <div class="container ductwork-photo-split ductwork-photo-split-reverse">
           ${
             firstPhoto
-              ? `<button class="ductwork-photo-card" type="button" data-lightbox-src="${asset(firstPhoto.image)}" data-lightbox-title="${escapeHtml(firstPhoto.category)}" data-lightbox-alt="${escapeHtml(firstPhoto.alt)}">
-                  <img src="${asset(firstPhoto.image)}" alt="${escapeHtml(firstPhoto.alt)}" loading="lazy" width="760" height="620">
+              ? `<button class="ductwork-photo-card" type="button" data-lightbox-src="${asset(firstPhoto.image)}" data-lightbox-title="${escapeHtml(firstPhoto.category)}" data-lightbox-alt="${escapeHtml(firstPhotoAlt)}">
+                  <img src="${asset(firstPhoto.image)}" alt="${escapeHtml(firstPhotoAlt)}" loading="lazy" width="760" height="620">
                   <span>Commercial ductwork installation detail</span>
                 </button>`
               : ""
@@ -8978,13 +9024,15 @@ function servicePage(service) {
   const work = servicePhotos(service);
   const faqs = serviceFaqs(service);
   const customWorkCopy = serviceWorkCopy[service.slug];
+  const serviceLabel = naturalServiceTitle(service);
+  const serviceLabelPhrase = servicePhrase(service);
   const pageTitle = isCoolingPage
     ? "Air Conditioning Services GTA | AC Repair & Installation | Airrand"
     : isHeatPumpPage
       ? "Heat Pump Installation & Service GTA | Airrand"
       : isDuctlessPage
       ? "Ductless Mini Split Installation & Service GTA | Airrand"
-    : `${service.title} Services in the GTA`;
+    : `${serviceLabel} Services in the GTA`;
   const pageDescription = isCoolingPage
     ? "Airrand provides air conditioning installation, replacement, repair and maintenance for residential and commercial properties throughout the Greater Toronto Area."
     : isHeatPumpPage
@@ -9012,16 +9060,16 @@ function servicePage(service) {
     : "A look at recent Airrand HVAC and mechanical work throughout the GTA.";
   const heroHeading = isDuctlessPage
     ? "Ductless Mini-Split Services in the Greater Toronto Area"
-    : `${service.title} Services in the Greater Toronto Area`;
+    : `${serviceLabel} Services in the Greater Toronto Area`;
   const detailHeading = isDuctlessPage
     ? "Professional ductless heating and cooling work with proper sizing, placement and clean installation."
-    : `Professional ${service.title.toLowerCase()} work with clear scope and clean execution.`;
+    : `Professional ${serviceLabelPhrase} work with clear scope and clean execution.`;
   const detailText = isDuctlessPage
     ? `${service.intro} The goal is a ductless system that fits the space, looks intentional and is set up for reliable long-term comfort.`
     : `${service.intro} The goal is a system that fits the building, operates properly and is left ready for long-term use.`;
   const finalCtaTitle = isDuctlessPage
     ? "Need ductless mini-split help?"
-    : `Need ${service.title.toLowerCase()} help?`;
+    : `Need ${serviceLabelPhrase} help?`;
   const workSection = work.photos.length
     ? `<section class="section gallery-section">
         <div class="container">
@@ -9030,7 +9078,7 @@ function servicePage(service) {
             title: workTitle,
             text: workText,
           })}
-          ${workSlider(work.photos, workTitle)}
+          ${workSlider(work.photos, workTitle, { preserveProjectGalleryAlt: service.slug === "commercial-hvac" })}
         </div>
       </section>`
     : "";
@@ -9843,7 +9891,13 @@ function commercialPage() {
             text:
               "Real Airrand commercial project photos show rooftop equipment, ductwork, ventilation pathways, gas piping and mechanical installation work across the GTA.",
           })}
-          ${commercialWorkPhotos.length ? workSlider(commercialWorkPhotos, "Airrand commercial HVAC and mechanical project photos") : ""}
+          ${
+            commercialWorkPhotos.length
+              ? workSlider(commercialWorkPhotos, "Airrand commercial HVAC and mechanical project photos", {
+                  preserveProjectGalleryAlt: true,
+                })
+              : ""
+          }
           <div class="commercial-project-link">
             <a class="button button-secondary" href="${link("/gallery/")}">View Commercial Projects</a>
           </div>
@@ -10099,22 +10153,22 @@ const aboutWorkPhotos = [
   {
     category: "Commercial Ductwork",
     image: "work/commercial-hvac-03.webp",
-    alt: "Commercial ductwork installation from the Airrand project gallery",
+    alt: "Commercial ductwork installation by Airrand",
   },
   {
     category: "Residential HVAC",
     image: "work/air-conditioning-01.webp",
-    alt: "Air conditioning condenser installation from the Airrand project gallery",
+    alt: "Air conditioning condenser installation by Airrand",
   },
   {
     category: "Mechanical",
     image: "work/furnaces-01.webp",
-    alt: "Furnace and water heater installation from the Airrand project gallery",
+    alt: "Furnace and water heater installation by Airrand",
   },
   {
     category: "Clean Ductwork",
     image: "work/ductwork-04.webp",
-    alt: "Clean ductwork installation detail from the Airrand project gallery",
+    alt: "Clean ductwork installation detail by Airrand",
   },
 ];
 
@@ -10122,22 +10176,22 @@ const instagramPreviewPhotos = [
   {
     category: "Furnace Work",
     image: "work/furnaces-07.webp",
-    alt: "Mechanical room furnace installation from the Airrand project gallery",
+    alt: "Mechanical room furnace installation by Airrand",
   },
   {
     category: "Air Conditioning",
     image: "work/air-conditioning-05.webp",
-    alt: "Air conditioning condenser installation from the Airrand project gallery",
+    alt: "Air conditioning condenser installation by Airrand",
   },
   {
     category: "Ductwork",
     image: "work/ductwork-04.webp",
-    alt: "Ductwork installation detail from the Airrand project gallery",
+    alt: "Ductwork installation detail by Airrand",
   },
   {
     category: "Commercial HVAC",
     image: "work/commercial-hvac-05.webp",
-    alt: "Commercial HVAC installation from the Airrand project gallery",
+    alt: "Commercial HVAC installation by Airrand",
   },
 ];
 
@@ -10202,7 +10256,7 @@ function aboutPage() {
             <p>The finished installation should also be clean, serviceable and understandable. Airrand focuses on the complete installation rather than simply getting equipment running and leaving.</p>
           </article>
           <figure class="about-intro-photo reveal">
-            <img src="${asset("work/furnaces-01.webp")}" alt="Furnace and water heater installation from the Airrand project gallery" loading="eager" width="900" height="1100">
+            <img src="${asset("work/furnaces-01.webp")}" alt="Furnace and water heater installation by Airrand" loading="eager" width="900" height="1100">
             <figcaption>
               <span class="about-caption-label">Airrand Standard</span>
               <span class="about-caption-quote"><strong>Equipment matters.</strong><span>The installation matters just as much.</span></span>
@@ -10248,7 +10302,7 @@ function aboutPage() {
           </div>
           <div class="about-capability-split">
             <article class="about-capability-panel reveal">
-              <img src="${asset("work/air-conditioning-01.webp")}" alt="Residential air conditioning installation from the Airrand project gallery" loading="lazy" width="900" height="760">
+              <img src="${asset("work/air-conditioning-01.webp")}" alt="Residential air conditioning installation by Airrand" loading="lazy" width="900" height="760">
               <div>
                 <p class="eyebrow">Residential HVAC</p>
                 <h3>Residential Comfort Systems</h3>
@@ -10258,7 +10312,7 @@ function aboutPage() {
               </div>
             </article>
             <article class="about-capability-panel about-capability-panel-warm reveal">
-              <img class="about-capability-image-rtu" src="${asset("work/commercial-rooftop-rtu-01.webp")}" alt="Commercial rooftop HVAC units and gas piping installation from the Airrand project gallery" loading="lazy" width="900" height="760">
+              <img class="about-capability-image-rtu" src="${asset("work/commercial-rooftop-rtu-01.webp")}" alt="Commercial rooftop HVAC units and gas piping installation by Airrand" loading="lazy" width="900" height="760">
               <div>
                 <p class="eyebrow">Commercial HVAC</p>
                 <h3>Commercial Mechanical Systems</h3>
@@ -10290,7 +10344,7 @@ function aboutPage() {
       <section class="section about-workmanship-section">
         <div class="container about-feature-grid">
           <figure class="about-feature-photo reveal">
-            <img src="${asset("work/ductwork-04.webp")}" alt="Clean ductwork installation detail from the Airrand project gallery" loading="lazy" width="1100" height="900">
+            <img src="${asset("work/ductwork-04.webp")}" alt="Clean ductwork installation detail by Airrand" loading="lazy" width="1100" height="900">
           </figure>
           <article class="about-feature-copy">
             <p class="eyebrow">Workmanship</p>
@@ -10534,7 +10588,6 @@ function privacyPage() {
           <p>When you contact Airrand, you may choose to provide your name, phone number, email address, service need, project type, message and optional photos. This information is sent to Airrand by the configured website email service and used to respond to your request.</p>
           <h2>Contact</h2>
           <p>For privacy questions, contact Airrand at <a href="mailto:${site.email}">${site.email}</a>.</p>
-          <p>This policy should be reviewed by Airrand before publication and expanded if analytics, advertising pixels, CRM systems or additional third-party tools are added.</p>
         </div>
       </section>
     `,
